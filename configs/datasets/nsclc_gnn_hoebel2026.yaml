@@ -1,0 +1,30 @@
+name: NSCLC-GNN-Hoebel2026
+root: NSCLC-GNN_Hoebel2026/processed
+metadata_files:
+  - metadata.csv
+regions_dir: regions
+cell_type_col: cell_type
+# inForm/Vectra 20x; coords in pixels (README: 0.496 µm/px).
+microns_per_pixel: 0.496
+
+normalization:
+  method: none   # expression is binary 0/1 marker positivity; no transform applies
+
+tasks:
+  - id: OS
+    type: survival
+    time_col: followup_years
+    event_col: deceased
+
+  - id: stage_binary
+    type: binary_classification
+    label_col: stage_binarized
+    positive_class: High
+    drop_na_cols: [stage_binarized]
+
+validation:
+  # 507 patients, multiple ROIs per patient — always split at patient level
+  # Paper used 60/15/25 train/val/test stratified by survival status
+  primary_strategy: patient_cv
+  n_folds: 5
+  patient_col: patient_id

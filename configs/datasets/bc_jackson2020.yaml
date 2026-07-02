@@ -1,0 +1,53 @@
+name: BC-Jackson2020
+root: BC_Jackson2020/processed
+metadata_files:
+  - basel_metadata.csv
+  - zurich_metadata.csv
+regions_dir: regions
+cell_type_col: cell_type
+# Coordinates already in microns (IMC, 1 µm/px raster).
+microns_per_pixel: 1.0
+
+normalization:
+  method: arcsinh
+  cofactor: 1.0   # IMC mean ion counts; field-standard arcsinh cofactor
+
+tasks:
+  - id: OS
+    type: survival
+    time_col: OS_months
+    event_col: OS_event
+    row_filter: "cohort == 'Basel'"
+
+  - id: DFS
+    type: survival
+    time_col: DFS_months
+    event_col: DFS_event
+    row_filter: "cohort == 'Basel'"
+
+  - id: response
+    type: binary_classification
+    label_col: response
+    positive_class: Sensitive
+    row_filter: "cohort == 'Basel'"
+    drop_na_cols: [response]
+
+  - id: clinical_type
+    type: multiclass_classification
+    label_col: clinical_type
+    # CV is still confined to Basel by the validation-level `cv_filter` below.
+    drop_na_cols: [clinical_type]
+
+validation:
+  # Primary: patient-level 5-fold CV within Basel
+  primary_strategy: patient_cv
+  n_folds: 5
+  patient_col: patient_id
+  cv_filter: "cohort == 'Basel'"
+  cohort_col: cohort
+  generalization_tests:
+    - name: Basel_to_Zurich
+      train: [Basel]
+      test: [Zurich]
+      tasks: [clinical_type]
+      cell_type_col: cell_type_uniform

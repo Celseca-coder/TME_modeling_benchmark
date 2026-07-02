@@ -1,0 +1,31 @@
+name: CRC-Wu2022
+root: CRC_Wu2022/processed
+metadata_files:
+  - metadata.csv
+regions_dir: regions
+cell_type_col: cell_type
+# CODEX (Akoya) 20x; coords in pixels. README omits pixel size; 0.3775 is the Akoya 20x default — verify via distance distributions.
+microns_per_pixel: 0.3775
+
+normalization:
+  method: arcsinh
+  cofactor: quantile   # adaptive per-marker cofactor 5*p20 + 1e-5 (Wu2022 CODEX pipeline)
+  quantile: 0.2
+  quantile_scale: 5.0
+
+tasks:
+  - id: primary_outcome
+    type: binary_classification
+    label_col: primary_outcome
+    positive_class: 1
+    drop_na_cols: [primary_outcome]
+
+  - id: DFS
+    type: survival
+    time_col: dfs_months
+    event_col: recurrence_event
+
+validation:
+  primary_strategy: patient_cv
+  n_folds: 5
+  patient_col: patient_id

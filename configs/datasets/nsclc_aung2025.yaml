@@ -1,0 +1,46 @@
+name: NSCLC-Aung2025
+root: NSCLC_Aung2025/processed
+metadata_files:
+  - metadata.csv
+regions_dir: regions
+cell_type_col: cell_type
+# Coordinates already in microns.
+microns_per_pixel: 1.0
+
+normalization:
+  method: arcsinh
+  cofactor: 5.0   # CODEX intensities rescaled to 0-255 (NOT raw MFI; 150 would be far too large)
+
+tasks:
+  - id: immunotherapy_response
+    type: binary_classification
+    label_col: immunotherapy_response
+    positive_class: Responder
+    drop_na_cols: [immunotherapy_response]
+    # No cohort row_filter here: CV is confined to Yale by `cv_filter` below, and a
+    # cohort filter on the task would also drop the UQ / YaleExt test rows and break
+    # the generalization tests.
+
+  - id: PFS
+    type: survival
+    time_col: pfs_days
+    event_col: pfs_event
+    row_filter: "cohort == 'Yale'"   # PFS exists only in Yale
+
+validation:
+  primary_strategy: patient_cv
+  n_folds: 5
+  patient_col: patient_id
+  cv_filter: "cohort == 'Yale'"
+  cohort_col: cohort
+  generalization_tests:
+    - name: Yale_to_UQ          # B: the paper's cross-site validation cohort
+      train: [Yale]
+      test: [UQ]
+      tasks: [immunotherapy_response]
+      cell_type_col: cell_type
+    - name: Yale_to_YaleExt     # C: extra Yale TMA (YTMA_404), within-platform check
+      train: [Yale]
+      test: [YaleExt]
+      tasks: [immunotherapy_response]
+      cell_type_col: cell_type

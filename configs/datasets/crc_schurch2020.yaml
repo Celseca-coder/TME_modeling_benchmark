@@ -1,0 +1,37 @@
+name: CRC-Schurch2020
+root: CRC_Schürch2020/processed
+metadata_files:
+  - metadata.csv
+regions_dir: regions
+cell_type_col: cell_type
+# CyCIF, 20x objective; coords in pixels (README: ~0.65 µm/px).
+microns_per_pixel: 0.65
+
+normalization:
+  method: arcsinh
+  cofactor: 150.0   # CODEX/CyCIF high-MFI fluorescence; ~16% exact zeros rule out adaptive
+
+tasks:
+  - id: CLR_DII
+    type: binary_classification
+    label_col: "CLR/DII"
+    # 1 = CLR (Crohn's-like reaction), 2 = DII (diffuse inflammatory infiltration)
+    # Binarised: CLR=1 is the positive class
+    positive_class: 1
+    drop_na_cols: ["CLR/DII"]
+
+  - id: OS
+    type: survival
+    time_col: OS_months
+    event_col: OS_event
+
+  - id: DFS
+    type: survival
+    time_col: DFS_months
+    event_col: DFS_event
+
+validation:
+  primary_strategy: patient_cv
+  n_folds: 5
+  patient_col: patient_id
+  # Note: only 35 patients; use 5-fold or leave-one-out

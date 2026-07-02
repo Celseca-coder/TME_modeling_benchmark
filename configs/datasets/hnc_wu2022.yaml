@@ -1,0 +1,54 @@
+name: HNC-Wu2022
+root: HNC_Wu2022/processed
+metadata_files:
+  - metadata.csv
+regions_dir: regions
+cell_type_col: cell_type
+# CODEX (Akoya) 20x; coords in pixels. README omits pixel size; 0.3775 is the Akoya 20x default — verify via distance distributions.
+microns_per_pixel: 0.3775
+
+normalization:
+  method: arcsinh
+  cofactor: quantile   # adaptive per-marker cofactor 5*p20 + 1e-5 (Wu2022 CODEX pipeline)
+  quantile: 0.2
+  quantile_scale: 5.0
+
+tasks:
+  - id: primary_outcome
+    type: binary_classification
+    label_col: primary_outcome
+    positive_class: 1
+    # Both cohorts: UPMC-HNC = NED (1) vs recurrence (0); DFCI-HNC uses pathologic
+    # tumour response to neoadjuvant anti-PD1 as a primary-outcome PROXY (pTR_label:
+    # 1 = responder, 0 = poor), per Wu et al. So primary_outcome is also evaluable
+    # under the UPMC -> DFCI fixed extension.
+
+  - id: hpv_status
+    type: binary_classification
+    label_col: hpv_status
+    positive_class: 1
+
+  - id: OS
+    type: survival
+    # Overall survival, harmonised across both sub-cohorts by the processing
+    # notebook: UPMC-HNC (s240, survival_status/survival_day in DAYS) and DFCI-HNC
+    # (s271, Vital_Status/OS_mons in MONTHS) are merged into OS_event (1 = dead)
+    # and OS_months (time in months). Both cohorts therefore carry this label,
+    # so OS is also evaluable under the UPMC -> DFCI fixed extension.
+    time_col: OS_months
+    event_col: OS_event
+    row_filter: "OS_months.notna()"
+
+validation:
+  # Primary: patient-level CV within UPMC-HNC only; DFCI_HNC (s271) is test-only
+  primary_strategy: patient_cv
+  n_folds: 5
+  patient_col: patient_id
+  cv_filter: "dataset == 'UPMC_HNC'"
+  cohort_col: dataset
+  generalization_tests:
+    - name: UPMC_to_DFCI
+      train: [UPMC_HNC]
+      test: [DFCI_HNC]
+      tasks: [primary_outcome, OS]
+      cell_type_col: cell_type_uniform

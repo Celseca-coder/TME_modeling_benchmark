@@ -1,0 +1,30 @@
+name: NSCLC-ICI-Monkman2024
+root: NSCLC-ICI_Monkman2024/processed
+metadata_files:
+  - metadata.csv
+regions_dir: regions
+cell_type_col: cell_type
+# Coordinates already in microns.
+microns_per_pixel: 1.0
+
+normalization:
+  method: arcsinh
+  cofactor: 150.0   # CODEX raw MFI (0-40k); community-standard cofactor for this scale
+
+tasks:
+  - id: immunotherapy_response
+    type: binary_classification
+    label_col: immunotherapy_response
+    positive_class: Responder
+    drop_na_cols: [immunotherapy_response]
+
+  - id: OS
+    type: survival
+    time_col: os_days
+    event_col: os_event
+
+validation:
+  # Single cohort (n=36 — 35 with response labels); leave-one-out or 5-fold CV
+  primary_strategy: patient_cv
+  n_folds: 5
+  patient_col: patient_id

@@ -1,0 +1,34 @@
+name: BC-METABRIC-Ali2020
+root: BC-METABRIC_Ali2020/processed
+metadata_files:
+  - metadata.csv
+regions_dir: regions
+cell_type_col: cell_type
+# IMC raster at 1 µm/px; coords are pixels == microns.
+microns_per_pixel: 1.0
+
+normalization:
+  method: arcsinh
+  cofactor: 0.8   # IMC; cofactor used by Ali et al. for single-cell clustering
+
+tasks:
+  - id: DSS
+    type: survival
+    time_col: DSS_days
+    event_col: DSS_event
+
+  - id: OS
+    type: survival
+    time_col: OS_days
+    event_col: OS_event
+
+  - id: ER_status
+    type: binary_classification
+    label_col: ER_status
+    positive_class: pos
+    drop_na_cols: [ER_status]
+
+validation:
+  primary_strategy: patient_cv
+  n_folds: 5
+  patient_col: patient_id

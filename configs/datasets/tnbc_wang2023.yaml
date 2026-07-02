@@ -1,0 +1,44 @@
+name: TNBC-Wang2023
+root: TNBC_Wang2023/processed
+metadata_files:
+  - metadata.csv
+regions_dir: regions
+cell_type_col: cell_type
+# IMC at 1 µm/px; coords are pixels == microns.
+microns_per_pixel: 1.0
+
+normalization:
+  method: arcsinh
+  cofactor: quantile   # per-marker scales span ~7 orders of magnitude; all p20>0 -> adaptive
+  quantile: 0.2
+  quantile_scale: 5.0
+
+tasks:
+  - id: pCR_arm_C
+    type: binary_classification
+    label_col: pCR
+    positive_class: 1
+    # Chemotherapy arm only, Baseline biopsies only
+    row_filter: "biopsy_phase == 'Baseline' and arm == 'C'"
+    drop_na_cols: [pCR]
+
+  - id: pCR_arm_CI
+    type: binary_classification
+    label_col: pCR
+    positive_class: 1
+    # Chemo + immunotherapy arm only, Baseline biopsies only
+    row_filter: "biopsy_phase == 'Baseline' and arm == 'C&I'"
+    drop_na_cols: [pCR]
+
+  - id: pCR_all
+    type: binary_classification
+    label_col: pCR
+    positive_class: 1
+    row_filter: "biopsy_phase == 'Baseline'"
+    drop_na_cols: [pCR]
+
+validation:
+  # Patient-level 5-fold CV; arm should be used as stratification covariate in analysis
+  primary_strategy: patient_cv
+  n_folds: 5
+  patient_col: patient_id

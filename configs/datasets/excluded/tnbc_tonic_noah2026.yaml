@@ -1,0 +1,46 @@
+name: TNBC-TONIC-Noah2026
+root: TNBC-TONIC_Noah2026/processed
+metadata_files:
+  - metadata.csv
+regions_dir: regions
+cell_type_col: cell_type
+
+normalization:
+  method: arcsinh
+  cofactor: 0.01   # MIBI-TOF Rosetta-compensated, pre-normalised; small dynamic range
+
+tasks:
+  - id: clinical_response_on_nivo
+    type: binary_classification
+    label_col: clinical_response
+    positive_class: 1
+    row_filter: "timepoint == 'on_nivo'"
+    drop_na_cols: [clinical_response]
+
+  - id: clinical_response_pre_nivo
+    type: binary_classification
+    label_col: clinical_response
+    positive_class: 1
+    row_filter: "timepoint == 'pre_nivo'"
+    drop_na_cols: [clinical_response]
+
+  - id: clinical_response_baseline
+    type: binary_classification
+    label_col: clinical_response
+    positive_class: 1
+    row_filter: "timepoint == 'baseline'"
+    drop_na_cols: [clinical_response]
+
+  - id: clinical_response_primary
+    type: binary_classification
+    label_col: clinical_response
+    positive_class: 1
+    row_filter: "timepoint == 'primary'"
+    drop_na_cols: [clinical_response]
+
+validation:
+  # Stratified 3-fold CV (10 random seeds in the paper); use 5-fold here
+  # clinical_response requires patient_clinical_data.csv — labels are NaN otherwise
+  primary_strategy: patient_cv
+  n_folds: 5
+  patient_col: patient_id

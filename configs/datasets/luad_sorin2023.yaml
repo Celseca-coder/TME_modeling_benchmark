@@ -1,0 +1,38 @@
+name: LUAD-Sorin2023
+root: LUAD_Sorin2023/processed
+metadata_files:
+  - metadata.csv
+regions_dir: regions
+cell_type_col: cell_type
+# IMC at 1 µm/px; coords are pixels == microns (README: 1 px = 1 µm).
+microns_per_pixel: 1.0
+
+normalization:
+  method: arcsinh
+  cofactor: 1.0   # IMC; ~70% exact zeros rule out an adaptive (quantile) cofactor
+
+tasks:
+  - id: progression
+    type: binary_classification
+    label_col: progression
+    positive_class: 1
+    drop_na_cols: [progression]
+
+  - id: OS
+    type: survival
+    time_col: survival_years
+    event_col: death
+
+validation:
+  # Primary: patient-level CV within Discovery (n=416)
+  primary_strategy: patient_cv
+  n_folds: 5
+  patient_col: patient_id
+  cv_filter: "cohort == 'Discovery'"
+  cohort_col: cohort
+  generalization_tests:
+    - name: Discovery_to_Validation
+      train: [Discovery]
+      test: [Validation]
+      tasks: [progression]
+      cell_type_col: cell_type
