@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import json
+import unicodedata
 from dataclasses import dataclass, field
 from pathlib import Path
 from typing import Iterable, Iterator
@@ -210,8 +211,8 @@ class TMEDataset:
     def __init__(self, config: dict, data_root: str | Path):
         self.config = config
         self.name = config["name"]
-        self._root = Path(data_root) / config["root"]
-        self._regions_dir = self._root / config.get("regions_dir", "regions")
+        self._root = self._resolve_existing_path(data_root, config["root"])
+        self._regions_dir = self._resolve_existing_path(self._root, config.get("regions_dir", "regions"))
         self._meta_files = config.get("metadata_files", ["metadata.csv"])
         self._cell_type_col = config.get("cell_type_col", "cell_type")
 
@@ -232,6 +233,41 @@ class TMEDataset:
     # ------------------------------------------------------------------
     # Class methods
     # ------------------------------------------------------------------
+
+    @staticmethod
+    def _path_variants(path: str | Path) -> list[Path]:
+        path = Path(path)
+        if not path.parts:
+            return [path]
+
+        variants: list[tuple[str, ...]] = [()]
+        for part in path.parts:
+            next_variants: list[tuple[str, ...]] = []
+            for prefix in variants:
+                forms = {
+                    part,
+                    unicodedata.normalize("NFC", part),
+                    unicodedata.normalize("NFD", part),
+                }
+                for form in forms:
+                    next_variants.append(prefix + (form,))
+            variants = next_variants
+        return [Path(*parts) for parts in variants]
+
+    def _resolve_existing_path(self, base: str | Path, path: str | Path) -> Path:
+        base_path = Path(base)
+        candidate = Path(path)
+        if not candidate.is_absolute():
+            candidate = base_path / candidate
+
+        if candidate.exists():
+            return candidate
+
+        for variant in self._path_variants(candidate):
+            if variant.exists():
+                return variant
+
+        return candidate
 
     @classmethod
     def from_yaml(cls, yaml_path: str | Path, data_root: str | Path) -> "TMEDataset":

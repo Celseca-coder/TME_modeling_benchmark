@@ -44,11 +44,11 @@ def model_factory(task_cfg, seed):
     return LinearCox(seed=seed) if task_cfg["type"] == "survival" else LinearClassifier(seed=seed)
 
 
-def run(dataset_names, seeds) -> pd.DataFrame:
+def run(dataset_names, seeds,data_root=None) -> pd.DataFrame:
     dens = lambda: CellTypeDensityFeaturizer()      # CV: fine cell_type, fit per fold
     rows = []
     for name in dataset_names:
-        ds = load_dataset(name)
+        ds = load_dataset(name, data_root=data_root)
         print(f"=== {name} ===")
 
         # (A) cross-validation for every task
@@ -83,9 +83,11 @@ def main():
     ap.add_argument("--datasets", nargs="*", default=None)
     ap.add_argument("--seeds", type=int, nargs="*", default=[0, 1, 2])
     ap.add_argument("--output", default=str(_CODE / "results" / "celltype_density_benchmark.csv"))
+    ap.add_argument("--data-root", default=None)
     args = ap.parse_args()
 
-    summary = run(args.datasets or list_datasets(), args.seeds)
+    #summary = run(args.datasets or list_datasets(), args.seeds)
+    summary = run(args.datasets or list_datasets(), args.seeds, data_root=args.data_root)
     summary["score"] = summary.apply(lambda r: f"{r['mean']:.3f} ± {r['sd']:.3f}", axis=1)
     out = Path(args.output)
     out.parent.mkdir(parents=True, exist_ok=True)
