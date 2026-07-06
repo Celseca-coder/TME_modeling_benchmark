@@ -87,56 +87,53 @@ class SpatialDistanceFeaturizer(BaseFeatureExtractor):
         if k == 0:
             return {f"{name}": np.nan for name in self.feature_names()}
 
-        tree = KDTree(coords)
+        labels_arr = labels.to_numpy()
+        same_dists = np.full(n, np.nan, dtype=float)
+        cross_dists = np.full(n, np.nan, dtype=float)
 
-        # Query k+1 nearest because first is self
-        dists, indices = tree.query(coords, k=k + 1)
-        # dists shape (n, k+1); indices shape (n, k+1)
-        # Exclude self: take columns 1..k
-        dists = dists[:, 1:]  # (n, k)
-        indices = indices[:, 1:]
-
-        # For each cell, find distances to same-type neighbors and cross-type neighbors
-        same_dists = []
-        cross_dists = []
-        labels_arr = labels.values
-        for i in range(n):
-            neigh_labels = labels_arr[indices[i]]
-            same_mask = neigh_labels == labels_arr[i]
-            same = dists[i][same_mask]
-            cross = dists[i][~same_mask]
-            # For each cell we take the minimum distance among the k neighbors of the desired type
-            # If no such neighbor, we treat as NaN (or maybe inf)
-            same_min = same.min() if len(same) > 0 else np.nan
-            cross_min = cross.min() if len(cross) > 0 else np.nan
-            same_dists.append(same_min)
-            cross_dists.append(cross_min)
+        # Search complete same-type and different-type candidate sets. Looking only
+        # inside the k globally nearest cells can leave one category unobserved.
+        for cell_type in pd.unique(labels_arr):
+            source_idx = np.flatnonzero(labels_arr == cell_type)
+            other_idx = np.flatnonzero(labels_arr != cell_type)
+            if len(source_idx) > k:
+                same_tree = KDTree(coords[source_idx])
+                same_query, _ = same_tree.query(coords[source_idx], k=k + 1)
+                same_dists[source_idx] = np.asarray(same_query)[:, k]
+            if len(other_idx) >= k:
+                cross_tree = KDTree(coords[other_idx])
+                cross_query, _ = cross_tree.query(coords[source_idx], k=k)
+                cross_query = np.asarray(cross_query)
+                cross_dists[source_idx] = cross_query if k == 1 else cross_query[:, k - 1]
 
         # Aggregate
         features = {}
         for agg in self.agg_funcs:
-            func = getattr(np, agg, None)
+            func = getattr(np, f"nan{agg}", None)
             if func is None:
                 continue
             # Same-type distance aggregated across cells
-            val_same = func(np.array(same_dists)) if not np.isnan(same_dists).all() else np.nan
-            val_cross = func(np.array(cross_dists)) if not np.isnan(cross_dists).all() else np.nan
+            val_same = func(same_dists) if not np.isnan(same_dists).all() else np.nan
+            val_cross = func(cross_dists) if not np.isnan(cross_dists).all() else np.nan
             features[f"same_neighbor_dist_{agg}"] = float(val_same) if not np.isnan(val_same) else np.nan
             features[f"cross_neighbor_dist_{agg}"] = float(val_cross) if not np.isnan(val_cross) else np.nan
 
         # Also the proportion of cells whose nearest neighbor (k=1) is same type
         if self.k == 1:
-            # Use the first neighbor (index 1 from query)
-            neigh_labels = labels_arr[indices[:, 0]]
+            tree = KDTree(coords)
+            _, nearest_indices = tree.query(coords, k=2)
+            neigh_labels = labels_arr[nearest_indices[:, 1]]
             same_count = (neigh_labels == labels_arr).sum()
             prop = same_count / n
             features["proportion_same_nearest"] = float(prop)
         else:
             # For k>1, maybe compute average proportion of same-type among k neighbors?
             # Let's add a feature: mean proportion of same-type neighbors across cells
+            tree = KDTree(coords)
+            _, neighbor_indices = tree.query(coords, k=k + 1)
             props = []
             for i in range(n):
-                neigh_labels = labels_arr[indices[i]]
+                neigh_labels = labels_arr[neighbor_indices[i, 1:]]
                 props.append((neigh_labels == labels_arr[i]).mean())
             features["mean_proportion_same_neighbors"] = float(np.mean(props))
 
@@ -161,13 +158,19 @@ class SpatialDistanceFeaturizer(BaseFeatureExtractor):
             return {name: np.nan for name in self.feature_names()}
 
         # Get coordinates and labels aligned
-        coords = region.coordinates[["x", "y"]].to_numpy(float)
+        raw_coords = region.coordinates[["x", "y"]].to_numpy(float)
+        coords = region.coordinates_um[["x", "y"]].to_numpy(float)
         labels = region.cell_types[col].reindex(region.coordinates.index).astype("object")
+
+        valid_labels = labels.notna().to_numpy()
+        raw_coords = raw_coords[valid_labels]
+        coords = coords[valid_labels]
+        labels = labels.iloc[valid_labels].reset_index(drop=True)
 
         # Determine tissue mask if requested
         tissue_mask = None
         if self.use_tissue_mask:
-            in_tissue = region.polygon_contains(coords, "tissue")
+            in_tissue = region.polygon_contains(raw_coords, "tissue")
             if in_tissue is not None:
                 tissue_mask = in_tissue
 

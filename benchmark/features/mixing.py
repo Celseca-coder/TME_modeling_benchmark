@@ -73,6 +73,13 @@ class MixingFeaturizer(BaseFeatureExtractor):
         entropy = - (proportions * np.log(proportions)).sum()
         return float(entropy) if not np.isnan(entropy) else np.nan
 
+    def _compute_normalized_entropy(self, labels: pd.Series) -> float:
+        """Shannon entropy scaled to [0, 1] for the observed type count."""
+        n_types = labels.nunique()
+        if n_types < 2:
+            return 0.0 if n_types == 1 else np.nan
+        return self._compute_global_entropy(labels) / np.log(n_types)
+
     def _compute_local_mixing(
         self,
         coords: np.ndarray,
@@ -107,20 +114,36 @@ class MixingFeaturizer(BaseFeatureExtractor):
             gini = 1 - (probs**2).sum()
             scores.append(gini)
 
-        return {
+        same_type = labels_arr[indices] == labels_arr[:, None]
+        features = {
             "local_mixing_mean": float(np.mean(scores)),
             "local_mixing_std": float(np.std(scores)),
             "local_mixing_min": float(np.min(scores)),
             "local_mixing_max": float(np.max(scores)),
+            "same_type_neighbor_fraction": float(np.mean(same_type)),
         }
+        for source_type in self.cell_types_:
+            source_mask = labels_arr == source_type
+            for neighbor_type in self.cell_types_:
+                key = f"neighbor_fraction__{source_type}__to__{neighbor_type}"
+                features[key] = (
+                    float(np.mean(labels_arr[indices[source_mask]] == neighbor_type))
+                    if source_mask.any() else np.nan
+                )
+        return features
 
     # -- feature names ------------------------------------------------
     def feature_names(self) -> list[str]:
         names = []
         if self.include_global_entropy:
-            names.append("shannon_entropy_global")
+            names.extend(["shannon_entropy_global", "shannon_entropy_normalized"])
         if self.include_local_mixing:
-            names.extend(["local_mixing_mean", "local_mixing_std", "local_mixing_min", "local_mixing_max"])
+            names.extend(["local_mixing_mean", "local_mixing_std", "local_mixing_min",
+                          "local_mixing_max", "same_type_neighbor_fraction"])
+            names.extend(
+                f"neighbor_fraction__{source}__to__{neighbor}"
+                for source in self.cell_types_ for neighbor in self.cell_types_
+            )
         return names
 
     # -- extraction -------------------------------------------------------
@@ -130,12 +153,18 @@ class MixingFeaturizer(BaseFeatureExtractor):
             return {name: np.nan for name in self.feature_names()}
 
         # Get aligned data
-        coords = region.coordinates[["x", "y"]].to_numpy(float)
+        raw_coords = region.coordinates[["x", "y"]].to_numpy(float)
+        coords = region.coordinates_um[["x", "y"]].to_numpy(float)
         labels = region.cell_types[col].reindex(region.coordinates.index).astype("object")
+
+        valid_labels = labels.notna().to_numpy()
+        raw_coords = raw_coords[valid_labels]
+        coords = coords[valid_labels]
+        labels = labels.iloc[valid_labels].reset_index(drop=True)
 
         # Apply tissue mask if requested
         if self.use_tissue_mask:
-            in_tissue = region.polygon_contains(coords, "tissue")
+            in_tissue = region.polygon_contains(raw_coords, "tissue")
             if in_tissue is not None:
                 coords = coords[in_tissue]
                 labels = labels.iloc[in_tissue].reset_index(drop=True)
@@ -145,6 +174,7 @@ class MixingFeaturizer(BaseFeatureExtractor):
         features = {}
         if self.include_global_entropy:
             features["shannon_entropy_global"] = self._compute_global_entropy(labels)
+            features["shannon_entropy_normalized"] = self._compute_normalized_entropy(labels)
         if self.include_local_mixing:
             local = self._compute_local_mixing(coords, labels, self.k_neighbors)
             features.update(local)

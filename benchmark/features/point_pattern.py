@@ -80,33 +80,33 @@ class PointPatternFeaturizer(BaseFeatureExtractor):
         return self
 
     # -- helper: area ----------------------------------------------------
-    def _get_area_mm2(self, region: RegionData, coords: np.ndarray) -> float | None:
+    def _get_area_um2(self, region: RegionData, coords: np.ndarray) -> float | None:
         """Return area in mm²: use tissue area if available, else convex hull, else bounding box."""
         if region.tissue_area_mm2 is not None and region.tissue_area_mm2 > 0:
-            return region.tissue_area_mm2
+            return region.tissue_area_mm2 * 1e6
         if len(coords) >= 3:
             try:
                 hull = ConvexHull(coords)
-                return hull.volume / 1e6
+                return float(hull.volume)
             except Exception:
                 pass
         if len(coords) > 0:
             xmin, xmax = coords[:, 0].min(), coords[:, 0].max()
             ymin, ymax = coords[:, 1].min(), coords[:, 1].max()
             area_um2 = (xmax - xmin) * (ymax - ymin)
-            return area_um2 / 1e6
+            return float(area_um2)
         return None
 
     # -- compute Ripley's K and L ----------------------------------------
     def _compute_ripley(
         self,
         coords: np.ndarray,
-        area_mm2: float,
+        area_um2: float,
         radii: list[float],
     ) -> dict[str, float]:
         """Compute K(r) and L(r). Returns dict with keys like 'K_r10'."""
         n = len(coords)
-        if n < 2 or area_mm2 is None or area_mm2 <= 0:
+        if n < 2 or area_um2 is None or area_um2 <= 0:
             return {f"{metric}_r{r}": np.nan for metric in self.metrics for r in radii}
 
         tree = KDTree(coords)
@@ -115,8 +115,8 @@ class PointPatternFeaturizer(BaseFeatureExtractor):
             pair_count = 0
             for i in range(n):
                 idxs = tree.query_ball_point(coords[i], r)
-                pair_count += len(idxs)  # query_ball_point 不包含自身，所以直接加
-            K = (area_mm2 / (n**2)) * pair_count
+                pair_count += len(idxs) - 1  # query includes the focal point
+            K = (area_um2 / (n * (n - 1))) * pair_count
             if "K" in self.metrics:
                 features[f"K_r{r}"] = float(K)
             if "L" in self.metrics:
@@ -128,13 +128,13 @@ class PointPatternFeaturizer(BaseFeatureExtractor):
     def _compute_pcf(
         self,
         coords: np.ndarray,
-        area_mm2: float,
+        area_um2: float,
         radii: list[float],
         bandwidth: float | None = None,
     ) -> dict[str, float]:
         """Estimate g(r) using kernel smoothing of interpoint distances."""
         n = len(coords)
-        if n < 2 or area_mm2 is None or area_mm2 <= 0:
+        if n < 2 or area_um2 is None or area_um2 <= 0:
             return {f"pcf_r{r}": np.nan for r in radii}
 
         max_r = max(radii)
@@ -144,6 +144,8 @@ class PointPatternFeaturizer(BaseFeatureExtractor):
         for i in range(n):
             idxs = tree.query_ball_point(coords[i], max_r)  # 只取半径 max_r 内的邻居
             for j in idxs:
+                if j == i:
+                    continue
                 # 跳过自身（实际上 query_ball_point 返回的索引不包含自身）
                 d = np.linalg.norm(coords[i] - coords[j])
                 all_dists.append(d)
@@ -161,7 +163,7 @@ class PointPatternFeaturizer(BaseFeatureExtractor):
             f_r = kde.evaluate([r])[0] if len(all_dists) > 0 else 0.0
             # pcf g(r) = A * f(r) / (2πr)
             if r > 0 and f_r > 0:
-                g = (area_mm2 * f_r) / (2 * np.pi * r)
+                g = (area_um2 * f_r) / (2 * np.pi * r * n * (n - 1))
             else:
                 g = np.nan
             features[f"pcf_r{r}"] = float(g) if not np.isnan(g) else np.nan
@@ -206,20 +208,21 @@ class PointPatternFeaturizer(BaseFeatureExtractor):
 
     # -- extraction -------------------------------------------------------
     def extract_region(self, region: RegionData) -> dict[str, float]:
-        coords = region.coordinates[["x", "y"]].to_numpy(float)
+        raw_coords = region.coordinates[["x", "y"]].to_numpy(float)
+        coords = region.coordinates_um[["x", "y"]].to_numpy(float)
         if len(coords) == 0:
             return self._empty_features()
 
         # Apply tissue mask if requested
         in_tissue = None
         if self.use_tissue_mask:
-            in_tissue = region.polygon_contains(coords, "tissue")
+            in_tissue = region.polygon_contains(raw_coords, "tissue")
             if in_tissue is not None:
                 coords = coords[in_tissue]
                 if len(coords) == 0:
                     return self._empty_features()
 
-        area = self._get_area_mm2(region, coords)
+        area = self._get_area_um2(region, coords)
 
         if self.by_type:
             col = self._col(region)
@@ -247,15 +250,15 @@ class PointPatternFeaturizer(BaseFeatureExtractor):
     def _compute_all_metrics(
         self,
         coords: np.ndarray,
-        area_mm2: float,
+        area_um2: float,
         radii: list[float],
     ) -> dict[str, float]:
         """Compute all requested metrics and combine into one dict."""
         features = {}
         if "K" in self.metrics or "L" in self.metrics:
-            features.update(self._compute_ripley(coords, area_mm2, radii))
+            features.update(self._compute_ripley(coords, area_um2, radii))
         if "pcf" in self.metrics:
-            features.update(self._compute_pcf(coords, area_mm2, radii, self.pcf_bandwidth))
+            features.update(self._compute_pcf(coords, area_um2, radii, self.pcf_bandwidth))
         if "variogram" in self.metrics:
             features.update(self._compute_variogram(coords, radii))
         return features
