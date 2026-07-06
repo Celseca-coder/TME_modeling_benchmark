@@ -7,8 +7,32 @@ LOG_DIR="$ROOT/results/nohup_logs"
 
 mkdir -p "$LOG_DIR"
 
+check_space_gm_deps() {
+  python - <<'PY'
+import importlib.util
+missing = [name for name in ("torch", "torch_geometric") if importlib.util.find_spec(name) is None]
+if missing:
+    print("Missing dependencies for SPACE-GM baseline:", ", ".join(missing))
+    print("Install them first, for example: pip install 'torch>=2.2.2' 'torch-geometric>=2.4.0'")
+    raise SystemExit(1)
+PY
+}
+
 source /autofs/nas8/tywang/tjzou/Miniconda3/etc/profile.d/conda.sh
-conda activate p3
+CONDA_BASE=$(conda info --base)
+P3_PY="$CONDA_BASE/envs/p3/bin/python"
+SPACEGM_PY="$CONDA_BASE/envs/space_gm/bin/python"
+
+check_space_gm_deps() {
+  "$SPACEGM_PY" - <<'PY'
+import importlib.util
+missing = [name for name in ("torch", "torch_geometric") if importlib.util.find_spec(name) is None]
+if missing:
+    print("Missing dependencies for SPACE-GM baseline:", ", ".join(missing))
+    print("Install them first, for example: pip install 'torch>=2.2.2' 'torch-geometric>=2.4.0'")
+    raise SystemExit(1)
+PY
+}
 
 cd "$ROOT"
 
@@ -61,12 +85,20 @@ cd "$ROOT"
 #   > "$LOG_DIR/mixing_baseline.log" 2>&1 &
 # echo $! > "$LOG_DIR/mixing_baseline.pid"
 
-echo "Starting patch baseline..."
-nohup python -u scripts/run_patch_baseline.py \
+# echo "Starting patch baseline..."
+# nohup python -u scripts/run_patch_baseline.py \
+#   --data-root "$DATA_ROOT" \
+#   --output "$ROOT/results/patch_benchmark.csv" \
+#   > "$LOG_DIR/patch_baseline.log" 2>&1 &
+# echo $! > "$LOG_DIR/patch_baseline.pid"
+
+echo "Starting SPACE-GM baseline..."
+check_space_gm_deps
+nohup python -u scripts/run_space_gm_baseline.py \
   --data-root "$DATA_ROOT" \
-  --output "$ROOT/results/patch_benchmark.csv" \
-  > "$LOG_DIR/patch_baseline.log" 2>&1 &
-echo $! > "$LOG_DIR/patch_baseline.pid"
+  --output "$ROOT/results/space_gm_benchmark.csv" \
+  > "$LOG_DIR/space_gm_baseline.log" 2>&1 &
+echo $! > "$LOG_DIR/space_gm_baseline.pid"
 
 echo "All jobs launched."
 echo "Logs:"
