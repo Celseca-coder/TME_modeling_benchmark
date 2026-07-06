@@ -1,28 +1,17 @@
-"""SPACE-GM style graph construction: Delaunay triangulation edges (pruned by
-a max edge length) + one-hot cell-type node features (+ optional marker
-expression channels).
+"""SPACE-GM microenvironment graph construction.
 
-Unlike density/mixing/point_pattern, `extract_region` does NOT return
-`dict[str, float]` in spirit — it returns `{"graph": data}` where `data` is a
-`torch_geometric.data.Data` object. `BaseFeatureExtractor.transform` still
-works unchanged (it just builds a DataFrame with one object-dtype column
-instead of many float columns), so this plugs into `cross_validate` /
-`cohort_split_test` with zero changes to crossval.py. The matching models —
-`SpaceGMClassifier` / `SpaceGMCox` in `benchmark/models/space_gm.py` — unpack
-that single column instead of calling `_TabularModel`'s scaler/imputer (there
-is nothing to standardise in a graph object).
-
-ASSUMPTION (only confirmed via `benchmark/models/mil.py`'s usage): RegionData
-exposes `region.coordinates` (DataFrame with `coord_cols`, indexed by cell id)
-and `region.cell_types` (DataFrame with `cell_type_col`). Marker expression is
-assumed to live on `region.expression` with the same index — adjust
-`_node_features` if your actual attribute names differ.
+Each region is represented by one local graph per sampled centre cell.  A graph
+contains the centre's three-hop Delaunay neighbourhood, restricted to 75 um.
+Node inputs contain cell-type IDs plus cell-size/centre indicators; protein
+expression is stored only as a pre-training target and never used as input.
 """
 from __future__ import annotations
 
+from collections import deque
+
 import numpy as np
 import torch
-from scipy.spatial import Delaunay
+from scipy.spatial import Delaunay, QhullError
 from torch_geometric.data import Data
 
 from benchmark.data.dataset import RegionData
@@ -31,80 +20,158 @@ from .base import BaseFeatureExtractor
 
 class SpaceGMGraphBuilder(BaseFeatureExtractor):
     def __init__(self, cell_type_col: str = "cell_type", coord_cols=("x", "y"),
-                 marker_cols: list[str] | None = None,
-                 max_edge_length: float | None = 50.0, min_cells: int = 4):
+                 cell_size_col: str | None = None, n_hops: int = 3,
+                 radius_um: float = 75.0, near_edge_um: float = 20.0,
+                 max_centers: int | None = 256, seed: int = 0):
         self.cell_type_col = cell_type_col
         self.coord_cols = list(coord_cols)
-        self.marker_cols = marker_cols or []
-        self.max_edge_length = max_edge_length
-        self.min_cells = min_cells
+        self.cell_size_col = cell_size_col
+        self.n_hops = n_hops
+        self.radius_um = radius_um
+        self.near_edge_um = near_edge_um
+        self.max_centers = max_centers
+        self.seed = seed
         self._cell_types: list[str] | None = None
+        self._markers: list[str] = []
+        self._size_min = 0.0
+        self._size_max = 1.0
 
     def fit(self, regions: list[RegionData]) -> "SpaceGMGraphBuilder":
-        # 固定全局细胞类型词表 -> 保证train/val的one-hot维度一致,不会因为某个
-        # fold里缺某个细胞类型而导致node feature维度对不齐
-        types = set()
-        for r in regions:
-            types.update(r.cell_types[self.cell_type_col].dropna().unique().tolist())
+        types: set[str] = set()
+        marker_sets = []
+        sizes = []
+        for region in regions:
+            col = self._cell_type_column(region)
+            types.update(region.cell_types[col].dropna().astype(str).unique())
+            marker_sets.append(set(region.expression.columns))
+            values = self._raw_sizes(region)
+            if values is not None:
+                sizes.append(values[np.isfinite(values) & (values >= 0)])
         self._cell_types = sorted(types)
+        self._markers = sorted(set.intersection(*marker_sets)) if marker_sets else []
+        if sizes and any(len(x) for x in sizes):
+            logged = np.log1p(np.concatenate([x for x in sizes if len(x)]))
+            self._size_min, self._size_max = float(logged.min()), float(logged.max())
         return self
+
+    def _cell_type_column(self, region: RegionData) -> str:
+        if self.cell_type_col in region.cell_types.columns:
+            return self.cell_type_col
+        if "cell_type" in region.cell_types.columns:
+            return "cell_type"
+        raise ValueError(f"Region {region.region_id} has no cell-type column")
+
+    def _raw_sizes(self, region: RegionData) -> np.ndarray | None:
+        candidates = ([self.cell_size_col] if self.cell_size_col else []) + [
+            "cell_size", "cell_area", "area", "size"
+        ]
+        for col in candidates:
+            if col and col in region.cell_types.columns:
+                return region.cell_types[col].reindex(region.coordinates.index).to_numpy(float)
+            if col and col in region.expression.columns:
+                return region.expression[col].reindex(region.coordinates.index).to_numpy(float)
+        return None
+
+    def _scaled_sizes(self, region: RegionData, n: int) -> np.ndarray:
+        raw = self._raw_sizes(region)
+        if raw is None:
+            return np.zeros(n, dtype=np.float32)
+        logged = np.log1p(np.clip(np.nan_to_num(raw, nan=0.0), 0, None))
+        span = self._size_max - self._size_min
+        return np.clip((logged - self._size_min) / span, 0, 1).astype(np.float32) if span > 0 else np.zeros(n, np.float32)
+
+    @staticmethod
+    def _delaunay_edges(coords: np.ndarray) -> np.ndarray:
+        n = len(coords)
+        if n < 2:
+            return np.empty((0, 2), dtype=int)
+        if n == 2:
+            return np.array([[0, 1]], dtype=int)
+        try:
+            simplices = Delaunay(coords).simplices
+            edges = {tuple(sorted((int(s[i]), int(s[(i + 1) % 3]))))
+                     for s in simplices for i in range(3)}
+            return np.asarray(sorted(edges), dtype=int)
+        except QhullError:
+            order = np.argsort(coords[:, 0] + coords[:, 1] * 1e-9)
+            return np.column_stack([order[:-1], order[1:]])
+
+    def _hop_neighbourhood(self, center: int, adjacency: list[set[int]]) -> set[int]:
+        seen = {center}
+        queue = deque([(center, 0)])
+        while queue:
+            node, depth = queue.popleft()
+            if depth == self.n_hops:
+                continue
+            for neighbour in adjacency[node]:
+                if neighbour not in seen:
+                    seen.add(neighbour)
+                    queue.append((neighbour, depth + 1))
+        return seen
 
     def extract_region(self, region: RegionData) -> dict:
         assert self._cell_types is not None, "call fit() before extract_region()"
-        coords = region.coordinates[self.coord_cols].to_numpy(dtype=float)
+        coords = region.coordinates_um[self.coord_cols].to_numpy(float)
         n = len(coords)
-        if n < self.min_cells:
-            # 细胞太少建不出有意义的图:返回一个形状正确的空图,而不是报错让
-            # cross_validate里的try/except把它吞成一整行NaN
-            x = torch.zeros((0, self._n_node_features()), dtype=torch.float32)
-            edge_index = torch.zeros((2, 0), dtype=torch.long)
-            return {"graph": Data(x=x, edge_index=edge_index)}
+        if n == 0:
+            return {"graphs": []}
 
-        edge_index = self._build_edges(coords)
-        x = self._node_features(region, n)
-        return {"graph": Data(x=x, edge_index=edge_index,
-                              pos=torch.as_tensor(coords, dtype=torch.float32))}
+        base_edges = self._delaunay_edges(coords)
+        adjacency = [set() for _ in range(n)]
+        for a, b in base_edges:
+            adjacency[a].add(b)
+            adjacency[b].add(a)
 
-    # ------------------------------------------------------------------
-    def _n_node_features(self) -> int:
-        return len(self._cell_types) + len(self.marker_cols)
+        centers = np.arange(n)
+        if self.max_centers is not None and n > self.max_centers:
+            rng = np.random.default_rng(self.seed)
+            centers = np.sort(rng.choice(n, self.max_centers, replace=False))
 
-    def _node_features(self, region: RegionData, n: int) -> torch.Tensor:
-        type_to_int = {t: i for i, t in enumerate(self._cell_types)}
-        labels = region.cell_types[self.cell_type_col].to_numpy()
-        onehot = np.zeros((n, len(self._cell_types)), dtype=np.float32)
-        for i, t in enumerate(labels):
-            j = type_to_int.get(t)
-            if j is not None:
-                onehot[i, j] = 1.0
+        labels = region.cell_types[self._cell_type_column(region)].reindex(region.coordinates.index)
+        # Index 0 is reserved for labels not observed in the training fold.
+        type_map = {name: i + 1 for i, name in enumerate(self._cell_types)}
+        type_ids = np.array([type_map.get(str(x), 0) for x in labels], dtype=np.int64)
+        sizes = self._scaled_sizes(region, n)
+        expression = region.expression.reindex(region.coordinates.index)[self._markers].to_numpy(np.float32)
 
-        if self.marker_cols:
-            expr = region.expression[self.marker_cols].to_numpy(dtype=np.float32)
-            feats = np.concatenate([onehot, np.nan_to_num(expr, nan=0.0)], axis=1)
-        else:
-            feats = onehot
-        return torch.as_tensor(feats, dtype=torch.float32)
+        graphs = []
+        for center in centers:
+            nodes = self._hop_neighbourhood(int(center), adjacency)
+            distance = np.linalg.norm(coords - coords[center], axis=1)
+            nodes = sorted(i for i in nodes if distance[i] <= self.radius_um)
+            if center not in nodes:
+                nodes.append(int(center)); nodes.sort()
+            local = {old: new for new, old in enumerate(nodes)}
 
-    def _build_edges(self, coords: np.ndarray) -> torch.Tensor:
-        n = len(coords)
-        if n < 3:  # Delaunay至少要3个不共线的点
-            edges = np.array([[0, 1]]) if n >= 2 else np.empty((0, 2), dtype=int)
-        else:
-            tri = Delaunay(coords)
-            edge_set = set()
-            for simplex in tri.simplices:
-                for i in range(3):
-                    a, b = int(simplex[i]), int(simplex[(i + 1) % 3])
-                    edge_set.add((min(a, b), max(a, b)))
-            edges = np.array(sorted(edge_set))
+            directed_edges = []
+            edge_types = []
+            for a, b in base_edges:
+                if a in local and b in local:
+                    edge_type = 0 if np.linalg.norm(coords[a] - coords[b]) < self.near_edge_um else 1
+                    directed_edges.extend([(local[a], local[b]), (local[b], local[a])])
+                    edge_types.extend([edge_type, edge_type])
+            for old in nodes:
+                directed_edges.append((local[old], local[old]))
+                edge_types.append(2)
 
-        if self.max_edge_length is not None and len(edges):
-            d = np.linalg.norm(coords[edges[:, 0]] - coords[edges[:, 1]], axis=1)
-            edges = edges[d <= self.max_edge_length]
-            if len(edges) == 0:          # 所有边都被剪掉了:退化成自环,保证不空
-                edges = np.array([[0, 0]])
+            edge_index = torch.tensor(directed_edges, dtype=torch.long).T.contiguous()
+            center_flag = np.array([old == center for old in nodes], dtype=np.float32)
+            aux = np.column_stack([sizes[nodes], center_flag]).astype(np.float32)
+            graphs.append(Data(
+                cell_type=torch.tensor(type_ids[nodes], dtype=torch.long),
+                aux=torch.tensor(aux, dtype=torch.float32),
+                edge_index=edge_index,
+                edge_type=torch.tensor(edge_types, dtype=torch.long),
+                center_index=torch.tensor(local[int(center)], dtype=torch.long),
+                center_expression=torch.tensor(np.nan_to_num(expression[center]), dtype=torch.float32),
+                pos=torch.tensor(coords[nodes], dtype=torch.float32),
+            ))
+        return {"graphs": graphs}
 
-        if len(edges) == 0:
-            return torch.zeros((2, 0), dtype=torch.long)
-        edge_index = np.concatenate([edges, edges[:, ::-1]], axis=0).T
-        return torch.as_tensor(edge_index, dtype=torch.long)
+    @property
+    def n_cell_types(self) -> int:
+        return len(self._cell_types or [])
+
+    @property
+    def n_markers(self) -> int:
+        return len(self._markers)

@@ -1,11 +1,9 @@
 #!/usr/bin/env python
-"""SPACE-GM style GNN baseline over all datasets, tasks and schemes.
+"""SPACE-GM baseline over all datasets, tasks and schemes.
 
-Feature: per region, a Delaunay-triangulation cell-cell graph (node features =
-cell-type one-hot [+ marker expression]), fed end-to-end into a GIN encoder +
-global mean pooling. Unlike every other baseline in this repo, the
-"featurizer" here (SpaceGMGraphBuilder) only builds the graph — all the
-learning happens inside SpaceGMClassifier / SpaceGMCox.
+Each centre cell defines a 3-hop, 75-um microenvironment. The model performs
+protein-expression pre-training followed by phenotype fine-tuning and averages
+microenvironment predictions to obtain one region-level prediction.
 """
 from __future__ import annotations
 
@@ -48,7 +46,9 @@ def run(dataset_names, seeds, data_root=None) -> pd.DataFrame:
         # (A) CV
         for task in ds.task_ids:
             metric = PRIMARY_METRIC[ds.get_task_config(task)["type"]]
-            featurizer = lambda: SpaceGMGraphBuilder(max_edge_length=50.0)
+            featurizer = lambda: SpaceGMGraphBuilder(
+                n_hops=3, radius_um=75.0, near_edge_um=20.0, max_centers=256,
+            )
             # normalize=True: node里塞的marker表达需要走数据集自己的标准化,
             # 因为SpaceGM*模型没有走_TabularModel那层scaler(见space_gm.py)
             fm = cross_validate(ds, task, featurizer, model_factory, seeds=seeds, normalize=True)
@@ -60,7 +60,10 @@ def run(dataset_names, seeds, data_root=None) -> pd.DataFrame:
         # (B) generalization tests
         for gt in ds.validation_config.get("generalization_tests", []):
             cell_type_col = gt.get("cell_type_col", "cell_type")
-            featurizer = lambda c=cell_type_col: SpaceGMGraphBuilder(cell_type_col=c, max_edge_length=50.0)
+            featurizer = lambda c=cell_type_col: SpaceGMGraphBuilder(
+                cell_type_col=c, n_hops=3, radius_um=75.0,
+                near_edge_um=20.0, max_centers=256,
+            )
             for task in gt.get("tasks", ds.task_ids):
                 metric = PRIMARY_METRIC[ds.get_task_config(task)["type"]]
                 res = cohort_split_test(ds, task, gt, featurizer, model_factory, seeds=seeds, normalize=True)

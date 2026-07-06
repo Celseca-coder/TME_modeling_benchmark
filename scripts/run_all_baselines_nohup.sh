@@ -1,4 +1,5 @@
 #!/usr/bin/env bash
+# Keep this script in Unix LF format; it is executed on Linux.
 set -euo pipefail
 
 ROOT=/autofs/nas8/tywang/tjzou/TME_modeling_benchmark
@@ -6,17 +7,6 @@ DATA_ROOT=/autofs/bal14/zqwu/CellularTables/TME_benchmark_data
 LOG_DIR="$ROOT/results/nohup_logs"
 
 mkdir -p "$LOG_DIR"
-
-check_space_gm_deps() {
-  python - <<'PY'
-import importlib.util
-missing = [name for name in ("torch", "torch_geometric") if importlib.util.find_spec(name) is None]
-if missing:
-    print("Missing dependencies for SPACE-GM baseline:", ", ".join(missing))
-    print("Install them first, for example: pip install 'torch>=2.2.2' 'torch-geometric>=2.4.0'")
-    raise SystemExit(1)
-PY
-}
 
 source /autofs/nas8/tywang/tjzou/Miniconda3/etc/profile.d/conda.sh
 CONDA_BASE=$(conda info --base)
@@ -94,7 +84,7 @@ cd "$ROOT"
 
 echo "Starting SPACE-GM baseline..."
 check_space_gm_deps
-nohup python -u scripts/run_space_gm_baseline.py \
+nohup "$SPACEGM_PY" -u scripts/run_space_gm_baseline.py \
   --data-root "$DATA_ROOT" \
   --output "$ROOT/results/space_gm_benchmark.csv" \
   > "$LOG_DIR/space_gm_baseline.log" 2>&1 &

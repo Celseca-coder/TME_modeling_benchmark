@@ -1,12 +1,4 @@
-"""SPACE-GM style graph neural network region models: a GIN encoder + global
-mean pooling, trained end-to-end. Unlike the tabular baselines, the "learning"
-happens entirely inside `fit` — the featurizer (`SpaceGMGraphBuilder`) only
-builds the graph and does not touch model weights.
-
-Do NOT inherit `_TabularModel`: its median-impute + StandardScaler assumes a
-2D numeric feature table and will either crash or silently mangle the
-`"graph"` column if applied here.
-"""
+"""SPACE-GM models with expression pre-training and region-level aggregation."""
 from __future__ import annotations
 
 import numpy as np
@@ -15,134 +7,181 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch_geometric.data import Batch
-from torch_geometric.nn import GINConv, global_mean_pool
+from torch_geometric.nn import global_max_pool
 
 from .base import RegionModel
 
 
-class _SpaceGMEncoder(nn.Module):
-    def __init__(self, in_dim: int, hidden_dim: int = 64, n_layers: int = 3, out_dim: int = 1):
+class _EdgeGINLayer(nn.Module):
+    def __init__(self, hidden_dim: int):
         super().__init__()
-        self.convs = nn.ModuleList()
-        d = in_dim
-        for _ in range(n_layers):
-            mlp = nn.Sequential(nn.Linear(d, hidden_dim), nn.ReLU(), nn.Linear(hidden_dim, hidden_dim))
-            self.convs.append(GINConv(mlp))
-            d = hidden_dim
-        self.head = nn.Sequential(nn.Linear(hidden_dim, hidden_dim), nn.ReLU(),
-                                   nn.Linear(hidden_dim, out_dim))
+        self.edge_embedding = nn.Embedding(3, hidden_dim)
+        self.eps = nn.Parameter(torch.zeros(1))
+        self.mlp = nn.Sequential(
+            nn.Linear(hidden_dim, hidden_dim), nn.LeakyReLU(0.1),
+            nn.Linear(hidden_dim, hidden_dim),
+        )
 
-    def forward(self, batch: Batch) -> torch.Tensor:
-        h = batch.x
-        for conv in self.convs:
-            h = F.relu(conv(h, batch.edge_index))
-        pooled = global_mean_pool(h, batch.batch)     # (n_graphs, hidden_dim)
-        return self.head(pooled)                       # (n_graphs, out_dim)
+    def forward(self, h, edge_index, edge_type):
+        source, target = edge_index
+        messages = h[source] + self.edge_embedding(edge_type)
+        aggregated = torch.zeros_like(h)
+        aggregated.index_add_(0, target, messages)
+        return self.mlp((1.0 + self.eps) * h + aggregated)
+
+
+class _SpaceGMBackbone(nn.Module):
+    def __init__(self, n_cell_types: int, hidden_dim: int = 512, n_layers: int = 3):
+        super().__init__()
+        self.type_embedding = nn.Embedding(max(n_cell_types, 1), hidden_dim)
+        self.aux_projection = nn.Linear(2, hidden_dim)
+        self.layers = nn.ModuleList([_EdgeGINLayer(hidden_dim) for _ in range(n_layers)])
+
+    def forward(self, batch: Batch):
+        h = self.type_embedding(batch.cell_type) + self.aux_projection(batch.aux)
+        for layer in self.layers:
+            h = F.leaky_relu(layer(h, batch.edge_index, batch.edge_type), 0.1)
+        pooled = global_max_pool(h, batch.batch)
+        centers = h[batch.aux[:, 1] > 0.5]
+        return centers, pooled
+
+
+def _three_layer_head(in_dim: int, out_dim: int) -> nn.Sequential:
+    return nn.Sequential(
+        nn.Linear(in_dim, in_dim), nn.LeakyReLU(0.1),
+        nn.Linear(in_dim, in_dim // 2), nn.LeakyReLU(0.1),
+        nn.Linear(in_dim // 2, out_dim),
+    )
 
 
 class _SpaceGMBase(RegionModel):
-    def __init__(self, seed: int = 0, hidden_dim: int = 64, n_layers: int = 3,
-                 lr: float = 1e-3, epochs: int = 100, weight_decay: float = 1e-4,
-                 batch_size: int = 16, device: str = "cpu"):
+    def __init__(self, seed: int = 0, hidden_dim: int = 512, n_layers: int = 3,
+                 lr: float = 1e-4, pretrain_epochs: int = 20, epochs: int = 100,
+                 weight_decay: float = 1e-4, micro_batch_size: int = 32,
+                 device: str | None = None):
         torch.manual_seed(seed)
+        np.random.seed(seed)
         self.seed = seed
         self.hidden_dim, self.n_layers = hidden_dim, n_layers
-        self.lr, self.epochs, self.weight_decay = lr, epochs, weight_decay
-        self.batch_size = batch_size
-        self.device = device
-        self._encoder = None
+        self.lr, self.pretrain_epochs, self.epochs = lr, pretrain_epochs, epochs
+        self.weight_decay = weight_decay
+        self.micro_batch_size = micro_batch_size
+        self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
+        self.backbone = None
+        self.head = None
 
     @staticmethod
-    def _graphs(features: pd.DataFrame) -> list:
-        return features["graph"].tolist()
+    def _region_graphs(features: pd.DataFrame) -> list[list]:
+        return features["graphs"].tolist()
 
-    def _init_encoder(self, in_dim: int, out_dim: int):
-        self._encoder = _SpaceGMEncoder(in_dim, self.hidden_dim, self.n_layers, out_dim).to(self.device)
-        return torch.optim.Adam(self._encoder.parameters(), lr=self.lr, weight_decay=self.weight_decay)
+    def _initialise(self, region_graphs: list[list], out_dim: int):
+        first = next(graph for graphs in region_graphs for graph in graphs)
+        n_cell_types = max(int(graph.cell_type.max()) for graphs in region_graphs for graph in graphs) + 1
+        self.backbone = _SpaceGMBackbone(n_cell_types, self.hidden_dim, self.n_layers).to(self.device)
+        self.head = _three_layer_head(self.hidden_dim, out_dim).to(self.device)
+        self._pretrain(region_graphs, int(first.center_expression.numel()))
+
+    def _encode_graphs(self, graphs: list, need_centers: bool = False):
+        if not graphs:
+            raise ValueError("SPACE-GM received a region with no microenvironments")
+        center_parts, pooled_parts = [], []
+        for start in range(0, len(graphs), self.micro_batch_size):
+            batch = Batch.from_data_list(graphs[start:start + self.micro_batch_size]).to(self.device)
+            centers, pooled = self.backbone(batch)
+            center_parts.append(centers)
+            pooled_parts.append(pooled)
+        centers = torch.cat(center_parts) if need_centers else None
+        return centers, torch.cat(pooled_parts)
+
+    def _pretrain(self, region_graphs: list[list], n_markers: int):
+        if self.pretrain_epochs <= 0 or n_markers == 0:
+            return
+        expression_head = _three_layer_head(self.hidden_dim, n_markers).to(self.device)
+        optimizer = torch.optim.Adam(
+            list(self.backbone.parameters()) + list(expression_head.parameters()),
+            lr=self.lr, weight_decay=self.weight_decay,
+        )
+        all_graphs = [graph for graphs in region_graphs for graph in graphs]
+        self.backbone.train(); expression_head.train()
+        for _ in range(self.pretrain_epochs):
+            order = np.random.permutation(len(all_graphs))
+            for start in range(0, len(order), self.micro_batch_size):
+                selected = [all_graphs[i] for i in order[start:start + self.micro_batch_size]]
+                batch = Batch.from_data_list(selected).to(self.device)
+                optimizer.zero_grad()
+                centers, _ = self.backbone(batch)
+                target = batch.center_expression.reshape(len(selected), n_markers)
+                loss = F.mse_loss(expression_head(centers), target)
+                loss.backward(); optimizer.step()
+
+    def _region_output(self, graphs: list):
+        _, embeddings = self._encode_graphs(graphs)
+        # Mean aggregation across all microenvironments in the same tissue region.
+        return self.head(embeddings).mean(dim=0)
+
+    def _optimizer(self):
+        return torch.optim.Adam(
+            list(self.backbone.parameters()) + list(self.head.parameters()),
+            lr=self.lr, weight_decay=self.weight_decay,
+        )
 
 
 class SpaceGMClassifier(_SpaceGMBase):
-    """Binary / multiclass classification. Mini-batched (batch_size) is fine
-    here since cross-entropy per-sample doesn't need a shared risk set."""
-
-    def __init__(self, **kw):
-        super().__init__(**kw)
-        self.task_type = "binary"
-        self.classes_ = None
+    task_type = "binary"
 
     def fit(self, features: pd.DataFrame, target: pd.Series) -> "SpaceGMClassifier":
-        graphs = self._graphs(features.loc[list(target.index)])
+        region_graphs = self._region_graphs(features.loc[list(target.index)])
         self.classes_ = np.sort(target.unique())
-        class_to_int = {c: i for i, c in enumerate(self.classes_)}
+        class_to_int = {label: i for i, label in enumerate(self.classes_)}
         y = target.map(class_to_int).to_numpy()
-        opt = self._init_encoder(graphs[0].x.shape[1], out_dim=len(self.classes_))
-
-        n = len(graphs)
-        self._encoder.train()
+        self._initialise(region_graphs, len(self.classes_))
+        optimizer = self._optimizer()
+        self.backbone.train(); self.head.train()
         for _ in range(self.epochs):
-            perm = np.random.permutation(n)
-            for start in range(0, n, self.batch_size):
-                sel = perm[start:start + self.batch_size]
-                batch = Batch.from_data_list([graphs[i] for i in sel]).to(self.device)
-                yb = torch.as_tensor(y[sel], dtype=torch.long, device=self.device)
-                opt.zero_grad()
-                loss = F.cross_entropy(self._encoder(batch), yb)
-                loss.backward()
-                opt.step()
+            for i in np.random.permutation(len(region_graphs)):
+                optimizer.zero_grad()
+                logits = self._region_output(region_graphs[i]).unsqueeze(0)
+                label = torch.tensor([y[i]], dtype=torch.long, device=self.device)
+                F.cross_entropy(logits, label).backward(); optimizer.step()
         return self
 
     def predict(self, features: pd.DataFrame) -> np.ndarray:
-        graphs = self._graphs(features)
-        self._encoder.eval()
-        n = len(graphs)
-        probs = np.zeros((n, len(self.classes_)), dtype=np.float32)
+        self.backbone.eval(); self.head.eval()
+        outputs = []
         with torch.no_grad():
-            for start in range(0, n, self.batch_size):
-                sel = np.arange(start, min(start + self.batch_size, n))
-                batch = Batch.from_data_list([graphs[i] for i in sel]).to(self.device)
-                probs[sel] = F.softmax(self._encoder(batch), dim=1).cpu().numpy()
-        return probs
+            for graphs in self._region_graphs(features):
+                outputs.append(F.softmax(self._region_output(graphs), dim=0).cpu().numpy())
+        return np.asarray(outputs)
 
 
 class SpaceGMCox(_SpaceGMBase):
-    """Cox proportional-hazards risk score via a Breslow partial-likelihood
-    loss. `predict` returns the raw log-hazard (higher = worse prognosis,
-    same monotone direction as `LinearCox.predict`'s partial hazard — a
-    rank-based metric like C-index is invariant to the exp()).
-
-    IMPORTANT: unlike SpaceGMClassifier, this ignores `batch_size` during
-    `fit` and always uses the full training cohort as one batch — the Breslow
-    approximation needs every sample in the risk set, so mini-batching here
-    would silently compute the wrong (incomplete-risk-set) likelihood.
-    """
-
     task_type = "survival"
 
+    @staticmethod
+    def _breslow_loss(risk, time, event):
+        loss = risk.new_tensor(0.0)
+        n_events = event.sum().clamp(min=1.0)
+        for event_time in torch.unique(time[event > 0]):
+            deaths = (time == event_time) & (event > 0)
+            risk_set = time >= event_time
+            loss -= risk[deaths].sum() - deaths.sum() * torch.logsumexp(risk[risk_set], dim=0)
+        return loss / n_events
+
     def fit(self, features: pd.DataFrame, target: pd.DataFrame) -> "SpaceGMCox":
-        graphs = self._graphs(features.loc[list(target.index)])
-        time = target["time"].to_numpy()
-        event = target["event"].to_numpy().astype(np.float32)
-
-        order = np.argsort(-time)                      # descending time -> risk sets are prefixes
-        graphs = [graphs[i] for i in order]
-        event_t = torch.as_tensor(event[order], dtype=torch.float32, device=self.device)
-
-        opt = self._init_encoder(graphs[0].x.shape[1], out_dim=1)
-        self._encoder.train()
+        region_graphs = self._region_graphs(features.loc[list(target.index)])
+        self._initialise(region_graphs, 1)
+        time = torch.tensor(target["time"].to_numpy(), dtype=torch.float32, device=self.device)
+        event = torch.tensor(target["event"].to_numpy(), dtype=torch.float32, device=self.device)
+        optimizer = self._optimizer()
+        self.backbone.train(); self.head.train()
         for _ in range(self.epochs):
-            opt.zero_grad()
-            batch = Batch.from_data_list(graphs).to(self.device)   # full batch, see docstring
-            risk = self._encoder(batch).squeeze(-1)                 # (n,) log-hazard
-            log_cumsum = torch.logcumsumexp(risk, dim=0)
-            loss = -((risk - log_cumsum) * event_t).sum() / event_t.sum().clamp(min=1)
-            loss.backward()
-            opt.step()
+            optimizer.zero_grad()
+            risk = torch.stack([self._region_output(graphs).squeeze() for graphs in region_graphs])
+            self._breslow_loss(risk, time, event).backward(); optimizer.step()
         return self
 
     def predict(self, features: pd.DataFrame) -> np.ndarray:
-        graphs = self._graphs(features)
-        self._encoder.eval()
+        self.backbone.eval(); self.head.eval()
         with torch.no_grad():
-            batch = Batch.from_data_list(graphs).to(self.device)
-            risk = self._encoder(batch).squeeze(-1)
-        return risk.cpu().numpy()
+            risk = [self._region_output(graphs).item() for graphs in self._region_graphs(features)]
+        return np.asarray(risk)
