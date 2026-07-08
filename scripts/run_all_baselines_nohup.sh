@@ -61,29 +61,29 @@ cd "$ROOT"
 # echo "Logs:"
 # ls -1 "$LOG_DIR"
 
-# ---- 新增：距离特征基线 ----
-# echo "Starting spatial distance baseline..."
-# nohup python -u scripts/run_spatial_distance_baseline.py \
-#   --data-root "$DATA_ROOT" \
-#   --output "$ROOT/results/spatial_distance_benchmark.csv" \
-#   > "$LOG_DIR/spatial_distance_baseline.log" 2>&1 &
-# echo $! > "$LOG_DIR/spatial_distance_baseline.pid"
+#---- 新增：距离特征基线 ----
+echo "Starting spatial distance baseline..."
+nohup python -u scripts/run_spatial_distance_baseline.py \
+  --data-root "$DATA_ROOT" \
+  --output "$ROOT/results/spatial_distance_benchmark_0706.csv" \
+  > "$LOG_DIR/spatial_distance_baseline.log" 2>&1 &
+echo $! > "$LOG_DIR/spatial_distance_baseline.pid"
 
-# ---- 新增：点模式统计基线 ----
-# echo "Starting point pattern baseline..."
-# nohup python -u scripts/run_point_pattern_baseline.py \
-#   --data-root "$DATA_ROOT" \
-#   --output "$ROOT/results/point_pattern_benchmark.csv" \
-#   > "$LOG_DIR/point_pattern_baseline.log" 2>&1 &
-# echo $! > "$LOG_DIR/point_pattern_baseline.pid"
+#---- 新增：点模式统计基线 ----
+echo "Starting point pattern baseline..."
+nohup python -u scripts/run_point_pattern_baseline.py \
+  --data-root "$DATA_ROOT" \
+  --output "$ROOT/results/point_pattern_benchmark_0706.csv" \
+  > "$LOG_DIR/point_pattern_baseline.log" 2>&1 &
+echo $! > "$LOG_DIR/point_pattern_baseline.pid"
 
-# ---- 新增：混合/浸润评分基线 ----
-# echo "Starting mixing baseline..."
-# nohup python -u scripts/run_mixing_baseline.py \
-#   --data-root "$DATA_ROOT" \
-#   --output "$ROOT/results/mixing_benchmark.csv" \
-#   > "$LOG_DIR/mixing_baseline.log" 2>&1 &
-# echo $! > "$LOG_DIR/mixing_baseline.pid"
+#---- 新增：混合/浸润评分基线 ----
+echo "Starting mixing baseline..."
+nohup python -u scripts/run_mixing_baseline.py \
+  --data-root "$DATA_ROOT" \
+  --output "$ROOT/results/mixing_benchmark_0706.csv" \
+  > "$LOG_DIR/mixing_baseline.log" 2>&1 &
+echo $! > "$LOG_DIR/mixing_baseline.pid"
 
 # echo "Starting patch baseline..."
 # nohup python -u scripts/run_patch_baseline.py \
@@ -92,13 +92,13 @@ cd "$ROOT"
 #   > "$LOG_DIR/patch_baseline.log" 2>&1 &
 # echo $! > "$LOG_DIR/patch_baseline.pid"
 
-echo "Starting SPACE-GM baseline..."
-check_space_gm_deps
-nohup python -u scripts/run_space_gm_baseline.py \
-  --data-root "$DATA_ROOT" \
-  --output "$ROOT/results/space_gm_benchmark.csv" \
-  > "$LOG_DIR/space_gm_baseline.log" 2>&1 &
-echo $! > "$LOG_DIR/space_gm_baseline.pid"
+# echo "Starting SPACE-GM baseline..."
+# check_space_gm_deps
+# nohup python -u scripts/run_space_gm_baseline.py \
+#   --data-root "$DATA_ROOT" \
+#   --output "$ROOT/results/space_gm_benchmark.csv" \
+#   > "$LOG_DIR/space_gm_baseline.log" 2>&1 &
+# echo $! > "$LOG_DIR/space_gm_baseline.pid"
 
 echo "All jobs launched."
 echo "Logs:"

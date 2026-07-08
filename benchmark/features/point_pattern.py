@@ -209,7 +209,7 @@ class PointPatternFeaturizer(BaseFeatureExtractor):
     # -- extraction -------------------------------------------------------
     def extract_region(self, region: RegionData) -> dict[str, float]:
         raw_coords = region.coordinates[["x", "y"]].to_numpy(float)
-        coords = region.coordinates_um[["x", "y"]].to_numpy(float)
+        coords = region.coordinates[["x", "y"]].to_numpy(float)
         if len(coords) == 0:
             return self._empty_features()
 

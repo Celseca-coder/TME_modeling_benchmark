@@ -159,7 +159,7 @@ class SpatialDistanceFeaturizer(BaseFeatureExtractor):
 
         # Get coordinates and labels aligned
         raw_coords = region.coordinates[["x", "y"]].to_numpy(float)
-        coords = region.coordinates_um[["x", "y"]].to_numpy(float)
+        coords = region.coordinates[["x", "y"]].to_numpy(float)
         labels = region.cell_types[col].reindex(region.coordinates.index).astype("object")
 
         valid_labels = labels.notna().to_numpy()
