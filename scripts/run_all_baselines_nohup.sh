@@ -24,6 +24,17 @@ if missing:
 PY
 }
 
+check_cyto_community_deps() {
+  "$SPACEGM_PY" - <<'PY'
+import importlib.util
+missing = [name for name in ("torch", "torch_geometric") if importlib.util.find_spec(name) is None]
+if missing:
+    print("Missing dependencies for Cyto-Community baseline:", ", ".join(missing))
+    print("Install them first, for example: pip install 'torch>=2.2.2' 'torch-geometric>=2.4.0'")
+    raise SystemExit(1)
+PY
+}
+
 cd "$ROOT"
 
 # echo "Starting composition baseline..."
@@ -89,6 +100,14 @@ nohup "$SPACEGM_PY" -u scripts/run_space_gm_baseline.py \
   --output "$ROOT/results/space_gm_benchmark.csv" \
   > "$LOG_DIR/space_gm_baseline.log" 2>&1 &
 echo $! > "$LOG_DIR/space_gm_baseline.pid"
+
+echo "Starting Cyto-Community baseline..."
+check_cyto_community_deps
+nohup "$SPACEGM_PY" -u scripts/run_cyto_community_baseline.py \
+  --data-root "$DATA_ROOT" \
+  --output "$ROOT/results/cyto_community_benchmark.csv" \
+  > "$LOG_DIR/cyto_community_baseline.log" 2>&1 &
+echo $! > "$LOG_DIR/cyto_community_baseline.pid"
 
 echo "All jobs launched."
 echo "Logs:"
