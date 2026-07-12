@@ -93,13 +93,13 @@ cd "$ROOT"
 #   > "$LOG_DIR/patch_baseline.log" 2>&1 &
 # echo $! > "$LOG_DIR/patch_baseline.pid"
 
-echo "Starting SPACE-GM baseline..."
-check_space_gm_deps
-nohup "$SPACEGM_PY" -u scripts/run_space_gm_baseline.py \
-  --data-root "$DATA_ROOT" \
-  --output "$ROOT/results/space_gm_benchmark.csv" \
-  > "$LOG_DIR/space_gm_baseline.log" 2>&1 &
-echo $! > "$LOG_DIR/space_gm_baseline.pid"
+# echo "Starting SPACE-GM baseline..."
+# check_space_gm_deps
+# nohup "$SPACEGM_PY" -u scripts/run_space_gm_baseline.py \
+#   --data-root "$DATA_ROOT" \
+#   --output "$ROOT/results/space_gm_benchmark.csv" \
+#   > "$LOG_DIR/space_gm_baseline.log" 2>&1 &
+# echo $! > "$LOG_DIR/space_gm_baseline.pid"
 
 echo "Starting Cyto-Community baseline..."
 check_cyto_community_deps
