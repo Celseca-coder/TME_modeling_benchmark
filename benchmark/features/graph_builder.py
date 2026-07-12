@@ -132,7 +132,11 @@ class SpaceGMGraphBuilder(BaseFeatureExtractor):
         type_map = {name: i + 1 for i, name in enumerate(self._cell_types)}
         type_ids = np.array([type_map.get(str(x), 0) for x in labels], dtype=np.int64)
         sizes = self._scaled_sizes(region, n)
-        expression = region.expression.reindex(region.coordinates.index)[self._markers].to_numpy(np.float32)
+        expression = (
+            region.expression
+            .reindex(index=region.coordinates.index, columns=self._markers)
+            .to_numpy(np.float32)
+        )
 
         graphs = []
         for center in centers:

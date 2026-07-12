@@ -16,10 +16,10 @@ SPACEGM_PY="$CONDA_BASE/envs/space_gm/bin/python"
 check_space_gm_deps() {
   "$SPACEGM_PY" - <<'PY'
 import importlib.util
-missing = [name for name in ("torch", "torch_geometric") if importlib.util.find_spec(name) is None]
+missing = [name for name in ("torch", "torch_geometric", "lifelines", "sklearn") if importlib.util.find_spec(name) is None]
 if missing:
     print("Missing dependencies for SPACE-GM baseline:", ", ".join(missing))
-    print("Install them first, for example: pip install 'torch>=2.2.2' 'torch-geometric>=2.4.0'")
+    print("Install them first, for example: pip install 'torch>=2.2.2' 'torch-geometric>=2.4.0' lifelines scikit-learn")
     raise SystemExit(1)
 PY
 }

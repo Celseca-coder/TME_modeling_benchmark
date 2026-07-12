@@ -8,6 +8,7 @@ microenvironment predictions to obtain one region-level prediction.
 from __future__ import annotations
 
 import argparse
+import importlib.util
 import sys
 from pathlib import Path
 
@@ -31,6 +32,19 @@ except ModuleNotFoundError as exc:
             "Install them first, for example: pip install 'torch>=2.2.2' 'torch-geometric>=2.4.0'"
         ) from exc
     raise
+
+
+def check_runtime_deps():
+    missing = [
+        name for name in ("torch", "torch_geometric", "lifelines", "sklearn")
+        if importlib.util.find_spec(name) is None
+    ]
+    if missing:
+        raise SystemExit(
+            "SPACE-GM baseline is missing runtime dependencies: "
+            + ", ".join(missing)
+            + ". Install them in the SPACE-GM environment before running."
+        )
 
 
 def model_factory(task_cfg, seed):
@@ -79,6 +93,7 @@ def run(dataset_names, seeds, data_root=None) -> pd.DataFrame:
 
 
 def main():
+    check_runtime_deps()
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--datasets", nargs="*", default=None)
