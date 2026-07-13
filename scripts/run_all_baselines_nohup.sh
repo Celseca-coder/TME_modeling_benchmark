@@ -101,6 +101,13 @@ cd "$ROOT"
 #   > "$LOG_DIR/space_gm_baseline.log" 2>&1 &
 # echo $! > "$LOG_DIR/space_gm_baseline.pid"
 
+echo "Starting Cellular Neighborhood baseline..."
+nohup "$P3_PY" -u scripts/run_cellular_neighborhood_baseline.py \
+  --data-root "$DATA_ROOT" \
+  --output "$ROOT/results/cellular_neighborhood_benchmark.csv" \
+  > "$LOG_DIR/cellular_neighborhood_baseline.log" 2>&1 &
+echo $! > "$LOG_DIR/cellular_neighborhood_baseline.pid"
+
 echo "Starting Cyto-Community baseline..."
 check_cyto_community_deps
 nohup "$SPACEGM_PY" -u scripts/run_cyto_community_baseline.py \
