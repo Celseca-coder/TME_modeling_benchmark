@@ -34,18 +34,32 @@ except ModuleNotFoundError as exc:
     raise
 
 
-def model_factory(task_cfg, seed):
-    kwargs = dict(
-        seed=seed,
-        hidden_dim=32,
-        batch_size=2,
-        epochs=50,
-        device=os.environ.get("CYTO_COMMUNITY_DEVICE", "cpu"),
-    )
-    return CytoCommunityCox(**kwargs) if task_cfg["type"] == "survival" else CytoCommunityClassifier(**kwargs)
+def make_model_factory(hidden_dim: int, batch_size: int, epochs: int, device: str):
+    def model_factory(task_cfg, seed):
+        kwargs = dict(
+            seed=seed,
+            hidden_dim=hidden_dim,
+            batch_size=batch_size,
+            epochs=epochs,
+            device=device,
+        )
+        return CytoCommunityCox(**kwargs) if task_cfg["type"] == "survival" else CytoCommunityClassifier(**kwargs)
+
+    return model_factory
 
 
-def run(dataset_names, seeds, data_root=None) -> pd.DataFrame:
+def run(
+    dataset_names,
+    seeds,
+    data_root=None,
+    *,
+    hidden_dim: int = 32,
+    batch_size: int = 2,
+    epochs: int = 50,
+    device: str = "cpu",
+    max_cells: int = 1024,
+) -> pd.DataFrame:
+    model_factory = make_model_factory(hidden_dim, batch_size, epochs, device)
     rows = []
     for name in dataset_names:
         ds = load_dataset(name, data_root=data_root)
@@ -54,7 +68,7 @@ def run(dataset_names, seeds, data_root=None) -> pd.DataFrame:
         for task in ds.task_ids:
             metric = PRIMARY_METRIC[ds.get_task_config(task)["type"]]
             featurizer = lambda: CytoCommunityGraphBuilder(
-                radius_um=50.0, k_neighbors=8, max_cells=1024, include_expression=True,
+                radius_um=50.0, k_neighbors=8, max_cells=max_cells, include_expression=True,
             )
             fm = cross_validate(ds, task, featurizer, model_factory, seeds=seeds, normalize=True)
             mean, sd = summarize_folds(fm, metric)
@@ -66,7 +80,7 @@ def run(dataset_names, seeds, data_root=None) -> pd.DataFrame:
             cell_type_col = gt.get("cell_type_col", "cell_type")
             featurizer = lambda c=cell_type_col: CytoCommunityGraphBuilder(
                 cell_type_col=c, radius_um=50.0, k_neighbors=8,
-                max_cells=1024, include_expression=True,
+                max_cells=max_cells, include_expression=True,
             )
             for task in gt.get("tasks", ds.task_ids):
                 metric = PRIMARY_METRIC[ds.get_task_config(task)["type"]]
@@ -89,9 +103,28 @@ def main():
     ap.add_argument("--seeds", type=int, nargs="*", default=[0, 1, 2])
     ap.add_argument("--output", default=str(_CODE / "results" / "cyto_community_benchmark.csv"))
     ap.add_argument("--data-root", default=None)
+    ap.add_argument("--device", default=os.environ.get("CYTO_COMMUNITY_DEVICE", "cpu"))
+    ap.add_argument("--hidden-dim", type=int, default=32)
+    ap.add_argument("--batch-size", type=int, default=2)
+    ap.add_argument("--epochs", type=int, default=50)
+    ap.add_argument("--max-cells", type=int, default=1024)
+    ap.add_argument("--debug", action="store_true",
+                    help="Raise fold-level exceptions instead of recording NaN metrics.")
     args = ap.parse_args()
 
-    df = run(args.datasets or list_datasets(), args.seeds, data_root=args.data_root)
+    if args.debug:
+        os.environ["BENCHMARK_RAISE_ERRORS"] = "1"
+
+    df = run(
+        args.datasets or list_datasets(),
+        args.seeds,
+        data_root=args.data_root,
+        hidden_dim=args.hidden_dim,
+        batch_size=args.batch_size,
+        epochs=args.epochs,
+        device=args.device,
+        max_cells=args.max_cells,
+    )
     df["score"] = df.apply(lambda r: f"{r['mean']:.3f} +/- {r['sd']:.3f}", axis=1)
     out = Path(args.output)
     out.parent.mkdir(parents=True, exist_ok=True)
