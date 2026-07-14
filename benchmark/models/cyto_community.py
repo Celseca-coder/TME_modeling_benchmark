@@ -111,13 +111,10 @@ class _CytoCommunityBase(RegionModel):
         return Batch.from_data_list(graphs).to(self.device)
 
     def _loader(self, graphs: list, shuffle: bool = False) -> DataLoader:
-        generator = torch.Generator()
-        generator.manual_seed(self.seed)
         return DataLoader(
             graphs,
             batch_size=min(self.batch_size, max(1, len(graphs))),
             shuffle=shuffle,
-            generator=generator if shuffle else None,
         )
 
     def _optimizer(self):

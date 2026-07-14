@@ -2,6 +2,7 @@
 patient-level cross-validation and train-cohort -> test-cohort generalization."""
 from __future__ import annotations
 
+import os
 from typing import Any, Callable, Sequence
 
 import numpy as np
@@ -98,6 +99,8 @@ def cross_validate(
                 metrics = score_predictions(task_cfg, y_va, model.predict(X_va),
                                             getattr(model, "classes_", None))
             except Exception:
+                if os.environ.get("BENCHMARK_RAISE_ERRORS"):
+                    raise
                 metrics = _nan_metrics(task_cfg["type"])
 
             metrics.update({"seed": seed, "fold": fold_i,
@@ -155,6 +158,8 @@ def cohort_split_test(
             metrics = score_predictions(task_cfg, y_te, model.predict(X_te),
                                         getattr(model, "classes_", None))
         except Exception:
+            if os.environ.get("BENCHMARK_RAISE_ERRORS"):
+                raise
             metrics = _nan_metrics(task_cfg["type"])
         metrics.update({"seed": seed, "n_train": len(X_tr), "n_test": len(X_te)})
         results.append(metrics)
