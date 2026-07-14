@@ -1,6 +1,7 @@
 """Scoring: turn model predictions into a metric dict (one function)."""
 from __future__ import annotations
 
+import os
 import numpy as np
 
 # Primary metric reported per task type (the rest are kept as secondary columns).
@@ -35,9 +36,22 @@ def score_predictions(task_cfg: dict, y_true, y_pred, classes=None) -> dict[str,
         times = y_true["time"].values
         events = y_true["event"].values
         if events.sum() < 1:
+            if os.environ.get("BENCHMARK_RAISE_ERRORS"):
+                raise ValueError("Survival validation fold has no observed events; c-index is undefined")
+            return {"c_index": float("nan")}
+        pred = np.asarray(y_pred, dtype=float)
+        if not np.all(np.isfinite(pred)):
+            if os.environ.get("BENCHMARK_RAISE_ERRORS"):
+                raise ValueError(f"Survival predictions contain non-finite values: {pred}")
             return {"c_index": float("nan")}
         # Cox risk: higher = worse; lifelines wants higher = longer survival -> negate.
-        return {"c_index": float(concordance_index(times, -np.asarray(y_pred), events))}
+        c_index = float(concordance_index(times, -pred, events))
+        if not np.isfinite(c_index) and os.environ.get("BENCHMARK_RAISE_ERRORS"):
+            raise ValueError(
+                "Survival c-index is non-finite despite finite predictions; "
+                f"n={len(times)}, events={events.sum()}, pred_min={pred.min()}, pred_max={pred.max()}"
+            )
+        return {"c_index": c_index}
 
     y_true = np.asarray(y_true)
 
@@ -46,10 +60,19 @@ def score_predictions(task_cfg: dict, y_true, y_pred, classes=None) -> dict[str,
             roc_auc_score, average_precision_score, balanced_accuracy_score,
         )
         if classes is None or 1 not in list(classes):
+            if os.environ.get("BENCHMARK_RAISE_ERRORS"):
+                raise ValueError(f"Binary classifier classes do not contain positive class 1: {classes}")
             return {"auc_roc": float("nan"), "avg_precision": float("nan"),
                     "balanced_acc": float("nan")}
         score = np.asarray(y_pred)[:, list(classes).index(1)]
+        if not np.all(np.isfinite(score)):
+            if os.environ.get("BENCHMARK_RAISE_ERRORS"):
+                raise ValueError(f"Binary predictions contain non-finite values: {score}")
+            return {"auc_roc": float("nan"), "avg_precision": float("nan"),
+                    "balanced_acc": float("nan")}
         if len(np.unique(y_true)) < 2:
+            if os.environ.get("BENCHMARK_RAISE_ERRORS"):
+                raise ValueError(f"Binary validation fold has only one class: {np.unique(y_true)}")
             auc = ap = float("nan")
         else:
             auc = float(roc_auc_score(y_true, score))
@@ -59,6 +82,10 @@ def score_predictions(task_cfg: dict, y_true, y_pred, classes=None) -> dict[str,
 
     # multiclass
     from sklearn.metrics import balanced_accuracy_score, roc_auc_score
+    if not np.all(np.isfinite(np.asarray(y_pred, dtype=float))):
+        if os.environ.get("BENCHMARK_RAISE_ERRORS"):
+            raise ValueError("Multiclass predictions contain non-finite values")
+        return {"balanced_acc": float("nan"), "macro_auc": float("nan")}
     pred = np.asarray(classes)[np.argmax(np.asarray(y_pred), axis=1)]
     out = {"balanced_acc": float(balanced_accuracy_score(y_true, pred))}
     try:

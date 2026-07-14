@@ -7,6 +7,7 @@ risk from the community summary.
 """
 from __future__ import annotations
 
+import os
 import numpy as np
 import pandas as pd
 import torch
@@ -120,6 +121,11 @@ class _CytoCommunityBase(RegionModel):
     def _optimizer(self):
         return torch.optim.Adam(self.net.parameters(), lr=self.lr, weight_decay=self.weight_decay)
 
+    @staticmethod
+    def _check_finite(name: str, tensor: torch.Tensor):
+        if os.environ.get("BENCHMARK_RAISE_ERRORS") and not torch.isfinite(tensor).all():
+            raise FloatingPointError(f"Cyto-Community produced non-finite {name}")
+
 
 class CytoCommunityClassifier(_CytoCommunityBase):
     task_type = "binary"
@@ -138,7 +144,10 @@ class CytoCommunityClassifier(_CytoCommunityBase):
             for batch in self._loader(graphs, shuffle=True):
                 batch = batch.to(self.device)
                 optimizer.zero_grad()
-                loss = F.cross_entropy(self.net(batch), batch.y)
+                logits = self.net(batch)
+                self._check_finite("classification logits", logits)
+                loss = F.cross_entropy(logits, batch.y)
+                self._check_finite("classification loss", loss)
                 loss.backward()
                 optimizer.step()
         return self
@@ -150,7 +159,9 @@ class CytoCommunityClassifier(_CytoCommunityBase):
         with torch.no_grad():
             for batch in self._loader(graphs, shuffle=False):
                 batch = batch.to(self.device)
-                outputs.append(F.softmax(self.net(batch), dim=1).cpu().numpy())
+                logits = self.net(batch)
+                self._check_finite("prediction logits", logits)
+                outputs.append(F.softmax(logits, dim=1).cpu().numpy())
         return np.vstack(outputs) if outputs else np.empty((0, len(self.classes_)))
 
 
@@ -179,9 +190,13 @@ class CytoCommunityCox(_CytoCommunityBase):
             risks = []
             for batch in self._loader(graphs, shuffle=False):
                 batch = batch.to(self.device)
-                risks.append(self.net(batch).squeeze(-1))
+                batch_risk = self.net(batch).squeeze(-1)
+                self._check_finite("cox risk", batch_risk)
+                risks.append(batch_risk)
             risk = torch.cat(risks)
-            self._breslow_loss(risk, time, event).backward()
+            loss = self._breslow_loss(risk, time, event)
+            self._check_finite("cox loss", loss)
+            loss.backward()
             optimizer.step()
         return self
 
@@ -192,5 +207,7 @@ class CytoCommunityCox(_CytoCommunityBase):
         with torch.no_grad():
             for batch in self._loader(graphs, shuffle=False):
                 batch = batch.to(self.device)
-                risks.append(self.net(batch).squeeze(-1).cpu().numpy())
+                batch_risk = self.net(batch).squeeze(-1)
+                self._check_finite("prediction risk", batch_risk)
+                risks.append(batch_risk.cpu().numpy())
         return np.concatenate(risks) if risks else np.asarray([])
