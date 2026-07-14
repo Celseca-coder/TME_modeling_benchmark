@@ -13,6 +13,7 @@ import torch
 import torch.nn as nn
 import torch.nn.functional as F
 from torch_geometric.data import Batch
+from torch_geometric.loader import DataLoader
 from torch_geometric.nn import SAGEConv, global_mean_pool
 
 from .base import RegionModel
@@ -75,7 +76,7 @@ class _CytoCommunityBase(RegionModel):
     def __init__(self, seed: int = 0, hidden_dim: int = 128, n_layers: int = 2,
                  n_communities: int = 8, lr: float = 1e-3, epochs: int = 75,
                  weight_decay: float = 1e-4, dropout: float = 0.1,
-                 device: str | None = None):
+                 batch_size: int = 8, device: str | None = None):
         torch.manual_seed(seed)
         np.random.seed(seed)
         self.seed = seed
@@ -86,6 +87,7 @@ class _CytoCommunityBase(RegionModel):
         self.epochs = epochs
         self.weight_decay = weight_decay
         self.dropout = dropout
+        self.batch_size = batch_size
         self.device = device or ("cuda" if torch.cuda.is_available() else "cpu")
         self.net: _CytoCommunityNet | None = None
 
@@ -108,6 +110,16 @@ class _CytoCommunityBase(RegionModel):
     def _batch(self, graphs: list) -> Batch:
         return Batch.from_data_list(graphs).to(self.device)
 
+    def _loader(self, graphs: list, shuffle: bool = False) -> DataLoader:
+        generator = torch.Generator()
+        generator.manual_seed(self.seed)
+        return DataLoader(
+            graphs,
+            batch_size=min(self.batch_size, max(1, len(graphs))),
+            shuffle=shuffle,
+            generator=generator if shuffle else None,
+        )
+
     def _optimizer(self):
         return torch.optim.Adam(self.net.parameters(), lr=self.lr, weight_decay=self.weight_decay)
 
@@ -119,24 +131,30 @@ class CytoCommunityClassifier(_CytoCommunityBase):
         graphs = self._graphs(features.loc[list(target.index)])
         self.classes_ = np.sort(target.unique())
         class_to_int = {label: i for i, label in enumerate(self.classes_)}
-        y = torch.tensor(target.map(class_to_int).to_numpy(), dtype=torch.long, device=self.device)
+        y = target.map(class_to_int).to_numpy()
+        for graph, label in zip(graphs, y):
+            graph.y = torch.tensor(int(label), dtype=torch.long)
         self._initialise(graphs, len(self.classes_))
-        batch = self._batch(graphs)
         optimizer = self._optimizer()
         self.net.train()
         for _ in range(self.epochs):
-            optimizer.zero_grad()
-            loss = F.cross_entropy(self.net(batch), y)
-            loss.backward()
-            optimizer.step()
+            for batch in self._loader(graphs, shuffle=True):
+                batch = batch.to(self.device)
+                optimizer.zero_grad()
+                loss = F.cross_entropy(self.net(batch), batch.y)
+                loss.backward()
+                optimizer.step()
         return self
 
     def predict(self, features: pd.DataFrame) -> np.ndarray:
         self.net.eval()
-        batch = self._batch(self._graphs(features))
+        graphs = self._graphs(features)
+        outputs = []
         with torch.no_grad():
-            probs = F.softmax(self.net(batch), dim=1).cpu().numpy()
-        return probs
+            for batch in self._loader(graphs, shuffle=False):
+                batch = batch.to(self.device)
+                outputs.append(F.softmax(self.net(batch), dim=1).cpu().numpy())
+        return np.vstack(outputs) if outputs else np.empty((0, len(self.classes_)))
 
 
 class CytoCommunityCox(_CytoCommunityBase):
@@ -157,19 +175,25 @@ class CytoCommunityCox(_CytoCommunityBase):
         self._initialise(graphs, 1)
         time = torch.tensor(target["time"].to_numpy(), dtype=torch.float32, device=self.device)
         event = torch.tensor(target["event"].to_numpy(), dtype=torch.float32, device=self.device)
-        batch = self._batch(graphs)
         optimizer = self._optimizer()
         self.net.train()
         for _ in range(self.epochs):
             optimizer.zero_grad()
-            risk = self.net(batch).squeeze(-1)
+            risks = []
+            for batch in self._loader(graphs, shuffle=False):
+                batch = batch.to(self.device)
+                risks.append(self.net(batch).squeeze(-1))
+            risk = torch.cat(risks)
             self._breslow_loss(risk, time, event).backward()
             optimizer.step()
         return self
 
     def predict(self, features: pd.DataFrame) -> np.ndarray:
         self.net.eval()
-        batch = self._batch(self._graphs(features))
+        graphs = self._graphs(features)
+        risks = []
         with torch.no_grad():
-            risk = self.net(batch).squeeze(-1).cpu().numpy()
-        return risk
+            for batch in self._loader(graphs, shuffle=False):
+                batch = batch.to(self.device)
+                risks.append(self.net(batch).squeeze(-1).cpu().numpy())
+        return np.concatenate(risks) if risks else np.asarray([])

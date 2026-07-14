@@ -34,7 +34,8 @@ except ModuleNotFoundError as exc:
 
 
 def model_factory(task_cfg, seed):
-    return CytoCommunityCox(seed=seed) if task_cfg["type"] == "survival" else CytoCommunityClassifier(seed=seed)
+    kwargs = dict(seed=seed, hidden_dim=64, batch_size=4, epochs=50)
+    return CytoCommunityCox(**kwargs) if task_cfg["type"] == "survival" else CytoCommunityClassifier(**kwargs)
 
 
 def run(dataset_names, seeds, data_root=None) -> pd.DataFrame:
@@ -46,7 +47,7 @@ def run(dataset_names, seeds, data_root=None) -> pd.DataFrame:
         for task in ds.task_ids:
             metric = PRIMARY_METRIC[ds.get_task_config(task)["type"]]
             featurizer = lambda: CytoCommunityGraphBuilder(
-                radius_um=50.0, k_neighbors=8, max_cells=4096, include_expression=True,
+                radius_um=50.0, k_neighbors=8, max_cells=2048, include_expression=True,
             )
             fm = cross_validate(ds, task, featurizer, model_factory, seeds=seeds, normalize=True)
             mean, sd = summarize_folds(fm, metric)
@@ -58,7 +59,7 @@ def run(dataset_names, seeds, data_root=None) -> pd.DataFrame:
             cell_type_col = gt.get("cell_type_col", "cell_type")
             featurizer = lambda c=cell_type_col: CytoCommunityGraphBuilder(
                 cell_type_col=c, radius_um=50.0, k_neighbors=8,
-                max_cells=4096, include_expression=True,
+                max_cells=2048, include_expression=True,
             )
             for task in gt.get("tasks", ds.task_ids):
                 metric = PRIMARY_METRIC[ds.get_task_config(task)["type"]]
