@@ -197,7 +197,6 @@ class SpaceGMGraphBuilder(BaseFeatureExtractor):
         return {"nx_graph": G, "n_cells": int(G.number_of_nodes())}
 
     def transform(self, regions: list[RegionData]) -> pd.DataFrame:
-        print("Building graphs for %d regions..." % len(regions))
         df = super().transform(regions)
         # Convenience metadata (the model does not rely on these surviving).
         df.attrs["biomarkers"] = list(self.biomarkers)

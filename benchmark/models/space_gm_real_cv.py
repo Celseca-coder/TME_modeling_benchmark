@@ -78,42 +78,13 @@ class SpaceGMConfig:
     # "neighborhood_composition", to use the full feature set.
     expression_clip: float = 3.0
     neighborhood_size: int = 10
+
+    node_features: list = field(default_factory=lambda: list(NODE_FEATURES))
+    edge_features: list = field(default_factory=lambda: list(EDGE_FEATURES))
     use_center_node_features: list[str] = field(default_factory=lambda: ["cell_type"])
     use_neighbor_node_features: list[str] = field(default_factory=lambda: ["cell_type"])
 
     device: str | None = None            # None -> cuda if available else cpu
-
-    # If set, each fit() writes checkpoints + a vocab.json into a unique
-    # subfolder of this directory (periodic saves during training + a final
-    # ``model_final.pt``). None disables saving.
-    model_dir: str | None = None
-
-    node_features: list = field(default_factory=lambda: list(NODE_FEATURES))
-    edge_features: list = field(default_factory=lambda: list(EDGE_FEATURES))
-
-
-class _AddSurvivalLabel:
-    """SPACE-GM transform attaching survival labels (time -> graph_y, event -> graph_w).
-
-    This mirrors :class:`spacegm.transform.AddGraphLabel` but stores the two
-    survival channels in the ``graph_y`` / ``graph_w`` slots consumed by
-    ``spacegm.models.CoxSGDLossFn(y_pred, length, event)`` inside
-    ``spacegm.train.train_subgraph``.
-    """
-
-    def __init__(self, label_csv: str):
-        import torch  # noqa: F401 (kept local to avoid importing torch at module load)
-        df = pd.read_csv(label_csv, index_col=0)
-        df.index = df.index.map(str)
-        self._time = df["time"].astype(float).to_dict()
-        self._event = df["event"].astype(float).to_dict()
-
-    def __call__(self, data):
-        import torch
-        rid = str(data.region_id)
-        data.graph_y = torch.tensor([[self._time[rid]]], dtype=torch.float32)
-        data.graph_w = torch.tensor([[self._event[rid]]], dtype=torch.float32)
-        return data
 
 
 # ======================================================================
@@ -141,15 +112,30 @@ def derive_vocabulary(graphs: list):
     return mapping, freq, sorted(biomarkers)
 
 
-def build_dataset(graphs, root, cfg, mapping, freq, biomarkers):
+def build_dataset(regions, root, cfg):
     """Write ``graphs`` and build a CellularGraphDataset (processed once).
     """
+    print(f"Building dataset in {root} for {len(regions)} regions ...")
     raw_dir = os.path.join(root, "graph")
     os.makedirs(raw_dir, exist_ok=True)
-    for G in graphs:
-        with open(os.path.join(raw_dir, f"{G.region_id}.gpkl"), "wb") as f:
-            pickle.dump(G, f)
 
+    # ---- build nx graphs and cache ----
+    builder = SpaceGMGraphBuilder(near_edge_um=cfg.near_edge_um).fit(regions)
+    graphs = []
+    for region in regions:
+        g_path = os.path.join(raw_dir, f"{region.region_id}.gpkl")
+        if os.path.exists(g_path):
+            graph = pickle.load(open(g_path, "rb"))
+        else:
+            graph = builder.transform([region])['nx_graph'].iloc[0]
+            with open(g_path, "wb") as f:
+                pickle.dump(graph, f)
+        graphs.append(graph)
+
+    # ---- calculate dataset-wide vocabulary ----
+    mapping, freq, biomarkers = derive_vocabulary(graphs)
+
+    # ---- build dataset ----
     kwargs = dict(
         pre_transform=None,
         raw_folder_name="graph",
@@ -175,10 +161,10 @@ def build_dataset(graphs, root, cfg, mapping, freq, biomarkers):
 # ======================================================================
 # model train / predict on explicit indices
 # ======================================================================
-def _new_gnn(dataset, cfg, mapping, num_graph_tasks):
+def _new_gnn(dataset, cfg, num_graph_tasks):
     return sg.models.GNN_pred(
         num_layer=cfg.subgraph_size,
-        num_node_type=len(mapping) + 1,
+        num_node_type=len(dataset.cell_type_mapping) + 1,
         num_feat=dataset[0].x.shape[1] - 1,
         emb_dim=cfg.emb_dim,
         num_node_tasks=0,
@@ -190,19 +176,14 @@ def _new_gnn(dataset, cfg, mapping, num_graph_tasks):
     )
 
 
-def train_on_inds(dataset, cfg, seed, num_graph_tasks, loss_fn, train_inds,
-                  mapping, model_dir=None, tag="model"):
+def train_on_inds(dataset, cfg, seed, num_graph_tasks, loss_fn, train_inds, model_dir=None):
     """Fresh model trained on ``train_inds`` (absolute region indices)."""
     import torch
     torch.manual_seed(int(seed))
     np.random.seed(int(seed))
     device = cfg.device or ("cuda" if torch.cuda.is_available() else "cpu")
 
-    model = _new_gnn(dataset, cfg, mapping, num_graph_tasks)
-    folder = None
-    if model_dir:
-        folder = os.path.join(model_dir, f"{tag}__seed{seed}__{uuid.uuid4().hex[:8]}")
-        os.makedirs(folder, exist_ok=True)
+    model = _new_gnn(dataset, cfg, num_graph_tasks)
 
     model = sg.train.train_subgraph(
         model, dataset, device,
@@ -212,26 +193,28 @@ def train_on_inds(dataset, cfg, seed, num_graph_tasks, loss_fn, train_inds,
         num_regions_per_segment=0,
         num_iterations_per_segment=max(int(cfg.num_iterations) * 10, 1),
         evaluate_freq=max(int(cfg.num_iterations // 10), 500),
-        evaluate_fn=[sg.train.save_model_weight] if folder else [],
+        evaluate_fn=[sg.train.save_model_weight] if model_dir else [],
         evaluate_on_train=False,
         batch_size=cfg.batch_size,
         lr=cfg.lr,
         graph_loss_weight=cfg.graph_loss_weight,
         graph_task_loss_fn=loss_fn,
-        model_folder=folder,
+        model_folder=model_dir,
     )
-    if folder:
-        torch.save(model.state_dict(), os.path.join(folder, "model_final.pt"))
-        with open(os.path.join(folder, "vocab.json"), "w") as f:
-            json.dump({"cell_type_mapping": mapping,
+    if model_dir:
+        torch.save(model.state_dict(), os.path.join(model_dir, "model_final.pt"))
+        with open(os.path.join(model_dir, "vocab.json"), "w") as f:
+            json.dump({"cell_type_mapping": dataset.cell_type_mapping,
                        "num_graph_tasks": int(num_graph_tasks),
                        "emb_dim": int(cfg.emb_dim),
                        "subgraph_size": int(cfg.subgraph_size)}, f, indent=2)
-    return model, device
+    return model
 
 
-def predict_on_inds(model, dataset, cfg, inds, device) -> dict:
+def predict_on_inds(model, dataset, cfg, inds) -> dict:
     """``region_id -> mean graph-head output`` over sampled subgraphs of ``inds``."""
+    import torch
+    device = cfg.device or ("cuda" if torch.cuda.is_available() else "cpu")
     _, graph_results = sg.inference.collect_predict_for_all_nodes(
         model, dataset, device,
         inds=np.asarray(inds),
@@ -251,17 +234,10 @@ def predict_on_inds(model, dataset, cfg, inds, device) -> dict:
 # ======================================================================
 def _classification_spec(target: pd.Series, root: str):
     classes = np.sort(pd.unique(target))
-    multiclass = len(classes) > 2
     label_path = os.path.join(root, "graph_labels.csv")
 
-    if multiclass:
+    if len(classes) > 2:
         raise
-        # label_cols = [f"class__{c}" for c in classes]
-        # label_df = pd.DataFrame(index=[str(i) for i in target.index])
-        # label_df.index.name = "REGION_ID"
-        # for c, col in zip(classes, label_cols):
-        #     label_df[col] = (target.to_numpy() == c).astype(int)
-        # num_tasks = len(classes)
     else:
         label_cols = ["label"]
         label_df = pd.DataFrame(
@@ -283,6 +259,30 @@ def _classification_spec(target: pd.Series, root: str):
     return transform, loss_fn, num_tasks, classes, postprocess
 
 
+class _AddSurvivalLabel:
+    """SPACE-GM transform attaching survival labels (time -> graph_y, event -> graph_w).
+
+    This mirrors :class:`spacegm.transform.AddGraphLabel` but stores the two
+    survival channels in the ``graph_y`` / ``graph_w`` slots consumed by
+    ``spacegm.models.CoxSGDLossFn(y_pred, length, event)`` inside
+    ``spacegm.train.train_subgraph``.
+    """
+
+    def __init__(self, label_csv: str):
+        import torch  # noqa: F401 (kept local to avoid importing torch at module load)
+        df = pd.read_csv(label_csv, index_col=0)
+        df.index = df.index.map(str)
+        self._time = df["time"].astype(float).to_dict()
+        self._event = df["event"].astype(float).to_dict()
+
+    def __call__(self, data):
+        import torch
+        rid = str(data.region_id)
+        data.graph_y = torch.tensor([[self._time[rid]]], dtype=torch.float32)
+        data.graph_w = torch.tensor([[self._event[rid]]], dtype=torch.float32)
+        return data
+
+
 def _survival_spec(target: pd.DataFrame, root: str):
     label_path = os.path.join(root, "survival_labels.csv")
     label_df = pd.DataFrame(
@@ -296,7 +296,8 @@ def _survival_spec(target: pd.DataFrame, root: str):
     loss_fn = sg.models.CoxSGDLossFn()
 
     def postprocess(pred_map, index):
-        return _stack(pred_map, index, 1)[:, 0]
+        agg_pred_vals = [np.median(np.array(pred_map[i]).flatten()) if i in pred_map else np.nan for i in index]
+        return np.array(agg_pred_vals)
 
     return transform, loss_fn, 1, None, postprocess
 
@@ -342,56 +343,58 @@ def cross_validate_fast(ds, task_id, cfg: SpaceGMConfig, *, seeds=(0, 1, 2),
     region_ids = meta["region_id"].tolist()
     regions = ds.load_regions(region_ids, normalize=normalize)
 
-    # ---- featurize + build ONE dataset over all CV regions (processed once) ----
-    builder = SpaceGMGraphBuilder(near_edge_um=cfg.near_edge_um).fit(regions)
-    feats = builder.transform(regions)
-    graphs = list(feats["nx_graph"])
-    mapping, freq, biomarkers = derive_vocabulary(graphs)
+    # ---- Define and build dataset ----
+    if work_root is None:
+        work_root = tempfile.TemporaryDirectory(prefix="sgm_cv_", dir=None).name
+    os.makedirs(work_root, exist_ok=True)
+    dataset_root = os.path.join(work_root, "ds")
+    dataset = build_dataset(regions, dataset_root, cfg)
 
-    # ---- build label file and label transform ----
-    tmp = tempfile.TemporaryDirectory(prefix="sgm_cv_", dir=work_root)
-    target_all = ds.build_target(list(feats.index), task_id)
-    label_transform, loss_fn, num_tasks, classes, postprocess = _make_spec(task_cfg, target_all, tmp.name)
+    # ---- Build label file and label transform ----
+    target_all = ds.build_target(region_ids, task_id)
+    label_transform, loss_fn, num_tasks, classes, postprocess = \
+        _make_spec(task_cfg, target_all, work_root)
 
-    # ---- build dataset (processed once, shared by all folds) ----
-    dataset = build_dataset(graphs, os.path.join(tmp.name, "ds"), cfg, mapping, freq, biomarkers)
+    # ---- Attach transform ----
     transforms = [sg.transform.FeatureMask(
         dataset,
         use_center_node_features=cfg.use_center_node_features,
-        use_neighbor_node_features=cfg.use_neighbor_node_features)]
-    if label_transform is not None:
-        transforms.append(label_transform)
+        use_neighbor_node_features=cfg.use_neighbor_node_features),
+        label_transform]
     dataset.transform = transforms
     ridx = {str(r): i for i, r in enumerate(dataset.region_ids)}
-    idxr = {i: str(r) for i, r in enumerate(dataset.region_ids)}
 
+    # ---- Run CV ----
     fold_metrics: list[dict] = []
-    try:
-        for seed in seeds:
-            folds = safe_patient_kfold(meta, n_folds, patient_col, stratify_column(task_cfg), seed)
-            if folds is None:
-                continue
-            for fold_i, (train_ids, val_ids) in enumerate(folds):
-                tr_inds = [ridx[str(r)] for r in train_ids if str(r) in ridx]
-                va_inds = [ridx[str(r)] for r in val_ids if str(r) in ridx]
-                try:
-                    model, device = train_on_inds(
-                        dataset, cfg, seed, num_tasks, loss_fn, tr_inds, mapping,
-                        model_dir=model_dir, tag=f"{task_id}_fold{fold_i}")
-                    pred_map = predict_on_inds(model, dataset, cfg, va_inds, device)
+    for seed in seeds:
+        folds = safe_patient_kfold(meta, n_folds, patient_col, stratify_column(task_cfg), seed)
+        if folds is None:
+            continue
+        for fold_i, (train_ids, val_ids) in enumerate(folds):
+            tr_inds = [ridx[str(r)] for r in train_ids if str(r) in ridx]
+            va_inds = [ridx[str(r)] for r in val_ids if str(r) in ridx]
+            try:
+                model_folder = os.path.join(
+                    model_dir,
+                    f"seed{seed}_fold{fold_i}_{uuid.uuid4().hex[:8]}")
 
-                    y_va = target_all.loc[[idxr[i] for i in va_inds]]
-                    y_pred = postprocess(pred_map, {i: idxr[i] for i in va_inds})
-                    metrics = score_predictions(task_cfg, y_va, y_pred, classes)
-                except Exception:
-                    if os.environ.get("BENCHMARK_RAISE_ERRORS"):
-                        raise
-                    metrics = _nan_metrics(task_cfg["type"])
-                metrics.update({"seed": seed, "fold": fold_i,
-                                "n_train": len(tr_inds), "n_val": len(va_inds)})
-                fold_metrics.append(metrics)
-    finally:
-        tmp.cleanup()
+                model = train_on_inds(
+                    dataset, cfg, seed, num_tasks, loss_fn, tr_inds,
+                    model_dir=model_folder)
+                pred_map = predict_on_inds(model, dataset, cfg, va_inds)
+
+                y_va = target_all.loc[[dataset.region_ids[i] for i in va_inds]]
+                y_pred = postprocess(pred_map, va_inds)
+                metrics = score_predictions(task_cfg, y_va, y_pred, classes)
+            except Exception:
+                if os.environ.get("BENCHMARK_RAISE_ERRORS"):
+                    raise
+                metrics = _nan_metrics(task_cfg["type"])
+            metrics.update({"seed": seed, "fold": fold_i,
+                            "n_train": len(tr_inds), "n_val": len(va_inds)})
+            fold_metrics.append(metrics)
+            pd.DataFrame(fold_metrics).to_csv(os.path.join(work_root, "cv_metrics.csv"), index=False)
+
     return fold_metrics
 
 
