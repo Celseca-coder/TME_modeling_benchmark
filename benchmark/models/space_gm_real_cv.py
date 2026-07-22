@@ -235,33 +235,95 @@ def predict_on_inds(model, dataset, cfg, inds) -> dict:
 # ======================================================================
 # task specs (label transform + loss + prediction post-processing)
 # ======================================================================
-def _classification_spec(target: pd.Series, root: str, label_file_name: str = None):
+def _multiclass_ce_loss():
+    """Weighted softmax cross-entropy for the multiclass graph head.
+
+    Signature matches ``spacegm.train.train_subgraph``'s
+    ``graph_task_loss_fn(graph_pred, graph_y, graph_w)``: ``graph_pred`` is the
+    ``(B, C)`` graph-head logits, while ``AddGraphLabel`` supplies a single-column
+    ``graph_y`` (integer class index, shape ``(B, 1)``) and ``graph_w`` (that
+    class's imbalance weight, shape ``(B, 1)``). Cross-entropy is applied per
+    region and averaged with the per-sample class weight.
+    """
+    import torch
+    import torch.nn.functional as F
+
+    class _MulticlassCrossEntropy(torch.nn.Module):
+        def forward(self, y_pred, y, w):
+            target = y.reshape(-1).long()
+            weight = w.reshape(-1)
+            ce = F.cross_entropy(y_pred, target, reduction="none")
+            return (ce * weight).mean()
+
+    return _MulticlassCrossEntropy()
+
+
+def _classification_spec(target: pd.Series, root: str, label_file_name: str = None,
+                         classes=None):
+    """Label transform + loss + prediction post-processing for classification.
+
+    Binary uses a single graph head trained with the weighted
+    :class:`spacegm.models.BinaryCrossEntropy`. A ``C``-class task keeps a
+    **single integer label column** and uses ``C`` graph heads trained with a
+    weighted softmax cross-entropy (:func:`_multiclass_ce_loss`); the aggregated
+    per-class logits are softmax-normalised at inference into the ``(n, C)``
+    probability matrix :func:`score_predictions` expects (column order == ``classes``).
+
+    ``classes`` may be passed to fix the class set / column order (e.g. so a
+    cohort-generalization train and test split agree); otherwise it is derived
+    from ``target``.
+    """
     if label_file_name is None:
         label_file_name = "graph_labels.csv"
-    classes = np.sort(pd.unique(target))
+    if classes is None:
+        classes = np.sort(pd.unique(target))
+    classes = np.asarray(classes)
     label_path = os.path.join(root, label_file_name)
 
     if len(classes) > 2:
-        raise
+        # ---- multiclass: one integer label column, weighted softmax CE ----
+        codes = np.searchsorted(classes, target.to_numpy())
+        label_df = pd.DataFrame(
+            {"label": codes.astype(int)}, index=[str(i) for i in target.index])
+        label_df.index.name = "REGION_ID"
+        num_tasks = len(classes)
+        label_df.to_csv(label_path)
+
+        transform = sg.transform.AddGraphLabel(label_path, tasks=["label"])
+        loss_fn = _multiclass_ce_loss()
+
+        def postprocess(pred_map, index):
+            rows = []
+            for i in index:
+                preds = pred_map.get(i) if hasattr(pred_map, "get") else pred_map[i]
+                if preds:
+                    logits = np.median(
+                        np.stack([np.asarray(p).reshape(-1) for p in preds]), axis=0)
+                    e = np.exp(logits - np.max(logits))
+                    rows.append(e / e.sum())
+                else:
+                    rows.append(np.full(len(classes), np.nan))
+            return np.vstack(rows)
+        return transform, loss_fn, num_tasks, classes, postprocess
     else:
+        # ---- binary: single head, sigmoid readout ----
         label_cols = ["label"]
         label_df = pd.DataFrame(
             {"label": (target.to_numpy() == classes[-1]).astype(int)},
             index=[str(i) for i in target.index])
         label_df.index.name = "REGION_ID"
         num_tasks = 1
-    label_df.to_csv(label_path)
+        label_df.to_csv(label_path)
 
-    transform = sg.transform.AddGraphLabel(label_path, tasks=list(label_cols))
-    loss_fn = sg.models.BinaryCrossEntropy()
+        transform = sg.transform.AddGraphLabel(label_path, tasks=list(label_cols))
+        loss_fn = sg.models.BinaryCrossEntropy()
 
-    def postprocess(pred_map, index):
-        agg_pred_vals = [np.median(np.array(pred_map[i]).flatten()) if i in pred_map else np.nan for i in index]
-        p1 = np.array(agg_pred_vals)
-        p1 = 1.0 / (1.0 + np.exp(-p1))
-        return np.column_stack([1.0 - p1, p1])
-
-    return transform, loss_fn, num_tasks, classes, postprocess
+        def postprocess(pred_map, index):
+            agg_pred_vals = [np.median(np.array(pred_map[i]).flatten()) if i in pred_map else np.nan for i in index]
+            p1 = np.array(agg_pred_vals)
+            p1 = 1.0 / (1.0 + np.exp(-p1))
+            return np.column_stack([1.0 - p1, p1])
+        return transform, loss_fn, num_tasks, classes, postprocess
 
 
 class _AddSurvivalLabel:
@@ -309,10 +371,12 @@ def _survival_spec(target: pd.DataFrame, root: str, label_file_name: str = None)
     return transform, loss_fn, 1, None, postprocess
 
 
-def _make_spec(task_cfg: dict, target, root: str, label_file_name: str = None):
+def _make_spec(task_cfg: dict, target, root: str, label_file_name: str = None,
+               classes=None):
     if task_cfg["type"] == "survival":
         return _survival_spec(target, root, label_file_name=label_file_name)
-    return _classification_spec(target, root, label_file_name=label_file_name)
+    return _classification_spec(target, root, label_file_name=label_file_name,
+                                classes=classes)
 
 
 def _nan_metrics(task_type: str) -> dict:
@@ -446,10 +510,17 @@ def cohort_generalization_fast(ds, task_id, gentest, cfg: SpaceGMConfig, *,
     y_tr = ds.build_target([r.region_id for r in tr_regions], task_id)
     y_te = ds.build_target([r.region_id for r in te_regions], task_id)
 
+    # Share one class set across cohorts so the train/test one-hot heads and
+    # prediction columns line up (matters for multiclass; harmless for binary).
+    shared_classes = None
+    if task_cfg["type"] != "survival":
+        shared_classes = np.sort(pd.unique(pd.concat([y_tr, y_te])))
     label_transform_tr, loss_fn, num_tasks, classes, postprocess = \
-        _make_spec(task_cfg, y_tr, work_root, label_file_name="graph_labels_tr.csv")
+        _make_spec(task_cfg, y_tr, work_root, label_file_name="graph_labels_tr.csv",
+                   classes=shared_classes)
     label_transform_te, _, _, _, _ = \
-        _make_spec(task_cfg, y_te, work_root, label_file_name="graph_labels_te.csv")
+        _make_spec(task_cfg, y_te, work_root, label_file_name="graph_labels_te.csv",
+                   classes=shared_classes)
 
     # ---- Attach transform ----
     input_transforms = [sg.transform.FeatureMask(
