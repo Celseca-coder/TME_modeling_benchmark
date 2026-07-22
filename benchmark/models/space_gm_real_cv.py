@@ -112,7 +112,7 @@ def derive_vocabulary(graphs: list):
     return mapping, freq, sorted(biomarkers)
 
 
-def build_dataset(regions, root, cfg):
+def build_dataset(regions, root, cfg, cell_type_col='cell_type', mapping=None, freq=None, biomarkers=None):
     """Write ``graphs`` and build a CellularGraphDataset (processed once).
     """
     print(f"Building dataset in {root} for {len(regions)} regions ...")
@@ -120,7 +120,8 @@ def build_dataset(regions, root, cfg):
     os.makedirs(raw_dir, exist_ok=True)
 
     # ---- build nx graphs and cache ----
-    builder = SpaceGMGraphBuilder(near_edge_um=cfg.near_edge_um).fit(regions)
+    builder = SpaceGMGraphBuilder(
+        near_edge_um=cfg.near_edge_um, cell_type_col=cell_type_col).fit(regions)
     graphs = []
     for region in regions:
         g_path = os.path.join(raw_dir, f"{region.region_id}.gpkl")
@@ -133,7 +134,8 @@ def build_dataset(regions, root, cfg):
         graphs.append(graph)
 
     # ---- calculate dataset-wide vocabulary ----
-    mapping, freq, biomarkers = derive_vocabulary(graphs)
+    if mapping is None or freq is None or biomarkers is None:
+        mapping, freq, biomarkers = derive_vocabulary(graphs)
 
     # ---- build dataset ----
     kwargs = dict(
@@ -202,6 +204,7 @@ def train_on_inds(dataset, cfg, seed, num_graph_tasks, loss_fn, train_inds, mode
         model_folder=model_dir,
     )
     if model_dir:
+        os.makedirs(model_dir, exist_ok=True)
         torch.save(model.state_dict(), os.path.join(model_dir, "model_final.pt"))
         with open(os.path.join(model_dir, "vocab.json"), "w") as f:
             json.dump({"cell_type_mapping": dataset.cell_type_mapping,
@@ -232,9 +235,11 @@ def predict_on_inds(model, dataset, cfg, inds) -> dict:
 # ======================================================================
 # task specs (label transform + loss + prediction post-processing)
 # ======================================================================
-def _classification_spec(target: pd.Series, root: str):
+def _classification_spec(target: pd.Series, root: str, label_file_name: str = None):
+    if label_file_name is None:
+        label_file_name = "graph_labels.csv"
     classes = np.sort(pd.unique(target))
-    label_path = os.path.join(root, "graph_labels.csv")
+    label_path = os.path.join(root, label_file_name)
 
     if len(classes) > 2:
         raise
@@ -283,8 +288,10 @@ class _AddSurvivalLabel:
         return data
 
 
-def _survival_spec(target: pd.DataFrame, root: str):
-    label_path = os.path.join(root, "survival_labels.csv")
+def _survival_spec(target: pd.DataFrame, root: str, label_file_name: str = None):
+    if label_file_name is None:
+        label_file_name = "survival_labels.csv"
+    label_path = os.path.join(root, label_file_name)
     label_df = pd.DataFrame(
         {"time": target["time"].astype(float).to_numpy(),
          "event": target["event"].astype(float).to_numpy()},
@@ -293,7 +300,7 @@ def _survival_spec(target: pd.DataFrame, root: str):
     label_df.to_csv(label_path)
 
     transform = _AddSurvivalLabel(label_path)
-    loss_fn = sg.models.CoxSGDLossFn()
+    loss_fn = sg.models.CoxSGDLossFn(top_n=0, regularizer_weight=1e-3)
 
     def postprocess(pred_map, index):
         agg_pred_vals = [np.median(np.array(pred_map[i]).flatten()) if i in pred_map else np.nan for i in index]
@@ -302,10 +309,10 @@ def _survival_spec(target: pd.DataFrame, root: str):
     return transform, loss_fn, 1, None, postprocess
 
 
-def _make_spec(task_cfg: dict, target, root: str):
+def _make_spec(task_cfg: dict, target, root: str, label_file_name: str = None):
     if task_cfg["type"] == "survival":
-        return _survival_spec(target, root)
-    return _classification_spec(target, root)
+        return _survival_spec(target, root, label_file_name=label_file_name)
+    return _classification_spec(target, root, label_file_name=label_file_name)
 
 
 def _nan_metrics(task_type: str) -> dict:
@@ -418,40 +425,65 @@ def cohort_generalization_fast(ds, task_id, gentest, cfg: SpaceGMConfig, *,
 
     tr_regions = ds.load_regions(train_ids, normalize=normalize)
     te_regions = ds.load_regions(test_ids, normalize=normalize)
-    builder = SpaceGMGraphBuilder(cell_type_col=cell_type_col,
-                                  near_edge_um=cfg.near_edge_um).fit(tr_regions)
-    X_tr = builder.transform(tr_regions)
-    X_te = builder.transform(te_regions)
-    graphs_tr = list(X_tr["nx_graph"])
-    graphs_te = list(X_te["nx_graph"])
-    # Vocabulary is derived from the TRAIN cohort and shared by both datasets.
-    mapping, freq, biomarkers = derive_vocabulary(graphs_tr)
-    y_tr = ds.build_target(list(X_tr.index), task_id)
-    y_te = ds.build_target(list(X_te.index), task_id)
 
-    tmp = tempfile.TemporaryDirectory(prefix="sgm_gen_", dir=work_root)
-    transform, loss_fn, num_tasks, classes, postprocess = _make_spec(task_cfg, y_tr, tmp.name)
-    ds_tr = build_dataset(graphs_tr, os.path.join(tmp.name, "train"),
-                          cfg, mapping, freq, biomarkers, transform)
-    ds_te = build_dataset(graphs_te, os.path.join(tmp.name, "test"),
-                          cfg, mapping, freq, biomarkers, None)  # labels not needed to predict
+    # ---- Define and build dataset ----
+    if work_root is None:
+        work_root = tempfile.TemporaryDirectory(prefix="sgm_cv_", dir=None).name
+    os.makedirs(work_root, exist_ok=True)
+    ds_tr_root = os.path.join(work_root, "ds_tr")
+    dataset_tr = build_dataset(tr_regions, ds_tr_root, cfg, cell_type_col=cell_type_col)
 
-    results: list[dict] = []
-    try:
-        for seed in seeds:
+    ds_te_root = os.path.join(work_root, "ds_te")
+    dataset_te = build_dataset(
+        te_regions, ds_te_root, cfg, cell_type_col=cell_type_col,
+        mapping=dataset_tr.cell_type_mapping, freq=dataset_tr.cell_type_freq,
+        biomarkers=dataset_tr.biomarkers)
+
+    assert dataset_tr.cell_type_mapping == dataset_te.cell_type_mapping
+    assert dataset_tr.node_feature_names == dataset_te.node_feature_names
+
+    # ---- Build label file and label transform ----
+    y_tr = ds.build_target([r.region_id for r in tr_regions], task_id)
+    y_te = ds.build_target([r.region_id for r in te_regions], task_id)
+
+    label_transform_tr, loss_fn, num_tasks, classes, postprocess = \
+        _make_spec(task_cfg, y_tr, work_root, label_file_name="graph_labels_tr.csv")
+    label_transform_te, _, _, _, _ = \
+        _make_spec(task_cfg, y_te, work_root, label_file_name="graph_labels_te.csv")
+
+    # ---- Attach transform ----
+    input_transforms = [sg.transform.FeatureMask(
+        dataset_tr,
+        use_center_node_features=cfg.use_center_node_features,
+        use_neighbor_node_features=cfg.use_neighbor_node_features)]
+    dataset_tr.transform = input_transforms + [label_transform_tr]
+    dataset_te.transform = input_transforms + [label_transform_te]
+
+
+    run_metrics: list[dict] = []
+    for seed in seeds:
+        for run_i in range(3):
             try:
-                model, device = train_on_inds(
-                    ds_tr, cfg, seed, num_tasks, loss_fn, np.arange(ds_tr.N), mapping,
-                    model_dir=model_dir, tag=f"{task_id}_{gentest['name']}")
-                pred_map = predict_on_inds(model, ds_te, cfg, np.arange(ds_te.N), device)
-                y_pred = postprocess(pred_map, y_te.index)
-                metrics = score_predictions(task_cfg, y_te, y_pred, classes)
+                model_folder = os.path.join(
+                    model_dir,
+                    f"seed{seed}_run{run_i}_{uuid.uuid4().hex[:8]}")
+
+                model = train_on_inds(
+                    dataset_tr, cfg, seed, num_tasks, loss_fn, np.arange(dataset_tr.N),
+                    model_dir=model_folder)
+
+                pred_map = predict_on_inds(model, dataset_te, cfg, np.arange(dataset_te.N))
+
+                _y_te = y_te.loc[[dataset_te.region_ids[i] for i in np.arange(dataset_te.N)]]
+                y_pred = postprocess(pred_map, np.arange(dataset_te.N))
+                metrics = score_predictions(task_cfg, _y_te, y_pred, classes)
             except Exception:
                 if os.environ.get("BENCHMARK_RAISE_ERRORS"):
                     raise
                 metrics = _nan_metrics(task_cfg["type"])
-            metrics.update({"seed": seed, "n_train": int(ds_tr.N), "n_test": int(ds_te.N)})
-            results.append(metrics)
-    finally:
-        tmp.cleanup()
-    return results
+            metrics.update({"seed": seed, "run": run_i,
+                            "n_train": dataset_tr.N, "n_val": dataset_te.N})
+            run_metrics.append(metrics)
+            pd.DataFrame(run_metrics).to_csv(os.path.join(work_root, "cv_metrics.csv"), index=False)
+
+    return run_metrics

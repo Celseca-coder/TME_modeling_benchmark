@@ -42,6 +42,8 @@ from benchmark.validation import summarize_folds, PRIMARY_METRIC
 
 BINARY_TYPES = {"binary_classification", "binary"}
 
+DATA_ROOT = Path("/autofs/bal14/zqwu/CellularTables/TME_benchmark_data")
+MODEL_SAVE_ROOT = Path(f'/autofs/bal14/zqwu/projects/TME_modeling_benchmark')
 
 def check_runtime_deps():
     missing = [
@@ -79,47 +81,48 @@ def binary_tasks(ds, only_tasks=None) -> list[str]:
     return tasks
 
 
-def run(dataset_names, seeds, config, *, out_root: Path, data_root=None,
-        only_tasks=None) -> tuple[pd.DataFrame, pd.DataFrame]:
+def run(dataset_names, seeds, config, only_tasks=None) -> tuple[pd.DataFrame, pd.DataFrame]:
     from benchmark.models.space_gm_real_cv import cross_validate_fast
 
-    work_root = out_root / "work"
-    weights_root = out_root / "weights"
+    summary_rows = []
+    summary_path = MODEL_SAVE_ROOT / "summary.csv"
+    if summary_path.exists():
+        summary_rows = pd.read_csv(summary_path).to_dict(orient="records")
 
-    summary_rows, fold_rows = [], []
     for name in dataset_names:
-        ds = load_dataset(name, data_root=data_root)
+        ds = load_dataset(name, data_root=DATA_ROOT)
         tasks = binary_tasks(ds, only_tasks)
         if not tasks:
             continue
-        print(f"=== {name}  (binary tasks: {', '.join(tasks)}) ===", flush=True)
 
         for task in tasks:
+            flags = [entry for entry in summary_rows if entry["dataset"] == name and entry["task"] == task]
+            if flags:
+                print(f"%%%  {task:24s} cv   (already done) %%%", flush=True)
+                continue
+            print(f"=== {name}  (binary task: {task}) ===", flush=True)
+            
             metric = PRIMARY_METRIC[ds.get_task_config(task)["type"]]
-            work = work_root / name / task
-            model_dir = weights_root / name / task
-            work.mkdir(parents=True, exist_ok=True)
-            model_dir.mkdir(parents=True, exist_ok=True)
+
+            work_root = MODEL_SAVE_ROOT / f'{name}_{task}_cv'
+            work_root.mkdir(parents=True, exist_ok=True)
+            model_dir = work_root
 
             fm = cross_validate_fast(
                 ds, task, config, seeds=seeds,
-                model_dir=str(model_dir), work_root=str(work),
+                model_dir=str(model_dir), work_root=str(work_root),
             )
             if not fm:
                 print(f"  {task:24s} cv   (no evaluable folds)", flush=True)
                 continue
 
-            for m in fm:
-                fold_rows.append(dict(dataset=name, task=task, **m))
             mean, sd = summarize_folds(fm, metric)
             summary_rows.append(dict(dataset=name, task=task, scheme="cv",
                                      metric=metric, mean=mean, sd=sd, n=len(fm)))
-            print(f"  {task:24s} cv   {metric:12s} {mean:.4f} +/- {sd:.4f}"
-                  f"   ({len(fm)} folds)", flush=True)
+            pd.DataFrame(summary_rows).to_csv(summary_path, index=False)
 
         ds.clear_region_cache()
-
-    return pd.DataFrame(summary_rows), pd.DataFrame(fold_rows)
+    return
 
 
 def main():
@@ -129,43 +132,28 @@ def main():
                     help="subset of dataset config stems (default: all)")
     ap.add_argument("--tasks", nargs="*", default=None,
                     help="restrict to these task ids (still filtered to binary)")
+    
+    # seeds to run (default: 0,1,2)
     ap.add_argument("--seeds", type=int, nargs="*", default=[0, 1, 2])
-    ap.add_argument("--out-root", default=str(_CODE / "results" / "space_gm_binary_cv"),
-                    help="base dir for weights, per-task work dirs, and the summary CSVs")
-    ap.add_argument("--data-root", default=None)
+    
     # hyper-parameters (see benchmark.models.space_gm_real_cv.SpaceGMConfig)
-    ap.add_argument("--device", default=None, help="cuda / cpu (default: auto)")
+    ap.add_argument("--device", default="cuda:1", help="cuda / cpu (default: auto)")
     ap.add_argument("--subgraph-size", type=int, default=3)
     ap.add_argument("--radius-um", type=float, default=75.0)
     ap.add_argument("--near-edge-um", type=float, default=20.0)
     ap.add_argument("--emb-dim", type=int, default=512)
-    ap.add_argument("--num-iterations", type=int, default=10000)
+    ap.add_argument("--num-iterations", type=int, default=2000)
     ap.add_argument("--batch-size", type=int, default=64)
     ap.add_argument("--lr", type=float, default=1e-3)
-    ap.add_argument("--eval-subsample-ratio", type=float, default=0.3)
+    ap.add_argument("--eval-subsample-ratio", type=float, default=0.1)
     args = ap.parse_args()
 
     check_runtime_deps()
     config = build_config(args)
-    out_root = Path(args.out_root)
-    out_root.mkdir(parents=True, exist_ok=True)
 
-    summary, folds = run(
-        args.datasets or list_datasets(), args.seeds, config,
-        out_root=out_root, data_root=args.data_root, only_tasks=args.tasks,
+    run(
+        args.datasets or list_datasets(), args.seeds, config, only_tasks=args.tasks,
     )
-
-    if len(summary):
-        summary["score"] = summary.apply(lambda r: f"{r['mean']:.3f} ± {r['sd']:.3f}", axis=1)
-    summary_path = out_root / "summary.csv"
-    folds_path = out_root / "all_folds.csv"
-    summary.to_csv(summary_path, index=False)
-    folds.to_csv(folds_path, index=False)
-
-    print(f"\nWrote {summary_path}  ({len(summary)} task rows)")
-    print(f"Wrote {folds_path}  ({len(folds)} fold rows)")
-    if len(summary):
-        print("\n" + summary[["dataset", "task", "metric", "score", "n"]].to_string(index=False))
 
 
 if __name__ == "__main__":
