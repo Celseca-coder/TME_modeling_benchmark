@@ -459,7 +459,6 @@ def cohort_generalization_fast(ds, task_id, gentest, cfg: SpaceGMConfig, *,
     dataset_tr.transform = input_transforms + [label_transform_tr]
     dataset_te.transform = input_transforms + [label_transform_te]
 
-
     run_metrics: list[dict] = []
     for seed in seeds:
         for run_i in range(3):
@@ -484,6 +483,6 @@ def cohort_generalization_fast(ds, task_id, gentest, cfg: SpaceGMConfig, *,
             metrics.update({"seed": seed, "run": run_i,
                             "n_train": dataset_tr.N, "n_val": dataset_te.N})
             run_metrics.append(metrics)
-            pd.DataFrame(run_metrics).to_csv(os.path.join(work_root, "cv_metrics.csv"), index=False)
+            pd.DataFrame(run_metrics).to_csv(os.path.join(work_root, "run_metrics.csv"), index=False)
 
     return run_metrics
