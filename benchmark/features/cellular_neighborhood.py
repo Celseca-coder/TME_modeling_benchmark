@@ -134,6 +134,7 @@ class CellularNeighborhoodFeaturizer(BaseFeatureExtractor):
         for i in range(self.kmeans_.n_clusters):
             mask = cn == i
             out[f"cn_fraction::{i}"] = float(mask.sum() / n_cells)
+            # 后面可能导致错误
             if mask.any():
                 mean_profile = profiles[mask].mean(axis=0)
                 for j, ct in enumerate(self.cell_types_):

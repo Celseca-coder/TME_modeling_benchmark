@@ -28,3 +28,13 @@ validation:
   primary_strategy: patient_cv
   n_folds: 5
   patient_col: patient_id
+eva:
+  image_root: images
+  image_file: "{region_id}.tiff"
+  markers_file: /autofs/nas8/tywang/tjzou/TME_modeling_benchmark/model_results/Eva/marker_panels/NSCLC_ICI_Monkman2024/markers.txt
+  channel_axis: 0
+
+kronos:
+  markers_file: "/autofs/bal14/zqwu/CellularTables/TME_benchmark_data/NSCLC-ICI_Monkman2024/processed/images/channel_to_biomarker_order.csv"
+  channel_axis: 0
+  max_value: 65535

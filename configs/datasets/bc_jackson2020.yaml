@@ -51,3 +51,15 @@ validation:
       test: [Zurich]
       tasks: [clinical_type]
       cell_type_col: cell_type_uniform
+eva:
+  image_root: images
+  image_file: "{region_id}.tiff"
+  markers_file: "/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/model_results/Eva/marker_panels/BC_Jackson2020/markers_{cohort}.txt"
+  channel_axis: 0
+
+kronos:
+  image_root: images
+  image_file: "{region_id}.tiff"
+  markers_file: "/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/model_results/Eva/marker_panels/BC_Jackson2020/markers_{cohort}.txt"
+  channel_axis: 0
+  max_value: 65535

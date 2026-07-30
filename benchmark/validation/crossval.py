@@ -18,6 +18,11 @@ from benchmark.validation.splits import safe_patient_kfold, stratify_column
 Featurizer = Any
 
 
+def _progress(message: str) -> None:
+    if os.environ.get("BENCHMARK_PROGRESS"):
+        print(message, flush=True)
+
+
 def _resolve_featurizer(featurizer: Featurizer, train_regions: list):
     """Return a ready-to-``transform`` featurizer: call+fit a factory, or use a
     pre-specified instance unchanged."""
@@ -86,15 +91,21 @@ def cross_validate(
         if folds is None:
             continue
         for fold_i, (train_ids, val_ids) in enumerate(folds):
+            _progress(
+                f"    seed={seed} fold={fold_i + 1}/{len(folds)}: "
+                f"loading train={len(train_ids)} val={len(val_ids)}"
+            )
             train_regions = dataset.load_regions(train_ids, normalize=normalize)
             val_regions = dataset.load_regions(val_ids, normalize=normalize)
 
+            _progress(f"    seed={seed} fold={fold_i + 1}/{len(folds)}: building graphs/features")
             feat = _resolve_featurizer(featurizer, train_regions)
             X_tr, X_va = feat.transform(train_regions), feat.transform(val_regions)
             y_tr = dataset.build_target(list(X_tr.index), task_id)
             y_va = dataset.build_target(list(X_va.index), task_id)
 
             try:
+                _progress(f"    seed={seed} fold={fold_i + 1}/{len(folds)}: fitting model")
                 model = model_factory(task_cfg, seed).fit(X_tr, y_tr)
                 metrics = score_predictions(task_cfg, y_va, model.predict(X_va),
                                             getattr(model, "classes_", None))
@@ -102,6 +113,7 @@ def cross_validate(
                 if os.environ.get("BENCHMARK_RAISE_ERRORS"):
                     raise
                 metrics = _nan_metrics(task_cfg["type"])
+            _progress(f"    seed={seed} fold={fold_i + 1}/{len(folds)}: done")
 
             metrics.update({"seed": seed, "fold": fold_i,
                             "n_train": len(X_tr), "n_val": len(X_va)})
