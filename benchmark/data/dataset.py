@@ -18,11 +18,13 @@ DEFAULT_POLYGONS_FILE = "tissue_polygons.geojson"
 
 def load_region_polygons(path: str | Path) -> dict | None:
     """Read a ``tissue_polygons.geojson`` FeatureCollection into ``{kind: shapely geometry}``.
-
-    Geometry is kept in the region's pixel coordinate space (matching ``coordinates``);
-    ``kind`` is the Feature's ``properties.kind`` (``"tissue"`` / ``"tumour"``). Returns
-    ``None`` if the file is missing or empty.
-    """
+    
+        Geometry is kept in the region's pixel coordinate space (matching ``coordinates``);
+        ``kind`` is the Feature's ``properties.kind`` (``"tissue"`` / ``"tumour"``). Returns
+        ``None`` if the file is missing or empty.
+    
+    Args:
+        path (str | Path): Filesystem path of the resource to load or save."""
     path = Path(path)
     if not path.exists():
         return None
@@ -61,14 +63,20 @@ class RegionData:
 
     @property
     def n_cells(self) -> int:
+        """Execute the n cells operation.
+
+        Returns:
+            int: The operation result."""
         return len(self.coordinates)
 
     def polygon_area_mm2(self, kind: str = "tissue") -> float | None:
         """Physical area (mm^2) of the ``kind`` polygon, or None if absent.
-
-        ``shapely``'s ``.area`` is in coordinate (pixel) units squared; we convert with
-        ``microns_per_pixel`` the same way as :attr:`coordinates_um`.
-        """
+        
+                ``shapely``'s ``.area`` is in coordinate (pixel) units squared; we convert with
+                ``microns_per_pixel`` the same way as :attr:`coordinates_um`.
+        
+        Args:
+            kind (str): Polygon or region category to retrieve."""
         if self.polygons is None:
             return None
         g = self.polygons.get(self._KIND_ALIASES.get(kind, kind))
@@ -78,18 +86,29 @@ class RegionData:
 
     @property
     def tissue_area_mm2(self) -> float | None:
+        """Execute the tissue area mm2 operation.
+
+        Returns:
+            float | None: The operation result."""
         return self.polygon_area_mm2("tissue")
 
     @property
     def tumor_area_mm2(self) -> float | None:
+        """Execute the tumor area mm2 operation.
+
+        Returns:
+            float | None: The operation result."""
         return self.polygon_area_mm2("tumour")
 
     def polygon_contains(self, xy, kind: str = "tissue"):
         """Boolean array: which of ``xy`` (pixel coords, Nx2) lie inside the ``kind`` polygon.
-
-        Returns None if the polygon is absent. Defaults to all cells' coordinates when
-        ``xy`` is None.
-        """
+        
+                Returns None if the polygon is absent. Defaults to all cells' coordinates when
+                ``xy`` is None.
+        
+        Args:
+            xy (Any): Two-dimensional point coordinates.
+            kind (str): Polygon or region category to retrieve."""
         # Acquire the polygon
         if self.polygons is None:
             return None
@@ -111,18 +130,22 @@ class RegionData:
         polygons: dict | None | str = "inherit",
     ) -> "RegionData":
         """Return a new RegionData object with only the specified cell IDs.
-
-        Pass ``region_id`` to label the subset explicitly; otherwise the parent
-        region_id is suffixed with the (sorted) cell IDs.
-
-        ``polygons`` controls the tissue/tumour geometry of the subset:
-          * ``"inherit"`` (default) — keep the parent region's polygons (they describe the
-            same physical region, so this is right for label-based subsets such as
-            "all tumour cells");
-          * ``None`` — drop the polygons;
-          * a ``{kind: geometry}`` dict — redefine them (e.g. clipped geometry from a
-            spatial subset; see :meth:`neighborhood`).
-        """
+        
+                Pass ``region_id`` to label the subset explicitly; otherwise the parent
+                region_id is suffixed with the (sorted) cell IDs.
+        
+                ``polygons`` controls the tissue/tumour geometry of the subset:
+                  * ``"inherit"`` (default) — keep the parent region's polygons (they describe the
+                    same physical region, so this is right for label-based subsets such as
+                    "all tumour cells");
+                  * ``None`` — drop the polygons;
+                  * a ``{kind: geometry}`` dict — redefine them (e.g. clipped geometry from a
+                    spatial subset; see :meth:`neighborhood`).
+        
+        Args:
+            cell_ids (Iterable[int]): Unique identifiers of cells belonging to the region.
+            region_id (str | None): Unique identifier of a tissue region.
+            polygons (dict | None | str): Named spatial boundary polygons for the region."""
         cell_ids = sorted(set(cell_ids))
         if region_id is None:
             region_id = self.region_id + f"___subset-{str(cell_ids)}"
@@ -142,24 +165,27 @@ class RegionData:
         radius_um: float = 100.0,
     ):
         """Subset the local spatial neighborhood around one cell.
-
-        Returns every cell whose centroid lies within ``radius_um`` microns of the
-        centroid of ``center_cell_id`` (Euclidean distance). The radius is given in
-        physical units (µm) and converted to coordinate units internally using
-        :attr:`microns_per_pixel`, so the same ``radius_um`` selects a comparable
-        physical area across datasets regardless of pixel size.
-
-        Parameters
-        ----------
-        center_cell_id : int
-            ``cell_id`` (coordinates index value) of the focal cell.
-        radius_um : float
-            Neighborhood radius in microns (default 100 µm).
-
-        Returns
-        -------
-        RegionData | list[int]
-        """
+        
+                Returns every cell whose centroid lies within ``radius_um`` microns of the
+                centroid of ``center_cell_id`` (Euclidean distance). The radius is given in
+                physical units (µm) and converted to coordinate units internally using
+                :attr:`microns_per_pixel`, so the same ``radius_um`` selects a comparable
+                physical area across datasets regardless of pixel size.
+        
+                Parameters
+                ----------
+                center_cell_id : int
+                    ``cell_id`` (coordinates index value) of the focal cell.
+                radius_um : float
+                    Neighborhood radius in microns (default 100 µm).
+        
+                Returns
+                -------
+                RegionData | list[int]
+        
+        Args:
+            center_cell_id (int): Identifier of the cell used as the neighborhood center.
+            radius_um (float): Radius measured in micrometers."""
         if center_cell_id not in self.coordinates.index:
             raise KeyError(
                 f"center_cell_id {center_cell_id!r} not in region {self.region_id!r}"
@@ -209,6 +235,14 @@ class TMEDataset:
     """
 
     def __init__(self, config: dict, data_root: str | Path):
+        """Initialize the instance.
+        
+                Args:
+                    config (dict): Configuration values.
+                    data_root (str | Path): Root directory containing data.
+        
+        Args:
+            config (dict): Dataset and benchmark configuration mapping."""
         self.config = config
         self.name = config["name"]
         self._root = self._resolve_existing_path(data_root, config["root"])
@@ -236,6 +270,16 @@ class TMEDataset:
 
     @staticmethod
     def _path_variants(path: str | Path) -> list[Path]:
+        """Execute the path variants operation.
+        
+                Args:
+                    path (str | Path): Path to the input or output resource.
+        
+                Returns:
+                    list[Path]: The operation result.
+        
+        Args:
+            path (str | Path): Filesystem path of the resource to load or save."""
         path = Path(path)
         if not path.parts:
             return [path]
@@ -255,6 +299,17 @@ class TMEDataset:
         return [Path(*parts) for parts in variants]
 
     def _resolve_existing_path(self, base: str | Path, path: str | Path) -> Path:
+        """Execute the resolve existing path operation.
+        
+                Args:
+                    base (str | Path): Base directory used to resolve relative paths.
+                    path (str | Path): Path to the input or output resource.
+        
+                Returns:
+                    Path: The operation result.
+        
+        Args:
+            base (str | Path): Base directory used to resolve relative paths."""
         base_path = Path(base)
         candidate = Path(path)
         if not candidate.is_absolute():
@@ -271,6 +326,17 @@ class TMEDataset:
 
     @classmethod
     def from_yaml(cls, yaml_path: str | Path, data_root: str | Path) -> "TMEDataset":
+        """Execute the from yaml operation.
+        
+                Args:
+                    yaml_path (str | Path): Path to the YAML dataset configuration file.
+                    data_root (str | Path): Root directory containing data.
+        
+                Returns:
+                    'TMEDataset': The operation result.
+        
+        Args:
+            yaml_path (str | Path): Path to the YAML dataset configuration file."""
         with open(yaml_path) as f:
             config = yaml.safe_load(f)
         return cls(config, data_root)
@@ -281,10 +347,18 @@ class TMEDataset:
 
     @property
     def task_ids(self) -> list[str]:
+        """Execute the task ids operation.
+
+        Returns:
+            list[str]: The operation result."""
         return [t["id"] for t in self.config.get("tasks", [])]
 
     @property
     def validation_config(self) -> dict:
+        """Execute the validation config operation.
+
+        Returns:
+            dict: The operation result."""
         return self.config.get("validation", {})
 
     @property
@@ -303,6 +377,16 @@ class TMEDataset:
         return self._metadata
 
     def get_task_config(self, task_id: str) -> dict:
+        """Return task config.
+        
+                Args:
+                    task_id (str): Unique identifier of the benchmark task.
+        
+                Returns:
+                    dict: The operation result.
+        
+        Args:
+            task_id (str): Unique identifier of the benchmark task."""
         tasks = {t["id"]: t for t in self.config.get("tasks", [])}
         if task_id not in tasks:
             raise KeyError(f"Task '{task_id}' not found in dataset '{self.name}'. "
@@ -319,13 +403,15 @@ class TMEDataset:
 
     def get_task_metadata(self, task_id: str) -> pd.DataFrame:
         """Return metadata rows relevant for *task_id*, with NaN labels dropped.
-
-        Task config keys:
-          type : survival | binary | multiclass
-          label_col | time_col + event_col
-          row_filter : pandas query string (optional)
-          drop_na_cols : list[str] — extra columns to require non-NaN
-        """
+        
+                Task config keys:
+                  type : survival | binary | multiclass
+                  label_col | time_col + event_col
+                  row_filter : pandas query string (optional)
+                  drop_na_cols : list[str] — extra columns to require non-NaN
+        
+        Args:
+            task_id (str): Unique identifier of the benchmark task."""
         task = self.get_task_config(task_id)
         df = self.get_metadata()
 
@@ -347,12 +433,15 @@ class TMEDataset:
 
     def build_target(self, region_ids: list[str], task_id: str):
         """Region-level prediction target for *task_id*, indexed by ``region_id``
-        and ordered to match ``region_ids`` (so it aligns with features/predictions):
-
-          * binary classification     -> Series of 0/1 (1 = ``positive_class``)
-          * multiclass classification -> Series of raw labels
-          * survival                  -> DataFrame with columns ``time`` / ``event``
-        """
+                and ordered to match ``region_ids`` (so it aligns with features/predictions):
+        
+                  * binary classification     -> Series of 0/1 (1 = ``positive_class``)
+                  * multiclass classification -> Series of raw labels
+                  * survival                  -> DataFrame with columns ``time`` / ``event``
+        
+        Args:
+            region_ids (list[str]): Region identifiers to load or select.
+            task_id (str): Unique identifier of the benchmark task."""
         task = self.get_task_config(task_id)
         m = self.get_metadata().set_index("region_id").loc[list(region_ids)]
         if task["type"] == "survival":
@@ -373,6 +462,16 @@ class TMEDataset:
     # ------------------------------------------------------------------
 
     def region_dir(self, region_id: str) -> Path:
+        """Execute the region dir operation.
+        
+                Args:
+                    region_id (str): Unique identifier of a tissue region.
+        
+                Returns:
+                    Path: The operation result.
+        
+        Args:
+            region_id (str): Unique identifier of a tissue region."""
         return self._regions_dir / region_id
 
     def load_region(
@@ -382,16 +481,20 @@ class TMEDataset:
         use_cache: bool = True,
     ) -> RegionData:
         """Load coordinates, expression, and cell_types for one region.
-
-        By default the expression is normalised with the dataset's ``normalization``
-        config (the stateless arcsinh transform in :mod:`benchmark.data.transforms`),
-        so the returned RegionData is ready for feature extraction. Pass
-        ``normalize=False`` for the raw expression.
-
-        Loaded regions are cached in-memory (keyed by ``region_id`` and the
-        ``normalize`` flag); set ``use_cache=False`` to bypass, and
-        :meth:`clear_region_cache` to free the memory.
-        """
+        
+                By default the expression is normalised with the dataset's ``normalization``
+                config (the stateless arcsinh transform in :mod:`benchmark.data.transforms`),
+                so the returned RegionData is ready for feature extraction. Pass
+                ``normalize=False`` for the raw expression.
+        
+                Loaded regions are cached in-memory (keyed by ``region_id`` and the
+                ``normalize`` flag); set ``use_cache=False`` to bypass, and
+                :meth:`clear_region_cache` to free the memory.
+        
+        Args:
+            region_id (str): Unique identifier of a tissue region.
+            normalize (bool): Whether to normalize feature values before modeling.
+            use_cache (bool): Whether to use cache during processing."""
         key = (region_id, normalize)
         if use_cache and key in self._region_cache:
             return self._region_cache[key]
@@ -434,7 +537,13 @@ class TMEDataset:
         use_cache: bool = True,
         show_progress: bool = False,
     ) -> list[RegionData]:
-        """Load multiple regions (see :meth:`load_region`), optionally with a tqdm bar."""
+        """Load multiple regions (see :meth:`load_region`), optionally with a tqdm bar.
+        
+        Args:
+            region_ids (Iterable[str]): Region identifiers to load or select.
+            normalize (bool): Whether to normalize feature values before modeling.
+            use_cache (bool): Whether to use cache during processing.
+            show_progress (bool): Whether to display progress."""
         ids = list(region_ids)
         if show_progress:
             try:
@@ -451,7 +560,12 @@ class TMEDataset:
         normalize: bool = True,
         use_cache: bool = True,
     ) -> Iterator[RegionData]:
-        """Lazy iterator over regions (see :meth:`load_region`)."""
+        """Lazy iterator over regions (see :meth:`load_region`).
+        
+        Args:
+            region_ids (Iterable[str]): Region identifiers to load or select.
+            normalize (bool): Whether to normalize feature values before modeling.
+            use_cache (bool): Whether to use cache during processing."""
         for rid in region_ids:
             yield self.load_region(rid, normalize=normalize, use_cache=use_cache)
 
@@ -469,4 +583,8 @@ class TMEDataset:
     # ------------------------------------------------------------------
 
     def __repr__(self) -> str:
+        """Execute the repr operation.
+
+        Returns:
+            str: The operation result."""
         return f"TMEDataset(name={self.name!r}, root={self._root})"

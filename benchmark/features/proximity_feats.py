@@ -1,3 +1,5 @@
+"""Provide proximity feats functionality."""
+
 # """Proximity features: cell-cell co-localisation within a spatial radius."""
 # from __future__ import annotations
 

@@ -23,6 +23,17 @@ class GradientBoostingModel(_TabularModel):
     def __init__(self, seed: int = 0, n_estimators: int = 300,
                  learning_rate: float = 0.1, max_depth: int | None = None,
                  class_weight: str | None = "balanced") -> None:
+        """Initialize the instance.
+        
+                Args:
+                    seed (int): Random seed used for reproducibility.
+                    n_estimators (int): Number of estimators.
+                    learning_rate (float): Learning rate used by the optimizer.
+                    max_depth (int | None): Maximum allowed depth.
+                    class_weight (str | None): Weight applied to class.
+        
+        Args:
+            seed (int): Random seed used to make results reproducible."""
         self.seed = seed
         self.n_estimators = n_estimators
         self.learning_rate = learning_rate
@@ -32,6 +43,17 @@ class GradientBoostingModel(_TabularModel):
         self.classes_ = None
 
     def fit(self, features: pd.DataFrame, target: pd.Series) -> "GradientBoostingModel":
+        """Fit.
+        
+                Args:
+                    features (pd.DataFrame): Feature values used to fit or evaluate the model.
+                    target (pd.Series): Target labels or outcomes associated with the samples.
+        
+                Returns:
+                    'GradientBoostingModel': The operation result.
+        
+        Args:
+            features (pd.DataFrame): Feature values used to fit or evaluate the model."""
         from sklearn.ensemble import HistGradientBoostingClassifier
         Xs = self._prep_fit(features.loc[list(target.index)])
         sw = None
@@ -47,4 +69,14 @@ class GradientBoostingModel(_TabularModel):
         return self
 
     def predict(self, features: pd.DataFrame) -> np.ndarray:
+        """Predict.
+        
+                Args:
+                    features (pd.DataFrame): Feature values used to fit or evaluate the model.
+        
+                Returns:
+                    np.ndarray: The operation result.
+        
+        Args:
+            features (pd.DataFrame): Feature values used to fit or evaluate the model."""
         return self._clf.predict_proba(self._prep_pred(features))

@@ -60,6 +60,19 @@ class NeighborhoodMILModel(RegionModel):
     def __init__(self, featurizer, model: RegionModel, *,
                  n_samples: float = 16, radius_um: float = 100.0,
                  min_cells: int = 10, agg: str = "mean", seed: int = 0) -> None:
+        """Initialize the instance.
+        
+                Args:
+                    featurizer (Any): Feature extractor applied to each region.
+                    model (RegionModel): Model instance to use.
+                    n_samples (float): Number of samples.
+                    radius_um (float): Radius measured in micrometers.
+                    min_cells (int): Minimum required cells.
+                    agg (str): Aggregation strategy used to combine instance-level values.
+                    seed (int): Random seed used for reproducibility.
+        
+        Args:
+            featurizer (Any): Feature extractor applied to each region."""
         self.featurizer = featurizer
         self.model = model
         self.n_samples = n_samples
@@ -71,6 +84,18 @@ class NeighborhoodMILModel(RegionModel):
 
     # ------------------------------------------------------------------
     def _centers(self, region: RegionData, rng, n_samples=None) -> list:
+        """Execute the centers operation.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+                    rng (Any): Random-number generator used for reproducible sampling.
+                    n_samples (Any): Number of samples.
+        
+                Returns:
+                    list: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         ids = region.coordinates.index.to_numpy()
         n = len(ids)
         if n == 0:
@@ -89,7 +114,12 @@ class NeighborhoodMILModel(RegionModel):
         return rng.choice(ids, size=k, replace=False).tolist()
 
     def _instances(self, regions: list[RegionData], rng, n_samples=None):
-        """Featurize sampled neighborhoods -> (instance feature table, region-id index)."""
+        """Featurize sampled neighborhoods -> (instance feature table, region-id index).
+        
+        Args:
+            regions (list[RegionData]): Tissue regions used for fitting or feature extraction.
+            rng (Any): Random-number generator used for reproducible sampling.
+            n_samples (Any): Number of samples."""
         rows, idx, rid = [], [], []
         for r in regions:
             for j, c in enumerate(self._centers(r, rng, n_samples=n_samples)):
@@ -106,6 +136,17 @@ class NeighborhoodMILModel(RegionModel):
     # RegionModel API  (note: consumes list[RegionData], not a feature table)
     # ------------------------------------------------------------------
     def fit(self, regions: list[RegionData], target: pd.Series):
+        """Fit.
+        
+                Args:
+                    regions (list[RegionData]): Tissue regions used for fitting or feature extraction.
+                    target (pd.Series): Target labels or outcomes associated with the samples.
+        
+                Returns:
+                    Any: The operation result.
+        
+        Args:
+            regions (list[RegionData]): Tissue regions used for fitting or feature extraction."""
         rng = np.random.default_rng(self.seed)
         keep = [r for r in regions if r.region_id in target.index]
         X, rid = self._instances(keep, rng)
@@ -117,6 +158,17 @@ class NeighborhoodMILModel(RegionModel):
         return self
 
     def predict(self, regions: list[RegionData], n_samples: float | None = None) -> np.ndarray:
+        """Predict.
+        
+                Args:
+                    regions (list[RegionData]): Tissue regions used for fitting or feature extraction.
+                    n_samples (float | None): Number of samples.
+        
+                Returns:
+                    np.ndarray: The operation result.
+        
+        Args:
+            regions (list[RegionData]): Tissue regions used for fitting or feature extraction."""
         rng = np.random.default_rng(self.seed + 1)
         X, rid = self._instances(regions, rng, n_samples=n_samples)
         n_classes = len(self.classes_)

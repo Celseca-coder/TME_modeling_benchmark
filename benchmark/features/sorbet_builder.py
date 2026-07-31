@@ -17,6 +17,7 @@ from .base import BaseFeatureExtractor
 
 
 class SORBETGraphBuilder(BaseFeatureExtractor):
+    """Represent s o r b e t graph builder."""
     def __init__(
         self,
         cell_type_col: str = "cell_type",
@@ -28,6 +29,20 @@ class SORBETGraphBuilder(BaseFeatureExtractor):
         max_nodes_per_subgraph: int = 96,
         seed: int = 0,
     ) -> None:
+        """Initialize the instance.
+        
+                Args:
+                    cell_type_col (str): Name of the column containing cell type.
+                    coord_cols (Any): Names of columns containing coord.
+                    include_expression (bool): Whether to include expression in the output.
+                    radius_um (float): Radius measured in micrometers.
+                    k_neighbors (int): Value controlling or representing k neighbors.
+                    max_centers (int): Maximum allowed centers.
+                    max_nodes_per_subgraph (int): Maximum allowed nodes per subgraph.
+                    seed (int): Random seed used for reproducibility.
+        
+        Args:
+            cell_type_col (str): Name of the column containing cell type."""
         self.cell_type_col = cell_type_col
         self.coord_cols = list(coord_cols)
         self.include_expression = include_expression
@@ -40,6 +55,16 @@ class SORBETGraphBuilder(BaseFeatureExtractor):
         self._markers: list[str] = []
 
     def fit(self, regions: list[RegionData]) -> "SORBETGraphBuilder":
+        """Fit.
+        
+                Args:
+                    regions (list[RegionData]): Tissue regions used for fitting or feature extraction.
+        
+                Returns:
+                    'SORBETGraphBuilder': The operation result.
+        
+        Args:
+            regions (list[RegionData]): Tissue regions used for fitting or feature extraction."""
         cell_types: set[str] = set()
         marker_sets: list[set[str]] = []
         for region in regions:
@@ -52,6 +77,16 @@ class SORBETGraphBuilder(BaseFeatureExtractor):
         return self
 
     def _cell_type_column(self, region: RegionData) -> str:
+        """Execute the cell type column operation.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+        
+                Returns:
+                    str: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         if self.cell_type_col in region.cell_types.columns:
             return self.cell_type_col
         if "cell_type" in region.cell_types.columns:
@@ -59,6 +94,16 @@ class SORBETGraphBuilder(BaseFeatureExtractor):
         raise ValueError(f"Region {region.region_id} has no cell-type column")
 
     def _coords_um(self, region: RegionData) -> np.ndarray:
+        """Execute the coords um operation.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+        
+                Returns:
+                    np.ndarray: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         coords_um = getattr(region, "coordinates_um", None)
         if coords_um is not None:
             return coords_um[self.coord_cols].to_numpy(float)
@@ -66,10 +111,31 @@ class SORBETGraphBuilder(BaseFeatureExtractor):
         return coords * float(getattr(region, "microns_per_pixel", 1.0))
 
     def _stable_rng(self, region_id: str) -> np.random.Generator:
+        """Execute the stable rng operation.
+        
+                Args:
+                    region_id (str): Unique identifier of a tissue region.
+        
+                Returns:
+                    np.random.Generator: The operation result.
+        
+        Args:
+            region_id (str): Unique identifier of a tissue region."""
         stable = sum(ord(ch) for ch in str(region_id))
         return np.random.default_rng(self.seed + stable)
 
     def _node_features(self, region: RegionData, node_idx: np.ndarray) -> np.ndarray:
+        """Execute the node features operation.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+                    node_idx (np.ndarray): Index of the node used to construct a subgraph.
+        
+                Returns:
+                    np.ndarray: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         labels = region.cell_types[self._cell_type_column(region)].reindex(region.coordinates.index)
         type_map = {name: i + 1 for i, name in enumerate(self._cell_types)}
         type_ids = np.array([type_map.get(str(x), 0) for x in labels.iloc[node_idx]], dtype=int)
@@ -85,6 +151,16 @@ class SORBETGraphBuilder(BaseFeatureExtractor):
         return np.concatenate(parts, axis=1).astype(np.float32)
 
     def _subgraph_edges(self, coords: np.ndarray) -> torch.Tensor:
+        """Execute the subgraph edges operation.
+        
+                Args:
+                    coords (np.ndarray): Two-dimensional cell-coordinate array.
+        
+                Returns:
+                    torch.Tensor: The operation result.
+        
+        Args:
+            coords (np.ndarray): Two-dimensional cell-coordinate array."""
         n = len(coords)
         if n < 2:
             return torch.zeros((2, 0), dtype=torch.long)
@@ -107,6 +183,17 @@ class SORBETGraphBuilder(BaseFeatureExtractor):
         return torch.as_tensor(edges.T, dtype=torch.long)
 
     def _center_indices(self, region: RegionData, n_cells: int) -> np.ndarray:
+        """Execute the center indices operation.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+                    n_cells (int): Number of cells.
+        
+                Returns:
+                    np.ndarray: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         if n_cells == 0:
             return np.asarray([], dtype=int)
         if n_cells <= self.max_centers:
@@ -116,6 +203,19 @@ class SORBETGraphBuilder(BaseFeatureExtractor):
 
     def _neighborhood_nodes(self, tree: cKDTree, coords: np.ndarray, center: int,
                             rng: np.random.Generator) -> np.ndarray:
+        """Execute the neighborhood nodes operation.
+        
+                Args:
+                    tree (cKDTree): Spatial search tree used for neighbor queries.
+                    coords (np.ndarray): Two-dimensional cell-coordinate array.
+                    center (int): Coordinates or index of the center cell.
+                    rng (np.random.Generator): Random-number generator used for reproducible sampling.
+        
+                Returns:
+                    np.ndarray: The operation result.
+        
+        Args:
+            tree (cKDTree): Spatial search tree used for neighbor queries."""
         nodes = tree.query_ball_point(coords[center], r=self.radius_um)
         nodes = np.asarray(sorted(set(nodes + [center])), dtype=int)
         if len(nodes) > self.max_nodes_per_subgraph:
@@ -125,6 +225,16 @@ class SORBETGraphBuilder(BaseFeatureExtractor):
         return nodes
 
     def extract_region(self, region: RegionData) -> dict:
+        """Extract region.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+        
+                Returns:
+                    dict: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         assert self._cell_types is not None, "call fit() before extract_region()"
         coords = self._coords_um(region)
         n_cells = len(coords)

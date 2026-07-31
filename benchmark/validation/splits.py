@@ -14,24 +14,30 @@ def patient_kfold(
     seed: int = 42,
 ) -> list[tuple[list[str], list[str]]]:
     """Patient-level K-fold cross-validation splits.
-
-    Assignments are made at the *patient* level to avoid data leakage when
-    multiple regions share the same patient.
-
-    Parameters
-    ----------
-    metadata : DataFrame with at least ``patient_col`` and ``region_id`` columns.
-    n_folds : int
-    patient_col : str
-    stratify_col : str | None
-        If given, stratify patient assignments by this column (e.g. the event
-        indicator).  Value per patient is taken as the mode of that column.
-    seed : int
-
-    Returns
-    -------
-    list of (train_region_ids, val_region_ids) tuples, length = n_folds.
-    """
+    
+        Assignments are made at the *patient* level to avoid data leakage when
+        multiple regions share the same patient.
+    
+        Parameters
+        ----------
+        metadata : DataFrame with at least ``patient_col`` and ``region_id`` columns.
+        n_folds : int
+        patient_col : str
+        stratify_col : str | None
+            If given, stratify patient assignments by this column (e.g. the event
+            indicator).  Value per patient is taken as the mode of that column.
+        seed : int
+    
+        Returns
+        -------
+        list of (train_region_ids, val_region_ids) tuples, length = n_folds.
+    
+    Args:
+        metadata (pd.DataFrame): Sample-level metadata used to construct data splits.
+        n_folds (int): Number of folds.
+        patient_col (str): Name of the column containing patient.
+        stratify_col (str | None): Name of the column containing stratify.
+        seed (int): Random seed used to make results reproducible."""
     # One row per patient
     if "region_id" not in metadata.columns:
         meta = metadata.reset_index(names="region_id")
@@ -67,7 +73,10 @@ def patient_kfold(
 
 def stratify_column(task_cfg: dict) -> str | None:
     """The metadata column to stratify patient folds on, given a task config:
-    the event indicator for survival, else the label column."""
+        the event indicator for survival, else the label column.
+    
+    Args:
+        task_cfg (dict): Configuration mapping for the current prediction task."""
     if task_cfg["type"] == "survival":
         return task_cfg.get("event_col")
     return task_cfg.get("label_col")
@@ -81,11 +90,17 @@ def safe_patient_kfold(
     seed: int = 0,
 ) -> list[tuple[list[str], list[str]]] | None:
     """:func:`patient_kfold` with graceful fallbacks for small cohorts.
-
-    Caps ``n_folds`` at the number of patients, and drops stratification when a
-    minority class is smaller than ``n_folds`` (which makes StratifiedKFold raise).
-    Returns ``None`` when fewer than 2 folds are possible.
-    """
+    
+        Caps ``n_folds`` at the number of patients, and drops stratification when a
+        minority class is smaller than ``n_folds`` (which makes StratifiedKFold raise).
+        Returns ``None`` when fewer than 2 folds are possible.
+    
+    Args:
+        metadata (pd.DataFrame): Sample-level metadata used to construct data splits.
+        n_folds (int): Number of folds.
+        patient_col (str): Name of the column containing patient.
+        stratify_col (str | None): Name of the column containing stratify.
+        seed (int): Random seed used to make results reproducible."""
     n_pat = metadata[patient_col].nunique()
     folds = min(n_folds, n_pat)
     if folds < 2:
@@ -105,18 +120,23 @@ def cohort_split(
     test_values: list[str] | None = None,
 ) -> tuple[list[str], list[str]]:
     """Split regions by cohort membership.
-
-    Parameters
-    ----------
-    metadata     : DataFrame with ``region_id`` and ``cohort_col`` columns.
-    cohort_col   : column identifying the cohort of each region.
-    train_values : list of cohort values for training.
-    test_values  : list of cohort values for testing.
-
-    Returns
-    -------
-    (train_region_ids, test_region_ids)
-    """
+    
+        Parameters
+        ----------
+        metadata     : DataFrame with ``region_id`` and ``cohort_col`` columns.
+        cohort_col   : column identifying the cohort of each region.
+        train_values : list of cohort values for training.
+        test_values  : list of cohort values for testing.
+    
+        Returns
+        -------
+        (train_region_ids, test_region_ids)
+    
+    Args:
+        metadata (pd.DataFrame): Sample-level metadata used to construct data splits.
+        cohort_col (str): Name of the column containing cohort.
+        train_values (list[str] | None): Values belonging to the candidate training samples.
+        test_values (list[str] | None): Values belonging to the candidate test samples."""
     if "region_id" not in metadata.columns:
         meta = metadata.reset_index(names="region_id")
     else:

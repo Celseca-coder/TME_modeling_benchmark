@@ -25,14 +25,32 @@ SELECTED_BENCHMARK_TASKS = {
 
 def should_skip_benchmark_task(dataset: str, task: str, scheme: str, metric: str) -> bool:
     """Return True for tasks outside the selected-task comparison.
-
-    Historically this predicate was reversed: the 17 selected tasks were named
-    ``EXCLUDED_BENCHMARK_TASKS`` and therefore skipped by graph-model runners.
-    Keep the public predicate, but make its behaviour match its callers: skip
-    everything *except* the allowlisted tasks.
-    """
+    
+        Historically this predicate was reversed: the 17 selected tasks were named
+        ``EXCLUDED_BENCHMARK_TASKS`` and therefore skipped by graph-model runners.
+        Keep the public predicate, but make its behaviour match its callers: skip
+        everything *except* the allowlisted tasks.
+    
+    Args:
+        dataset (str): Dataset name used to filter benchmark records.
+        task (str): Benchmark task name used to filter results.
+        scheme (str): Validation scheme name used to filter results.
+        metric (str): Evaluation metric name used to filter results."""
     return not is_selected_benchmark_task(dataset, task, scheme, metric)
 
 
 def is_selected_benchmark_task(dataset: str, task: str, scheme: str, metric: str) -> bool:
+    """Execute the is selected benchmark task operation.
+    
+        Args:
+            dataset (str): Dataset name used to filter benchmark records.
+            task (str): Benchmark task name used to filter results.
+            scheme (str): Validation scheme name used to filter results.
+            metric (str): Evaluation metric name used to filter results.
+    
+        Returns:
+            bool: The operation result.
+    
+    Args:
+        dataset (str): Dataset name used to filter benchmark records."""
     return (dataset, task, scheme, metric) in SELECTED_BENCHMARK_TASKS

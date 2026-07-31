@@ -1,3 +1,5 @@
+"""Provide spatial stats functionality."""
+
 # """Spatial statistics features: Ripley's L-function and pair correlation function."""
 # from __future__ import annotations
 

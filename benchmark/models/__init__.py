@@ -1,3 +1,5 @@
+"""Expose the models package API."""
+
 from .base import RegionModel
 from .linear import LinearClassifier, LinearCox
 from .forest import RandomForestModel

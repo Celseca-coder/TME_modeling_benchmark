@@ -18,15 +18,24 @@ class BaseFeatureExtractor(ABC):
     """
 
     def fit(self, regions: list[RegionData]) -> "BaseFeatureExtractor":
-        """Discover domain from data (e.g. all cell-type names). Override if needed."""
+        """Discover domain from data (e.g. all cell-type names). Override if needed.
+        
+        Args:
+            regions (list[RegionData]): Tissue regions used for fitting or feature extraction."""
         return self
 
     @abstractmethod
     def extract_region(self, region: RegionData) -> dict[str, float]:
-        """Return a flat dict mapping feature name → value for one region."""
+        """Return a flat dict mapping feature name → value for one region.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
 
     def transform(self, regions: list[RegionData]) -> pd.DataFrame:
-        """Extract features for all regions; returns DataFrame indexed by region_id."""
+        """Extract features for all regions; returns DataFrame indexed by region_id.
+        
+        Args:
+            regions (list[RegionData]): Tissue regions used for fitting or feature extraction."""
         rows = []
         ids = []
         for r in regions:
@@ -37,4 +46,14 @@ class BaseFeatureExtractor(ABC):
         return df
 
     def fit_transform(self, regions: list[RegionData]) -> pd.DataFrame:
+        """Fit transform.
+        
+                Args:
+                    regions (list[RegionData]): Tissue regions used for fitting or feature extraction.
+        
+                Returns:
+                    pd.DataFrame: The operation result.
+        
+        Args:
+            regions (list[RegionData]): Tissue regions used for fitting or feature extraction."""
         return self.fit(regions).transform(regions)

@@ -18,6 +18,7 @@ from .base import BaseFeatureExtractor
 
 
 class CytoCommunityGraphBuilder(BaseFeatureExtractor):
+    """Represent cyto community graph builder."""
     def __init__(
         self,
         cell_type_col: str = "cell_type",
@@ -28,6 +29,19 @@ class CytoCommunityGraphBuilder(BaseFeatureExtractor):
         max_cells: int | None = 4096,
         seed: int = 0,
     ) -> None:
+        """Initialize the instance.
+        
+                Args:
+                    cell_type_col (str): Name of the column containing cell type.
+                    coord_cols (Any): Names of columns containing coord.
+                    include_expression (bool): Whether to include expression in the output.
+                    radius_um (float): Radius measured in micrometers.
+                    k_neighbors (int): Value controlling or representing k neighbors.
+                    max_cells (int | None): Maximum allowed cells.
+                    seed (int): Random seed used for reproducibility.
+        
+        Args:
+            cell_type_col (str): Name of the column containing cell type."""
         self.cell_type_col = cell_type_col
         self.coord_cols = list(coord_cols)
         self.include_expression = include_expression
@@ -39,6 +53,16 @@ class CytoCommunityGraphBuilder(BaseFeatureExtractor):
         self._markers: list[str] = []
 
     def fit(self, regions: list[RegionData]) -> "CytoCommunityGraphBuilder":
+        """Fit.
+        
+                Args:
+                    regions (list[RegionData]): Tissue regions used for fitting or feature extraction.
+        
+                Returns:
+                    'CytoCommunityGraphBuilder': The operation result.
+        
+        Args:
+            regions (list[RegionData]): Tissue regions used for fitting or feature extraction."""
         types: set[str] = set()
         marker_sets = []
         for region in regions:
@@ -51,6 +75,16 @@ class CytoCommunityGraphBuilder(BaseFeatureExtractor):
         return self
 
     def _cell_type_column(self, region: RegionData) -> str:
+        """Execute the cell type column operation.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+        
+                Returns:
+                    str: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         if self.cell_type_col in region.cell_types.columns:
             return self.cell_type_col
         if "cell_type" in region.cell_types.columns:
@@ -58,6 +92,16 @@ class CytoCommunityGraphBuilder(BaseFeatureExtractor):
         raise ValueError(f"Region {region.region_id} has no cell-type column")
 
     def _coords_um(self, region: RegionData) -> np.ndarray:
+        """Execute the coords um operation.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+        
+                Returns:
+                    np.ndarray: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         coords_um = getattr(region, "coordinates_um", None)
         if coords_um is not None:
             return coords_um[self.coord_cols].to_numpy(float)
@@ -65,6 +109,17 @@ class CytoCommunityGraphBuilder(BaseFeatureExtractor):
         return coords * float(getattr(region, "microns_per_pixel", 1.0))
 
     def _sample_cells(self, region: RegionData, n: int) -> np.ndarray:
+        """Execute the sample cells operation.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+                    n (int): Value controlling or representing n.
+        
+                Returns:
+                    np.ndarray: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         if self.max_cells is None or n <= self.max_cells:
             return np.arange(n)
         stable = sum(ord(ch) for ch in str(region.region_id))
@@ -72,6 +127,17 @@ class CytoCommunityGraphBuilder(BaseFeatureExtractor):
         return np.sort(rng.choice(n, self.max_cells, replace=False))
 
     def _node_features(self, region: RegionData, keep: np.ndarray) -> np.ndarray:
+        """Execute the node features operation.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+                    keep (np.ndarray): Boolean mask or indices selecting retained items.
+        
+                Returns:
+                    np.ndarray: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         labels = region.cell_types[self._cell_type_column(region)].reindex(region.coordinates.index)
         type_map = {name: i + 1 for i, name in enumerate(self._cell_types)}
         type_ids = np.array([type_map.get(str(x), 0) for x in labels.iloc[keep]], dtype=int)
@@ -87,6 +153,16 @@ class CytoCommunityGraphBuilder(BaseFeatureExtractor):
         return np.concatenate(parts, axis=1).astype(np.float32)
 
     def _edge_index(self, coords: np.ndarray) -> torch.Tensor:
+        """Execute the edge index operation.
+        
+                Args:
+                    coords (np.ndarray): Two-dimensional cell-coordinate array.
+        
+                Returns:
+                    torch.Tensor: The operation result.
+        
+        Args:
+            coords (np.ndarray): Two-dimensional cell-coordinate array."""
         n = len(coords)
         if n < 2:
             return torch.zeros((2, 0), dtype=torch.long)
@@ -111,6 +187,16 @@ class CytoCommunityGraphBuilder(BaseFeatureExtractor):
         return torch.as_tensor(edges.T, dtype=torch.long)
 
     def extract_region(self, region: RegionData) -> dict:
+        """Extract region.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+        
+                Returns:
+                    dict: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         assert self._cell_types is not None, "call fit() before extract_region()"
         coords = self._coords_um(region)
         keep = self._sample_cells(region, len(coords))
@@ -125,8 +211,16 @@ class CytoCommunityGraphBuilder(BaseFeatureExtractor):
 
     @property
     def n_cell_types(self) -> int:
+        """Execute the n cell types operation.
+
+        Returns:
+            int: The operation result."""
         return len(self._cell_types)
 
     @property
     def n_markers(self) -> int:
+        """Execute the n markers operation.
+
+        Returns:
+            int: The operation result."""
         return len(self._markers)

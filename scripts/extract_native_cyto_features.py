@@ -16,6 +16,16 @@ import pandas as pd
 
 
 def parse_image_name(result_path: Path) -> str:
+    """Parse image name.
+    
+        Args:
+            result_path (Path): Path to a benchmark result file.
+    
+        Returns:
+            str: The operation result.
+    
+    Args:
+        result_path (Path): Path to a benchmark result file."""
     name = result_path.name
     prefix = "ResultTable_"
     suffix = ".csv"
@@ -25,7 +35,10 @@ def parse_image_name(result_path: Path) -> str:
 
 
 def load_region_name_map(dataset_dir: Path) -> dict[str, str]:
-    """Return image_name -> original region_id mapping when available."""
+    """Return image_name -> original region_id mapping when available.
+    
+    Args:
+        dataset_dir (Path): Directory containing the source dataset."""
     candidates = [
         dataset_dir / "MERFISH-Brain_Input" / "region_name_map.csv",
         dataset_dir / "region_name_map.csv",
@@ -43,6 +56,18 @@ def load_region_name_map(dataset_dir: Path) -> dict[str, str]:
 
 
 def infer_region_id(dataset: str, image_name: str, name_map: dict[str, str]) -> str:
+    """Execute the infer region id operation.
+    
+        Args:
+            dataset (str): Dataset name used to filter benchmark records.
+            image_name (str): Image identifier used to match native feature files.
+            name_map (dict[str, str]): Mapping from source identifiers to canonical names.
+    
+        Returns:
+            str: The operation result.
+    
+    Args:
+        dataset (str): Dataset name used to filter benchmark records."""
     if image_name in name_map:
         return name_map[image_name]
     prefix = f"{dataset}__"
@@ -52,10 +77,30 @@ def infer_region_id(dataset: str, image_name: str, name_map: dict[str, str]) -> 
 
 
 def entropy(proportions: list[float]) -> float:
+    """Execute the entropy operation.
+    
+        Args:
+            proportions (list[float]): Cell-type proportions used to derive community labels.
+    
+        Returns:
+            float: The operation result.
+    
+    Args:
+        proportions (list[float]): Cell-type proportions used to derive community labels."""
     return -sum(p * math.log(p) for p in proportions if p > 0)
 
 
 def natural_tcn_sort(labels: list[int]) -> list[int]:
+    """Execute the natural tcn sort operation.
+    
+        Args:
+            labels (list[int]): Cell-type or class label assigned to each observation.
+    
+        Returns:
+            list[int]: The operation result.
+    
+    Args:
+        labels (list[int]): Cell-type or class label assigned to each observation."""
     return sorted(labels)
 
 
@@ -66,6 +111,20 @@ def extract_one_result(
     region_id: str,
     tcn_labels: list[int],
 ) -> dict[str, object]:
+    """Extract one result.
+    
+        Args:
+            result_path (Path): Path to a benchmark result file.
+            dataset (str): Dataset name used to filter benchmark records.
+            image_name (str): Image identifier used to match native feature files.
+            region_id (str): Unique identifier of a tissue region.
+            tcn_labels (list[int]): Tissue cellular-neighborhood labels assigned to cells.
+    
+        Returns:
+            dict[str, object]: The operation result.
+    
+    Args:
+        result_path (Path): Path to a benchmark result file."""
     df = pd.read_csv(result_path)
     if "TCN_Label" not in df.columns:
         raise ValueError(f"Missing TCN_Label column in {result_path}")
@@ -101,6 +160,16 @@ def extract_one_result(
 
 
 def discover_tcn_labels(result_paths: list[Path]) -> list[int]:
+    """Execute the discover tcn labels operation.
+    
+        Args:
+            result_paths (list[Path]): Benchmark result files to combine.
+    
+        Returns:
+            list[int]: The operation result.
+    
+    Args:
+        result_paths (list[Path]): Benchmark result files to combine."""
     labels: set[int] = set()
     for path in result_paths:
         df = pd.read_csv(path, usecols=["TCN_Label"])
@@ -112,6 +181,18 @@ def discover_tcn_labels(result_paths: list[Path]) -> list[int]:
 
 
 def extract_features(native_root: Path, output: Path, num_tcn: int | None = None) -> pd.DataFrame:
+    """Extract features.
+    
+        Args:
+            native_root (Path): Root directory containing native CytoCommunity outputs.
+            output (Path): Destination path for the generated result file.
+            num_tcn (int | None): Number of tcn.
+    
+        Returns:
+            pd.DataFrame: The operation result.
+    
+    Args:
+        native_root (Path): Root directory containing native CytoCommunity outputs."""
     if not native_root.exists():
         raise FileNotFoundError(f"Native root not found: {native_root}")
 
@@ -147,6 +228,7 @@ def extract_features(native_root: Path, output: Path, num_tcn: int | None = None
 
 
 def main() -> None:
+    """Execute the main operation."""
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument(
         "--native-root",

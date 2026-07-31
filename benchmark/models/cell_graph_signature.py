@@ -15,6 +15,17 @@ from .base import RegionModel
 
 
 def _gin_mlp(in_dim: int, out_dim: int) -> nn.Sequential:
+    """Execute the gin mlp operation.
+    
+        Args:
+            in_dim (int): Dimensionality of the in representation.
+            out_dim (int): Dimensionality of the out representation.
+    
+        Returns:
+            nn.Sequential: The operation result.
+    
+    Args:
+        in_dim (int): Dimensionality of the in representation."""
     return nn.Sequential(nn.Linear(in_dim, out_dim), nn.ReLU(), nn.Linear(out_dim, out_dim))
 
 
@@ -23,6 +34,17 @@ class _GINTopK(nn.Module):
 
     def __init__(self, in_dim: int, out_dim: int, hidden_dim: int, pooling_ratio: float,
                  dropout: float):
+        """Initialize the instance.
+        
+                Args:
+                    in_dim (int): Dimensionality of the in representation.
+                    out_dim (int): Dimensionality of the out representation.
+                    hidden_dim (int): Dimensionality of the hidden representation.
+                    pooling_ratio (float): Ratio controlling pooling.
+                    dropout (float): Dropout probability used for neural-network regularization.
+        
+        Args:
+            in_dim (int): Dimensionality of the in representation."""
         super().__init__()
         dims = [in_dim, hidden_dim, hidden_dim, hidden_dim]
         self.convs = nn.ModuleList(
@@ -37,6 +59,16 @@ class _GINTopK(nn.Module):
         self.dropout = dropout
 
     def forward(self, batch: Batch) -> torch.Tensor:
+        """Execute the forward operation.
+        
+                Args:
+                    batch (Batch): Batch of graphs or tensors processed together.
+        
+                Returns:
+                    torch.Tensor: The operation result.
+        
+        Args:
+            batch (Batch): Batch of graphs or tensors processed together."""
         x, edge_index, graph_index = batch.x, batch.edge_index, batch.batch
         summaries = []
         for conv, pool in zip(self.convs, self.pools):
@@ -55,6 +87,7 @@ class _GINTopK(nn.Module):
 
 
 class _CellGraphSignatureBase(RegionModel):
+    """Represent cell graph signature base."""
     def __init__(
         self,
         *,
@@ -69,6 +102,22 @@ class _CellGraphSignatureBase(RegionModel):
         batch_size: int = 32,
         device: str | None = None,
     ):
+        """Initialize the instance.
+        
+                Args:
+                    seed (int): Random seed used for reproducibility.
+                    hidden_dim (int): Dimensionality of the hidden representation.
+                    pooling_ratio (float): Ratio controlling pooling.
+                    dropout (float): Dropout probability used for neural-network regularization.
+                    lr (float): Learning rate used by the optimizer.
+                    weight_decay (float): L2 penalty applied by the optimizer.
+                    epochs (int): Number of epochs epochs.
+                    patience (int): Epochs without improvement allowed before early stopping.
+                    batch_size (int): Size of each batch.
+                    device (str | None): Compute device on which tensors and models are allocated.
+        
+        Args:
+            seed (int): Random seed used to make results reproducible."""
         if hidden_dim < 2:
             raise ValueError("hidden_dim must be at least 2")
         torch.manual_seed(seed)
@@ -87,6 +136,16 @@ class _CellGraphSignatureBase(RegionModel):
 
     @staticmethod
     def _region_graphs(features: pd.DataFrame) -> list[list]:
+        """Execute the region graphs operation.
+        
+                Args:
+                    features (pd.DataFrame): Feature values used to fit or evaluate the model.
+        
+                Returns:
+                    list[list]: The operation result.
+        
+        Args:
+            features (pd.DataFrame): Feature values used to fit or evaluate the model."""
         if "graphs" not in features:
             raise ValueError("Cell-Graph Signature expects a 'graphs' feature column")
         graphs = features["graphs"].tolist()
@@ -95,12 +154,31 @@ class _CellGraphSignatureBase(RegionModel):
         return graphs
 
     def _initialise(self, region_graphs: list[list], out_dim: int) -> None:
+        """Execute the initialise operation.
+        
+                Args:
+                    region_graphs (list[list]): Graphs grouped by their source tissue region.
+                    out_dim (int): Dimensionality of the out representation.
+        
+        Args:
+            region_graphs (list[list]): Graphs grouped by their source tissue region."""
         in_dim = int(region_graphs[0][0].x.shape[1])
         self.network = _GINTopK(
             in_dim, out_dim, self.hidden_dim, self.pooling_ratio, self.dropout
         ).to(self.device)
 
     def _graph_logits(self, graphs: list, *, training: bool) -> torch.Tensor:
+        """Execute the graph logits operation.
+        
+                Args:
+                    graphs (list): Graph objects used for training or inference.
+                    training (bool): Whether the module is operating in training mode.
+        
+                Returns:
+                    torch.Tensor: The operation result.
+        
+        Args:
+            graphs (list): Graph objects used for training or inference."""
         assert self.network is not None
         parts = []
         for start in range(0, len(graphs), self.batch_size):
@@ -109,12 +187,26 @@ class _CellGraphSignatureBase(RegionModel):
         return torch.cat(parts)
 
     def _region_logits(self, region_graphs: list[list]) -> torch.Tensor:
+        """Execute the region logits operation.
+        
+                Args:
+                    region_graphs (list[list]): Graphs grouped by their source tissue region.
+        
+                Returns:
+                    torch.Tensor: The operation result.
+        
+        Args:
+            region_graphs (list[list]): Graphs grouped by their source tissue region."""
         return torch.stack([
             self._graph_logits(graphs, training=self.network.training).mean(dim=0)
             for graphs in region_graphs
         ])
 
     def _optimizer(self):
+        """Execute the optimizer operation.
+
+        Returns:
+            Any: The operation result."""
         assert self.network is not None
         return torch.optim.Adam(
             self.network.parameters(), lr=self.lr, weight_decay=self.weight_decay
@@ -127,6 +219,17 @@ class CellGraphSignatureClassifier(_CellGraphSignatureBase):
     task_type = "binary"
 
     def fit(self, features: pd.DataFrame, target: pd.Series):
+        """Fit.
+        
+                Args:
+                    features (pd.DataFrame): Feature values used to fit or evaluate the model.
+                    target (pd.Series): Target labels or outcomes associated with the samples.
+        
+                Returns:
+                    Any: The operation result.
+        
+        Args:
+            features (pd.DataFrame): Feature values used to fit or evaluate the model."""
         region_graphs = self._region_graphs(features.loc[list(target.index)])
         self.classes_ = np.sort(target.unique())
         if len(self.classes_) < 2:
@@ -172,6 +275,16 @@ class CellGraphSignatureClassifier(_CellGraphSignatureBase):
         return self
 
     def predict(self, features: pd.DataFrame) -> np.ndarray:
+        """Predict.
+        
+                Args:
+                    features (pd.DataFrame): Feature values used to fit or evaluate the model.
+        
+                Returns:
+                    np.ndarray: The operation result.
+        
+        Args:
+            features (pd.DataFrame): Feature values used to fit or evaluate the model."""
         self.network.eval()
         outputs = []
         with torch.no_grad():
@@ -188,6 +301,18 @@ class CellGraphSignatureCox(_CellGraphSignatureBase):
 
     @staticmethod
     def _breslow_loss(risk, time, event):
+        """Execute the breslow loss operation.
+        
+                Args:
+                    risk (Any): Predicted risk scores for survival samples.
+                    time (Any): Observed survival or follow-up times.
+                    event (Any): Event indicators for survival outcomes.
+        
+                Returns:
+                    Any: The operation result.
+        
+        Args:
+            risk (Any): Predicted risk scores for survival samples."""
         loss = risk.new_tensor(0.0)
         for event_time in torch.unique(time[event > 0]):
             deaths = (time == event_time) & (event > 0)
@@ -196,6 +321,17 @@ class CellGraphSignatureCox(_CellGraphSignatureBase):
         return loss / event.sum().clamp(min=1.0)
 
     def fit(self, features: pd.DataFrame, target: pd.DataFrame):
+        """Fit.
+        
+                Args:
+                    features (pd.DataFrame): Feature values used to fit or evaluate the model.
+                    target (pd.DataFrame): Target labels or outcomes associated with the samples.
+        
+                Returns:
+                    Any: The operation result.
+        
+        Args:
+            features (pd.DataFrame): Feature values used to fit or evaluate the model."""
         region_graphs = self._region_graphs(features.loc[list(target.index)])
         self._initialise(region_graphs, 1)
         time = torch.tensor(target["time"].to_numpy(), dtype=torch.float32, device=self.device)
@@ -224,6 +360,16 @@ class CellGraphSignatureCox(_CellGraphSignatureBase):
         return self
 
     def predict(self, features: pd.DataFrame) -> np.ndarray:
+        """Predict.
+        
+                Args:
+                    features (pd.DataFrame): Feature values used to fit or evaluate the model.
+        
+                Returns:
+                    np.ndarray: The operation result.
+        
+        Args:
+            features (pd.DataFrame): Feature values used to fit or evaluate the model."""
         self.network.eval()
         with torch.no_grad():
             return self._region_logits(self._region_graphs(features)).squeeze(1).cpu().numpy()

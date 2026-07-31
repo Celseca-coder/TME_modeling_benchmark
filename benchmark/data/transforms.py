@@ -31,6 +31,17 @@ import pandas as pd
 
 
 def _numeric_cols(df: pd.DataFrame, exclude_cols: list[str] | None) -> list[str]:
+    """Execute the numeric cols operation.
+    
+        Args:
+            df (pd.DataFrame): Input data frame.
+            exclude_cols (list[str] | None): Columns excluded from numeric feature selection.
+    
+        Returns:
+            list[str]: The operation result.
+    
+    Args:
+        df (pd.DataFrame): Data frame whose columns are inspected or transformed."""
     skip = set(exclude_cols or ["cell_id"])
     return [c for c in df.columns if c not in skip and pd.api.types.is_numeric_dtype(df[c])]
 
@@ -42,7 +53,14 @@ def _resolve_cofactor(
     quantile_scale: float,
     eps: float,
 ) -> np.ndarray | float:
-    """Return a scalar (fixed) or per-marker (adaptive) cofactor array."""
+    """Return a scalar (fixed) or per-marker (adaptive) cofactor array.
+    
+    Args:
+        sub (pd.DataFrame): Subset of values currently being transformed.
+        cofactor (float | str): Cofactor used by the arcsinh transformation.
+        quantile (float): Reference quantile used to estimate the scaling factor.
+        quantile_scale (float): Value controlling or representing quantile scale.
+        eps (float): Small positive constant used to avoid numerical instability."""
     if isinstance(cofactor, str):
         mode = cofactor.lower()
         if mode in ("quantile", "adaptive", "auto"):
@@ -58,16 +76,19 @@ def apply_normalization(
     norm_cfg: dict | None = None,
 ) -> "RegionData":
     """Return a copy of *region_data* with arcsinh-transformed expression.
-
-    Stateless and per-region: nothing is fit across regions. Feature standardisation
-    is handled model-side (see module docstring).
-
-    ``norm_cfg`` keys
-    -----------------
-    method : {arcsinh, none}
-    cofactor : float or "quantile"            (for arcsinh)
-    quantile, quantile_scale, eps             (for the adaptive "quantile" cofactor)
-    """
+    
+        Stateless and per-region: nothing is fit across regions. Feature standardisation
+        is handled model-side (see module docstring).
+    
+        ``norm_cfg`` keys
+        -----------------
+        method : {arcsinh, none}
+        cofactor : float or "quantile"            (for arcsinh)
+        quantile, quantile_scale, eps             (for the adaptive "quantile" cofactor)
+    
+    Args:
+        region_data ('RegionData'): Region object containing coordinates, labels, and expression data.
+        norm_cfg (dict | None): Normalization settings applied to region measurements."""
     from .dataset import RegionData
 
     norm_cfg = norm_cfg or {}

@@ -26,6 +26,7 @@ from benchmark.validation import cross_validate, cohort_split_test, summarize_fo
 
 
 def check_runtime_deps() -> None:
+    """Check runtime deps."""
     missing = [
         name for name in ("torch", "torch_geometric", "lifelines", "sklearn")
         if importlib.util.find_spec(name) is None
@@ -39,7 +40,28 @@ def check_runtime_deps() -> None:
 
 
 def make_model_factory(args):
+    """Create model factory.
+    
+        Args:
+            args (Any): Command-line arguments passed to the entry point.
+    
+        Returns:
+            Any: The operation result.
+    
+    Args:
+        args (Any): Command-line arguments passed to the entry point."""
     def model_factory(task_cfg, seed):
+        """Execute the model factory operation.
+        
+                Args:
+                    task_cfg (Any): Configuration mapping for the current prediction task.
+                    seed (Any): Random seed used for reproducibility.
+        
+                Returns:
+                    Any: The operation result.
+        
+        Args:
+            task_cfg (Any): Configuration mapping for the current prediction task."""
         kwargs = dict(
             seed=seed,
             hidden_dim=args.hidden_dim,
@@ -57,6 +79,17 @@ def make_model_factory(args):
 
 
 def make_featurizer(args, cell_type_col: str = "cell_type"):
+    """Create featurizer.
+    
+        Args:
+            args (Any): Command-line arguments passed to the entry point.
+            cell_type_col (str): Name of the column containing cell type.
+    
+        Returns:
+            Any: The operation result.
+    
+    Args:
+        args (Any): Command-line arguments passed to the entry point."""
     return lambda c=cell_type_col: SORBETGraphBuilder(
         cell_type_col=c,
         radius_um=args.radius_um,
@@ -69,10 +102,36 @@ def make_featurizer(args, cell_type_col: str = "cell_type"):
 
 
 def should_run_task(args, dataset: str, task: str, scheme: str, metric: str) -> bool:
+    """Execute the should run task operation.
+    
+        Args:
+            args (Any): Command-line arguments passed to the entry point.
+            dataset (str): Dataset name used to filter benchmark records.
+            task (str): Benchmark task name used to filter results.
+            scheme (str): Validation scheme name used to filter results.
+            metric (str): Evaluation metric name used to filter results.
+    
+        Returns:
+            bool: The operation result.
+    
+    Args:
+        args (Any): Command-line arguments passed to the entry point."""
     return (not args.only_selected_tasks) or is_selected_benchmark_task(dataset, task, scheme, metric)
 
 
 def run(dataset_names, seeds, args) -> pd.DataFrame:
+    """Run.
+    
+        Args:
+            dataset_names (Any): Names of datasets to process.
+            seeds (Any): Random seeds used for repeated benchmark runs.
+            args (Any): Command-line arguments passed to the entry point.
+    
+        Returns:
+            pd.DataFrame: The operation result.
+    
+    Args:
+        dataset_names (Any): Names of datasets to process."""
     rows = []
     model_factory = make_model_factory(args)
     for name in dataset_names:
@@ -116,6 +175,7 @@ def run(dataset_names, seeds, args) -> pd.DataFrame:
 
 
 def main() -> None:
+    """Execute the main operation."""
     ap = argparse.ArgumentParser(description=__doc__, formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--datasets", nargs="*", default=None)
     ap.add_argument("--seeds", type=int, nargs="*", default=[0, 1, 2])

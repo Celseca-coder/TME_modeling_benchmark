@@ -21,8 +21,21 @@ from .base import RegionModel
 
 
 class _CytoCommunityNet(nn.Module):
+    """Represent cyto community net."""
     def __init__(self, in_dim: int, out_dim: int, hidden_dim: int = 128,
                  n_layers: int = 2, n_communities: int = 8, dropout: float = 0.1):
+        """Initialize the instance.
+        
+                Args:
+                    in_dim (int): Dimensionality of the in representation.
+                    out_dim (int): Dimensionality of the out representation.
+                    hidden_dim (int): Dimensionality of the hidden representation.
+                    n_layers (int): Number of layers.
+                    n_communities (int): Number of communities.
+                    dropout (float): Dropout probability used for neural-network regularization.
+        
+        Args:
+            in_dim (int): Dimensionality of the in representation."""
         super().__init__()
         self.n_communities = n_communities
         self.hidden_dim = hidden_dim
@@ -41,6 +54,16 @@ class _CytoCommunityNet(nn.Module):
         )
 
     def _encode_nodes(self, batch: Batch) -> torch.Tensor:
+        """Encode nodes.
+        
+                Args:
+                    batch (Batch): Batch of graphs or tensors processed together.
+        
+                Returns:
+                    torch.Tensor: The operation result.
+        
+        Args:
+            batch (Batch): Batch of graphs or tensors processed together."""
         h = F.relu(self.input_projection(batch.x))
         for conv in self.convs:
             h = conv(h, batch.edge_index)
@@ -50,6 +73,18 @@ class _CytoCommunityNet(nn.Module):
 
     def _region_embedding(self, h: torch.Tensor, batch_index: torch.Tensor,
                           n_graphs: int) -> torch.Tensor:
+        """Execute the region embedding operation.
+        
+                Args:
+                    h (torch.Tensor): Node or graph embeddings produced by the neural network.
+                    batch_index (torch.Tensor): Graph membership index for each item in the batch.
+                    n_graphs (int): Number of graphs.
+        
+                Returns:
+                    torch.Tensor: The operation result.
+        
+        Args:
+            h (torch.Tensor): Node or graph embeddings produced by the neural network."""
         global_embedding = global_mean_pool(h, batch_index, size=n_graphs)
         logits = self.assignment(h)
         region_parts = []
@@ -65,6 +100,16 @@ class _CytoCommunityNet(nn.Module):
         return torch.cat([community_embedding, global_embedding], dim=1)
 
     def forward(self, batch: Batch) -> torch.Tensor:
+        """Execute the forward operation.
+        
+                Args:
+                    batch (Batch): Batch of graphs or tensors processed together.
+        
+                Returns:
+                    torch.Tensor: The operation result.
+        
+        Args:
+            batch (Batch): Batch of graphs or tensors processed together."""
         n_graphs = int(batch.num_graphs)
         if batch.x.numel() == 0:
             return self.head(batch.x.new_zeros((n_graphs, (self.n_communities + 1) * self.hidden_dim)))
@@ -74,10 +119,27 @@ class _CytoCommunityNet(nn.Module):
 
 
 class _CytoCommunityBase(RegionModel):
+    """Represent cyto community base."""
     def __init__(self, seed: int = 0, hidden_dim: int = 128, n_layers: int = 2,
                  n_communities: int = 8, lr: float = 1e-3, epochs: int = 75,
                  weight_decay: float = 1e-4, dropout: float = 0.1,
                  batch_size: int = 8, device: str | None = None):
+        """Initialize the instance.
+        
+                Args:
+                    seed (int): Random seed used for reproducibility.
+                    hidden_dim (int): Dimensionality of the hidden representation.
+                    n_layers (int): Number of layers.
+                    n_communities (int): Number of communities.
+                    lr (float): Learning rate used by the optimizer.
+                    epochs (int): Number of epochs epochs.
+                    weight_decay (float): L2 penalty applied by the optimizer.
+                    dropout (float): Dropout probability used for neural-network regularization.
+                    batch_size (int): Size of each batch.
+                    device (str | None): Compute device on which tensors and models are allocated.
+        
+        Args:
+            seed (int): Random seed used to make results reproducible."""
         torch.manual_seed(seed)
         np.random.seed(seed)
         self.seed = seed
@@ -94,9 +156,30 @@ class _CytoCommunityBase(RegionModel):
 
     @staticmethod
     def _graphs(features: pd.DataFrame) -> list:
+        """Execute the graphs operation.
+        
+                Args:
+                    features (pd.DataFrame): Feature values used to fit or evaluate the model.
+        
+                Returns:
+                    list: The operation result.
+        
+        Args:
+            features (pd.DataFrame): Feature values used to fit or evaluate the model."""
         return features["graph"].tolist()
 
     def _initialise(self, graphs: list, out_dim: int):
+        """Execute the initialise operation.
+        
+                Args:
+                    graphs (list): Graph objects used for training or inference.
+                    out_dim (int): Dimensionality of the out representation.
+        
+                Returns:
+                    Any: The operation result.
+        
+        Args:
+            graphs (list): Graph objects used for training or inference."""
         first = next((graph for graph in graphs if graph.x is not None), None)
         in_dim = int(first.num_node_features) if first is not None else 1
         self.net = _CytoCommunityNet(
@@ -109,9 +192,30 @@ class _CytoCommunityBase(RegionModel):
         ).to(self.device)
 
     def _batch(self, graphs: list) -> Batch:
+        """Execute the batch operation.
+        
+                Args:
+                    graphs (list): Graph objects used for training or inference.
+        
+                Returns:
+                    Batch: The operation result.
+        
+        Args:
+            graphs (list): Graph objects used for training or inference."""
         return Batch.from_data_list(graphs).to(self.device)
 
     def _loader(self, graphs: list, shuffle: bool = False) -> DataLoader:
+        """Execute the loader operation.
+        
+                Args:
+                    graphs (list): Graph objects used for training or inference.
+                    shuffle (bool): Whether to shuffle samples during training.
+        
+                Returns:
+                    DataLoader: The operation result.
+        
+        Args:
+            graphs (list): Graph objects used for training or inference."""
         return DataLoader(
             graphs,
             batch_size=min(self.batch_size, max(1, len(graphs))),
@@ -119,18 +223,45 @@ class _CytoCommunityBase(RegionModel):
         )
 
     def _optimizer(self):
+        """Execute the optimizer operation.
+
+        Returns:
+            Any: The operation result."""
         return torch.optim.Adam(self.net.parameters(), lr=self.lr, weight_decay=self.weight_decay)
 
     @staticmethod
     def _check_finite(name: str, tensor: torch.Tensor):
+        """Check finite.
+        
+                Args:
+                    name (str): Registered name used to identify the object.
+                    tensor (torch.Tensor): Tensor to move, cast, or otherwise transform.
+        
+                Returns:
+                    Any: The operation result.
+        
+        Args:
+            name (str): Registered name used to identify the object."""
         if os.environ.get("BENCHMARK_RAISE_ERRORS") and not torch.isfinite(tensor).all():
             raise FloatingPointError(f"Cyto-Community produced non-finite {name}")
 
 
 class CytoCommunityClassifier(_CytoCommunityBase):
+    """Represent cyto community classifier."""
     task_type = "binary"
 
     def fit(self, features: pd.DataFrame, target: pd.Series) -> "CytoCommunityClassifier":
+        """Fit.
+        
+                Args:
+                    features (pd.DataFrame): Feature values used to fit or evaluate the model.
+                    target (pd.Series): Target labels or outcomes associated with the samples.
+        
+                Returns:
+                    'CytoCommunityClassifier': The operation result.
+        
+        Args:
+            features (pd.DataFrame): Feature values used to fit or evaluate the model."""
         graphs = self._graphs(features.loc[list(target.index)])
         self.classes_ = np.sort(target.unique())
         class_to_int = {label: i for i, label in enumerate(self.classes_)}
@@ -153,6 +284,16 @@ class CytoCommunityClassifier(_CytoCommunityBase):
         return self
 
     def predict(self, features: pd.DataFrame) -> np.ndarray:
+        """Predict.
+        
+                Args:
+                    features (pd.DataFrame): Feature values used to fit or evaluate the model.
+        
+                Returns:
+                    np.ndarray: The operation result.
+        
+        Args:
+            features (pd.DataFrame): Feature values used to fit or evaluate the model."""
         self.net.eval()
         graphs = self._graphs(features)
         outputs = []
@@ -166,10 +307,23 @@ class CytoCommunityClassifier(_CytoCommunityBase):
 
 
 class CytoCommunityCox(_CytoCommunityBase):
+    """Represent cyto community cox."""
     task_type = "survival"
 
     @staticmethod
     def _breslow_loss(risk, time, event):
+        """Execute the breslow loss operation.
+        
+                Args:
+                    risk (Any): Predicted risk scores for survival samples.
+                    time (Any): Observed survival or follow-up times.
+                    event (Any): Event indicators for survival outcomes.
+        
+                Returns:
+                    Any: The operation result.
+        
+        Args:
+            risk (Any): Predicted risk scores for survival samples."""
         loss = risk.new_tensor(0.0)
         n_events = event.sum().clamp(min=1.0)
         for event_time in torch.unique(time[event > 0]):
@@ -179,6 +333,17 @@ class CytoCommunityCox(_CytoCommunityBase):
         return loss / n_events
 
     def fit(self, features: pd.DataFrame, target: pd.DataFrame) -> "CytoCommunityCox":
+        """Fit.
+        
+                Args:
+                    features (pd.DataFrame): Feature values used to fit or evaluate the model.
+                    target (pd.DataFrame): Target labels or outcomes associated with the samples.
+        
+                Returns:
+                    'CytoCommunityCox': The operation result.
+        
+        Args:
+            features (pd.DataFrame): Feature values used to fit or evaluate the model."""
         graphs = self._graphs(features.loc[list(target.index)])
         self._initialise(graphs, 1)
         time = torch.tensor(target["time"].to_numpy(), dtype=torch.float32, device=self.device)
@@ -201,6 +366,16 @@ class CytoCommunityCox(_CytoCommunityBase):
         return self
 
     def predict(self, features: pd.DataFrame) -> np.ndarray:
+        """Predict.
+        
+                Args:
+                    features (pd.DataFrame): Feature values used to fit or evaluate the model.
+        
+                Returns:
+                    np.ndarray: The operation result.
+        
+        Args:
+            features (pd.DataFrame): Feature values used to fit or evaluate the model."""
         self.net.eval()
         graphs = self._graphs(features)
         risks = []

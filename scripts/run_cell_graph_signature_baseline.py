@@ -32,6 +32,7 @@ except ModuleNotFoundError as exc:
 
 
 def check_runtime_deps() -> None:
+    """Check runtime deps."""
     missing = [
         name for name in ("torch", "torch_geometric", "sklearn", "lifelines")
         if importlib.util.find_spec(name) is None
@@ -41,15 +42,42 @@ def check_runtime_deps() -> None:
 
 
 def model_factory(task_cfg, seed):
+    """Execute the model factory operation.
+    
+        Args:
+            task_cfg (Any): Configuration mapping for the current prediction task.
+            seed (Any): Random seed used for reproducibility.
+    
+        Returns:
+            Any: The operation result.
+    
+    Args:
+        task_cfg (Any): Configuration mapping for the current prediction task."""
     cls = CellGraphSignatureCox if task_cfg["type"] == "survival" else CellGraphSignatureClassifier
     return cls(seed=seed)
 
 
 def _builder():
+    """Execute the builder operation.
+
+    Returns:
+        Any: The operation result."""
     return CellGraphSignatureBuilder(graph_size=100, radius_um=20.0)
 
 
 def run(dataset_names, seeds, data_root=None) -> pd.DataFrame:
+    """Run.
+    
+        Args:
+            dataset_names (Any): Names of datasets to process.
+            seeds (Any): Random seeds used for repeated benchmark runs.
+            data_root (Any): Root directory containing data.
+    
+        Returns:
+            pd.DataFrame: The operation result.
+    
+    Args:
+        dataset_names (Any): Names of datasets to process."""
     rows = []
     for name in dataset_names:
         ds = load_dataset(name, data_root=data_root)
@@ -87,6 +115,7 @@ def run(dataset_names, seeds, data_root=None) -> pd.DataFrame:
 
 
 def main() -> None:
+    """Execute the main operation."""
     check_runtime_deps()
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--datasets", nargs="*", default=None)

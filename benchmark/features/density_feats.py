@@ -40,11 +40,28 @@ class CellTypeDensityFeaturizer(BaseFeatureExtractor):
     """
 
     def __init__(self, cell_type_col: str = "cell_type") -> None:
+        """Initialize the instance.
+        
+                Args:
+                    cell_type_col (str): Name of the column containing cell type.
+        
+        Args:
+            cell_type_col (str): Name of the column containing cell type."""
         self.cell_type_col = cell_type_col
         self.cell_types_: list[str] = []
 
     # -- vocabulary -------------------------------------------------------
     def _col(self, region: RegionData) -> str | None:
+        """Execute the col operation.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+        
+                Returns:
+                    str | None: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         if self.cell_type_col in region.cell_types.columns:
             return self.cell_type_col
         if "cell_type" in region.cell_types.columns:
@@ -52,6 +69,16 @@ class CellTypeDensityFeaturizer(BaseFeatureExtractor):
         return None
 
     def fit(self, regions: list[RegionData]) -> "CellTypeDensityFeaturizer":
+        """Fit.
+        
+                Args:
+                    regions (list[RegionData]): Tissue regions used for fitting or feature extraction.
+        
+                Returns:
+                    'CellTypeDensityFeaturizer': The operation result.
+        
+        Args:
+            regions (list[RegionData]): Tissue regions used for fitting or feature extraction."""
         types: set[str] = set()
         for r in regions:
             col = self._col(r)
@@ -63,6 +90,10 @@ class CellTypeDensityFeaturizer(BaseFeatureExtractor):
 
     # -- feature names ----------------------------------------------------
     def feature_names(self) -> list[str]:
+        """Execute the feature names operation.
+
+        Returns:
+            list[str]: The operation result."""
         names = [f"tissue_density::{ct}" for ct in self.cell_types_]
         names.append("tumor_area_ratio")
         names += [f"tumor_density::{ct}" for ct in self.cell_types_]
@@ -71,13 +102,28 @@ class CellTypeDensityFeaturizer(BaseFeatureExtractor):
     # -- extraction -------------------------------------------------------
     def _thousand_per_mm2(self, labels: pd.Series, inside: np.ndarray,
                         area_mm2: float | None) -> dict[str, float]:
-        """{cell_type: density} for cells with ``inside`` True, over the full vocabulary."""
+        """{cell_type: density} for cells with ``inside`` True, over the full vocabulary.
+        
+        Args:
+            labels (pd.Series): Cell-type or class label assigned to each observation.
+            inside (np.ndarray): Boolean mask indicating points inside the target area.
+            area_mm2 (float | None): Area measured in square millimeters."""
         if area_mm2 is None or area_mm2 <= 0 or inside is None:
             return {ct: np.nan for ct in self.cell_types_}
         counts = labels[inside].value_counts()
         return {ct: (float(counts.get(ct, 0)) / 1000) / area_mm2 for ct in self.cell_types_}
 
     def extract_region(self, region: RegionData) -> dict[str, float]:
+        """Extract region.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+        
+                Returns:
+                    dict[str, float]: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         col = self._col(region)
         # labels aligned to the coordinate/mask order
         labels = region.cell_types[col].reindex(region.coordinates.index).astype("object")

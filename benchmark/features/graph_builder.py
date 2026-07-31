@@ -19,10 +19,25 @@ from .base import BaseFeatureExtractor
 
 
 class SpaceGMGraphBuilder(BaseFeatureExtractor):
+    """Represent space g m graph builder."""
     def __init__(self, cell_type_col: str = "cell_type", coord_cols=("x", "y"),
                  cell_size_col: str | None = None, n_hops: int = 3,
                  radius_um: float = 75.0, near_edge_um: float = 20.0,
                  max_centers: int | None = 256, seed: int = 0):
+        """Initialize the instance.
+        
+                Args:
+                    cell_type_col (str): Name of the column containing cell type.
+                    coord_cols (Any): Names of columns containing coord.
+                    cell_size_col (str | None): Name of the column containing cell size.
+                    n_hops (int): Number of hops.
+                    radius_um (float): Radius measured in micrometers.
+                    near_edge_um (float): Near edge measured in micrometers.
+                    max_centers (int | None): Maximum allowed centers.
+                    seed (int): Random seed used for reproducibility.
+        
+        Args:
+            cell_type_col (str): Name of the column containing cell type."""
         self.cell_type_col = cell_type_col
         self.coord_cols = list(coord_cols)
         self.cell_size_col = cell_size_col
@@ -37,6 +52,16 @@ class SpaceGMGraphBuilder(BaseFeatureExtractor):
         self._size_max = 1.0
 
     def fit(self, regions: list[RegionData]) -> "SpaceGMGraphBuilder":
+        """Fit.
+        
+                Args:
+                    regions (list[RegionData]): Tissue regions used for fitting or feature extraction.
+        
+                Returns:
+                    'SpaceGMGraphBuilder': The operation result.
+        
+        Args:
+            regions (list[RegionData]): Tissue regions used for fitting or feature extraction."""
         types: set[str] = set()
         marker_sets = []
         sizes = []
@@ -55,6 +80,16 @@ class SpaceGMGraphBuilder(BaseFeatureExtractor):
         return self
 
     def _cell_type_column(self, region: RegionData) -> str:
+        """Execute the cell type column operation.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+        
+                Returns:
+                    str: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         if self.cell_type_col in region.cell_types.columns:
             return self.cell_type_col
         if "cell_type" in region.cell_types.columns:
@@ -62,6 +97,16 @@ class SpaceGMGraphBuilder(BaseFeatureExtractor):
         raise ValueError(f"Region {region.region_id} has no cell-type column")
 
     def _raw_sizes(self, region: RegionData) -> np.ndarray | None:
+        """Execute the raw sizes operation.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+        
+                Returns:
+                    np.ndarray | None: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         candidates = ([self.cell_size_col] if self.cell_size_col else []) + [
             "cell_size", "cell_area", "area", "size"
         ]
@@ -73,6 +118,17 @@ class SpaceGMGraphBuilder(BaseFeatureExtractor):
         return None
 
     def _scaled_sizes(self, region: RegionData, n: int) -> np.ndarray:
+        """Execute the scaled sizes operation.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+                    n (int): Value controlling or representing n.
+        
+                Returns:
+                    np.ndarray: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         raw = self._raw_sizes(region)
         if raw is None:
             return np.zeros(n, dtype=np.float32)
@@ -82,6 +138,16 @@ class SpaceGMGraphBuilder(BaseFeatureExtractor):
 
     @staticmethod
     def _delaunay_edges(coords: np.ndarray) -> np.ndarray:
+        """Execute the delaunay edges operation.
+        
+                Args:
+                    coords (np.ndarray): Two-dimensional cell-coordinate array.
+        
+                Returns:
+                    np.ndarray: The operation result.
+        
+        Args:
+            coords (np.ndarray): Two-dimensional cell-coordinate array."""
         n = len(coords)
         if n < 2:
             return np.empty((0, 2), dtype=int)
@@ -97,6 +163,17 @@ class SpaceGMGraphBuilder(BaseFeatureExtractor):
             return np.column_stack([order[:-1], order[1:]])
 
     def _hop_neighbourhood(self, center: int, adjacency: list[set[int]]) -> set[int]:
+        """Execute the hop neighbourhood operation.
+        
+                Args:
+                    center (int): Coordinates or index of the center cell.
+                    adjacency (list[set[int]]): Graph adjacency matrix describing connections between cells.
+        
+                Returns:
+                    set[int]: The operation result.
+        
+        Args:
+            center (int): Coordinates or index of the center cell."""
         seen = {center}
         queue = deque([(center, 0)])
         while queue:
@@ -110,6 +187,16 @@ class SpaceGMGraphBuilder(BaseFeatureExtractor):
         return seen
 
     def extract_region(self, region: RegionData) -> dict:
+        """Extract region.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+        
+                Returns:
+                    dict: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         assert self._cell_types is not None, "call fit() before extract_region()"
         coords = region.coordinates_um[self.coord_cols].to_numpy(float)
         n = len(coords)
@@ -174,8 +261,16 @@ class SpaceGMGraphBuilder(BaseFeatureExtractor):
 
     @property
     def n_cell_types(self) -> int:
+        """Execute the n cell types operation.
+
+        Returns:
+            int: The operation result."""
         return len(self._cell_types or [])
 
     @property
     def n_markers(self) -> int:
+        """Execute the n markers operation.
+
+        Returns:
+            int: The operation result."""
         return len(self._markers)

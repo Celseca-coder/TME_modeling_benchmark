@@ -26,10 +26,31 @@ class RegionModel(ABC):
 
     @abstractmethod
     def fit(self, features: pd.DataFrame, target) -> "RegionModel":
+        """Fit.
+        
+                Args:
+                    features (pd.DataFrame): Feature values used to fit or evaluate the model.
+                    target (Any): Target labels or outcomes associated with the samples.
+        
+                Returns:
+                    'RegionModel': The operation result.
+        
+        Args:
+            features (pd.DataFrame): Feature values used to fit or evaluate the model."""
         ...
 
     @abstractmethod
     def predict(self, features: pd.DataFrame) -> np.ndarray:
+        """Predict.
+        
+                Args:
+                    features (pd.DataFrame): Feature values used to fit or evaluate the model.
+        
+                Returns:
+                    np.ndarray: The operation result.
+        
+        Args:
+            features (pd.DataFrame): Feature values used to fit or evaluate the model."""
         ...
 
 
@@ -38,6 +59,16 @@ class _TabularModel(RegionModel):
     zero-variance columns, and standardise on the training statistics."""
 
     def _prep_fit(self, X: pd.DataFrame) -> np.ndarray:
+        """Execute the prep fit operation.
+        
+                Args:
+                    X (pd.DataFrame): Input feature data.
+        
+                Returns:
+                    np.ndarray: The operation result.
+        
+        Args:
+            X (pd.DataFrame): Feature matrix with one row per sample."""
         from sklearn.preprocessing import StandardScaler
         self._median = X.median()
         Xf = X.fillna(self._median)
@@ -49,5 +80,15 @@ class _TabularModel(RegionModel):
         return self._scaler.transform(Xf[self._keep])
 
     def _prep_pred(self, X: pd.DataFrame) -> np.ndarray:
+        """Execute the prep pred operation.
+        
+                Args:
+                    X (pd.DataFrame): Input feature data.
+        
+                Returns:
+                    np.ndarray: The operation result.
+        
+        Args:
+            X (pd.DataFrame): Feature matrix with one row per sample."""
         Xp = X[self._keep].fillna(self._median[self._keep])
         return self._scaler.transform(Xp)

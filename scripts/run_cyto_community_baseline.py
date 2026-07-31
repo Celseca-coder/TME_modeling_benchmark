@@ -35,7 +35,31 @@ except ModuleNotFoundError as exc:
 
 
 def make_model_factory(hidden_dim: int, batch_size: int, epochs: int, device: str):
+    """Create model factory.
+    
+        Args:
+            hidden_dim (int): Dimensionality of the hidden representation.
+            batch_size (int): Size of each batch.
+            epochs (int): Number of epochs epochs.
+            device (str): Compute device on which tensors and models are allocated.
+    
+        Returns:
+            Any: The operation result.
+    
+    Args:
+        hidden_dim (int): Dimensionality of the hidden representation."""
     def model_factory(task_cfg, seed):
+        """Execute the model factory operation.
+        
+                Args:
+                    task_cfg (Any): Configuration mapping for the current prediction task.
+                    seed (Any): Random seed used for reproducibility.
+        
+                Returns:
+                    Any: The operation result.
+        
+        Args:
+            task_cfg (Any): Configuration mapping for the current prediction task."""
         kwargs = dict(
             seed=seed,
             hidden_dim=hidden_dim,
@@ -59,6 +83,23 @@ def run(
     device: str = "cpu",
     max_cells: int = 1024,
 ) -> pd.DataFrame:
+    """Run.
+    
+        Args:
+            dataset_names (Any): Names of datasets to process.
+            seeds (Any): Random seeds used for repeated benchmark runs.
+            data_root (Any): Root directory containing data.
+            hidden_dim (int): Dimensionality of the hidden representation.
+            batch_size (int): Size of each batch.
+            epochs (int): Number of epochs epochs.
+            device (str): Compute device on which tensors and models are allocated.
+            max_cells (int): Maximum allowed cells.
+    
+        Returns:
+            pd.DataFrame: The operation result.
+    
+    Args:
+        dataset_names (Any): Names of datasets to process."""
     model_factory = make_model_factory(hidden_dim, batch_size, epochs, device)
     rows = []
     for name in dataset_names:
@@ -97,6 +138,10 @@ def run(
 
 
 def main():
+    """Execute the main operation.
+
+    Returns:
+        Any: The operation result."""
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--datasets", nargs="*", default=None)

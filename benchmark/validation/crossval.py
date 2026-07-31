@@ -19,17 +19,38 @@ Featurizer = Any
 
 
 def _progress(message: str) -> None:
+    """Execute the progress operation.
+    
+        Args:
+            message (str): Error or status message to report.
+    
+    Args:
+        message (str): Error or status message to report."""
     if os.environ.get("BENCHMARK_PROGRESS"):
         print(message, flush=True)
 
 
 def _resolve_featurizer(featurizer: Featurizer, train_regions: list):
     """Return a ready-to-``transform`` featurizer: call+fit a factory, or use a
-    pre-specified instance unchanged."""
+        pre-specified instance unchanged.
+    
+    Args:
+        featurizer (Featurizer): Feature extractor applied to each region.
+        train_regions (list): Regions available for fitting the feature extractor."""
     return featurizer().fit(train_regions) if callable(featurizer) else featurizer
 
 
 def _nan_metrics(task_type: str) -> dict[str, float]:
+    """Execute the nan metrics operation.
+    
+        Args:
+            task_type (str): Prediction task category, such as classification or survival.
+    
+        Returns:
+            dict[str, float]: The operation result.
+    
+    Args:
+        task_type (str): Prediction task category, such as classification or survival."""
     if task_type == "survival":
         return {"c_index": float("nan")}
     if task_type in ("binary", "binary_classification"):
@@ -51,27 +72,37 @@ def cross_validate(
     normalize: bool = True,
 ) -> list[dict]:
     """Run patient-level K-fold cross-validation; return one metric dict per fold.
-
-    Generic over the featurizer and model — it only needs:
-
-    * ``featurizer`` -> an extractor with ``fit(regions).transform(regions) ->
-      DataFrame indexed by region_id`` (e.g. ``benchmark.features.basic_feats``).
-      Pass either a **factory** (callable) — re-created and fit on each *training*
-      fold so the feature vocabulary never leaks from val — or a **pre-fitted /
-      stateless instance**, which is used as-is on every fold.
-    * ``model_factory(task_cfg, seed)`` -> a model with ``fit(features, target)`` and
-      ``predict(features)`` (e.g. ``benchmark.models``). Re-created per fold.
-
-    Splitting is at the **patient** level (no patient crosses train/val); every region
-    is an independent sample and metrics are computed over regions. The whole run is
-    repeated once per entry of ``seeds`` (each a fresh CV partition). Folds where the
-    model cannot be fit (e.g. a single class in the training split) yield NaN metrics
-    so the run continues.
-
-    ``n_folds`` / ``patient_col`` / ``cv_filter`` default to the dataset's
-    ``validation`` config. Each returned dict holds the metric values plus
-    ``seed``, ``fold``, ``n_train``, ``n_val``.
-    """
+    
+        Generic over the featurizer and model — it only needs:
+    
+        * ``featurizer`` -> an extractor with ``fit(regions).transform(regions) ->
+          DataFrame indexed by region_id`` (e.g. ``benchmark.features.basic_feats``).
+          Pass either a **factory** (callable) — re-created and fit on each *training*
+          fold so the feature vocabulary never leaks from val — or a **pre-fitted /
+          stateless instance**, which is used as-is on every fold.
+        * ``model_factory(task_cfg, seed)`` -> a model with ``fit(features, target)`` and
+          ``predict(features)`` (e.g. ``benchmark.models``). Re-created per fold.
+    
+        Splitting is at the **patient** level (no patient crosses train/val); every region
+        is an independent sample and metrics are computed over regions. The whole run is
+        repeated once per entry of ``seeds`` (each a fresh CV partition). Folds where the
+        model cannot be fit (e.g. a single class in the training split) yield NaN metrics
+        so the run continues.
+    
+        ``n_folds`` / ``patient_col`` / ``cv_filter`` default to the dataset's
+        ``validation`` config. Each returned dict holds the metric values plus
+        ``seed``, ``fold``, ``n_train``, ``n_val``.
+    
+    Args:
+        dataset (Any): Dataset name used to filter benchmark records.
+        task_id (str): Unique identifier of the benchmark task.
+        featurizer (Featurizer): Feature extractor applied to each region.
+        model_factory (Callable[[dict, int], object]): Callable that creates a fresh model for each fold.
+        seeds (Sequence[int]): Random seeds used for repeated benchmark runs.
+        n_folds (int | None): Number of folds.
+        patient_col (str | None): Name of the column containing patient.
+        cv_filter (str | None): Optional predicate selecting tasks for cross-validation.
+        normalize (bool): Whether to normalize feature values before modeling."""
     vcfg = dataset.validation_config
     n_folds = n_folds or vcfg.get("n_folds", 5)
     patient_col = patient_col or vcfg.get("patient_col", "patient_id")
@@ -132,21 +163,29 @@ def cohort_split_test(
     normalize: bool = True,
 ) -> list[dict]:
     """Train on the train cohort(s), evaluate on the held-out test cohort(s).
-
-    ``gentest`` is one entry of the dataset's ``validation.generalization_tests``
-    (a dict with ``train`` / ``test`` cohort lists, e.g. ``{"train": ["UPMC_HNC"],
-    "test": ["DFCI_HNC"], ...}``). The data split is fixed; ``seeds`` only re-seed the
-    model (so a deterministic model gives identical rows).
-
-    Same ``featurizer`` / ``model_factory`` contract as :func:`cross_validate`. A
-    featurizer **factory** is fit on the train cohort (so the feature space is the
-    train cohort's — bake any cross-cohort column, e.g.
-    ``cell_type_col=gentest["cell_type_col"]``, into it); a **pre-fitted instance** is
-    used as-is.
-
-    Returns one metric dict per seed (with ``seed`` / ``n_train`` / ``n_test``), or
-    ``[]`` if either cohort has no labelled regions for the task.
-    """
+    
+        ``gentest`` is one entry of the dataset's ``validation.generalization_tests``
+        (a dict with ``train`` / ``test`` cohort lists, e.g. ``{"train": ["UPMC_HNC"],
+        "test": ["DFCI_HNC"], ...}``). The data split is fixed; ``seeds`` only re-seed the
+        model (so a deterministic model gives identical rows).
+    
+        Same ``featurizer`` / ``model_factory`` contract as :func:`cross_validate`. A
+        featurizer **factory** is fit on the train cohort (so the feature space is the
+        train cohort's — bake any cross-cohort column, e.g.
+        ``cell_type_col=gentest["cell_type_col"]``, into it); a **pre-fitted instance** is
+        used as-is.
+    
+        Returns one metric dict per seed (with ``seed`` / ``n_train`` / ``n_test``), or
+        ``[]`` if either cohort has no labelled regions for the task.
+    
+    Args:
+        dataset (Any): Dataset name used to filter benchmark records.
+        task_id (str): Unique identifier of the benchmark task.
+        gentest (dict): Boolean mask identifying the held-out generalization set.
+        featurizer (Featurizer): Feature extractor applied to each region.
+        model_factory (Callable[[dict, int], object]): Callable that creates a fresh model for each fold.
+        seeds (Sequence[int]): Random seeds used for repeated benchmark runs.
+        normalize (bool): Whether to normalize feature values before modeling."""
     cohort_col = dataset.validation_config["cohort_col"]
     task_cfg = dataset.get_task_config(task_id)
     meta = dataset.get_task_metadata(task_id)

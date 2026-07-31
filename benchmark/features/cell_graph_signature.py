@@ -28,6 +28,14 @@ class CellGraphSignatureBuilder(BaseFeatureExtractor):
     """
 
     def __init__(self, graph_size: int = 100, radius_um: float = 20.0):
+        """Initialize the instance.
+        
+                Args:
+                    graph_size (int): Number of nodes retained in each cell graph.
+                    radius_um (float): Radius measured in micrometers.
+        
+        Args:
+            graph_size (int): Number of nodes retained in each cell graph."""
         if graph_size < 1:
             raise ValueError("graph_size must be at least 1")
         if radius_um <= 0:
@@ -38,6 +46,16 @@ class CellGraphSignatureBuilder(BaseFeatureExtractor):
         self._scale: np.ndarray | None = None
 
     def fit(self, regions: list[RegionData]) -> "CellGraphSignatureBuilder":
+        """Fit.
+        
+                Args:
+                    regions (list[RegionData]): Tissue regions used for fitting or feature extraction.
+        
+                Returns:
+                    'CellGraphSignatureBuilder': The operation result.
+        
+        Args:
+            regions (list[RegionData]): Tissue regions used for fitting or feature extraction."""
         marker_sets = [set(region.expression.columns) for region in regions]
         self._markers = sorted(set.intersection(*marker_sets)) if marker_sets else []
         if not self._markers:
@@ -53,6 +71,16 @@ class CellGraphSignatureBuilder(BaseFeatureExtractor):
         return self
 
     def extract_region(self, region: RegionData) -> dict[str, list[Data]]:
+        """Extract region.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+        
+                Returns:
+                    dict[str, list[Data]]: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         if self._markers is None or self._scale is None:
             raise RuntimeError("call fit() before extract_region()")
 
@@ -101,6 +129,10 @@ class CellGraphSignatureBuilder(BaseFeatureExtractor):
 
     @property
     def n_markers(self) -> int:
+        """Execute the n markers operation.
+
+        Returns:
+            int: The operation result."""
         return len(self._markers or [])
 
     @property

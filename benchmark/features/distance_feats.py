@@ -1,3 +1,5 @@
+"""Provide distance feats functionality."""
+
 # """Distance-based features: min/mean spatial distance between cell-type pairs."""
 # from __future__ import annotations
 

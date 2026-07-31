@@ -51,6 +51,20 @@ class PatchBasedFeaturizer(BaseFeatureExtractor):
         use_tissue_mask: bool = True,
         min_cells_per_window: int = 1,
     ) -> None:
+        """Initialize the instance.
+        
+                Args:
+                    window_size_um (float): Window size measured in micrometers.
+                    step_um (float | None): Step measured in micrometers.
+                    feature_type (str): Patch feature family to calculate.
+                    cell_type_col (str): Name of the column containing cell type.
+                    aggregations (tuple[str, ...]): Summary operations computed for each spatial window.
+                    quantiles (tuple[float, ...]): Quantile levels calculated for each feature distribution.
+                    use_tissue_mask (bool): Whether to use tissue mask during processing.
+                    min_cells_per_window (int): Minimum required cells per window.
+        
+        Args:
+            window_size_um (float): Window size measured in micrometers."""
         self.window_size = window_size_um
         self.step = step_um if step_um is not None else window_size_um
         self.feature_type = feature_type
@@ -63,6 +77,16 @@ class PatchBasedFeaturizer(BaseFeatureExtractor):
 
     # -- vocabulary -------------------------------------------------------
     def _get_vocab(self, region: RegionData) -> list[str]:
+        """Return vocab.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+        
+                Returns:
+                    list[str]: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         if self.feature_type == "composition":
             col = self._col(region)
             if col is None:
@@ -72,6 +96,16 @@ class PatchBasedFeaturizer(BaseFeatureExtractor):
             return sorted(region.expression.columns.tolist())
 
     def _col(self, region: RegionData) -> str | None:
+        """Execute the col operation.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+        
+                Returns:
+                    str | None: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         if self.cell_type_col in region.cell_types.columns:
             return self.cell_type_col
         if "cell_type" in region.cell_types.columns:
@@ -80,6 +114,16 @@ class PatchBasedFeaturizer(BaseFeatureExtractor):
 
     def fit(self, regions: list[RegionData]) -> "PatchBasedFeaturizer":
         # Collect vocabulary from all training regions
+        """Fit.
+        
+                Args:
+                    regions (list[RegionData]): Tissue regions used for fitting or feature extraction.
+        
+                Returns:
+                    'PatchBasedFeaturizer': The operation result.
+        
+        Args:
+            regions (list[RegionData]): Tissue regions used for fitting or feature extraction."""
         vocab_set = set()
         for r in regions:
             vocab_set.update(self._get_vocab(r))
@@ -88,6 +132,10 @@ class PatchBasedFeaturizer(BaseFeatureExtractor):
 
     # -- feature names ----------------------------------------------------
     def feature_names(self) -> list[str]:
+        """Execute the feature names operation.
+
+        Returns:
+            list[str]: The operation result."""
         names = []
         for agg in self.aggregations:
             if agg == "quantile":
@@ -101,7 +149,10 @@ class PatchBasedFeaturizer(BaseFeatureExtractor):
 
     # -- window generation ------------------------------------------------
     def _get_windows(self, region: RegionData) -> list[tuple[float, float, float, float]]:
-        """Return list of (xmin, ymin, xmax, ymax) for each window."""
+        """Return list of (xmin, ymin, xmax, ymax) for each window.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         coords = region.coordinates[["x", "y"]].to_numpy(float)
         if len(coords) == 0:
             return []
@@ -128,6 +179,17 @@ class PatchBasedFeaturizer(BaseFeatureExtractor):
 
     # -- extract per-window feature vector -------------------------------
     def _window_feature(self, region: RegionData, win: tuple) -> np.ndarray | None:
+        """Execute the window feature operation.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+                    win (tuple): Coordinates or contents of the current spatial window.
+        
+                Returns:
+                    np.ndarray | None: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         xmin, ymin, xmax, ymax = win
         coords = region.coordinates[["x", "y"]].to_numpy(float)
         # Find cells inside window
@@ -174,6 +236,16 @@ class PatchBasedFeaturizer(BaseFeatureExtractor):
 
     # -- extraction -------------------------------------------------------
     def extract_region(self, region: RegionData) -> dict[str, float]:
+        """Extract region.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+        
+                Returns:
+                    dict[str, float]: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         windows = self._get_windows(region)
         if not windows:
             return {name: np.nan for name in self.feature_names()}

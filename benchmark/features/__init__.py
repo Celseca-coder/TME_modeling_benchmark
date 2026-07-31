@@ -1,3 +1,5 @@
+"""Expose the features package API."""
+
 from .basic_feats import CompositionFeaturizer, MeanExpressionFeaturizer
 # from .distance_feats import CrossTypeDistanceFeatures
 # from .proximity_feats import ProximityFeatures

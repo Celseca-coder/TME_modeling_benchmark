@@ -49,6 +49,19 @@ class PointPatternFeaturizer(BaseFeatureExtractor):
         edge_correction: bool = False,
         pcf_bandwidth: float | None = None,
     ) -> None:
+        """Initialize the instance.
+        
+                Args:
+                    radii (list[float] | None): Value controlling or representing radii.
+                    metrics (tuple[str, ...]): Spatial statistics to calculate.
+                    by_type (bool): Whether to compute statistics separately for each cell type.
+                    cell_type_col (str): Name of the column containing cell type.
+                    use_tissue_mask (bool): Whether to use tissue mask during processing.
+                    edge_correction (bool): Value controlling or representing edge correction.
+                    pcf_bandwidth (float | None): Value controlling or representing pcf bandwidth.
+        
+        Args:
+            radii (list[float] | None): Value controlling or representing radii."""
         self.radii = radii if radii is not None else [10, 20, 50, 100, 200]
         self.metrics = metrics
         self.by_type = by_type
@@ -60,6 +73,16 @@ class PointPatternFeaturizer(BaseFeatureExtractor):
 
     # -- vocabulary (needed only if by_type) ------------------------------
     def _col(self, region: RegionData) -> str | None:
+        """Execute the col operation.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+        
+                Returns:
+                    str | None: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         if self.cell_type_col in region.cell_types.columns:
             return self.cell_type_col
         if "cell_type" in region.cell_types.columns:
@@ -67,6 +90,16 @@ class PointPatternFeaturizer(BaseFeatureExtractor):
         return None
 
     def fit(self, regions: list[RegionData]) -> "PointPatternFeaturizer":
+        """Fit.
+        
+                Args:
+                    regions (list[RegionData]): Tissue regions used for fitting or feature extraction.
+        
+                Returns:
+                    'PointPatternFeaturizer': The operation result.
+        
+        Args:
+            regions (list[RegionData]): Tissue regions used for fitting or feature extraction."""
         if self.by_type:
             types: set[str] = set()
             for r in regions:
@@ -81,7 +114,11 @@ class PointPatternFeaturizer(BaseFeatureExtractor):
 
     # -- helper: area ----------------------------------------------------
     def _get_area_um2(self, region: RegionData, coords: np.ndarray) -> float | None:
-        """Return area in mm²: use tissue area if available, else convex hull, else bounding box."""
+        """Return area in mm²: use tissue area if available, else convex hull, else bounding box.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed.
+            coords (np.ndarray): Two-dimensional cell-coordinate array."""
         if region.tissue_area_mm2 is not None and region.tissue_area_mm2 > 0:
             return region.tissue_area_mm2 * 1e6
         if len(coords) >= 3:
@@ -104,7 +141,12 @@ class PointPatternFeaturizer(BaseFeatureExtractor):
         area_um2: float,
         radii: list[float],
     ) -> dict[str, float]:
-        """Compute K(r) and L(r). Returns dict with keys like 'K_r10'."""
+        """Compute K(r) and L(r). Returns dict with keys like 'K_r10'.
+        
+        Args:
+            coords (np.ndarray): Two-dimensional cell-coordinate array.
+            area_um2 (float): Area measured in square micrometers.
+            radii (list[float]): Value controlling or representing radii."""
         n = len(coords)
         if n < 2 or area_um2 is None or area_um2 <= 0:
             return {f"{metric}_r{r}": np.nan for metric in self.metrics for r in radii}
@@ -132,7 +174,13 @@ class PointPatternFeaturizer(BaseFeatureExtractor):
         radii: list[float],
         bandwidth: float | None = None,
     ) -> dict[str, float]:
-        """Estimate g(r) using kernel smoothing of interpoint distances."""
+        """Estimate g(r) using kernel smoothing of interpoint distances.
+        
+        Args:
+            coords (np.ndarray): Two-dimensional cell-coordinate array.
+            area_um2 (float): Area measured in square micrometers.
+            radii (list[float]): Value controlling or representing radii.
+            bandwidth (float | None): Kernel bandwidth used by the spatial estimator."""
         n = len(coords)
         if n < 2 or area_um2 is None or area_um2 <= 0:
             return {f"pcf_r{r}": np.nan for r in radii}
@@ -175,7 +223,11 @@ class PointPatternFeaturizer(BaseFeatureExtractor):
         coords: np.ndarray,
         radii: list[float],
     ) -> dict[str, float]:
-        """Compute semi-variogram: 0.5 * mean squared difference in coordinates."""
+        """Compute semi-variogram: 0.5 * mean squared difference in coordinates.
+        
+        Args:
+            coords (np.ndarray): Two-dimensional cell-coordinate array.
+            radii (list[float]): Value controlling or representing radii."""
         n = len(coords)
         if n < 2:
             return {f"variogram_r{r}": np.nan for r in radii}
@@ -208,6 +260,16 @@ class PointPatternFeaturizer(BaseFeatureExtractor):
 
     # -- extraction -------------------------------------------------------
     def extract_region(self, region: RegionData) -> dict[str, float]:
+        """Extract region.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+        
+                Returns:
+                    dict[str, float]: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         raw_coords = region.coordinates[["x", "y"]].to_numpy(float)
         coords = region.coordinates_um[["x", "y"]].to_numpy(float)
         if len(coords) == 0:
@@ -253,7 +315,12 @@ class PointPatternFeaturizer(BaseFeatureExtractor):
         area_um2: float,
         radii: list[float],
     ) -> dict[str, float]:
-        """Compute all requested metrics and combine into one dict."""
+        """Compute all requested metrics and combine into one dict.
+        
+        Args:
+            coords (np.ndarray): Two-dimensional cell-coordinate array.
+            area_um2 (float): Area measured in square micrometers.
+            radii (list[float]): Value controlling or representing radii."""
         features = {}
         if "K" in self.metrics or "L" in self.metrics:
             features.update(self._compute_ripley(coords, area_um2, radii))

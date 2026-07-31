@@ -41,10 +41,33 @@ from benchmark.validation import (  # noqa: E402
 
 
 def model_factory(task_cfg, seed):
+    """Execute the model factory operation.
+    
+        Args:
+            task_cfg (Any): Configuration mapping for the current prediction task.
+            seed (Any): Random seed used for reproducibility.
+    
+        Returns:
+            Any: The operation result.
+    
+    Args:
+        task_cfg (Any): Configuration mapping for the current prediction task."""
     return LinearCox(seed=seed) if task_cfg["type"] == "survival" else LinearClassifier(seed=seed)
 
 
 def run(dataset_names, seeds,data_root=None) -> pd.DataFrame:
+    """Run.
+    
+        Args:
+            dataset_names (Any): Names of datasets to process.
+            seeds (Any): Random seeds used for repeated benchmark runs.
+            data_root (Any): Root directory containing data.
+    
+        Returns:
+            pd.DataFrame: The operation result.
+    
+    Args:
+        dataset_names (Any): Names of datasets to process."""
     dens = lambda: CellTypeDensityFeaturizer()      # CV: fine cell_type, fit per fold
     rows = []
     for name in dataset_names:
@@ -78,6 +101,10 @@ def run(dataset_names, seeds,data_root=None) -> pd.DataFrame:
 
 
 def main():
+    """Execute the main operation.
+
+    Returns:
+        Any: The operation result."""
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--datasets", nargs="*", default=None)

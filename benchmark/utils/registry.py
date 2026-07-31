@@ -18,15 +18,18 @@ def list_datasets() -> list[str]:
 
 def load_dataset(name: str, data_root: str | Path | None = None) -> TMEDataset:
     """Load a TMEDataset by its config filename stem.
-
-    Parameters
-    ----------
-    name : str
-        Config stem, e.g. ``'bc_metabric_ali2020'`` or ``'nsclc_aung2025'``.
-    data_root : path
-        Root folder containing dataset directories (e.g. BC-METABRIC_Ali2020/).
-        Defaults to the parent of the ``code/`` folder (i.e. TME_benchmark/).
-    """
+    
+        Parameters
+        ----------
+        name : str
+            Config stem, e.g. ``'bc_metabric_ali2020'`` or ``'nsclc_aung2025'``.
+        data_root : path
+            Root folder containing dataset directories (e.g. BC-METABRIC_Ali2020/).
+            Defaults to the parent of the ``code/`` folder (i.e. TME_benchmark/).
+    
+    Args:
+        name (str): Registered name used to identify the object.
+        data_root (str | Path | None): Root directory containing data."""
     yaml_path = _CONFIGS_DIR / f"{name}.yaml"
     if not yaml_path.exists():
         available = list_datasets()
@@ -39,5 +42,8 @@ def load_dataset(name: str, data_root: str | Path | None = None) -> TMEDataset:
 
 
 def load_all_datasets(data_root: str | Path | None = None) -> dict[str, TMEDataset]:
-    """Load all available datasets, returning a dict keyed by config name."""
+    """Load all available datasets, returning a dict keyed by config name.
+    
+    Args:
+        data_root (str | Path | None): Root directory containing data."""
     return {name: load_dataset(name, data_root) for name in list_datasets()}

@@ -39,6 +39,17 @@ class MixingFeaturizer(BaseFeatureExtractor):
         include_local_mixing: bool = True,
         use_tissue_mask: bool = True,
     ) -> None:
+        """Initialize the instance.
+        
+                Args:
+                    cell_type_col (str): Name of the column containing cell type.
+                    k_neighbors (int): Value controlling or representing k neighbors.
+                    include_global_entropy (bool): Whether to include global entropy in the output.
+                    include_local_mixing (bool): Whether to include local mixing in the output.
+                    use_tissue_mask (bool): Whether to use tissue mask during processing.
+        
+        Args:
+            cell_type_col (str): Name of the column containing cell type."""
         self.cell_type_col = cell_type_col
         self.k_neighbors = k_neighbors
         self.include_global_entropy = include_global_entropy
@@ -48,6 +59,16 @@ class MixingFeaturizer(BaseFeatureExtractor):
 
     # -- vocabulary -------------------------------------------------------
     def _col(self, region: RegionData) -> str | None:
+        """Execute the col operation.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+        
+                Returns:
+                    str | None: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         if self.cell_type_col in region.cell_types.columns:
             return self.cell_type_col
         if "cell_type" in region.cell_types.columns:
@@ -55,6 +76,16 @@ class MixingFeaturizer(BaseFeatureExtractor):
         return None
 
     def fit(self, regions: list[RegionData]) -> "MixingFeaturizer":
+        """Fit.
+        
+                Args:
+                    regions (list[RegionData]): Tissue regions used for fitting or feature extraction.
+        
+                Returns:
+                    'MixingFeaturizer': The operation result.
+        
+        Args:
+            regions (list[RegionData]): Tissue regions used for fitting or feature extraction."""
         types: set[str] = set()
         for r in regions:
             col = self._col(r)
@@ -66,7 +97,10 @@ class MixingFeaturizer(BaseFeatureExtractor):
 
     # -- helper ----------------------------------------------------------
     def _compute_global_entropy(self, labels: pd.Series) -> float:
-        """Shannon entropy based on cell type proportions."""
+        """Shannon entropy based on cell type proportions.
+        
+        Args:
+            labels (pd.Series): Cell-type or class label assigned to each observation."""
         proportions = labels.value_counts(normalize=True)
         # Avoid log(0)
         proportions = proportions[proportions > 0]
@@ -74,7 +108,10 @@ class MixingFeaturizer(BaseFeatureExtractor):
         return float(entropy) if not np.isnan(entropy) else np.nan
 
     def _compute_normalized_entropy(self, labels: pd.Series) -> float:
-        """Shannon entropy scaled to [0, 1] for the observed type count."""
+        """Shannon entropy scaled to [0, 1] for the observed type count.
+        
+        Args:
+            labels (pd.Series): Cell-type or class label assigned to each observation."""
         n_types = labels.nunique()
         if n_types < 2:
             return 0.0 if n_types == 1 else np.nan
@@ -86,7 +123,12 @@ class MixingFeaturizer(BaseFeatureExtractor):
         labels: pd.Series,
         k: int,
     ) -> dict[str, float]:
-        """Compute local mixing scores and aggregate."""
+        """Compute local mixing scores and aggregate.
+        
+        Args:
+            coords (np.ndarray): Two-dimensional cell-coordinate array.
+            labels (pd.Series): Cell-type or class label assigned to each observation.
+            k (int): Number of nearest neighbors considered."""
         n = len(coords)
         if n < 2 or k < 1:
             return {"local_mixing_mean": np.nan, "local_mixing_std": np.nan,
@@ -134,6 +176,10 @@ class MixingFeaturizer(BaseFeatureExtractor):
 
     # -- feature names ------------------------------------------------
     def feature_names(self) -> list[str]:
+        """Execute the feature names operation.
+
+        Returns:
+            list[str]: The operation result."""
         names = []
         if self.include_global_entropy:
             names.extend(["shannon_entropy_global", "shannon_entropy_normalized"])
@@ -148,6 +194,16 @@ class MixingFeaturizer(BaseFeatureExtractor):
 
     # -- extraction -------------------------------------------------------
     def extract_region(self, region: RegionData) -> dict[str, float]:
+        """Extract region.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+        
+                Returns:
+                    dict[str, float]: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         col = self._col(region)
         if col is None:
             return {name: np.nan for name in self.feature_names()}
