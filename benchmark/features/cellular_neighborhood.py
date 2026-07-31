@@ -28,6 +28,7 @@ class CellularNeighborhoodFeaturizer(BaseFeatureExtractor):
         radius_um: float | None = None,
         max_cells_per_fit_region: int = 2000,
         random_state: int = 0,
+        include_cn_celltype_content: bool = True,
     ) -> None:
         """Initialize the instance.
         
@@ -39,6 +40,9 @@ class CellularNeighborhoodFeaturizer(BaseFeatureExtractor):
                     radius_um (float | None): Radius measured in micrometers.
                     max_cells_per_fit_region (int): Maximum allowed cells per fit region.
                     random_state (int): Random state used for reproducibility.
+                    include_cn_celltype_content (bool): Whether to include the
+                        within-CN cell-type composition features. When False,
+                        only CN abundance features are returned.
         
         Args:
             cell_type_col (str): Name of the column containing cell type."""
@@ -49,6 +53,7 @@ class CellularNeighborhoodFeaturizer(BaseFeatureExtractor):
         self.radius_um = radius_um
         self.max_cells_per_fit_region = max_cells_per_fit_region
         self.random_state = random_state
+        self.include_cn_celltype_content = include_cn_celltype_content
         self.cell_types_: list[str] = []
         self.kmeans_: KMeans | None = None
 
@@ -251,9 +256,10 @@ class CellularNeighborhoodFeaturizer(BaseFeatureExtractor):
             list[str]: The operation result."""
         assert self.kmeans_ is not None, "call fit() before feature_names()"
         names = [f"cn_fraction::{i}" for i in range(self.kmeans_.n_clusters)]
-        for i in range(self.kmeans_.n_clusters):
-            for ct in self.cell_types_:
-                names.append(f"cn_celltype_fraction::{i}::{ct}")
+        if self.include_cn_celltype_content:
+            for i in range(self.kmeans_.n_clusters):
+                for ct in self.cell_types_:
+                    names.append(f"cn_celltype_fraction::{i}::{ct}")
         return names
 
     def extract_region(self, region: RegionData) -> dict[str, float]:
@@ -284,7 +290,7 @@ class CellularNeighborhoodFeaturizer(BaseFeatureExtractor):
             mask = cn == i
             out[f"cn_fraction::{i}"] = float(mask.sum() / n_cells)
             # 后面可能导致错误
-            if mask.any():
+            if self.include_cn_celltype_content and mask.any():
                 mean_profile = profiles[mask].mean(axis=0)
                 for j, ct in enumerate(self.cell_types_):
                     out[f"cn_celltype_fraction::{i}::{ct}"] = float(mean_profile[j])
