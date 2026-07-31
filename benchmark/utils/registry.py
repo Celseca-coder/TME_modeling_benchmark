@@ -12,20 +12,26 @@ _DEFAULT_DATA_ROOT = _CONFIGS_DIR.parent.parent.parent
 
 
 def list_datasets() -> list[str]:
-    """Return sorted list of available dataset config names (without .yaml)."""
+    """Return available dataset configuration names.
+
+    Returns:
+        Sorted YAML filename stems from the dataset configuration directory.
+    """
     return sorted(p.stem for p in _CONFIGS_DIR.glob("*.yaml"))
 
 
 def load_dataset(name: str, data_root: str | Path | None = None) -> TMEDataset:
     """Load a TMEDataset by its config filename stem.
 
-    Parameters
-    ----------
-    name : str
-        Config stem, e.g. ``'bc_metabric_ali2020'`` or ``'nsclc_aung2025'``.
-    data_root : path
-        Root folder containing dataset directories (e.g. BC-METABRIC_Ali2020/).
-        Defaults to the parent of the ``code/`` folder (i.e. TME_benchmark/).
+    Args:
+        name: Configuration stem, such as ``bc_metabric_ali2020``.
+        data_root: Optional root directory containing dataset folders.
+
+    Returns:
+        Dataset initialized from the selected YAML configuration.
+
+    Raises:
+        FileNotFoundError: If the requested configuration does not exist.
     """
     yaml_path = _CONFIGS_DIR / f"{name}.yaml"
     if not yaml_path.exists():
@@ -39,5 +45,12 @@ def load_dataset(name: str, data_root: str | Path | None = None) -> TMEDataset:
 
 
 def load_all_datasets(data_root: str | Path | None = None) -> dict[str, TMEDataset]:
-    """Load all available datasets, returning a dict keyed by config name."""
+    """Load every registered dataset.
+
+    Args:
+        data_root: Optional root directory containing dataset folders.
+
+    Returns:
+        Mapping from configuration name to initialized dataset.
+    """
     return {name: load_dataset(name, data_root) for name in list_datasets()}

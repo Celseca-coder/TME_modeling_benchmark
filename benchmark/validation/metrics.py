@@ -1,9 +1,10 @@
-"""Scoring: turn model predictions into a metric dict (one function)."""
+"""Score region-level predictions and summarize repeated validation results."""
+
 from __future__ import annotations
 
 import numpy as np
 
-# Primary metric reported per task type (the rest are kept as secondary columns).
+
 PRIMARY_METRIC = {
     "survival": "c_index",
     "binary": "auc_roc",
@@ -14,70 +15,113 @@ PRIMARY_METRIC = {
 
 
 def score_predictions(task_cfg: dict, y_true, y_pred, classes=None) -> dict[str, float]:
-    """Compute the metrics for one fold from a task config, targets and predictions.
+    """Calculate task-appropriate metrics for one validation fold.
 
-    Parameters
-    ----------
-    task_cfg : task dict (uses ``type`` and, for binary, the 0/1 positive encoding).
-    y_true   : survival -> DataFrame with ``time`` / ``event``; classification ->
-               array/Series of labels (0/1 for binary, raw labels for multiclass).
-    y_pred   : classification -> probability matrix ``(n, n_classes)``;
-               survival -> 1-D risk score (higher = worse prognosis).
-    classes  : model class labels (classification), giving ``y_pred`` column order.
+    Degenerate folds, such as binary folds with one class or survival folds
+    without observed events, return ``NaN``.
 
-    Degenerate folds (one class present, no events) return NaN rather than raising.
-    Metrics are computed by calling sklearn / lifelines directly.
+    Args:
+        task_cfg: Task configuration containing the prediction type.
+        y_true: Survival ``time``/``event`` table or classification labels.
+        y_pred: Survival-risk vector or class-probability matrix.
+        classes: Class labels giving the probability-column order.
+
+    Returns:
+        Metric mapping for the configured task type.
     """
-    ttype = task_cfg["type"]
+    task_type = task_cfg["type"]
 
-    if ttype == "survival":
+    if task_type == "survival":
         from lifelines.utils import concordance_index
+
         times = y_true["time"].values
         events = y_true["event"].values
         if events.sum() < 1:
             return {"c_index": float("nan")}
-        # Cox risk: higher = worse; lifelines wants higher = longer survival -> negate.
-        return {"c_index": float(concordance_index(times, -np.asarray(y_pred), events))}
+        # Cox risk increases as prognosis worsens, whereas lifelines expects
+        # larger scores to indicate longer survival.
+        return {
+            "c_index": float(
+                concordance_index(times, -np.asarray(y_pred), events)
+            )
+        }
 
     y_true = np.asarray(y_true)
 
-    if ttype in ("binary", "binary_classification"):
+    if task_type in ("binary", "binary_classification"):
         from sklearn.metrics import (
-            roc_auc_score, average_precision_score, balanced_accuracy_score,
+            average_precision_score,
+            balanced_accuracy_score,
+            roc_auc_score,
         )
+
         if classes is None or 1 not in list(classes):
-            return {"auc_roc": float("nan"), "avg_precision": float("nan"),
-                    "balanced_acc": float("nan")}
+            return {
+                "auc_roc": float("nan"),
+                "avg_precision": float("nan"),
+                "balanced_acc": float("nan"),
+            }
         score = np.asarray(y_pred)[:, list(classes).index(1)]
         if len(np.unique(y_true)) < 2:
-            auc = ap = float("nan")
+            auc = average_precision = float("nan")
         else:
             auc = float(roc_auc_score(y_true, score))
-            ap = float(average_precision_score(y_true, score))
-        return {"auc_roc": auc, "avg_precision": ap,
-                "balanced_acc": float(balanced_accuracy_score(y_true, (score > 0.5).astype(int)))}
+            average_precision = float(average_precision_score(y_true, score))
+        return {
+            "auc_roc": auc,
+            "avg_precision": average_precision,
+            "balanced_acc": float(
+                balanced_accuracy_score(y_true, (score > 0.5).astype(int))
+            ),
+        }
 
-    # multiclass
     from sklearn.metrics import balanced_accuracy_score, roc_auc_score
-    pred = np.asarray(classes)[np.argmax(np.asarray(y_pred), axis=1)]
-    out = {"balanced_acc": float(balanced_accuracy_score(y_true, pred))}
+
+    predicted_labels = np.asarray(classes)[np.argmax(np.asarray(y_pred), axis=1)]
+    result = {
+        "balanced_acc": float(
+            balanced_accuracy_score(y_true, predicted_labels)
+        )
+    }
     try:
-        out["macro_auc"] = float(roc_auc_score(
-            y_true, y_pred, multi_class="ovr", average="macro", labels=classes))
+        result["macro_auc"] = float(
+            roc_auc_score(
+                y_true,
+                y_pred,
+                multi_class="ovr",
+                average="macro",
+                labels=classes,
+            )
+        )
     except Exception:
-        out["macro_auc"] = float("nan")
-    return out
+        result["macro_auc"] = float("nan")
+    return result
 
 
-def summarize_folds(fold_metrics: list[dict], metric: str) -> tuple[float, float]:
-    """Mean and sample SD of ``metric`` across the folds from :func:`cross_validate`
-    (NaN folds dropped)."""
+def summarize_folds(
+    fold_metrics: list[dict],
+    metric: str,
+) -> tuple[float, float]:
+    """Summarize a metric across validation folds or repeated seeds.
+
+    Args:
+        fold_metrics: Per-fold or per-seed metric dictionaries.
+        metric: Metric key to summarize.
+
+    Returns:
+        Mean and sample standard deviation after dropping ``NaN`` values.
+    """
     if not fold_metrics:
         return float("nan"), float("nan")
-    vals = np.array([fm.get(metric, np.nan) for fm in fold_metrics], dtype=float)
-    vals = vals[~np.isnan(vals)]
-    if len(vals) == 0:
+    values = np.array(
+        [fold.get(metric, np.nan) for fold in fold_metrics],
+        dtype=float,
+    )
+    values = values[~np.isnan(values)]
+    if len(values) == 0:
         return float("nan"), float("nan")
-    mean = float(np.mean(vals))
-    sd = float(np.std(vals, ddof=1)) if len(vals) > 1 else 0.0
-    return mean, sd
+    mean = float(np.mean(values))
+    standard_deviation = (
+        float(np.std(values, ddof=1)) if len(values) > 1 else 0.0
+    )
+    return mean, standard_deviation

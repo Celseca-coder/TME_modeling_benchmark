@@ -19,6 +19,9 @@ ENV/
 .ipynb_checkpoints/
 */.ipynb_checkpoints/
 
+/models/
+/model_results/
+
 # Testing / coverage / caches
 .pytest_cache/
 .mypy_cache/

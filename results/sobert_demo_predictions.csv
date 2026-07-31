@@ -1,0 +1,3 @@
+id,whisper_text,reference_text,sobert_text,wer_before,wer_after
+1,Can I deposit this check into my current count,Can I deposit this cheque into my current account,Can I deposit this check into my current count,0.2222222222222222,0.2222222222222222
+2,Please sign the bag of the check and fill out this deposit slip,Please sign the back of the cheque and fill out this deposit slip,Please sign the back of the check and fill out this deposit slip,0.15384615384615385,0.07692307692307693

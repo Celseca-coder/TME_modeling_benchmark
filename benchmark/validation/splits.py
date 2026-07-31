@@ -13,24 +13,21 @@ def patient_kfold(
     stratify_col: str | None = None,
     seed: int = 42,
 ) -> list[tuple[list[str], list[str]]]:
-    """Patient-level K-fold cross-validation splits.
+    """Create patient-level K-fold cross-validation splits.
 
     Assignments are made at the *patient* level to avoid data leakage when
     multiple regions share the same patient.
 
-    Parameters
-    ----------
-    metadata : DataFrame with at least ``patient_col`` and ``region_id`` columns.
-    n_folds : int
-    patient_col : str
-    stratify_col : str | None
-        If given, stratify patient assignments by this column (e.g. the event
-        indicator).  Value per patient is taken as the mode of that column.
-    seed : int
+    Args:
+        metadata: Table containing region identifiers and patient membership.
+        n_folds: Requested number of validation folds.
+        patient_col: Column containing patient identifiers.
+        stratify_col: Optional patient-level stratification source, such as the
+            survival event indicator. Each patient's modal value is used.
+        seed: Random seed controlling shuffled fold assignment.
 
-    Returns
-    -------
-    list of (train_region_ids, val_region_ids) tuples, length = n_folds.
+    Returns:
+        Pairs of training and validation region-identifier lists.
     """
     # One row per patient
     if "region_id" not in metadata.columns:
@@ -66,8 +63,14 @@ def patient_kfold(
 
 
 def stratify_column(task_cfg: dict) -> str | None:
-    """The metadata column to stratify patient folds on, given a task config:
-    the event indicator for survival, else the label column."""
+    """Choose the metadata column used to stratify patient folds.
+
+    Args:
+        task_cfg: Prediction-task configuration.
+
+    Returns:
+        Event column for survival, otherwise the configured label column.
+    """
     if task_cfg["type"] == "survival":
         return task_cfg.get("event_col")
     return task_cfg.get("label_col")
@@ -80,11 +83,21 @@ def safe_patient_kfold(
     stratify_col: str | None = None,
     seed: int = 0,
 ) -> list[tuple[list[str], list[str]]] | None:
-    """:func:`patient_kfold` with graceful fallbacks for small cohorts.
+    """Create patient folds with graceful fallbacks for small cohorts.
 
     Caps ``n_folds`` at the number of patients, and drops stratification when a
     minority class is smaller than ``n_folds`` (which makes StratifiedKFold raise).
-    Returns ``None`` when fewer than 2 folds are possible.
+
+    Args:
+        metadata: Table containing region identifiers and patient membership.
+        n_folds: Requested number of validation folds.
+        patient_col: Column containing patient identifiers.
+        stratify_col: Optional column used for patient-level stratification.
+        seed: Random seed controlling shuffled fold assignment.
+
+    Returns:
+        Training/validation region splits, or ``None`` when fewer than two
+        patient folds are possible.
     """
     n_pat = metadata[patient_col].nunique()
     folds = min(n_folds, n_pat)
@@ -106,16 +119,14 @@ def cohort_split(
 ) -> tuple[list[str], list[str]]:
     """Split regions by cohort membership.
 
-    Parameters
-    ----------
-    metadata     : DataFrame with ``region_id`` and ``cohort_col`` columns.
-    cohort_col   : column identifying the cohort of each region.
-    train_values : list of cohort values for training.
-    test_values  : list of cohort values for testing.
+    Args:
+        metadata: Table containing region identifiers and cohort membership.
+        cohort_col: Column identifying each region's cohort.
+        train_values: Cohorts explicitly assigned to training.
+        test_values: Cohorts explicitly assigned to testing.
 
-    Returns
-    -------
-    (train_region_ids, test_region_ids)
+    Returns:
+        Training and test region-identifier lists.
     """
     if "region_id" not in metadata.columns:
         meta = metadata.reset_index(names="region_id")

@@ -18,12 +18,28 @@ Featurizer = Any
 
 
 def _resolve_featurizer(featurizer: Featurizer, train_regions: list):
-    """Return a ready-to-``transform`` featurizer: call+fit a factory, or use a
-    pre-specified instance unchanged."""
+    """Resolve a feature extractor for one training split.
+
+    Args:
+        featurizer: Factory for a fold-specific extractor or an existing
+            extractor instance.
+        train_regions: Regions used to fit a newly created extractor.
+
+    Returns:
+        Extractor ready to transform training and evaluation regions.
+    """
     return featurizer().fit(train_regions) if callable(featurizer) else featurizer
 
 
 def _nan_metrics(task_type: str) -> dict[str, float]:
+    """Return the expected metric schema filled with ``NaN``.
+
+    Args:
+        task_type: Survival, binary, or multiclass task category.
+
+    Returns:
+        Metric mapping appropriate for the task type.
+    """
     if task_type == "survival":
         return {"c_index": float("nan")}
     if task_type in ("binary", "binary_classification"):
@@ -65,6 +81,20 @@ def cross_validate(
     ``n_folds`` / ``patient_col`` / ``cv_filter`` default to the dataset's
     ``validation`` config. Each returned dict holds the metric values plus
     ``seed``, ``fold``, ``n_train``, ``n_val``.
+
+    Args:
+        dataset: Dataset supplying metadata, regions, and task targets.
+        task_id: Identifier of the prediction task.
+        featurizer: Fold-specific extractor factory or existing extractor.
+        model_factory: Callable creating a new model from task config and seed.
+        seeds: Seeds controlling repeated fold assignments and model fitting.
+        n_folds: Optional override for the number of patient folds.
+        patient_col: Optional override for the patient identifier column.
+        cv_filter: Optional pandas query restricting eligible metadata rows.
+        normalize: Whether to normalize expression while loading regions.
+
+    Returns:
+        Per-fold metric dictionaries with split metadata.
     """
     vcfg = dataset.validation_config
     n_folds = n_folds or vcfg.get("n_folds", 5)
@@ -131,6 +161,18 @@ def cohort_split_test(
 
     Returns one metric dict per seed (with ``seed`` / ``n_train`` / ``n_test``), or
     ``[]`` if either cohort has no labelled regions for the task.
+
+    Args:
+        dataset: Dataset supplying metadata, regions, and task targets.
+        task_id: Identifier of the prediction task.
+        gentest: Configuration defining training and held-out cohorts.
+        featurizer: Training-cohort extractor factory or existing extractor.
+        model_factory: Callable creating a new model from task config and seed.
+        seeds: Seeds controlling repeated model fits.
+        normalize: Whether to normalize expression while loading regions.
+
+    Returns:
+        Per-seed metric dictionaries with training and test sample counts.
     """
     cohort_col = dataset.validation_config["cohort_col"]
     task_cfg = dataset.get_task_config(task_id)

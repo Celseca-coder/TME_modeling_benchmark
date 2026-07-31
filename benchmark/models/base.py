@@ -26,10 +26,27 @@ class RegionModel(ABC):
 
     @abstractmethod
     def fit(self, features: pd.DataFrame, target) -> "RegionModel":
+        """Fit the region-level prediction model.
+
+        Args:
+            features: Region-by-feature training table.
+            target: Region-aligned classification or survival targets.
+
+        Returns:
+            The fitted model.
+        """
         ...
 
     @abstractmethod
     def predict(self, features: pd.DataFrame) -> np.ndarray:
+        """Generate predictions for region-level features.
+
+        Args:
+            features: Region-by-feature table to score.
+
+        Returns:
+            Class probabilities or one-dimensional survival-risk scores.
+        """
         ...
 
 
@@ -38,6 +55,20 @@ class _TabularModel(RegionModel):
     zero-variance columns, and standardise on the training statistics."""
 
     def _prep_fit(self, X: pd.DataFrame) -> np.ndarray:
+        """Fit tabular preprocessing and transform training features.
+
+        Missing values are median-imputed, constant columns are discarded, and
+        retained columns are standardized using training-set statistics.
+
+        Args:
+            X: Raw region-by-feature training table.
+
+        Returns:
+            Numeric, imputed, non-constant, standardized training matrix.
+
+        Raises:
+            ValueError: If no non-constant feature column remains.
+        """
         from sklearn.preprocessing import StandardScaler
         self._median = X.median()
         Xf = X.fillna(self._median)
@@ -49,5 +80,14 @@ class _TabularModel(RegionModel):
         return self._scaler.transform(Xf[self._keep])
 
     def _prep_pred(self, X: pd.DataFrame) -> np.ndarray:
+        """Transform features using preprocessing learned from training data.
+
+        Args:
+            X: Raw region-by-feature prediction table.
+
+        Returns:
+            Numeric matrix containing the retained, imputed, standardized
+            features in training-column order.
+        """
         Xp = X[self._keep].fillna(self._median[self._keep])
         return self._scaler.transform(Xp)

@@ -27,10 +27,35 @@ from benchmark.validation import (
 
 
 def model_factory(task_cfg, seed):
+    """Create the region-level model required by a task.
+
+    Args:
+        task_cfg: Task configuration containing its prediction ``type``.
+        seed: Random seed passed to the model.
+
+    Returns:
+        A Cox proportional-hazards model for survival tasks, otherwise a
+        logistic-regression classifier.
+    """
     return LinearCox(seed=seed) if task_cfg["type"] == "survival" else LinearClassifier(seed=seed)
 
 
 def run(dataset_names, seeds, data_root=None) -> pd.DataFrame:
+    """Run the Mixing baseline over datasets, tasks, and validation schemes.
+
+    Each cross-validation fold fits its own cell-type vocabulary and predictive
+    model. Configured generalization tests fit on their training cohort and
+    evaluate on the held-out cohort.
+
+    Args:
+        dataset_names: Names of registered datasets to evaluate.
+        seeds: Random seeds used for repeated validation splits or model fits.
+        data_root: Optional root directory overriding the configured data root.
+
+    Returns:
+        One summary row per dataset, task, and validation scheme, including the
+        primary metric mean, sample standard deviation, and repetition count.
+    """
     rows = []
     for name in dataset_names:
         print(f"=== {name} started at {time.strftime('%Y-%m-%d %H:%M:%S')} ===", flush=True)
@@ -63,7 +88,8 @@ def run(dataset_names, seeds, data_root=None) -> pd.DataFrame:
     return pd.DataFrame(rows)
 
 
-def main():
+def main() -> None:
+    """Parse command-line options, run the benchmark, and write its CSV."""
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--datasets", nargs="*", default=None)

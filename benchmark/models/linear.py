@@ -17,6 +17,15 @@ class LinearClassifier(_TabularModel):
 
     def __init__(self, seed: int = 0, C: float = 1.0, l1_ratio: float = 0.0,
                  class_weight: str | None = "balanced", max_iter: int = 5000) -> None:
+        """Initialize the regularized logistic-regression model.
+
+        Args:
+            seed: Random seed used by stochastic solvers.
+            C: Inverse regularization strength.
+            l1_ratio: Elastic-net mixing value; zero selects pure L2.
+            class_weight: Class-weight strategy passed to scikit-learn.
+            max_iter: Maximum solver iterations.
+        """
         self.seed = seed
         self.C = C
         self.l1_ratio = l1_ratio
@@ -26,6 +35,15 @@ class LinearClassifier(_TabularModel):
         self.classes_ = None
 
     def fit(self, features: pd.DataFrame, target: pd.Series) -> "LinearClassifier":
+        """Fit logistic regression to region-level features.
+
+        Args:
+            features: Region-by-feature training table.
+            target: Region-indexed class labels.
+
+        Returns:
+            This fitted classifier.
+        """
         from sklearn.linear_model import LogisticRegression
         Xs = self._prep_fit(features.loc[list(target.index)])
         if self.l1_ratio == 0.0:                       # pure L2: fast lbfgs solver
@@ -41,6 +59,14 @@ class LinearClassifier(_TabularModel):
         return self
 
     def predict(self, features: pd.DataFrame) -> np.ndarray:
+        """Predict class probabilities for regions.
+
+        Args:
+            features: Region-by-feature table to score.
+
+        Returns:
+            Probability matrix whose columns follow ``classes_``.
+        """
         return self._clf.predict_proba(self._prep_pred(features))
 
 
@@ -50,10 +76,25 @@ class LinearCox(_TabularModel):
     task_type = "survival"
 
     def __init__(self, seed: int = 0, penalizer: float = 0.1) -> None:
+        """Initialize the penalized Cox proportional-hazards model.
+
+        Args:
+            seed: Reproducibility seed retained for the common model interface.
+            penalizer: L2 penalty applied by ``lifelines.CoxPHFitter``.
+        """
         self.seed = seed
         self.penalizer = penalizer
 
     def fit(self, features: pd.DataFrame, target: pd.DataFrame) -> "LinearCox":
+        """Fit Cox regression to features and censored survival outcomes.
+
+        Args:
+            features: Region-by-feature training table.
+            target: Region-indexed table with ``time`` and ``event`` columns.
+
+        Returns:
+            This fitted survival model.
+        """
         from lifelines import CoxPHFitter
         Xs = self._prep_fit(features.loc[list(target.index)])
         data = pd.DataFrame(Xs, columns=self._keep, index=target.index)
@@ -64,5 +105,14 @@ class LinearCox(_TabularModel):
         return self
 
     def predict(self, features: pd.DataFrame) -> np.ndarray:
+        """Predict relative hazard for each region.
+
+        Args:
+            features: Region-by-feature table to score.
+
+        Returns:
+            One-dimensional relative-risk array; larger values indicate worse
+            predicted prognosis.
+        """
         Xs = pd.DataFrame(self._prep_pred(features), columns=self._keep, index=features.index)
         return self._model.predict_partial_hazard(Xs).values

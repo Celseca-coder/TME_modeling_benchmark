@@ -15,20 +15,19 @@ from .base import BaseFeatureExtractor
 
 
 class MixingFeaturizer(BaseFeatureExtractor):
-    """Extract mixing statistics for cell type spatial distribution.
+    """Extract global and local cell-type mixing features from tissue regions.
 
-    Parameters
-    ----------
-    cell_type_col : str, default="cell_type"
-        Column name for cell types.
-    k_neighbors : int, default=10
-        Number of nearest neighbors to consider for local mixing.
-    include_global_entropy : bool, default=True
-        Whether to compute Shannon entropy based on global cell type proportions.
-    include_local_mixing : bool, default=True
-        Whether to compute local mixing scores (diversity of neighbor types).
-    use_tissue_mask : bool, default=True
-        If True, restrict to cells inside tissue mask.
+    The global features describe cell-type diversity without using spatial
+    positions. The local features use each cell's nearest neighbors to measure
+    how strongly different cell types intermingle.
+
+    Attributes:
+        cell_type_col: Preferred column containing cell-type labels.
+        k_neighbors: Number of non-self nearest neighbors used per cell.
+        include_global_entropy: Whether to emit global Shannon entropy features.
+        include_local_mixing: Whether to emit spatial neighbor-mixing features.
+        use_tissue_mask: Whether to restrict calculations to the tissue polygon.
+        cell_types_: Sorted cell-type vocabulary learned from training regions.
     """
 
     def __init__(
@@ -39,6 +38,15 @@ class MixingFeaturizer(BaseFeatureExtractor):
         include_local_mixing: bool = True,
         use_tissue_mask: bool = True,
     ) -> None:
+        """Initialize the mixing feature extractor.
+
+        Args:
+            cell_type_col: Preferred column containing cell-type labels.
+            k_neighbors: Number of nearest neighbors used for each cell.
+            include_global_entropy: Whether to calculate global Shannon entropy.
+            include_local_mixing: Whether to calculate local spatial mixing.
+            use_tissue_mask: Whether to exclude cells outside the tissue polygon.
+        """
         self.cell_type_col = cell_type_col
         self.k_neighbors = k_neighbors
         self.include_global_entropy = include_global_entropy
@@ -48,6 +56,15 @@ class MixingFeaturizer(BaseFeatureExtractor):
 
     # -- vocabulary -------------------------------------------------------
     def _col(self, region: RegionData) -> str | None:
+        """Resolve the cell-type column available in a region.
+
+        Args:
+            region: Region whose cell-type table is inspected.
+
+        Returns:
+            The configured column name, the ``cell_type`` fallback, or ``None``
+            when neither column exists.
+        """
         if self.cell_type_col in region.cell_types.columns:
             return self.cell_type_col
         if "cell_type" in region.cell_types.columns:
@@ -55,6 +72,20 @@ class MixingFeaturizer(BaseFeatureExtractor):
         return None
 
     def fit(self, regions: list[RegionData]) -> "MixingFeaturizer":
+        """Learn a common z**cell-type** vocabulary from training regions.
+
+        The vocabulary determines the source-to-neighbor transition feature
+        columns and is learned only from the training fold to avoid leakage.
+
+        Args:
+            regions: Training regions containing cell-type annotations.
+
+        Returns:
+            This fitted feature extractor.
+
+        Raises:
+            ValueError: If a training region has no usable cell-type column.
+        """
         types: set[str] = set()
         for r in regions:
             col = self._col(r)
@@ -66,7 +97,14 @@ class MixingFeaturizer(BaseFeatureExtractor):
 
     # -- helper ----------------------------------------------------------
     def _compute_global_entropy(self, labels: pd.Series) -> float:
-        """Shannon entropy based on cell type proportions."""
+        """Calculate Shannon entropy of the region-wide cell-type proportions.
+
+        Args:
+            labels: Cell-type label for every included cell.
+
+        Returns:
+            Shannon entropy in natural-log units, or ``NaN`` when undefined.
+        """
         proportions = labels.value_counts(normalize=True)
         # Avoid log(0)
         proportions = proportions[proportions > 0]
@@ -74,7 +112,15 @@ class MixingFeaturizer(BaseFeatureExtractor):
         return float(entropy) if not np.isnan(entropy) else np.nan
 
     def _compute_normalized_entropy(self, labels: pd.Series) -> float:
-        """Shannon entropy scaled to [0, 1] for the observed type count."""
+        """Calculate Shannon entropy normalized by the observed type count.
+
+        Args:
+            labels: Cell-type label for every included cell.
+
+        Returns:
+            Entropy divided by ``log(number_of_observed_types)``. A homogeneous
+            non-empty region returns ``0`` and an empty region returns ``NaN``.
+        """
         n_types = labels.nunique()
         if n_types < 2:
             return 0.0 if n_types == 1 else np.nan
@@ -86,7 +132,25 @@ class MixingFeaturizer(BaseFeatureExtractor):
         labels: pd.Series,
         k: int,
     ) -> dict[str, float]:
-        """Compute local mixing scores and aggregate."""
+        """Calculate and aggregate nearest-neighbor mixing statistics.
+
+        For every cell, the method finds its ``k`` nearest non-self neighbors
+        and calculates the Gini-Simpson diversity
+        ``1 - sum(cell_type_proportion ** 2)``. It also calculates the overall
+        same-type neighbor fraction and every directed source-type-to-neighbor-
+        type fraction.
+
+        Args:
+            coords: Two-dimensional coordinates aligned with ``labels``.
+            labels: Cell-type labels aligned row-for-row with ``coords``.
+            k: Requested number of non-self neighbors per cell.
+
+        Returns:
+            Mapping containing the mean, standard deviation, minimum, and
+            maximum local diversity; the same-type neighbor fraction; and the
+            directed cell-type neighbor fractions. Diversity summaries are
+            ``NaN`` when fewer than two cells are available.
+        """
         n = len(coords)
         if n < 2 or k < 1:
             return {"local_mixing_mean": np.nan, "local_mixing_std": np.nan,
@@ -134,6 +198,11 @@ class MixingFeaturizer(BaseFeatureExtractor):
 
     # -- feature names ------------------------------------------------
     def feature_names(self) -> list[str]:
+        """Return feature names in the same schema produced by extraction.
+
+        Returns:
+            Ordered names of enabled global and local mixing features.
+        """
         names = []
         if self.include_global_entropy:
             names.extend(["shannon_entropy_global", "shannon_entropy_normalized"])
@@ -148,6 +217,20 @@ class MixingFeaturizer(BaseFeatureExtractor):
 
     # -- extraction -------------------------------------------------------
     def extract_region(self, region: RegionData) -> dict[str, float]:
+        """Extract enabled mixing features for one tissue region.
+
+        Cell labels are aligned to the coordinate index, missing labels are
+        discarded, and the optional tissue polygon is applied before global
+        and local statistics are calculated.
+
+        Args:
+            region: Tissue region containing coordinates and cell-type labels.
+
+        Returns:
+            Flat mapping from feature name to region-level numeric value.
+            Missing cell-type columns or an empty tissue selection produce
+            ``NaN`` values for the expected feature schema.
+        """
         col = self._col(region)
         if col is None:
             return {name: np.nan for name in self.feature_names()}

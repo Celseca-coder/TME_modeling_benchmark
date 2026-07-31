@@ -1,8 +1,8 @@
-"""Abstract base for all feature extractors."""
+"""Define the common interface for region-level feature extractors."""
+
 from __future__ import annotations
 
 from abc import ABC, abstractmethod
-from dataclasses import dataclass, field
 
 import pandas as pd
 
@@ -10,31 +10,55 @@ from benchmark.data.dataset import RegionData
 
 
 class BaseFeatureExtractor(ABC):
-    """Extract a flat feature vector from a RegionData object,
-    with optional specification of cell IDs.
-
-    Subclasses implement :meth:`extract_region`.  The ``fit`` / ``transform``
-    API mirrors sklearn's pattern so extractors can be used inside pipelines.
-    """
+    """Convert spatial regions into flat, region-level feature vectors."""
 
     def fit(self, regions: list[RegionData]) -> "BaseFeatureExtractor":
-        """Discover domain from data (e.g. all cell-type names). Override if needed."""
+        """Learn any feature schema required by an extractor.
+
+        Args:
+            regions: Training regions used to learn vocabularies or parameters.
+
+        Returns:
+            This fitted extractor.
+        """
         return self
 
     @abstractmethod
     def extract_region(self, region: RegionData) -> dict[str, float]:
-        """Return a flat dict mapping feature name → value for one region."""
+        """Extract one flat feature vector.
+
+        Args:
+            region: Region to summarize.
+
+        Returns:
+            Mapping from feature name to numeric value.
+        """
 
     def transform(self, regions: list[RegionData]) -> pd.DataFrame:
-        """Extract features for all regions; returns DataFrame indexed by region_id."""
+        """Extract a feature table for multiple regions.
+
+        Args:
+            regions: Regions to summarize independently.
+
+        Returns:
+            Region-by-feature table indexed by region identifier.
+        """
         rows = []
         ids = []
-        for r in regions:
-            rows.append(self.extract_region(r))
-            ids.append(r.region_id)
-        df = pd.DataFrame(rows, index=ids)
-        df.index.name = "region_id"
-        return df
+        for region in regions:
+            rows.append(self.extract_region(region))
+            ids.append(region.region_id)
+        table = pd.DataFrame(rows, index=ids)
+        table.index.name = "region_id"
+        return table
 
     def fit_transform(self, regions: list[RegionData]) -> pd.DataFrame:
+        """Fit the extractor and transform the same regions.
+
+        Args:
+            regions: Regions used to learn the schema and produce output rows.
+
+        Returns:
+            Region-by-feature table indexed by region identifier.
+        """
         return self.fit(regions).transform(regions)
