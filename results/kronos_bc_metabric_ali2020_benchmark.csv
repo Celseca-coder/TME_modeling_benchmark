@@ -1,0 +1,4 @@
+dataset,task,scheme,metric,mean,sd,n,score
+bc_metabric_ali2020,DSS,cv,c_index,0.5455541502230754,0.054031368721908474,15,0.546 +/- 0.054
+bc_metabric_ali2020,OS,cv,c_index,0.5443237427499025,0.042141011704065985,15,0.544 +/- 0.042
+bc_metabric_ali2020,ER_status,cv,auc_roc,0.7629533413939604,0.0675394158016757,15,0.763 +/- 0.068

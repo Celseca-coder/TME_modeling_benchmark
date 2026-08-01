@@ -1,0 +1,9 @@
+dataset,task,scheme,metric,mean,sd,n,score
+hnc_wu2022,primary_outcome,cv,auc_roc,0.7206840203751448,0.08760590391557194,15,0.721 +/- 0.088
+hnc_wu2022,hpv_status,cv,auc_roc,0.8017337092113604,0.08540143995261872,15,0.802 +/- 0.085
+hnc_wu2022,OS,cv,c_index,,,15,nan +/- nan
+hnc_wu2022,primary_outcome,UPMC_to_DFCI,auc_roc,0.8121212121212121,0.005283513870958324,3,0.812 +/- 0.005
+luad_sorin2023,OS,cv,c_index,,,15,nan +/- nan
+nsclc_gnn_hoebel2026,OS,cv,c_index,,,15,nan +/- nan
+nsclc_gnn_hoebel2026,stage_binary,cv,auc_roc,0.7208678224392853,0.044872007040561435,15,0.721 +/- 0.045
+tnbc_wang2023,pCR_all,cv,auc_roc,0.6279534803172275,0.08126511582734416,15,0.628 +/- 0.081

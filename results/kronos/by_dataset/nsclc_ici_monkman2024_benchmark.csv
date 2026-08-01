@@ -1,0 +1,3 @@
+dataset,task,scheme,metric,mean,sd,n,score
+nsclc_ici_monkman2024,immunotherapy_response,cv,auc_roc,0.5488888888888889,0.17744512528320547,15,0.549 +/- 0.177
+nsclc_ici_monkman2024,OS,cv,c_index,,,15,nan +/- nan

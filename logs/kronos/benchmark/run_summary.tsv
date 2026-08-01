@@ -1,0 +1,11 @@
+dataset	mode	started	finished	exit_code	result_rows	output
+bc_jackson2020	native	2026-07-23 09:03:59	2026-07-23 09:05:13	0	5	/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/results/kronos/by_dataset/bc_jackson2020_benchmark.csv
+bc_metabric_ali2020	native	2026-07-23 09:05:13	2026-07-23 09:05:24	1	0	/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/results/kronos/by_dataset/bc_metabric_ali2020_benchmark.csv
+crc_schurch2020	rasterized	2026-07-23 09:05:24	2026-07-23 09:05:42	0	3	/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/results/kronos/by_dataset/crc_schurch2020_benchmark.csv
+crc_wu2022	rasterized	2026-07-23 09:05:42	2026-07-23 09:06:03	0	2	/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/results/kronos/by_dataset/crc_wu2022_benchmark.csv
+hnc_wu2022	rasterized	2026-07-23 09:06:03	2026-07-23 09:06:54	0	5	/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/results/kronos/by_dataset/hnc_wu2022_benchmark.csv
+luad_sorin2023	native	2026-07-23 09:06:54	2026-07-23 09:07:25	0	3	/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/results/kronos/by_dataset/luad_sorin2023_benchmark.csv
+nsclc_aung2025	rasterized	2026-07-23 09:07:25	2026-07-23 09:07:36	0	4	/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/results/kronos/by_dataset/nsclc_aung2025_benchmark.csv
+nsclc_gnn_hoebel2026	rasterized	2026-07-23 09:07:36	2026-07-23 09:09:14	0	2	/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/results/kronos/by_dataset/nsclc_gnn_hoebel2026_benchmark.csv
+nsclc_ici_monkman2024	native	2026-07-23 09:09:14	2026-07-23 09:09:22	0	2	/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/results/kronos/by_dataset/nsclc_ici_monkman2024_benchmark.csv
+tnbc_wang2023	rasterized	2026-07-23 09:09:22	2026-07-23 09:10:13	0	3	/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/results/kronos/by_dataset/tnbc_wang2023_benchmark.csv

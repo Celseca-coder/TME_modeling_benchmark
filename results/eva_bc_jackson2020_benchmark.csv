@@ -1,0 +1,6 @@
+dataset,task,scheme,metric,mean,sd,n,score
+bc_jackson2020,OS,cv,c_index,0.5893404216153498,0.05390183814168565,15,0.589 +/- 0.054
+bc_jackson2020,DFS,cv,c_index,0.6181600453732528,0.04060522567753566,15,0.618 +/- 0.041
+bc_jackson2020,response,cv,auc_roc,0.6993170534502383,0.08241797845489422,15,0.699 +/- 0.082
+bc_jackson2020,clinical_type,cv,balanced_acc,0.3695941494639316,0.06246614768555258,15,0.370 +/- 0.062
+bc_jackson2020,clinical_type,Basel_to_Zurich,balanced_acc,0.30931216531728795,0.0,3,0.309 +/- 0.000

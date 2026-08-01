@@ -1,0 +1,6 @@
+dataset,task,scheme,metric,mean,sd,n,score
+hnc_wu2022,primary_outcome,cv,auc_roc,0.663456669789021,0.12278552603317273,15,0.663 +/- 0.123
+hnc_wu2022,hpv_status,cv,auc_roc,0.6823608588448539,0.06974703520051265,15,0.682 +/- 0.070
+hnc_wu2022,OS,cv,c_index,,,15,nan +/- nan
+hnc_wu2022,primary_outcome,UPMC_to_DFCI,auc_roc,0.5587878787878788,0.0,3,0.559 +/- 0.000
+hnc_wu2022,OS,UPMC_to_DFCI,c_index,,,3,nan +/- nan

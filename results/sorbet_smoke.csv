@@ -1,0 +1,2 @@
+dataset,task,scheme,metric,mean,sd,n,score
+tnbc_wang2023,pCR_all,cv,auc_roc,0.6672660719729452,0.08835379649933046,5,0.667 +/- 0.088

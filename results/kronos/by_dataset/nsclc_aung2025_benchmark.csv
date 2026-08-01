@@ -1,0 +1,5 @@
+dataset,task,scheme,metric,mean,sd,n,score
+nsclc_aung2025,immunotherapy_response,cv,auc_roc,0.2666666666666667,0.21602468994692867,15,0.267 +/- 0.216
+nsclc_aung2025,PFS,cv,c_index,,,15,nan +/- nan
+nsclc_aung2025,immunotherapy_response,Yale_to_UQ,auc_roc,0.5833333333333333,0.0,3,0.583 +/- 0.000
+nsclc_aung2025,immunotherapy_response,Yale_to_YaleExt,auc_roc,0.6166666666666667,0.0,3,0.617 +/- 0.000

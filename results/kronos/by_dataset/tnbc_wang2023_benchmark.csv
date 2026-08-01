@@ -1,0 +1,4 @@
+dataset,task,scheme,metric,mean,sd,n,score
+tnbc_wang2023,pCR_arm_C,cv,auc_roc,0.5465000695528317,0.08171360489443463,15,0.547 +/- 0.082
+tnbc_wang2023,pCR_arm_CI,cv,auc_roc,0.5970102685778989,0.05692987135216387,15,0.597 +/- 0.057
+tnbc_wang2023,pCR_all,cv,auc_roc,0.6199977443720062,0.04481438700846415,15,0.620 +/- 0.045

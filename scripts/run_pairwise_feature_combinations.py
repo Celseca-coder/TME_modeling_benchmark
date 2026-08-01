@@ -48,7 +48,9 @@ def make_featurizer(groups, cell_type_col="cell_type", fixed_markers=None, point
         "expression": MeanExpressionFeaturizer,
         "distance": lambda: SpatialDistanceFeaturizer(cell_type_col=cell_type_col),
         "point_pattern": lambda: PointPatternFeaturizer(
-            metrics=tuple(point_metrics or ("K", "L", "pcf", "variogram")),
+            # Match scripts/run_point_pattern_baseline.py and the extractor's
+            # native default: the single-feature baseline computes K and L only.
+            metrics=tuple(point_metrics or ("K", "L")),
             cell_type_col=cell_type_col,
         ),
         "mixing": lambda: MixingFeaturizer(cell_type_col=cell_type_col),
@@ -71,7 +73,9 @@ def shared_markers(ds, task, gentest):
     return sorted(set.intersection(*marker_sets)) if marker_sets else []
 
 
-def run(dataset_names, combinations, seeds, data_root=None, point_metrics=None):
+def run(dataset_names, combinations, seeds, data_root=None, point_metrics=None, selected_runs=None):
+    """Run combinations, optionally restricted to ``(dataset, task, scheme)`` triples."""
+    selected_runs = set(selected_runs) if selected_runs is not None else None
     rows = []
     for dataset_name in dataset_names:
         ds = load_dataset(dataset_name, data_root=data_root)
@@ -83,6 +87,8 @@ def run(dataset_names, combinations, seeds, data_root=None, point_metrics=None):
             print(f"-- {combination} --", flush=True)
 
             for task in ds.task_ids:
+                if selected_runs is not None and (dataset_name, task, "cv") not in selected_runs:
+                    continue
                 factory = lambda g=groups: make_featurizer(g, point_metrics=point_metrics)
                 result = cross_validate(
                     ds, task, factory, model_factory, seeds=seeds, normalize=normalize
@@ -96,6 +102,9 @@ def run(dataset_names, combinations, seeds, data_root=None, point_metrics=None):
             for gentest in ds.validation_config.get("generalization_tests", []):
                 cell_type_col = gentest.get("cell_type_col", "cell_type")
                 for task in gentest.get("tasks", ds.task_ids):
+                    if (selected_runs is not None and
+                            (dataset_name, task, gentest["name"]) not in selected_runs):
+                        continue
                     marker_key = (gentest["name"], task)
                     if normalize and marker_key not in marker_cache:
                         marker_cache[marker_key] = shared_markers(ds, task, gentest)
@@ -137,7 +146,7 @@ def main():
     parser.add_argument("--datasets", nargs="*", default=None)
     parser.add_argument("--combinations", nargs="*", default=None, choices=COMBINATIONS)
     parser.add_argument("--seeds", type=int, nargs="*", default=[0, 1, 2])
-    parser.add_argument("--point-pattern-metrics", nargs="+", default=["K", "L", "pcf", "variogram"],
+    parser.add_argument("--point-pattern-metrics", nargs="+", default=["K", "L"],
                         choices=["K", "L", "pcf", "variogram"])
     parser.add_argument("--data-root", default=None)
     parser.add_argument("--output", default=str(_CODE / "results" / "pairwise_benchmark.csv"))

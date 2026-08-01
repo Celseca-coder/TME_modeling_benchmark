@@ -1,0 +1,4 @@
+dataset,task,scheme,metric,mean,sd,n,score
+crc_schurch2020,CLR_DII,cv,auc_roc,0.6618055555555554,0.09468504163693629,15,0.662 +/- 0.095
+crc_schurch2020,OS,cv,c_index,,,15,nan +/- nan
+crc_schurch2020,DFS,cv,c_index,,,15,nan +/- nan

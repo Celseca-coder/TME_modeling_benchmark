@@ -1,0 +1,3 @@
+dataset,task,scheme,metric,mean,sd,n,score
+nsclc_gnn_hoebel2026,OS,cv,c_index,0.6473297519829726,0.02966130999592908,5,0.647 +/- 0.030
+nsclc_gnn_hoebel2026,stage_binary,cv,auc_roc,0.6103143354400907,0.015423425976225763,5,0.610 +/- 0.015

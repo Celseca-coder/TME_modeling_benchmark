@@ -1,0 +1,11 @@
+dataset	mode	started	finished	exit_code	ok	error	manifest
+bc_jackson2020	native	2026-07-22 19:23:56	2026-07-22 19:24:12	0	735	0	/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/model_results/KRONOS/precompute_by_dataset/bc_jackson2020/precompute_manifest.csv
+bc_metabric_ali2020	native	2026-07-22 19:24:12	2026-07-22 19:26:53	0	547	1	/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/model_results/KRONOS/precompute_by_dataset/bc_metabric_ali2020/precompute_manifest.csv
+crc_schurch2020	rasterized	2026-07-22 19:26:53	2026-07-22 19:44:39	0	140	0	/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/model_results/KRONOS/precompute_by_dataset/crc_schurch2020/precompute_manifest.csv
+crc_wu2022	rasterized	2026-07-22 19:44:39	2026-07-22 20:09:33	0	292	0	/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/model_results/KRONOS/precompute_by_dataset/crc_wu2022/precompute_manifest.csv
+hnc_wu2022	rasterized	2026-07-22 20:09:33	2026-07-22 21:20:41	0	366	0	/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/model_results/KRONOS/precompute_by_dataset/hnc_wu2022/precompute_manifest.csv
+luad_sorin2023	native	2026-07-22 21:20:42	2026-07-22 21:21:16	0	536	0	/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/model_results/KRONOS/precompute_by_dataset/luad_sorin2023/precompute_manifest.csv
+nsclc_aung2025	rasterized	2026-07-22 21:21:16	2026-07-22 21:24:39	0	95	0	/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/model_results/KRONOS/precompute_by_dataset/nsclc_aung2025/precompute_manifest.csv
+nsclc_gnn_hoebel2026	rasterized	2026-07-22 21:24:39	2026-07-22 21:44:24	0	2863	0	/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/model_results/KRONOS/precompute_by_dataset/nsclc_gnn_hoebel2026/precompute_manifest.csv
+nsclc_ici_monkman2024	native	2026-07-22 21:44:24	2026-07-22 21:49:59	0	36	0	/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/model_results/KRONOS/precompute_by_dataset/nsclc_ici_monkman2024/precompute_manifest.csv
+tnbc_wang2023	rasterized	2026-07-22 21:49:59	2026-07-22 21:59:17	0	766	0	/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/model_results/KRONOS/precompute_by_dataset/tnbc_wang2023/precompute_manifest.csv

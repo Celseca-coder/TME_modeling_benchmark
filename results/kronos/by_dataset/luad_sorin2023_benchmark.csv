@@ -1,0 +1,4 @@
+dataset,task,scheme,metric,mean,sd,n,score
+luad_sorin2023,progression,cv,auc_roc,0.520148315736551,0.05791768565168419,15,0.520 +/- 0.058
+luad_sorin2023,OS,cv,c_index,,,15,nan +/- nan
+luad_sorin2023,progression,Discovery_to_Validation,auc_roc,0.4703703703703705,6.798699777552591e-17,3,0.470 +/- 0.000
