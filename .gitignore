@@ -43,3 +43,7 @@ htmlcov/
 *.log
 
 .claude/
+/logs/
+/model_results/
+/results/
+/models/
