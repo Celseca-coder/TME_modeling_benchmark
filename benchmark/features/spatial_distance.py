@@ -39,6 +39,16 @@ class SpatialDistanceFeaturizer(BaseFeatureExtractor):
         aggregate_functions: tuple[str, ...] = ("mean", "std", "min", "max", "median"),
         use_tissue_mask: bool = True,
     ) -> None:
+        """Initialize the instance.
+        
+                Args:
+                    cell_type_col (str): Name of the column containing cell type.
+                    k (int): Number of nearest neighbors considered.
+                    aggregate_functions (tuple[str, ...]): Functions used to summarize distance measurements.
+                    use_tissue_mask (bool): Whether to use tissue mask during processing.
+        
+        Args:
+            cell_type_col (str): Name of the column containing cell type."""
         self.cell_type_col = cell_type_col
         self.k = k
         self.agg_funcs = aggregate_functions
@@ -47,6 +57,16 @@ class SpatialDistanceFeaturizer(BaseFeatureExtractor):
 
     # -- vocabulary -------------------------------------------------------
     def _col(self, region: RegionData) -> str | None:
+        """Execute the col operation.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+        
+                Returns:
+                    str | None: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         if self.cell_type_col in region.cell_types.columns:
             return self.cell_type_col
         if "cell_type" in region.cell_types.columns:
@@ -54,6 +74,16 @@ class SpatialDistanceFeaturizer(BaseFeatureExtractor):
         return None
 
     def fit(self, regions: list[RegionData]) -> "SpatialDistanceFeaturizer":
+        """Fit.
+        
+                Args:
+                    regions (list[RegionData]): Tissue regions used for fitting or feature extraction.
+        
+                Returns:
+                    'SpatialDistanceFeaturizer': The operation result.
+        
+        Args:
+            regions (list[RegionData]): Tissue regions used for fitting or feature extraction."""
         types: set[str] = set()
         for r in regions:
             col = self._col(r)
@@ -70,7 +100,12 @@ class SpatialDistanceFeaturizer(BaseFeatureExtractor):
         labels: pd.Series,
         tissue_mask: np.ndarray | None = None,
     ) -> dict[str, float]:
-        """Compute aggregated distances for same and cross types."""
+        """Compute aggregated distances for same and cross types.
+        
+        Args:
+            coords (np.ndarray): Two-dimensional cell-coordinate array.
+            labels (pd.Series): Cell-type or class label assigned to each observation.
+            tissue_mask (np.ndarray | None): Spatial mask defining the valid tissue area."""
         if len(coords) < 2:
             return {f"{name}": np.nan for name in self.feature_names()}
 
@@ -141,6 +176,10 @@ class SpatialDistanceFeaturizer(BaseFeatureExtractor):
 
     # -- feature names ----------------------------------------------------
     def feature_names(self) -> list[str]:
+        """Execute the feature names operation.
+
+        Returns:
+            list[str]: The operation result."""
         names = []
         for agg in self.agg_funcs:
             names.append(f"same_neighbor_dist_{agg}")
@@ -153,6 +192,16 @@ class SpatialDistanceFeaturizer(BaseFeatureExtractor):
 
     # -- extraction -------------------------------------------------------
     def extract_region(self, region: RegionData) -> dict[str, float]:
+        """Extract region.
+        
+                Args:
+                    region (RegionData): Region whose cells and spatial measurements are processed.
+        
+                Returns:
+                    dict[str, float]: The operation result.
+        
+        Args:
+            region (RegionData): Region whose cells and spatial measurements are processed."""
         col = self._col(region)
         if col is None:
             return {name: np.nan for name in self.feature_names()}
@@ -175,3 +224,55 @@ class SpatialDistanceFeaturizer(BaseFeatureExtractor):
                 tissue_mask = in_tissue
 
         return self._compute_distances(coords, labels, tissue_mask)
+
+
+class MultiKSpatialDistanceFeaturizer(BaseFeatureExtractor):
+    """Concatenate spatial-distance summaries for several neighbor orders.
+
+    Each requested ``k`` uses the existing :class:`SpatialDistanceFeaturizer`
+    unchanged. Feature names receive a ``k{value}::`` prefix so, for example,
+    the first-, second-, and fifth-nearest cross-type distance summaries can be
+    supplied to one downstream model simultaneously.
+    """
+
+    def __init__(
+        self,
+        k_values: tuple[int, ...] | list[int] = (1, 2, 5),
+        cell_type_col: str = "cell_type",
+        aggregate_functions: tuple[str, ...] = ("mean", "std", "min", "max", "median"),
+        use_tissue_mask: bool = True,
+    ) -> None:
+        values = tuple(dict.fromkeys(int(k) for k in k_values))
+        if not values or any(k < 1 for k in values):
+            raise ValueError("k_values must contain one or more positive integers")
+        self.k_values = values
+        self.extractors = {
+            k: SpatialDistanceFeaturizer(
+                cell_type_col=cell_type_col,
+                k=k,
+                aggregate_functions=aggregate_functions,
+                use_tissue_mask=use_tissue_mask,
+            )
+            for k in values
+        }
+
+    def fit(self, regions: list[RegionData]) -> "MultiKSpatialDistanceFeaturizer":
+        for extractor in self.extractors.values():
+            extractor.fit(regions)
+        return self
+
+    def feature_names(self) -> list[str]:
+        return [
+            f"k{k}::{name}"
+            for k, extractor in self.extractors.items()
+            for name in extractor.feature_names()
+        ]
+
+    def extract_region(self, region: RegionData) -> dict[str, float]:
+        features: dict[str, float] = {}
+        for k, extractor in self.extractors.items():
+            features.update(
+                {f"k{k}::{name}": value
+                 for name, value in extractor.extract_region(region).items()}
+            )
+        return features

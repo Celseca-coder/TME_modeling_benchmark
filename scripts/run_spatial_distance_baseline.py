@@ -20,7 +20,10 @@ _CODE = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(_CODE))
 
 from benchmark.utils.registry import list_datasets, load_dataset
-from benchmark.features.spatial_distance import SpatialDistanceFeaturizer
+from benchmark.features.spatial_distance import (
+    MultiKSpatialDistanceFeaturizer,
+    SpatialDistanceFeaturizer,
+)
 from benchmark.models.linear import LinearClassifier, LinearCox
 from benchmark.validation import (
     cross_validate, cohort_split_test, summarize_folds, PRIMARY_METRIC,
@@ -28,10 +31,42 @@ from benchmark.validation import (
 
 
 def model_factory(task_cfg, seed):
+    """Execute the model factory operation.
+    
+        Args:
+            task_cfg (Any): Configuration mapping for the current prediction task.
+            seed (Any): Random seed used for reproducibility.
+    
+        Returns:
+            Any: The operation result.
+    
+    Args:
+        task_cfg (Any): Configuration mapping for the current prediction task."""
     return LinearCox(seed=seed) if task_cfg["type"] == "survival" else LinearClassifier(seed=seed)
 
 
-def run(dataset_names, seeds, data_root=None) -> pd.DataFrame:
+def distance_featurizer(k_values, cell_type_col="cell_type"):
+    """Use the legacy extractor for one k, or concatenate several k feature sets."""
+    if len(k_values) == 1:
+        return SpatialDistanceFeaturizer(cell_type_col=cell_type_col, k=k_values[0])
+    return MultiKSpatialDistanceFeaturizer(
+        k_values=k_values, cell_type_col=cell_type_col
+    )
+
+
+def run(dataset_names, seeds, data_root=None, k_values=(1,)) -> pd.DataFrame:
+    """Run.
+    
+        Args:
+            dataset_names (Any): Names of datasets to process.
+            seeds (Any): Random seeds used for repeated benchmark runs.
+            data_root (Any): Root directory containing data.
+    
+        Returns:
+            pd.DataFrame: The operation result.
+    
+    Args:
+        dataset_names (Any): Names of datasets to process."""
     rows = []
     for name in dataset_names:
         ds = load_dataset(name, data_root=data_root)
@@ -40,17 +75,18 @@ def run(dataset_names, seeds, data_root=None) -> pd.DataFrame:
         # (A) CV
         for task in ds.task_ids:
             metric = PRIMARY_METRIC[ds.get_task_config(task)["type"]]
-            featurizer = lambda: SpatialDistanceFeaturizer()
+            featurizer = lambda ks=k_values: distance_featurizer(ks)
             fm = cross_validate(ds, task, featurizer, model_factory, seeds=seeds, normalize=False)
             mean, sd = summarize_folds(fm, metric)
             rows.append(dict(dataset=name, task=task, scheme="cv",
-                             metric=metric, mean=mean, sd=sd, n=len(fm)))
+                             metric=metric, mean=mean, sd=sd, n=len(fm),
+                             k_values=",".join(map(str, k_values))))
             print(f"  {task:24s} cv               {metric:12s} {mean:.4f} +/- {sd:.4f}")
 
         # (B) generalization tests
         for gt in ds.validation_config.get("generalization_tests", []):
             cell_type_col = gt.get("cell_type_col", "cell_type")
-            featurizer = lambda c=cell_type_col: SpatialDistanceFeaturizer(cell_type_col=c)
+            featurizer = lambda c=cell_type_col, ks=k_values: distance_featurizer(ks, c)
             for task in gt.get("tasks", ds.task_ids):
                 metric = PRIMARY_METRIC[ds.get_task_config(task)["type"]]
                 res = cohort_split_test(ds, task, gt, featurizer, model_factory, seeds=seeds, normalize=False)
@@ -58,7 +94,8 @@ def run(dataset_names, seeds, data_root=None) -> pd.DataFrame:
                     continue
                 mean, sd = summarize_folds(res, metric)
                 rows.append(dict(dataset=name, task=task, scheme=gt["name"],
-                                 metric=metric, mean=mean, sd=sd, n=len(res)))
+                                 metric=metric, mean=mean, sd=sd, n=len(res),
+                                 k_values=",".join(map(str, k_values))))
                 print(f"  {task:24s} {gt['name']:16s} {metric:12s} {mean:.4f} +/- {sd:.4f}")
 
         ds.clear_region_cache()
@@ -66,15 +103,29 @@ def run(dataset_names, seeds, data_root=None) -> pd.DataFrame:
 
 
 def main():
+    """Execute the main operation.
+
+    Returns:
+        Any: The operation result."""
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--datasets", nargs="*", default=None)
     ap.add_argument("--seeds", type=int, nargs="*", default=[0, 1, 2])
     ap.add_argument("--output", default=str(_CODE / "results" / "spatial_distance_benchmark.csv"))
     ap.add_argument("--data-root", default=None)
+    ap.add_argument(
+        "--k-values", type=int, nargs="+", default=[1],
+        help="Neighbor orders to concatenate, e.g. --k-values 1 2 5",
+    )
     args = ap.parse_args()
 
-    df = run(args.datasets or list_datasets(), args.seeds, data_root=args.data_root)
+    if any(k < 1 for k in args.k_values):
+        ap.error("--k-values must contain positive integers")
+    k_values = tuple(dict.fromkeys(args.k_values))
+    df = run(
+        args.datasets or list_datasets(), args.seeds,
+        data_root=args.data_root, k_values=k_values,
+    )
     df["score"] = df.apply(lambda r: f"{r['mean']:.3f} ± {r['sd']:.3f}", axis=1)
     out = Path(args.output)
     out.parent.mkdir(parents=True, exist_ok=True)
