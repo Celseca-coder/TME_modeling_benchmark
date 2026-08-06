@@ -2,6 +2,7 @@
 from __future__ import annotations
 
 import copy
+import os
 
 import numpy as np
 import pandas as pd
@@ -340,14 +341,52 @@ class CellGraphSignatureCox(_CellGraphSignatureBase):
             raise ValueError("Cox training requires at least one observed event")
         optimizer = self._optimizer()
         best_loss, stale, best_state = float("inf"), 0, None
-        for _ in range(self.epochs):
+        for epoch in range(self.epochs):
             self.network.train()
+
+            # Keeping the autograd graph for every region until the full Cox
+            # loss is formed makes memory grow with cohort size.  Compute the
+            # exact full-cohort gradient in two passes: first differentiate the
+            # Cox objective with respect to detached scalar region risks, then
+            # recompute and backpropagate one region at a time.  Restoring RNG
+            # states keeps dropout identical between the two passes.
+            cpu_states = []
+            cuda_states = []
+            risk_values = []
+            with torch.no_grad():
+                for graphs in region_graphs:
+                    cpu_states.append(torch.random.get_rng_state())
+                    if str(self.device).startswith("cuda"):
+                        cuda_states.append(torch.cuda.get_rng_state(self.device))
+                    risk_values.append(
+                        self._graph_logits(
+                            graphs, training=self.network.training
+                        ).mean(dim=0).squeeze()
+                    )
+
+            detached_risk = torch.stack(risk_values).detach().requires_grad_(True)
+            detached_loss = self._breslow_loss(detached_risk, time, event)
+            risk_gradient, = torch.autograd.grad(detached_loss, detached_risk)
+
             optimizer.zero_grad()
-            risk = self._region_logits(region_graphs).squeeze(1)
-            loss = self._breslow_loss(risk, time, event)
-            loss.backward()
+            for region_i, graphs in enumerate(region_graphs):
+                torch.random.set_rng_state(cpu_states[region_i])
+                if str(self.device).startswith("cuda"):
+                    torch.cuda.set_rng_state(cuda_states[region_i], self.device)
+                risk = self._graph_logits(
+                    graphs, training=self.network.training
+                ).mean(dim=0).squeeze()
+                risk.backward(gradient=risk_gradient[region_i])
             optimizer.step()
-            value = float(loss.detach())
+            value = float(detached_loss.detach())
+            if os.environ.get("BENCHMARK_PROGRESS") and (
+                epoch == 0 or (epoch + 1) % 5 == 0 or epoch + 1 == self.epochs
+            ):
+                print(
+                    f"      Cell-Graph Cox epoch {epoch + 1}/{self.epochs} "
+                    f"loss={value:.6f}",
+                    flush=True,
+                )
             if value < best_loss - 1e-7:
                 best_loss, stale = value, 0
                 best_state = copy.deepcopy(self.network.state_dict())
