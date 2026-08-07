@@ -1,5 +1,3 @@
-"""Expose the features package API."""
-
 from .basic_feats import CompositionFeaturizer, MeanExpressionFeaturizer
 # from .distance_feats import CrossTypeDistanceFeatures
 # from .proximity_feats import ProximityFeatures
@@ -8,5 +6,5 @@ from .density_feats import CellTypeDensityFeaturizer
 from .spatial_distance import SpatialDistanceFeaturizer
 from .point_pattern import PointPatternFeaturizer
 from .mixing import MixingFeaturizer
-from .patch_feats import PatchBasedFeaturizer 
-from .cellular_neighborhood import CellularNeighborhoodFeaturizer
+from .patch_feats import PatchBasedFeaturizer
+from .attention_mil import HandcraftedAttentionMILFeaturizer
