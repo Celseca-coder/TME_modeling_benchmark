@@ -1,0 +1,33 @@
+name: Python application UTAG test automation
+on:
+  push:
+    branches: [main, dev]
+  pull_request:
+    branches: [main, dev]
+permissions:
+  contents: read
+jobs:
+  build:
+    name: Test on ${{ matrix.os }} / py${{ matrix.python-version }}
+    strategy:
+      matrix:
+        os: ['ubuntu-latest', 'macos-latest']
+        python-version: ['3.11', '3.12', '3.13', '3.14']
+      fail-fast: false
+    runs-on: ${{ matrix.os }}
+    steps:
+      - uses: actions/checkout@v4
+
+      - name: Install uv
+        uses: astral-sh/setup-uv@v4
+        with:
+          enable-cache: true
+
+      - name: Set up Python ${{ matrix.python-version }}
+        run: uv python install ${{ matrix.python-version }}
+
+      - name: Install dependencies
+        run: uv sync --group test
+
+      - name: Test with pytest
+        run: uv run pytest utag/tests/utag_test.py

@@ -1,0 +1,157 @@
+# PIP, using PEP621
+[project]
+name = "utag"
+authors = [
+    {name = "Junbum Kim", email = "juk4007@med.cornell.edu"},
+    {name = "Andre Rendeiro", email = "afrendeiro@gmail.com"},
+]
+description = "Unsupervised discovery of tissue architechture with graphs (UTAG)"
+readme = "README.md"
+keywords = [
+    "computational biology",
+    "bioinformatics",
+    "imaging",
+    "multiplexed imaging",
+]
+classifiers = [
+    "Programming Language :: Python :: 3 :: Only",
+    "Programming Language :: Python :: 3.11",
+    "Programming Language :: Python :: 3.12",
+    "Programming Language :: Python :: 3.13",
+    "Programming Language :: Python :: 3.14",
+    "Development Status :: 3 - Beta",
+    "Typing :: Typed",
+    "Topic :: Scientific/Engineering :: Bio-Informatics",
+]
+license = "GPL-3.0-or-later"
+
+requires-python = ">=3.11,<3.15"
+dependencies = [
+    "numpy",
+    "pandas",
+    "anndata",
+    "scanpy>=1.9.3,<1.12",
+    "parc",
+    "squidpy>=1.4",
+    "scipy",
+    "matplotlib",
+    "tqdm",
+    "networkx",
+    "parmap",
+    "scikit-learn"
+]
+dynamic = ['version']
+
+[project.urls]
+homepage = "https://github.com/ElementoLab/utag"
+documentation = "https://github.com/ElementoLab/utag/blob/main/README.md"
+repository = "https://github.com/ElementoLab/utag"
+
+[project.optional-dependencies]
+dev = [
+    "ipython",
+    "black[d]",
+    "mypy",
+    "pylint",
+    "git-lint",
+    "pytest",
+    "rich",
+    "PyQt5",
+]
+test = [
+    "pytest>=6",
+    "pytest-cov",
+]
+doc = [
+    "Sphinx",
+    "sphinx-issues",
+    "sphinx-rtd-theme",
+    "sphinx-autodoc-typehints"
+]
+
+[tool.uv]
+default-groups = ["dev", "test", "doc"]
+
+[dependency-groups]
+dev = [
+    "ipython",
+    "black[d]",
+    "mypy",
+    "pylint",
+    "git-lint",
+    "pytest",
+    "rich",
+]
+test = [
+    "pytest>=6",
+    "pytest-cov",
+]
+doc = [
+    "Sphinx",
+    "sphinx-issues",
+    "sphinx-rtd-theme",
+    "sphinx-autodoc-typehints"
+]
+
+[build-system]
+requires = ["setuptools","setuptools_scm[toml]>=6.0"]
+build-backend = "setuptools.build_meta"
+
+[tool.setuptools_scm]
+write_to = "utag/_version.py"
+write_to_template = 'version = __version__ = "{version}"'
+
+[tool.black]
+line-length = 90
+target-version = ['py312']
+include = '\.pyi?$'
+exclude = '''
+
+(
+  /(
+      \.eggs         # exclude a few common directories in the
+    | \.git          # root of the project
+    | \.hg
+    | \.mypy_cache
+    | \.tox
+    | \.venv
+    | _build
+    | buck-out
+    | build
+    | dist
+  )/
+  | foo.py           # also separately exclude a file named foo.py in
+                     # the root of the project
+)
+'''
+
+[tool.mypy]
+python_version = '3.12'
+warn_return_any = true
+warn_unused_configs = true
+
+# Packages without type annotations in shed yet
+[[tool.mypy.overrides]]
+module = [
+    'numpy.*',
+    'pandas.*',
+    'scipy.*',
+    'skimage.*',
+    'matplotlib.*',
+    'networkx.*',
+    #
+    'utag.*'
+]
+ignore_missing_imports = true
+
+[tool.pytest.ini_options]
+minversion = "6.0"
+addopts = "-ra -q --strict-markers"
+testpaths = [
+    "tests",
+    "integration",
+]
+markers = [
+    'slow', # 'marks tests as slow (deselect with "-m 'not slow'")',
+    'serial'
+]

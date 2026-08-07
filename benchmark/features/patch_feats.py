@@ -27,7 +27,10 @@ class PatchBasedFeaturizer(BaseFeatureExtractor):
     step_um : float, default=None
         Step size between windows (if None, equals window_size, i.e. non-overlapping).
     feature_type : {"composition", "expression"}, default="composition"
-        What to compute per window: cell-type fractions or mean expression of markers.
+        Legacy single-group interface. Ignored when ``feature_groups`` is supplied.
+    feature_groups : tuple of {"composition", "expression"}, optional
+        One or both local feature groups. With both groups, cell-type fractions and
+        mean marker expression are concatenated before the fixed statistical pooling.
     cell_type_col : str, default="cell_type"
         Column name for cell types (used only for composition).
     aggregations : tuple, default=("mean", "max", "std")
@@ -45,6 +48,7 @@ class PatchBasedFeaturizer(BaseFeatureExtractor):
         window_size_um: float = 100,
         step_um: float | None = None,
         feature_type: str = "composition",
+        feature_groups: tuple[str, ...] | None = None,
         cell_type_col: str = "cell_type",
         aggregations: tuple[str, ...] = ("mean", "max", "std"),
         quantiles: tuple[float, ...] = (0.25, 0.5, 0.75),
@@ -54,23 +58,20 @@ class PatchBasedFeaturizer(BaseFeatureExtractor):
         self.window_size = window_size_um
         self.step = step_um if step_um is not None else window_size_um
         self.feature_type = feature_type
+        self.feature_groups = tuple(feature_groups or (feature_type,))
+        unknown = set(self.feature_groups) - {"composition", "expression"}
+        if unknown:
+            raise ValueError(f"Unknown feature group(s): {sorted(unknown)}")
         self.cell_type_col = cell_type_col
         self.aggregations = aggregations
         self.quantiles = quantiles
         self.use_tissue_mask = use_tissue_mask
         self.min_cells = min_cells_per_window
-        self.vocab_: list[str] = []   # cell types or markers
+        self.cell_types_: list[str] = []
+        self.markers_: list[str] = []
+        self.vocab_: list[str] = []   # prefixed output dimensions
 
     # -- vocabulary -------------------------------------------------------
-    def _get_vocab(self, region: RegionData) -> list[str]:
-        if self.feature_type == "composition":
-            col = self._col(region)
-            if col is None:
-                raise ValueError(f"Region {region.region_id} has no cell-type column")
-            return sorted(region.cell_types[col].dropna().unique())
-        else:  # expression
-            return sorted(region.expression.columns.tolist())
-
     def _col(self, region: RegionData) -> str | None:
         if self.cell_type_col in region.cell_types.columns:
             return self.cell_type_col
@@ -79,11 +80,28 @@ class PatchBasedFeaturizer(BaseFeatureExtractor):
         return None
 
     def fit(self, regions: list[RegionData]) -> "PatchBasedFeaturizer":
-        # Collect vocabulary from all training regions
-        vocab_set = set()
+        cell_types: set[str] = set()
+        marker_sets: list[set[str]] = []
         for r in regions:
-            vocab_set.update(self._get_vocab(r))
-        self.vocab_ = sorted(vocab_set)
+            if "composition" in self.feature_groups:
+                col = self._col(r)
+                if col is None:
+                    raise ValueError(f"Region {r.region_id} has no cell-type column")
+                cell_types.update(r.cell_types[col].dropna().astype(str).unique())
+            if "expression" in self.feature_groups:
+                marker_sets.append(set(map(str, r.expression.columns)))
+        self.cell_types_ = sorted(cell_types)
+        # Panel intersection is necessary for cohort-transfer tasks: absent channels
+        # must not be confused with truly zero expression.
+        common_markers = set.intersection(*marker_sets) if marker_sets else set()
+        self.markers_ = sorted(common_markers)
+        self.vocab_ = []
+        if "composition" in self.feature_groups:
+            self.vocab_.extend(f"composition__{x}" for x in self.cell_types_)
+        if "expression" in self.feature_groups:
+            self.vocab_.extend(f"expression__{x}" for x in self.markers_)
+        if not self.vocab_:
+            raise ValueError("No patch feature dimensions are available")
         return self
 
     # -- feature names ----------------------------------------------------
@@ -102,7 +120,8 @@ class PatchBasedFeaturizer(BaseFeatureExtractor):
     # -- window generation ------------------------------------------------
     def _get_windows(self, region: RegionData) -> list[tuple[float, float, float, float]]:
         """Return list of (xmin, ymin, xmax, ymax) for each window."""
-        coords = region.coordinates[["x", "y"]].to_numpy(float)
+        coords = (region.coordinates[["x", "y"]].to_numpy(float)
+                  * float(region.microns_per_pixel))
         if len(coords) == 0:
             return []
         xmin, xmax = coords[:, 0].min(), coords[:, 0].max()
@@ -129,7 +148,8 @@ class PatchBasedFeaturizer(BaseFeatureExtractor):
     # -- extract per-window feature vector -------------------------------
     def _window_feature(self, region: RegionData, win: tuple) -> np.ndarray | None:
         xmin, ymin, xmax, ymax = win
-        coords = region.coordinates[["x", "y"]].to_numpy(float)
+        raw_coords = region.coordinates[["x", "y"]].to_numpy(float)
+        coords = raw_coords * float(region.microns_per_pixel)
         # Find cells inside window
         inside = (coords[:, 0] >= xmin) & (coords[:, 0] < xmax) & \
                  (coords[:, 1] >= ymin) & (coords[:, 1] < ymax)
@@ -138,14 +158,15 @@ class PatchBasedFeaturizer(BaseFeatureExtractor):
 
         # Possibly restrict to tissue mask
         if self.use_tissue_mask:
-            in_tissue = region.polygon_contains(coords, "tissue")
+            in_tissue = region.polygon_contains(raw_coords, "tissue")
             if in_tissue is not None:
                 inside = inside & in_tissue
                 if not inside.any():
                     return None
 
         # Count cells inside window
-        if self.feature_type == "composition":
+        parts: list[np.ndarray] = []
+        if "composition" in self.feature_groups:
             col = self._col(region)
             if col is None:
                 return None
@@ -156,21 +177,22 @@ class PatchBasedFeaturizer(BaseFeatureExtractor):
                 return None
             # Compute fractions (map to vocab)
             counts = cells_in_window.value_counts()
-            vec = np.zeros(len(self.vocab_), dtype=float)
-            for i, ct in enumerate(self.vocab_):
-                vec[i] = counts.get(ct, 0) / n
-            return vec
-        else:  # expression
+            comp = np.zeros(len(self.cell_types_), dtype=float)
+            for i, ct in enumerate(self.cell_types_):
+                comp[i] = counts.get(ct, 0) / n
+            parts.append(comp)
+        if "expression" in self.feature_groups:
             expr = region.expression.iloc[inside]  # subset of cells
             if len(expr) < self.min_cells:
                 return None
             # Mean expression per marker
             mean_expr = expr.mean(axis=0)
             # Map to vocab order (markers present in training)
-            vec = np.zeros(len(self.vocab_), dtype=float)
-            for i, m in enumerate(self.vocab_):
-                vec[i] = mean_expr.get(m, np.nan)  # if marker missing -> NaN
-            return vec
+            expr_vec = np.zeros(len(self.markers_), dtype=float)
+            for i, marker in enumerate(self.markers_):
+                expr_vec[i] = mean_expr.get(marker, np.nan)
+            parts.append(expr_vec)
+        return np.concatenate(parts)
 
     # -- extraction -------------------------------------------------------
     def extract_region(self, region: RegionData) -> dict[str, float]:

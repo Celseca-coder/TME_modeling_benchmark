@@ -3,3 +3,4 @@ from .linear import LinearClassifier, LinearCox
 from .forest import RandomForestModel
 from .boosting import GradientBoostingModel
 from .mil import NeighborhoodMILModel
+from .attention_mil import AttentionMILModel

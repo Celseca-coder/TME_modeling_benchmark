@@ -27,21 +27,23 @@ def model_factory(task_cfg, seed):
     return LinearCox(seed=seed) if task_cfg["type"] == "survival" else LinearClassifier(seed=seed)
 
 
-def run(dataset_names, seeds, data_root=None) -> pd.DataFrame:
+def run(dataset_names, seeds, args) -> pd.DataFrame:
     rows = []
     for name in dataset_names:
-        ds = load_dataset(name, data_root=data_root)
+        ds = load_dataset(name, data_root=args.data_root)
         print(f"=== {name} ===")
 
         # (A) CV
         for task in ds.task_ids:
             metric = PRIMARY_METRIC[ds.get_task_config(task)["type"]]
             featurizer = lambda: PatchBasedFeaturizer(
-                window_size_um=100,
-                step_um=50,
-                feature_type="composition",   # can be changed via args later
-                aggregations=("mean", "max", "std", "quantile"),
-                quantiles=(0.25, 0.5, 0.75),
+                window_size_um=args.window_size,
+                step_um=args.step,
+                feature_groups=tuple(args.feature_groups),
+                aggregations=tuple(args.aggregations),
+                quantiles=tuple(args.quantiles),
+                min_cells_per_window=args.min_cells,
+                use_tissue_mask=not args.no_tissue_mask,
             )
             fm = cross_validate(ds, task, featurizer, model_factory, seeds=seeds, normalize=False)
             mean, sd = summarize_folds(fm, metric)
@@ -53,12 +55,14 @@ def run(dataset_names, seeds, data_root=None) -> pd.DataFrame:
         for gt in ds.validation_config.get("generalization_tests", []):
             cell_type_col = gt.get("cell_type_col", "cell_type")
             featurizer = lambda c=cell_type_col: PatchBasedFeaturizer(
-                window_size_um=100,
-                step_um=50,
-                feature_type="composition",
+                window_size_um=args.window_size,
+                step_um=args.step,
+                feature_groups=tuple(args.feature_groups),
                 cell_type_col=c,
-                aggregations=("mean", "max", "std", "quantile"),
-                quantiles=(0.25, 0.5, 0.75),
+                aggregations=tuple(args.aggregations),
+                quantiles=tuple(args.quantiles),
+                min_cells_per_window=args.min_cells,
+                use_tissue_mask=not args.no_tissue_mask,
             )
             for task in gt.get("tasks", ds.task_ids):
                 metric = PRIMARY_METRIC[ds.get_task_config(task)["type"]]
@@ -81,16 +85,23 @@ def main():
     ap.add_argument("--seeds", type=int, nargs="*", default=[0, 1, 2])
     ap.add_argument("--output", default=str(_CODE / "results" / "patch_benchmark.csv"))
     ap.add_argument("--data-root", default=None)
-    ap.add_argument("--window-size", type=float, default=100, help="Window side length (µm)")
-    ap.add_argument("--step", type=float, default=50, help="Step size (µm)")
-    ap.add_argument("--feature-type", choices=["composition", "expression"], default="composition")
+    ap.add_argument("--window-size", type=float, default=100, help="Window side length (um)")
+    ap.add_argument("--step", type=float, default=50, help="Step size (um)")
+    ap.add_argument(
+        "--feature-groups", nargs="+", choices=["composition", "expression"],
+        default=["composition"],
+        help="One or both per-window feature groups.",
+    )
+    ap.add_argument(
+        "--aggregations", nargs="+", choices=["mean", "max", "min", "std", "quantile"],
+        default=["mean", "max", "std", "quantile"],
+    )
+    ap.add_argument("--quantiles", nargs="+", type=float, default=[0.25, 0.5, 0.75])
+    ap.add_argument("--min-cells", type=int, default=10)
+    ap.add_argument("--no-tissue-mask", action="store_true")
     args = ap.parse_args()
 
-    # Override default featurizer with command-line args? For simplicity, we use fixed params in run.
-    # If we want to use args, we need to modify run() to accept them. For now, run uses hardcoded values.
-    # But we could pass them via lambda if needed.
-
-    df = run(args.datasets or list_datasets(), args.seeds, data_root=args.data_root)
+    df = run(args.datasets or list_datasets(), args.seeds, args)
     df["score"] = df.apply(lambda r: f"{r['mean']:.3f} ± {r['sd']:.3f}", axis=1)
     out = Path(args.output)
     out.parent.mkdir(parents=True, exist_ok=True)
