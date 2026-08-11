@@ -1,0 +1,116 @@
+dataset,task,scheme,model,class,feature,mean_abs_shap,sd_abs_shap,mean_shap,value_shap_spearman,top_fold_frequency,n_fold_models,n_explained_regions,direction_consistency,direction
+bc_jackson2020,clinical_type,Basel_to_Zurich,logistic,HR+HER2+,tcn_fraction__5,0.12551205870310367,0.0026673903396381674,0.02923432071826269,-1.0,1.0,3,600,1.0,higher value decreases prediction
+bc_jackson2020,clinical_type,Basel_to_Zurich,logistic,HR+HER2+,tcn_fraction__3,0.07340997505874715,0.002115745234112758,-0.011362435766299804,-1.0,1.0,3,600,1.0,higher value decreases prediction
+bc_jackson2020,clinical_type,Basel_to_Zurich,logistic,HR+HER2+,tcn_fraction__1,0.06300970242676135,0.0034034496089638015,0.006939769984022207,1.0,1.0,3,600,1.0,higher value increases prediction
+bc_jackson2020,clinical_type,Basel_to_Zurich,logistic,HR+HER2+,tcn_fraction__2,0.0,0.0,0.0,,1.0,3,600,,unclear
+bc_jackson2020,clinical_type,Basel_to_Zurich,logistic,HR+HER2+,tcn_fraction__4,0.0,0.0,0.0,,1.0,3,600,,unclear
+bc_jackson2020,clinical_type,Basel_to_Zurich,logistic,HR+HER2-,tcn_fraction__5,0.054634184354980374,0.0049356427768387345,-0.012751895198167376,1.0,1.0,3,600,1.0,higher value increases prediction
+bc_jackson2020,clinical_type,Basel_to_Zurich,logistic,HR+HER2-,tcn_fraction__3,0.008484179622908126,0.0028718973082367187,-0.001266367001598861,-1.0,1.0,3,600,1.0,higher value decreases prediction
+bc_jackson2020,clinical_type,Basel_to_Zurich,logistic,HR+HER2-,tcn_fraction__1,0.0,0.0,0.0,,1.0,3,600,,unclear
+bc_jackson2020,clinical_type,Basel_to_Zurich,logistic,HR+HER2-,tcn_fraction__2,0.0,0.0,0.0,,1.0,3,600,,unclear
+bc_jackson2020,clinical_type,Basel_to_Zurich,logistic,HR+HER2-,tcn_fraction__4,0.0,0.0,0.0,,1.0,3,600,,unclear
+bc_jackson2020,clinical_type,Basel_to_Zurich,logistic,HR-HER2+,tcn_fraction__3,0.2114739651223377,0.010431153747599904,0.03293767708942355,1.0,1.0,3,600,1.0,higher value increases prediction
+bc_jackson2020,clinical_type,Basel_to_Zurich,logistic,HR-HER2+,tcn_fraction__1,0.134799190421943,0.007280352370311939,-0.014846525426118052,-1.0,1.0,3,600,1.0,higher value decreases prediction
+bc_jackson2020,clinical_type,Basel_to_Zurich,logistic,HR-HER2+,tcn_fraction__2,0.09038082144735304,0.002917123528652634,-0.004137605129914966,1.0,1.0,3,600,1.0,higher value increases prediction
+bc_jackson2020,clinical_type,Basel_to_Zurich,logistic,HR-HER2+,tcn_fraction__5,0.02214601354030922,0.003877882438221245,0.005143025188233448,-1.0,1.0,3,600,1.0,higher value decreases prediction
+bc_jackson2020,clinical_type,Basel_to_Zurich,logistic,HR-HER2+,tcn_fraction__4,0.0,0.0,0.0,,1.0,3,600,,unclear
+bc_jackson2020,clinical_type,Basel_to_Zurich,logistic,TripleNeg,tcn_fraction__4,0.1887854091917913,0.00661252849199724,0.01195464263862659,-1.0,1.0,3,600,1.0,higher value decreases prediction
+bc_jackson2020,clinical_type,Basel_to_Zurich,logistic,TripleNeg,tcn_fraction__2,0.09775050082487217,0.0031554150033849125,0.004475010955986094,-1.0,1.0,3,600,1.0,higher value decreases prediction
+bc_jackson2020,clinical_type,Basel_to_Zurich,logistic,TripleNeg,tcn_fraction__3,0.029167793548308535,0.003973211052620167,0.004588462888256193,1.0,1.0,3,600,1.0,higher value increases prediction
+bc_jackson2020,clinical_type,Basel_to_Zurich,logistic,TripleNeg,tcn_fraction__5,0.016340187895332984,0.004400351412907457,-0.0038267723796422824,1.0,1.0,3,600,1.0,higher value increases prediction
+bc_jackson2020,clinical_type,Basel_to_Zurich,logistic,TripleNeg,tcn_fraction__1,0.0,0.0,0.0,,1.0,3,600,,unclear
+bc_jackson2020,clinical_type,cv,logistic,HR+HER2+,tcn_fraction__5,0.11527256785691732,0.07996394862464426,-0.00572462446985064,-1.0,1.0,15,1110,1.0,higher value decreases prediction
+bc_jackson2020,clinical_type,cv,logistic,HR+HER2+,tcn_fraction__1,0.06142580965350608,0.06710521389230635,-0.0035945062251972817,1.0,1.0,15,1110,1.0,higher value increases prediction
+bc_jackson2020,clinical_type,cv,logistic,HR+HER2+,tcn_fraction__3,0.05565143178380849,0.04564590627406593,0.0036428421901974076,-1.0,1.0,15,1110,1.0,higher value decreases prediction
+bc_jackson2020,clinical_type,cv,logistic,HR+HER2+,tcn_fraction__4,0.025667758729887045,0.04085482214318371,0.003342483040031633,1.0,1.0,15,1110,1.0,higher value increases prediction
+bc_jackson2020,clinical_type,cv,logistic,HR+HER2+,tcn_fraction__2,0.012478278838672273,0.028029581232859282,0.0010537974138354709,1.0,1.0,15,1110,1.0,higher value increases prediction
+bc_jackson2020,clinical_type,cv,logistic,HR+HER2-,tcn_fraction__5,0.05744423941418184,0.05240754117711955,-0.0019526704356385247,1.0,1.0,15,1110,1.0,higher value increases prediction
+bc_jackson2020,clinical_type,cv,logistic,HR+HER2-,tcn_fraction__3,0.020254620360398046,0.022405636632698667,-0.002020937171140588,-0.8333333333333334,1.0,15,1110,0.9166666666666666,higher value decreases prediction
+bc_jackson2020,clinical_type,cv,logistic,HR+HER2-,tcn_fraction__4,0.018888508928559915,0.031319459493746316,-0.002358348133729395,0.6363636363636362,1.0,15,1110,0.8181818181818182,higher value increases prediction
+bc_jackson2020,clinical_type,cv,logistic,HR+HER2-,tcn_fraction__1,0.005429489994662834,0.011519747504168799,0.0009369132514474569,-0.9999999999999999,1.0,15,1110,1.0,higher value decreases prediction
+bc_jackson2020,clinical_type,cv,logistic,HR+HER2-,tcn_fraction__2,0.0008981301890261457,0.002397977352492527,-6.206885212478592e-05,0.3333333333333333,1.0,15,1110,0.6666666666666666,higher value increases prediction
+bc_jackson2020,clinical_type,cv,logistic,HR-HER2+,tcn_fraction__3,0.15564307263074778,0.056886123342479625,0.004202106896256853,1.0,1.0,15,1110,1.0,higher value increases prediction
+bc_jackson2020,clinical_type,cv,logistic,HR-HER2+,tcn_fraction__1,0.15070566061906546,0.07302900845188383,-0.0016879426257590238,-1.0,1.0,15,1110,1.0,higher value decreases prediction
+bc_jackson2020,clinical_type,cv,logistic,HR-HER2+,tcn_fraction__2,0.06568496804963742,0.08913706916676908,0.009083832873974835,1.0,1.0,15,1110,1.0,higher value increases prediction
+bc_jackson2020,clinical_type,cv,logistic,HR-HER2+,tcn_fraction__5,0.04785217300287507,0.07084967877944116,0.004684822596051128,-1.0,1.0,15,1110,1.0,higher value decreases prediction
+bc_jackson2020,clinical_type,cv,logistic,HR-HER2+,tcn_fraction__4,0.007677234116832447,0.01183526516455456,-0.00017050871450030372,-0.2,1.0,15,1110,0.6,higher value decreases prediction
+bc_jackson2020,clinical_type,cv,logistic,TripleNeg,tcn_fraction__4,0.13624899298194787,0.094375870071484,-0.007957669293447817,-0.9999999999999999,1.0,15,1110,1.0,higher value decreases prediction
+bc_jackson2020,clinical_type,cv,logistic,TripleNeg,tcn_fraction__2,0.06867986200083857,0.05820099715884736,-0.0008368380395194123,-1.0,1.0,15,1110,1.0,higher value decreases prediction
+bc_jackson2020,clinical_type,cv,logistic,TripleNeg,tcn_fraction__5,0.03642107628907779,0.03329667983750397,-0.001038883609693804,1.0,1.0,15,1110,1.0,higher value increases prediction
+bc_jackson2020,clinical_type,cv,logistic,TripleNeg,tcn_fraction__3,0.03581661538936914,0.042009946556663715,-0.0034656730398834952,0.8181818181818182,1.0,15,1110,0.9090909090909091,higher value increases prediction
+bc_jackson2020,clinical_type,cv,logistic,TripleNeg,tcn_fraction__1,0.010609637949190091,0.021904669811073613,-0.000645899173053897,1.0,1.0,15,1110,1.0,higher value increases prediction
+bc_jackson2020,response,cv,logistic,1,tcn_fraction__3,0.1699464901787879,0.05581368607619691,0.003083526262230994,-1.0,1.0,15,657,1.0,higher value decreases prediction
+bc_jackson2020,response,cv,logistic,1,tcn_fraction__2,0.04221998116744972,0.03856891034414169,0.001779551508076578,-0.8333333333333334,1.0,15,657,0.9166666666666666,higher value decreases prediction
+bc_jackson2020,response,cv,logistic,1,tcn_fraction__1,0.018709813296974485,0.03480295319122108,-0.0029219411895061538,0.42857142857142855,1.0,15,657,0.7142857142857143,higher value increases prediction
+bc_jackson2020,response,cv,logistic,1,tcn_fraction__4,0.01672656225414474,0.024077381812055324,-0.002174866324583457,1.0,1.0,15,657,1.0,higher value increases prediction
+bc_jackson2020,response,cv,logistic,1,tcn_fraction__5,0.013279489519044256,0.022379773332248293,0.001981868782608977,0.7142857142857143,1.0,15,657,0.8571428571428571,higher value increases prediction
+bc_metabric_ali2020,DSS,cv,cox,risk,tcn_fraction__2,0.059268124356014855,0.015871449240537454,0.0009660194646531409,-1.0,1.0,15,1596,1.0,higher value decreases prediction
+bc_metabric_ali2020,DSS,cv,cox,risk,tcn_fraction__5,0.044577831266749884,0.01899320331654531,0.0005972537769773787,1.0,1.0,15,1596,1.0,higher value increases prediction
+bc_metabric_ali2020,DSS,cv,cox,risk,tcn_fraction__3,0.02827252249694335,0.020233085407560417,-0.0001789273155103778,0.6,1.0,15,1596,0.8,higher value increases prediction
+bc_metabric_ali2020,DSS,cv,cox,risk,tcn_fraction__4,0.02379941320435133,0.010800772294122178,0.0019771977673436855,-0.7333333333333333,1.0,15,1596,0.8666666666666667,higher value decreases prediction
+bc_metabric_ali2020,DSS,cv,cox,risk,tcn_fraction__1,0.016097548897424853,0.013437167457188799,0.0005884939243840731,0.4666666666666667,1.0,15,1596,0.7333333333333333,higher value increases prediction
+bc_metabric_ali2020,ER_status,cv,logistic,1,tcn_fraction__5,0.18901325228225724,0.04146268981277148,-0.0020271707545857277,-1.0,1.0,15,1554,1.0,higher value decreases prediction
+bc_metabric_ali2020,ER_status,cv,logistic,1,tcn_fraction__4,0.12646840207931848,0.043265255524913705,0.00040915863517445303,1.0,1.0,15,1554,1.0,higher value increases prediction
+bc_metabric_ali2020,ER_status,cv,logistic,1,tcn_fraction__2,0.08573924199432831,0.03379691222929033,0.00039089226588280427,-1.0,1.0,15,1554,1.0,higher value decreases prediction
+bc_metabric_ali2020,ER_status,cv,logistic,1,tcn_fraction__3,0.015146840889564053,0.027303849187638514,-0.0002632400184115199,1.0,1.0,15,1554,1.0,higher value increases prediction
+bc_metabric_ali2020,ER_status,cv,logistic,1,tcn_fraction__1,0.015021781698194773,0.023308650383193796,0.0012337594247412104,1.0,1.0,15,1554,1.0,higher value increases prediction
+crc_schurch2020,CLR_DII,cv,logistic,1,tcn_fraction__4,0.062988022065542,0.08823665187872111,0.0018807943995183666,-0.9999999999999999,1.0,15,420,1.0,higher value decreases prediction
+crc_schurch2020,CLR_DII,cv,logistic,1,tcn_fraction__5,0.0445421245999624,0.07620749129772185,-0.0029614449944941864,-0.25,1.0,15,420,0.625,higher value decreases prediction
+crc_schurch2020,CLR_DII,cv,logistic,1,tcn_fraction__1,0.04447168210676022,0.050171075281055744,-0.0025482582840859374,0.9999999999999998,1.0,15,420,1.0,higher value increases prediction
+crc_schurch2020,CLR_DII,cv,logistic,1,tcn_fraction__3,0.026567909549951953,0.04981055383813161,-0.008856484603940592,-2.7755575615628914e-17,1.0,15,420,0.5,higher value decreases prediction
+crc_schurch2020,CLR_DII,cv,logistic,1,tcn_fraction__2,0.02307713457587648,0.027042225765518547,7.165320356210951e-05,-0.09090909090909087,1.0,15,420,0.5454545454545454,higher value decreases prediction
+crc_schurch2020,OS,cv,cox,risk,tcn_fraction__2,0.06017089298619221,0.03765582534428201,0.002055795882784028,-1.0,1.0,15,420,1.0,higher value decreases prediction
+crc_schurch2020,OS,cv,cox,risk,tcn_fraction__5,0.04151350813376166,0.03840073612478945,0.003123945725890143,0.6,1.0,15,420,0.8,higher value increases prediction
+crc_schurch2020,OS,cv,cox,risk,tcn_fraction__4,0.026419015277759795,0.03414024437229754,0.0015909337433785901,0.8666666666666666,1.0,15,420,0.9333333333333333,higher value increases prediction
+crc_schurch2020,OS,cv,cox,risk,tcn_fraction__3,0.024123531976601345,0.02985720316874923,0.004228088382704231,0.2,1.0,15,420,0.6,higher value increases prediction
+crc_schurch2020,OS,cv,cox,risk,tcn_fraction__1,0.01854734387057603,0.02045730474192408,0.0006093337679514819,-0.06666666666666662,1.0,15,420,0.5333333333333333,higher value decreases prediction
+hnc_wu2022,OS,cv,cox,risk,tcn_fraction__3,0.10704174666195747,0.034880397962983894,0.001147916611131067,1.0,1.0,15,924,1.0,higher value increases prediction
+hnc_wu2022,OS,cv,cox,risk,tcn_fraction__4,0.10113568575858047,0.022623719064313482,0.0017301048304443982,-1.0,1.0,15,924,1.0,higher value decreases prediction
+hnc_wu2022,OS,cv,cox,risk,tcn_fraction__1,0.043348287066033615,0.03042195791030285,-0.001725514718010787,-0.8666666666666667,1.0,15,924,0.9333333333333333,higher value decreases prediction
+hnc_wu2022,OS,cv,cox,risk,tcn_fraction__5,0.03957665366170931,0.021959132067927805,-0.0011695004678002837,-0.4666666666666667,1.0,15,924,0.7333333333333333,higher value decreases prediction
+hnc_wu2022,OS,cv,cox,risk,tcn_fraction__2,0.02765405727383617,0.01803840504341953,0.0006061773221779724,0.8666666666666667,1.0,15,924,0.9333333333333333,higher value increases prediction
+hnc_wu2022,hpv_status,cv,logistic,1,tcn_fraction__2,0.13209225743051428,0.06436517428123373,0.0021186058504582893,-1.0,1.0,15,924,1.0,higher value decreases prediction
+hnc_wu2022,hpv_status,cv,logistic,1,tcn_fraction__4,0.12208428893093001,0.04499100075540887,-0.003309730667687516,1.0,1.0,15,924,1.0,higher value increases prediction
+hnc_wu2022,hpv_status,cv,logistic,1,tcn_fraction__3,0.04931370359577978,0.06507610128105802,0.009599538547138707,1.0,1.0,15,924,1.0,higher value increases prediction
+hnc_wu2022,hpv_status,cv,logistic,1,tcn_fraction__1,0.02529363065505611,0.035309007303464805,-0.0030029903357669872,-1.0,1.0,15,924,1.0,higher value decreases prediction
+hnc_wu2022,hpv_status,cv,logistic,1,tcn_fraction__5,0.021293180476696368,0.031940847025998864,0.0038397297778546354,-0.33333333333333326,1.0,15,924,0.6666666666666666,higher value decreases prediction
+hnc_wu2022,primary_outcome,UPMC_to_DFCI,logistic,1,tcn_fraction__4,0.25947294493217626,7.581842581835823e-05,-0.10707267856140423,1.0,1.0,3,174,1.0,higher value increases prediction
+hnc_wu2022,primary_outcome,UPMC_to_DFCI,logistic,1,tcn_fraction__3,0.1874266655070895,6.838889107511244e-05,-0.025332920436536996,-1.0,1.0,3,174,1.0,higher value decreases prediction
+hnc_wu2022,primary_outcome,UPMC_to_DFCI,logistic,1,tcn_fraction__1,0.08613319655942604,6.160583492250554e-05,0.033409764207119025,1.0,1.0,3,174,1.0,higher value increases prediction
+hnc_wu2022,primary_outcome,UPMC_to_DFCI,logistic,1,tcn_fraction__2,0.06044812594634508,6.638067062832292e-05,-0.024847776981167014,-1.0,1.0,3,174,1.0,higher value decreases prediction
+hnc_wu2022,primary_outcome,UPMC_to_DFCI,logistic,1,tcn_fraction__5,0.0,0.0,0.0,,1.0,3,174,,unclear
+hnc_wu2022,primary_outcome,cv,logistic,1,tcn_fraction__4,0.11608713858122406,0.04673095638861988,-0.0015042984221726268,1.0,1.0,15,924,1.0,higher value increases prediction
+hnc_wu2022,primary_outcome,cv,logistic,1,tcn_fraction__3,0.10370303023208056,0.03256007841108923,-0.0010214129567247066,-1.0,1.0,15,924,1.0,higher value decreases prediction
+hnc_wu2022,primary_outcome,cv,logistic,1,tcn_fraction__1,0.038934142958350244,0.03082342903645926,0.0007117045775804664,1.0,1.0,15,924,1.0,higher value increases prediction
+hnc_wu2022,primary_outcome,cv,logistic,1,tcn_fraction__2,0.03792440884619874,0.04561948528665448,-0.002445873538352013,-1.0,1.0,15,924,1.0,higher value decreases prediction
+hnc_wu2022,primary_outcome,cv,logistic,1,tcn_fraction__5,0.011832767622525171,0.01637975908537043,-0.00019268069821057844,-1.850371707708594e-17,1.0,15,924,0.5,higher value decreases prediction
+luad_sorin2023,OS,cv,cox,risk,tcn_fraction__5,0.04038362070996209,0.023028662568092453,0.0009079100945258155,0.8666666666666667,1.0,15,1248,0.9333333333333333,higher value increases prediction
+luad_sorin2023,OS,cv,cox,risk,tcn_fraction__3,0.03233803726620653,0.016393770875943004,-0.00021210079267353703,-0.8666666666666667,1.0,15,1248,0.9333333333333333,higher value decreases prediction
+luad_sorin2023,OS,cv,cox,risk,tcn_fraction__1,0.021839941896199977,0.018258896473410665,0.00018547593518198884,-0.4666666666666667,1.0,15,1248,0.7333333333333333,higher value decreases prediction
+luad_sorin2023,OS,cv,cox,risk,tcn_fraction__2,0.021172005030821724,0.009756562964100556,6.107528148515605e-05,1.0,1.0,15,1248,1.0,higher value increases prediction
+luad_sorin2023,OS,cv,cox,risk,tcn_fraction__4,0.014368060820415618,0.011036680097072255,-0.0009500120395726642,0.2,1.0,15,1248,0.6,higher value increases prediction
+nsclc_aung2025,immunotherapy_response,Yale_to_UQ,logistic,1,tcn_fraction__5,0.2861458999479609,9.282578981095233e-06,-0.2008657108480989,0.9999999999999997,1.0,3,105,1.0,higher value increases prediction
+nsclc_aung2025,immunotherapy_response,Yale_to_UQ,logistic,1,tcn_fraction__4,0.105225166696624,5.426046793102037e-06,0.039031168778290416,0.9999999999999997,1.0,3,105,1.0,higher value increases prediction
+nsclc_aung2025,immunotherapy_response,Yale_to_UQ,logistic,1,tcn_fraction__2,0.028261777619857705,7.94922282608333e-06,0.0007915982020773703,-0.9999999999999997,1.0,3,105,1.0,higher value decreases prediction
+nsclc_aung2025,immunotherapy_response,Yale_to_UQ,logistic,1,tcn_fraction__1,0.0,0.0,0.0,,1.0,3,105,,unclear
+nsclc_aung2025,immunotherapy_response,Yale_to_UQ,logistic,1,tcn_fraction__3,0.0,0.0,0.0,,1.0,3,105,,unclear
+nsclc_aung2025,immunotherapy_response,Yale_to_YaleExt,logistic,1,tcn_fraction__5,0.3844931694473299,1.2472966461199261e-05,-0.15179328999422573,1.0,1.0,3,84,1.0,higher value increases prediction
+nsclc_aung2025,immunotherapy_response,Yale_to_YaleExt,logistic,1,tcn_fraction__4,0.11684962591576979,6.025474303164634e-06,-0.0034033718115334447,1.0,1.0,3,84,1.0,higher value increases prediction
+nsclc_aung2025,immunotherapy_response,Yale_to_YaleExt,logistic,1,tcn_fraction__2,0.03949711117316933,1.1109398068489958e-05,3.382439094200559e-05,-0.9999999999999997,1.0,3,84,1.0,higher value decreases prediction
+nsclc_aung2025,immunotherapy_response,Yale_to_YaleExt,logistic,1,tcn_fraction__1,0.0,0.0,0.0,,1.0,3,84,,unclear
+nsclc_aung2025,immunotherapy_response,Yale_to_YaleExt,logistic,1,tcn_fraction__3,0.0,0.0,0.0,,1.0,3,84,,unclear
+nsclc_gnn_hoebel2026,OS,cv,cox,risk,tcn_fraction__2,0.03995643630389707,0.011910830977036234,-0.0005595902523918485,1.0,1.0,15,3000,1.0,higher value increases prediction
+nsclc_gnn_hoebel2026,OS,cv,cox,risk,tcn_fraction__3,0.016127335460184154,0.009574293662184045,-2.5302462613466414e-05,-0.8666666666666667,1.0,15,3000,0.9333333333333333,higher value decreases prediction
+nsclc_gnn_hoebel2026,OS,cv,cox,risk,tcn_fraction__4,0.010926502360481897,0.0055999573754464205,-0.0005391399943875454,-0.7333333333333333,1.0,15,3000,0.8666666666666667,higher value decreases prediction
+nsclc_gnn_hoebel2026,OS,cv,cox,risk,tcn_fraction__1,0.01024282863129639,0.007848486284012324,0.0001348879422602244,-0.8666666666666667,1.0,15,3000,0.9333333333333333,higher value decreases prediction
+nsclc_gnn_hoebel2026,OS,cv,cox,risk,tcn_fraction__5,0.005814915334973512,0.0049356509643301094,0.0001295388582142003,-0.4666666666666667,1.0,15,3000,0.7333333333333333,higher value decreases prediction
+nsclc_gnn_hoebel2026,stage_binary,cv,logistic,1,tcn_fraction__2,0.08483036315537992,0.023504777625277976,-0.0012307634738888884,1.0,1.0,15,3000,1.0,higher value increases prediction
+nsclc_gnn_hoebel2026,stage_binary,cv,logistic,1,tcn_fraction__5,0.038177443663096285,0.02195153801405159,-0.0003967935655020001,1.0,1.0,15,3000,1.0,higher value increases prediction
+nsclc_gnn_hoebel2026,stage_binary,cv,logistic,1,tcn_fraction__3,0.03803943426493938,0.019553590272874292,3.321103376164421e-05,-1.0,1.0,15,3000,1.0,higher value decreases prediction
+nsclc_gnn_hoebel2026,stage_binary,cv,logistic,1,tcn_fraction__1,0.016706357957827125,0.014916776457153861,-0.00025831983576022824,-1.0,1.0,15,3000,1.0,higher value decreases prediction
+nsclc_gnn_hoebel2026,stage_binary,cv,logistic,1,tcn_fraction__4,0.004671746310373825,0.0074338045527610605,-0.0004047835847106868,-0.6,1.0,15,3000,0.8,higher value decreases prediction
+tnbc_wang2023,pCR_all,cv,logistic,1,tcn_fraction__5,0.11181112716089407,0.04124638912238616,-0.00022264550780923994,1.0,1.0,15,2298,1.0,higher value increases prediction
+tnbc_wang2023,pCR_all,cv,logistic,1,tcn_fraction__1,0.06324244007557009,0.037941979861779704,0.00207087446112723,-1.0,1.0,15,2298,1.0,higher value decreases prediction
+tnbc_wang2023,pCR_all,cv,logistic,1,tcn_fraction__3,0.05530551537028613,0.03457925937456712,-0.0010000996895192114,-1.0,1.0,15,2298,1.0,higher value decreases prediction
+tnbc_wang2023,pCR_all,cv,logistic,1,tcn_fraction__4,0.03313200568439158,0.03601547487018919,0.0018448313893003033,0.9999999999999999,1.0,15,2298,1.0,higher value increases prediction
+tnbc_wang2023,pCR_all,cv,logistic,1,tcn_fraction__2,0.002949106380391338,0.008613532652461212,0.00015956125852830755,1.0,1.0,15,2298,1.0,higher value increases prediction
