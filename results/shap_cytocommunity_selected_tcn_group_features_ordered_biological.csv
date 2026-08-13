@@ -1,0 +1,20 @@
+analysis,method,dataset,task,scheme,model,class,feature
+SHAP,CytoCommunity,nsclc_aung2025,immunotherapy_response,Yale_to_YaleExt,logistic,1,TCN5: DC/B-cell/M1-enriched tumor niche
+SHAP,CytoCommunity,nsclc_aung2025,immunotherapy_response,Yale_to_UQ,logistic,1,TCN5: DC/B-cell/M1-enriched tumor niche
+SHAP,CytoCommunity,hnc_wu2022,primary_outcome,UPMC_to_DFCI,logistic,1,TCN4: dendritic/NK–proliferative tumor niche
+SHAP,CytoCommunity,bc_jackson2020,clinical_type,Basel_to_Zurich,logistic,HR-HER2+,TCN3: proliferative/p53+ tumor–macrophage niche
+SHAP,CytoCommunity,bc_metabric_ali2020,ER_status,cv,logistic,1,TCN5: Ki67+ HR- tumor–T/B immune niche
+SHAP,CytoCommunity,bc_jackson2020,clinical_type,Basel_to_Zurich,logistic,TripleNeg,TCN4: CK7+/apoptotic tumor–B-cell niche
+SHAP,CytoCommunity,bc_jackson2020,response,cv,logistic,1,TCN3: proliferative/p53+ tumor–macrophage niche
+SHAP,CytoCommunity,hnc_wu2022,hpv_status,cv,logistic,1,TCN2: PanCK-low tumor–stroma / Treg-like niche
+SHAP,CytoCommunity,bc_jackson2020,clinical_type,Basel_to_Zurich,logistic,HR+HER2+,TCN5: proliferative HR-high tumor–stroma niche
+SHAP,CytoCommunity,hnc_wu2022,primary_outcome,cv,logistic,1,TCN4: dendritic/NK–proliferative tumor niche
+SHAP,CytoCommunity,tnbc_wang2023,pCR_all,cv,logistic,1,TCN5: neutrophil/B-cell/TCF1+CD4 T niche
+SHAP,CytoCommunity,hnc_wu2022,OS,cv,cox,risk,TCN3: naive B/lymphocyte–proliferative tumor niche
+SHAP,CytoCommunity,nsclc_gnn_hoebel2026,stage_binary,cv,logistic,1,TCN2: PD-L1+/- tumor–immune niche
+SHAP,CytoCommunity,crc_schurch2020,CLR_DII,cv,logistic,1,TCN4: tumor–immune mixed / macrophage niche
+SHAP,CytoCommunity,crc_schurch2020,OS,cv,cox,risk,TCN2: monocyte/macrophage–smooth-muscle niche
+SHAP,CytoCommunity,bc_metabric_ali2020,DSS,cv,cox,risk,TCN2: hypoxic HR+ tumor–stroma niche
+SHAP,CytoCommunity,bc_jackson2020,clinical_type,Basel_to_Zurich,logistic,HR+HER2-,TCN5: proliferative HR-high tumor–stroma niche
+SHAP,CytoCommunity,nsclc_gnn_hoebel2026,OS,cv,cox,risk,TCN2: PD-L1+/- tumor–immune niche
+SHAP,CytoCommunity,luad_sorin2023,OS,cv,cox,risk,TCN2: cancer-dominant monocyte/endothelial niche

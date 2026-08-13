@@ -1,8 +1,9 @@
 #!/usr/bin/env python
 """Patch-based composition/expression + MIL aggregation baseline over all datasets, tasks and schemes.
 
-Feature: per region, divide into fixed-size windows, compute composition (or mean expression)
-per window, then aggregate with MIL-style pooling (mean, max, std, quantiles).
+Feature: per region, divide into fixed-size windows, compute global-style cell
+composition and mean expression per window, concatenate them, then aggregate with
+MIL-style pooling (mean, max, std, quantiles).
 """
 from __future__ import annotations
 
@@ -21,6 +22,7 @@ from benchmark.models.linear import LinearClassifier, LinearCox
 from benchmark.validation import (
     cross_validate, cohort_split_test, summarize_folds, PRIMARY_METRIC,
 )
+from benchmark.validation.selected_tasks import SELECTED_DATASETS, SELECTED_TRIPLES
 
 
 def model_factory(task_cfg, seed):
@@ -29,12 +31,16 @@ def model_factory(task_cfg, seed):
 
 def run(dataset_names, seeds, args) -> pd.DataFrame:
     rows = []
+    normalize = "expression" in args.feature_groups
+    selected = SELECTED_TRIPLES if args.selected_runs else None
     for name in dataset_names:
         ds = load_dataset(name, data_root=args.data_root)
         print(f"=== {name} ===")
 
         # (A) CV
         for task in ds.task_ids:
+            if selected is not None and (name, task, "cv") not in selected:
+                continue
             metric = PRIMARY_METRIC[ds.get_task_config(task)["type"]]
             featurizer = lambda: PatchBasedFeaturizer(
                 window_size_um=args.window_size,
@@ -45,7 +51,10 @@ def run(dataset_names, seeds, args) -> pd.DataFrame:
                 min_cells_per_window=args.min_cells,
                 use_tissue_mask=not args.no_tissue_mask,
             )
-            fm = cross_validate(ds, task, featurizer, model_factory, seeds=seeds, normalize=False)
+            fm = cross_validate(
+                ds, task, featurizer, model_factory,
+                seeds=seeds, normalize=normalize,
+            )
             mean, sd = summarize_folds(fm, metric)
             rows.append(dict(dataset=name, task=task, scheme="cv",
                              metric=metric, mean=mean, sd=sd, n=len(fm)))
@@ -65,8 +74,13 @@ def run(dataset_names, seeds, args) -> pd.DataFrame:
                 use_tissue_mask=not args.no_tissue_mask,
             )
             for task in gt.get("tasks", ds.task_ids):
+                if selected is not None and (name, task, gt["name"]) not in selected:
+                    continue
                 metric = PRIMARY_METRIC[ds.get_task_config(task)["type"]]
-                res = cohort_split_test(ds, task, gt, featurizer, model_factory, seeds=seeds, normalize=False)
+                res = cohort_split_test(
+                    ds, task, gt, featurizer, model_factory,
+                    seeds=seeds, normalize=normalize,
+                )
                 if not res:
                     continue
                 mean, sd = summarize_folds(res, metric)
@@ -82,6 +96,11 @@ def main():
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
     ap.add_argument("--datasets", nargs="*", default=None)
+    ap.add_argument(
+        "--selected-runs",
+        action="store_true",
+        help="Run only the 17 curated dataset/task/validation-scheme combinations.",
+    )
     ap.add_argument("--seeds", type=int, nargs="*", default=[0, 1, 2])
     ap.add_argument("--output", default=str(_CODE / "results" / "patch_benchmark.csv"))
     ap.add_argument("--data-root", default=None)
@@ -89,8 +108,11 @@ def main():
     ap.add_argument("--step", type=float, default=50, help="Step size (um)")
     ap.add_argument(
         "--feature-groups", nargs="+", choices=["composition", "expression"],
-        default=["composition"],
-        help="One or both per-window feature groups.",
+        default=["composition", "expression"],
+        help=(
+            "Per-window feature groups. By default, concatenate global-style "
+            "composition and mean expression before naive MIL pooling."
+        ),
     )
     ap.add_argument(
         "--aggregations", nargs="+", choices=["mean", "max", "min", "std", "quantile"],
@@ -101,7 +123,15 @@ def main():
     ap.add_argument("--no-tissue-mask", action="store_true")
     args = ap.parse_args()
 
-    df = run(args.datasets or list_datasets(), args.seeds, args)
+    if args.selected_runs:
+        requested = set(args.datasets) if args.datasets else None
+        dataset_names = [
+            name for name in SELECTED_DATASETS
+            if requested is None or name in requested
+        ]
+    else:
+        dataset_names = args.datasets or list_datasets()
+    df = run(dataset_names, args.seeds, args)
     df["score"] = df.apply(lambda r: f"{r['mean']:.3f} ± {r['sd']:.3f}", axis=1)
     out = Path(args.output)
     out.parent.mkdir(parents=True, exist_ok=True)

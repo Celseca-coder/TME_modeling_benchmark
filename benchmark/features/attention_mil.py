@@ -13,6 +13,7 @@ import pandas as pd
 
 from benchmark.data.dataset import RegionData
 from .base import BaseFeatureExtractor
+from .combined import CombinedCompositionExpressionFeaturizer
 
 
 class HandcraftedAttentionMILFeaturizer(BaseFeatureExtractor):
@@ -48,6 +49,7 @@ class HandcraftedAttentionMILFeaturizer(BaseFeatureExtractor):
         self.max_markers = max_markers
         self.cell_types_: list[str] = []
         self.markers_: list[str] = []
+        self.local_features_: CombinedCompositionExpressionFeaturizer | None = None
 
     def _col(self, region: RegionData) -> str | None:
         if self.cell_type_col in region.cell_types.columns:
@@ -57,20 +59,26 @@ class HandcraftedAttentionMILFeaturizer(BaseFeatureExtractor):
         return None
 
     def fit(self, regions: list[RegionData]) -> "HandcraftedAttentionMILFeaturizer":
-        cell_types: set[str] = set()
-        marker_sets: list[set[str]] = []
-        for region in regions:
-            col = self._col(region)
-            if col is not None:
-                cell_types.update(region.cell_types[col].dropna().astype(str).unique())
-            marker_sets.append(set(map(str, region.expression.columns)))
-        self.cell_types_ = sorted(cell_types)
-        # Use the training-panel intersection.  This is robust to cohorts with
-        # different panels and avoids inventing zero expression for absent markers.
-        common = set.intersection(*marker_sets) if marker_sets else set()
-        self.markers_ = sorted(common)
+        simple_groups = tuple(
+            group
+            for group in ("composition", "expression")
+            if group in self.feature_groups
+        )
+        if simple_groups:
+            self.local_features_ = CombinedCompositionExpressionFeaturizer(
+                cell_type_col=self.cell_type_col,
+                feature_groups=simple_groups,
+            ).fit(regions)
+            self.cell_types_ = self.local_features_.cell_types_
+            self.markers_ = self.local_features_.markers_
+        else:
+            self.local_features_ = None
+            self.cell_types_ = []
+            self.markers_ = []
         if self.max_markers is not None:
             self.markers_ = self.markers_[: self.max_markers]
+            if self.local_features_ is not None:
+                self.local_features_.expression.markers_ = self.markers_
         if not self.feature_names():
             raise ValueError("No local handcrafted features are available")
         return self
@@ -78,11 +86,11 @@ class HandcraftedAttentionMILFeaturizer(BaseFeatureExtractor):
     def feature_names(self) -> list[str]:
         names: list[str] = []
         if "composition" in self.feature_groups:
-            names.extend(f"local_frac_{x}" for x in self.cell_types_)
+            names.extend(f"composition__{x}" for x in self.cell_types_)
         if "density" in self.feature_groups:
             names.append("local_cell_density_per_mm2")
         if "expression" in self.feature_groups:
-            names.extend(f"local_mean_expr_{x}" for x in self.markers_)
+            names.extend(f"expression__{x}" for x in self.markers_)
         if "entropy" in self.feature_groups:
             names.append("local_celltype_entropy")
         return names
@@ -125,19 +133,27 @@ class HandcraftedAttentionMILFeaturizer(BaseFeatureExtractor):
                 continue
 
             values: list[float] = []
+            simple_values: dict[str, float] = {}
+            if self.local_features_ is not None:
+                cell_ids = region.coordinates.index[inside]
+                simple_values = self.local_features_.extract_cells(region, cell_ids)
             counts = pd.Series(dtype=float)
             if labels is not None:
                 counts = labels.iloc[inside].dropna().astype(str).value_counts()
             if "composition" in self.feature_groups:
-                denom = max(1.0, float(counts.sum()))
-                values.extend(float(counts.get(ct, 0.0) / denom) for ct in self.cell_types_)
+                values.extend(
+                    simple_values[f"composition__{cell_type}"]
+                    for cell_type in self.cell_types_
+                )
             if "density" in self.feature_groups:
                 # coordinates are interpreted in microns, as elsewhere in benchmark
                 area_mm2 = (self.window_size * self.window_size) / 1_000_000.0
                 values.append(float(n / area_mm2))
             if "expression" in self.feature_groups:
-                means = region.expression.iloc[inside].mean(axis=0)
-                values.extend(float(means.get(marker, np.nan)) for marker in self.markers_)
+                values.extend(
+                    simple_values[f"expression__{marker}"]
+                    for marker in self.markers_
+                )
             if "entropy" in self.feature_groups:
                 p = counts.to_numpy(float)
                 p = p / p.sum() if p.sum() else p

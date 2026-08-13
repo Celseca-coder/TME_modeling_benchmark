@@ -15,12 +15,22 @@ from benchmark.features import HandcraftedAttentionMILFeaturizer
 from benchmark.models import AttentionMILModel
 from benchmark.utils.registry import list_datasets, load_dataset
 from benchmark.validation import cross_validate, cohort_split_test, summarize_folds, PRIMARY_METRIC
+from benchmark.validation.selected_tasks import SELECTED_DATASETS, SELECTED_TRIPLES
 
 
 def run(args) -> pd.DataFrame:
     rows = []
-    names = args.datasets or list_datasets()
+    if args.selected_runs:
+        requested = set(args.datasets) if args.datasets else None
+        names = [
+            name for name in SELECTED_DATASETS
+            if requested is None or name in requested
+        ]
+    else:
+        names = args.datasets or list_datasets()
     groups = tuple(args.feature_groups)
+    normalize = args.normalize or "expression" in groups
+    selected = SELECTED_TRIPLES if args.selected_runs else None
     for dataset_i, name in enumerate(names, 1):
         ds = load_dataset(name, data_root=args.data_root)
         print(f"[{dataset_i}/{len(names)}] === {name} ===", flush=True)
@@ -46,12 +56,14 @@ def run(args) -> pd.DataFrame:
             )
 
         for task in ds.task_ids:
+            if selected is not None and (name, task, "cv") not in selected:
+                continue
             cfg = ds.get_task_config(task)
             if args.only_c_index and cfg["type"] != "survival":
                 continue
             metric = PRIMARY_METRIC[cfg["type"]]
             fm = cross_validate(ds, task, make_feat, make_model, seeds=args.seeds,
-                                normalize=args.normalize)
+                                normalize=normalize)
             mean, sd = summarize_folds(fm, metric)
             rows.append(dict(dataset=name, task=task, scheme="cv", metric=metric,
                              mean=mean, sd=sd, n=len(fm)))
@@ -60,6 +72,8 @@ def run(args) -> pd.DataFrame:
 
         for gt in ds.validation_config.get("generalization_tests", []):
             for task in gt.get("tasks", ds.task_ids):
+                if selected is not None and (name, task, gt["name"]) not in selected:
+                    continue
                 cfg = ds.get_task_config(task)
                 if args.only_c_index and cfg["type"] != "survival":
                     continue
@@ -67,7 +81,7 @@ def run(args) -> pd.DataFrame:
                 column = gt.get("cell_type_col", "cell_type")
                 feat = lambda c=column: make_feat(c)
                 fm = cohort_split_test(ds, task, gt, feat, make_model,
-                                       seeds=args.seeds, normalize=args.normalize)
+                                       seeds=args.seeds, normalize=normalize)
                 if not fm:
                     continue
                 mean, sd = summarize_folds(fm, metric)
@@ -82,6 +96,11 @@ def run(args) -> pd.DataFrame:
 def main():
     parser = argparse.ArgumentParser(description=__doc__)
     parser.add_argument("--datasets", nargs="*", default=None)
+    parser.add_argument(
+        "--selected-runs",
+        action="store_true",
+        help="Run only the 17 curated dataset/task/validation-scheme combinations.",
+    )
     parser.add_argument("--data-root", default=None)
     parser.add_argument("--seeds", nargs="*", type=int, default=[0, 1, 2])
     parser.add_argument("--window-size", type=float, default=100.0)
@@ -89,7 +108,11 @@ def main():
     parser.add_argument("--min-cells", type=int, default=10)
     parser.add_argument("--feature-groups", nargs="+",
                         choices=sorted(HandcraftedAttentionMILFeaturizer.VALID_GROUPS),
-                        default=["composition", "density", "expression", "entropy"])
+                        default=["composition", "expression"],
+                        help=(
+                            "Local feature groups. The default directly concatenates "
+                            "global-style composition and mean expression."
+                        ))
     parser.add_argument("--max-markers", type=int, default=None)
     parser.add_argument("--hidden-dim", type=int, default=64)
     parser.add_argument("--attention-dim", type=int, default=32)
@@ -100,7 +123,10 @@ def main():
     parser.add_argument("--patience", type=int, default=25)
     parser.add_argument("--max-instances", type=int, default=512)
     parser.add_argument("--device", default="auto", help="auto, cpu, cuda, or cuda:0")
-    parser.add_argument("--normalize", action="store_true")
+    parser.add_argument(
+        "--normalize", action="store_true",
+        help="Normalize regions; enabled automatically when expression is selected.",
+    )
     parser.add_argument("--no-tissue-mask", action="store_true")
     parser.add_argument("--only-c-index", action="store_true")
     parser.add_argument("--output", default=str(CODE_DIR / "results" / "attention_mil_benchmark.csv"))

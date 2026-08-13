@@ -28,6 +28,7 @@ _CODE = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(_CODE))
 
 from benchmark.features.basic_feats import CompositionFeaturizer, MeanExpressionFeaturizer
+from benchmark.features.combined import CombinedCompositionExpressionFeaturizer
 from benchmark.features.density_feats import CellTypeDensityFeaturizer
 from benchmark.features.mixing import MixingFeaturizer
 from benchmark.features.patch_feats import PatchBasedFeaturizer
@@ -37,24 +38,6 @@ from benchmark.utils.registry import list_datasets, load_dataset
 from benchmark.validation.stability_lasso import stability_lasso_cv
 
 LOGGER = logging.getLogger("stability_lasso")
-
-
-class _CombinedGlobalFeaturizer:
-    """Concatenate prefixed global composition and mean-expression features."""
-
-    def __init__(self, cell_type_col: str = "cell_type") -> None:
-        self.composition = CompositionFeaturizer(cell_type_col=cell_type_col)
-        self.expression = MeanExpressionFeaturizer()
-
-    def fit(self, regions):
-        self.composition.fit(regions)
-        self.expression.fit(regions)
-        return self
-
-    def transform(self, regions) -> pd.DataFrame:
-        composition = self.composition.transform(regions).add_prefix("composition__")
-        expression = self.expression.transform(regions).add_prefix("expression__")
-        return pd.concat([composition, expression], axis=1)
 
 
 def _configure_logging(
@@ -120,7 +103,9 @@ def _featurizer_factory(args, dataset):
     if args.feature_source == "expression":
         return lambda: MeanExpressionFeaturizer()
     if args.feature_source == "composition-expression":
-        return lambda: _CombinedGlobalFeaturizer(cell_type_col=args.cell_type_col)
+        return lambda: CombinedCompositionExpressionFeaturizer(
+            cell_type_col=args.cell_type_col
+        )
     if args.feature_source == "patch":
         return lambda: PatchBasedFeaturizer(
             window_size_um=args.window_size,

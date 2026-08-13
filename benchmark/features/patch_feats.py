@@ -15,6 +15,7 @@ from scipy.spatial import KDTree
 
 from benchmark.data.dataset import RegionData
 from .base import BaseFeatureExtractor
+from .combined import CombinedCompositionExpressionFeaturizer
 
 
 class PatchBasedFeaturizer(BaseFeatureExtractor):
@@ -70,6 +71,7 @@ class PatchBasedFeaturizer(BaseFeatureExtractor):
         self.cell_types_: list[str] = []
         self.markers_: list[str] = []
         self.vocab_: list[str] = []   # prefixed output dimensions
+        self.local_features_: CombinedCompositionExpressionFeaturizer | None = None
 
     # -- vocabulary -------------------------------------------------------
     def _col(self, region: RegionData) -> str | None:
@@ -80,28 +82,13 @@ class PatchBasedFeaturizer(BaseFeatureExtractor):
         return None
 
     def fit(self, regions: list[RegionData]) -> "PatchBasedFeaturizer":
-        cell_types: set[str] = set()
-        marker_sets: list[set[str]] = []
-        for r in regions:
-            if "composition" in self.feature_groups:
-                col = self._col(r)
-                if col is None:
-                    raise ValueError(f"Region {r.region_id} has no cell-type column")
-                cell_types.update(r.cell_types[col].dropna().astype(str).unique())
-            if "expression" in self.feature_groups:
-                marker_sets.append(set(map(str, r.expression.columns)))
-        self.cell_types_ = sorted(cell_types)
-        # Panel intersection is necessary for cohort-transfer tasks: absent channels
-        # must not be confused with truly zero expression.
-        common_markers = set.intersection(*marker_sets) if marker_sets else set()
-        self.markers_ = sorted(common_markers)
-        self.vocab_ = []
-        if "composition" in self.feature_groups:
-            self.vocab_.extend(f"composition__{x}" for x in self.cell_types_)
-        if "expression" in self.feature_groups:
-            self.vocab_.extend(f"expression__{x}" for x in self.markers_)
-        if not self.vocab_:
-            raise ValueError("No patch feature dimensions are available")
+        self.local_features_ = CombinedCompositionExpressionFeaturizer(
+            cell_type_col=self.cell_type_col,
+            feature_groups=self.feature_groups,
+        ).fit(regions)
+        self.cell_types_ = self.local_features_.cell_types_
+        self.markers_ = self.local_features_.markers_
+        self.vocab_ = self.local_features_.feature_names()
         return self
 
     # -- feature names ----------------------------------------------------
@@ -164,35 +151,16 @@ class PatchBasedFeaturizer(BaseFeatureExtractor):
                 if not inside.any():
                     return None
 
-        # Count cells inside window
-        parts: list[np.ndarray] = []
-        if "composition" in self.feature_groups:
-            col = self._col(region)
-            if col is None:
-                return None
-            labels = region.cell_types[col].reindex(region.coordinates.index).astype("object")
-            cells_in_window = labels.iloc[inside]
-            n = len(cells_in_window)
-            if n < self.min_cells:
-                return None
-            # Compute fractions (map to vocab)
-            counts = cells_in_window.value_counts()
-            comp = np.zeros(len(self.cell_types_), dtype=float)
-            for i, ct in enumerate(self.cell_types_):
-                comp[i] = counts.get(ct, 0) / n
-            parts.append(comp)
-        if "expression" in self.feature_groups:
-            expr = region.expression.iloc[inside]  # subset of cells
-            if len(expr) < self.min_cells:
-                return None
-            # Mean expression per marker
-            mean_expr = expr.mean(axis=0)
-            # Map to vocab order (markers present in training)
-            expr_vec = np.zeros(len(self.markers_), dtype=float)
-            for i, marker in enumerate(self.markers_):
-                expr_vec[i] = mean_expr.get(marker, np.nan)
-            parts.append(expr_vec)
-        return np.concatenate(parts)
+        if int(inside.sum()) < self.min_cells:
+            return None
+        if self.local_features_ is None:
+            raise RuntimeError("PatchBasedFeaturizer must be fitted before extraction")
+
+        # Apply exactly the same composition + mean-expression extractor used by
+        # the global baseline, then concatenate its columns in the fitted order.
+        cell_ids = region.coordinates.index[inside]
+        values = self.local_features_.extract_cells(region, cell_ids)
+        return np.asarray([values[name] for name in self.vocab_], dtype=float)
 
     # -- extraction -------------------------------------------------------
     def extract_region(self, region: RegionData) -> dict[str, float]:
