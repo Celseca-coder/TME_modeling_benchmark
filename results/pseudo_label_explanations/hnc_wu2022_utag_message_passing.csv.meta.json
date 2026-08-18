@@ -1,0 +1,9 @@
+{
+  "dataset": "hnc_wu2022",
+  "feature_mode": "message-passing",
+  "n_regions": 366,
+  "n_features": 56,
+  "domain_names": [],
+  "leak_free_domains": true,
+  "cache_dir": "model_results/UTAG/message_passing_cache"
+}

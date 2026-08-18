@@ -1,0 +1,15 @@
+dataset,task,feature_source,scheme,metric,mean,sd,n,score
+hnc_wu2022,motif_tumor_high,density,cv,auc_roc,0.9940159075785394,0.006107341821807072,15,0.994 ± 0.006
+hnc_wu2022,motif_cd8_high,density,cv,auc_roc,0.9919208815190413,0.00776088307751974,15,0.992 ± 0.008
+hnc_wu2022,motif_cd8_clustering,density,cv,auc_roc,0.6392264113404464,0.13068981520777603,15,0.639 ± 0.131
+hnc_wu2022,motif_tls_like,density,cv,auc_roc,0.6275478134982779,0.05992699594529533,15,0.628 ± 0.060
+hnc_wu2022,motif_immune_exclusion,density,cv,auc_roc,0.9278828548074729,0.045149677651283124,15,0.928 ± 0.045
+hnc_wu2022,motif_interface_immune,density,cv,auc_roc,0.9337905720576154,0.05506508380054925,15,0.934 ± 0.055
+hnc_wu2022,motif_tumor_stroma_mixing,density,cv,auc_roc,0.8248037396009453,0.05408994415284705,15,0.825 ± 0.054
+hnc_wu2022,motif_tumor_high,point-pattern,cv,auc_roc,0.5736833830542083,0.04801216894922055,15,0.574 ± 0.048
+hnc_wu2022,motif_cd8_high,point-pattern,cv,auc_roc,0.7395021362547362,0.08527058761506325,15,0.740 ± 0.085
+hnc_wu2022,motif_cd8_clustering,point-pattern,cv,auc_roc,0.5662160285821277,0.07192117134539258,15,0.566 ± 0.072
+hnc_wu2022,motif_tls_like,point-pattern,cv,auc_roc,0.5396122556886738,0.08606250522546188,15,0.540 ± 0.086
+hnc_wu2022,motif_immune_exclusion,point-pattern,cv,auc_roc,0.6116833372922085,0.09580043605292018,15,0.612 ± 0.096
+hnc_wu2022,motif_interface_immune,point-pattern,cv,auc_roc,0.6960679562727831,0.04282195513234433,15,0.696 ± 0.043
+hnc_wu2022,motif_tumor_stroma_mixing,point-pattern,cv,auc_roc,0.6481468504830566,0.08768512464659137,15,0.648 ± 0.088

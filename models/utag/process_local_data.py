@@ -12,6 +12,11 @@ representation.  It returns one fixed-length vector per region using either:
 For ``domains``/``combined``, the domain model is fitted only on training
 regions inside each cross-validation fold.  Validation regions are assigned to
 the frozen training centroids, preventing clustering leakage.
+
+Motif-explanation verification (native domain portraits, v2 pseudo-labels)::
+
+    python models/utag/verify_native_domain_portraits.py
+    bash models/utag/run_verify_motif_explanations.sh
 """
 
 import argparse
@@ -50,6 +55,25 @@ from benchmark.validation import (  # noqa: E402
     cross_validate,
     summarize_folds,
 )
+
+
+def default_featurizer_args(**overrides) -> argparse.Namespace:
+    """Defaults shared by the clinical adapter and motif verification scripts."""
+    args = argparse.Namespace(
+        feature_mode="domains",
+        max_dist=20.0,
+        normalization_mode="l1_norm",
+        coordinate_mode="auto",
+        expression_transform="arcsinh",
+        arcsinh_cofactor=5.0,
+        n_domains=10,
+        max_fit_cells=100000,
+        seed=0,
+        cache_dir=str(DEFAULT_CACHE),
+    )
+    for key, value in overrides.items():
+        setattr(args, key, value)
+    return args
 
 
 def log(message: str) -> None:

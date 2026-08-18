@@ -1,0 +1,174 @@
+# HNC-Wu2022 motif catalog for method verification.
+# Spatial motifs are residualized on the relevant global fractions so composition
+# cannot trivially recover them (see tls_like ρ=0.94 without residual).
+# Cell sets use cell_type_uniform. Thresholds are fit on UPMC only.
+
+dataset: hnc_wu2022
+cell_type_col: cell_type_uniform
+cv_filter: "dataset == 'UPMC_HNC'"
+atlas_n: 20
+radius_um: 50.0
+
+cell_sets:
+  tumor:
+    - Tumor
+    - Tumor (Proliferating)
+  t_cell:
+    - CD4 T cell
+    - CD8 T cell
+  cd8:
+    - CD8 T cell
+  cd4:
+    - CD4 T cell
+  b_cell:
+    - B cell
+  macrophage:
+    - Macrophage
+  apc:
+    - APC/Dendritic cell
+    - Macrophage
+  granulocyte:
+    - Granulocyte
+  vessel:
+    - Vessel
+  stroma:
+    - Stroma
+  immune:
+    - CD4 T cell
+    - CD8 T cell
+    - B cell
+    - APC/Dendritic cell
+    - Macrophage
+    - Granulocyte
+    - Naive immune cell
+
+motifs:
+  # --- composition controls (pipeline check; not spatial tests) ---
+  - id: tumor_high
+    kind: composition
+    spatial: false
+    cell_set: tumor
+    label_rule: median
+
+  - id: cd8_high
+    kind: composition
+    spatial: false
+    cell_set: cd8
+    label_rule: median
+
+  # --- immune phenotypes (Chen/Hegde: desert is cd8_high; inflamed ≈ inverse of exclusion) ---
+  - id: immune_exclusion
+    kind: immune_exclusion
+    spatial: true
+    immune_set: cd8
+    tumor_set: tumor
+    radius_um: 50.0
+    min_source_cells: 5
+    residual_on: [tumor, cd8]
+    label_rule: tertile_extremes
+
+  # --- pairwise mixing / contact (Keren MIBI, mixing scores, graph papers) ---
+  - id: t_tumor_mixing
+    kind: neighbor_fraction
+    spatial: true
+    source_set: t_cell
+    neighbor_set: tumor
+    radius_um: 50.0
+    min_source_cells: 5
+    residual_on: [tumor, t_cell]
+    label_rule: tertile_extremes
+
+  - id: cd8_tumor_contact
+    kind: neighbor_fraction
+    spatial: true
+    source_set: cd8
+    neighbor_set: tumor
+    radius_um: 50.0
+    min_source_cells: 5
+    residual_on: [tumor, cd8]
+    label_rule: tertile_extremes
+
+  - id: macrophage_tumor_niche
+    kind: neighbor_fraction
+    spatial: true
+    source_set: macrophage
+    neighbor_set: tumor
+    radius_um: 50.0
+    min_source_cells: 5
+    residual_on: [tumor, macrophage]
+    label_rule: tertile_extremes
+
+  - id: granulocyte_tumor_niche
+    kind: neighbor_fraction
+    spatial: true
+    source_set: granulocyte
+    neighbor_set: tumor
+    radius_um: 50.0
+    min_source_cells: 5
+    residual_on: [tumor, granulocyte]
+    label_rule: tertile_extremes
+
+  - id: apc_t_contact
+    kind: neighbor_fraction
+    spatial: true
+    source_set: apc
+    neighbor_set: t_cell
+    radius_um: 50.0
+    min_source_cells: 5
+    residual_on: [apc, t_cell]
+    label_rule: tertile_extremes
+
+  # --- TLS / lymphoid aggregate (Schürch CN-9, Cabrita/Helmink) ---
+  - id: tls_like
+    kind: tls_like
+    spatial: true
+    required_sets: [b_cell, t_cell]
+    min_frac:
+      b_cell: 0.10
+      t_cell: 0.10
+    radius_um: 50.0
+    min_cluster_size: 5
+    residual_on: [b_cell, t_cell]
+    label_rule: tertile_extremes
+
+  # --- tissue geography ---
+  - id: interface_immune
+    kind: interface
+    spatial: true
+    immune_set: immune
+    tumor_set: tumor
+    radius_um: 50.0
+    min_source_cells: 5
+    residual_on: [immune, tumor]
+    label_rule: tertile_extremes
+
+  - id: vessel_immune
+    kind: neighbor_fraction
+    spatial: true
+    source_set: immune
+    neighbor_set: vessel
+    radius_um: 50.0
+    min_source_cells: 5
+    residual_on: [immune, vessel]
+    label_rule: tertile_extremes
+
+  - id: tumor_stroma_mixing
+    kind: neighbor_fraction
+    spatial: true
+    source_set: tumor
+    neighbor_set: stroma
+    radius_um: 50.0
+    min_source_cells: 5
+    residual_on: [tumor, stroma]
+    label_rule: tertile_extremes
+
+  # --- arrangement given abundance (hotspot vs diffuse CD8) ---
+  - id: cd8_clustering
+    kind: neighbor_fraction
+    spatial: true
+    source_set: cd8
+    neighbor_set: cd8
+    radius_um: 50.0
+    min_source_cells: 5
+    residual_on: [cd8]
+    label_rule: tertile_extremes

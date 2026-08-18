@@ -1,0 +1,8 @@
+dataset,task,feature_source,scheme,metric,mean,sd,n,score
+hnc_wu2022,motif_tumor_high,point-pattern,cv,auc_roc,0.9704366995944631,0.023417141967604672,15,0.970 ± 0.023
+hnc_wu2022,motif_cd8_high,point-pattern,cv,auc_roc,0.9852663103214196,0.01249034525413977,15,0.985 ± 0.012
+hnc_wu2022,motif_cd8_clustering,point-pattern,cv,auc_roc,0.9133011134058802,0.03821174874687019,15,0.913 ± 0.038
+hnc_wu2022,motif_tls_like,point-pattern,cv,auc_roc,0.6450657798480018,0.07996372994864448,15,0.645 ± 0.080
+hnc_wu2022,motif_immune_exclusion,point-pattern,cv,auc_roc,0.8320062201157403,0.07723972371155019,15,0.832 ± 0.077
+hnc_wu2022,motif_interface_immune,point-pattern,cv,auc_roc,0.8332278926900921,0.06619876012795865,15,0.833 ± 0.066
+hnc_wu2022,motif_tumor_stroma_mixing,point-pattern,cv,auc_roc,0.9137863024398456,0.04550543884735272,15,0.914 ± 0.046
