@@ -1,0 +1,14 @@
+motif_id,panel,kind,spatial,residual_on,label_rule,n_labeled,n_negative,n_positive,auc_composition,composition_score,composition_gate,auc_expression,expression_score,expression_gate,decision,in_formal_panel,notes
+tumor_high,control,composition,False,,median,366,191,175,0.998,0.998 ± 0.003,pass,0.914,0.914 ± 0.050,pass,keep_as_control,True,对照。组成 0.998、表达 0.914 都应高，确认 pipeline 能看见丰度。
+cd8_high,control,composition,False,,median,366,183,183,0.995,0.995 ± 0.005,pass,0.903,0.903 ± 0.048,pass,keep_as_control,True,对照。组成 0.995、表达 0.903 都应高，确认 pipeline 能看见丰度。
+cd8_clustering,spatial_candidate,neighbor_fraction,True,cd8,tertile_extremes,223,123,100,0.556,0.556 ± 0.078,pass,0.558,0.558 ± 0.072,pass,adopt,True,组成 0.556、表达 0.558 都接近随机，丰度/marker 均值都抄不走。
+tumor_stroma_mixing,spatial_candidate,neighbor_fraction,True,tumor;stroma,tertile_extremes,213,110,103,0.499,0.499 ± 0.082,pass,0.877,0.877 ± 0.052,fail,drop_expression_leak,False,组成打底过关（0.499），但 marker 均值 0.877 仍能抄走，按表达泄漏淘汰。
+interface_immune,spatial_candidate,interface,True,immune;tumor,tertile_extremes,220,98,122,0.531,0.531 ± 0.101,pass,0.784,0.784 ± 0.057,fail,drop_expression_leak,False,组成打底过关（0.531），但 marker 均值 0.784 仍能抄走，按表达泄漏淘汰。
+immune_exclusion,spatial_candidate,immune_exclusion,True,tumor;cd8,tertile_extremes,216,107,109,0.62,0.620 ± 0.099,borderline,0.77,0.770 ± 0.073,fail,drop_expression_leak,False,组成 0.620 擦边，且 marker 均值 0.770 仍能抄走，按表达泄漏淘汰。
+tls_like,spatial_candidate,tls_like,True,b_cell;t_cell,tertile_extremes,231,130,101,0.514,0.514 ± 0.123,pass,0.686,0.686 ± 0.085,fail,drop_expression_leak,False,组成打底过关（0.514），但 marker 均值 0.686 仍能抄走，按表达泄漏淘汰。
+t_tumor_mixing,spatial_candidate,neighbor_fraction,True,tumor;t_cell,tertile_extremes,238,118,120,0.799,0.799 ± 0.066,fail,0.839,0.839 ± 0.088,fail,drop_composition_leak,False,组成 0.799 已能抄走，不能当空间题。表达 0.839 只作记录。
+cd8_tumor_contact,spatial_candidate,neighbor_fraction,True,tumor;cd8,tertile_extremes,232,111,121,0.702,0.702 ± 0.082,fail,0.67,0.670 ± 0.079,fail,drop_composition_leak,False,组成 0.702 已能抄走，不能当空间题。表达 0.670 只作记录。
+macrophage_tumor_niche,spatial_candidate,neighbor_fraction,True,tumor;macrophage,tertile_extremes,241,109,132,0.711,0.711 ± 0.087,fail,0.817,0.817 ± 0.075,fail,drop_composition_leak,False,组成 0.711 已能抄走，不能当空间题。表达 0.817 只作记录。
+granulocyte_tumor_niche,spatial_candidate,neighbor_fraction,True,tumor;granulocyte,tertile_extremes,236,114,122,0.637,0.637 ± 0.080,borderline,0.62,0.620 ± 0.067,borderline,hold,False,组成 0.637、表达 0.620 至少一项擦边，暂不进入正式空间题。
+apc_t_contact,spatial_candidate,neighbor_fraction,True,apc;t_cell,tertile_extremes,250,135,115,0.733,0.733 ± 0.088,fail,0.656,0.656 ± 0.081,fail,drop_composition_leak,False,组成 0.733 已能抄走，不能当空间题。表达 0.656 只作记录。
+vessel_immune,spatial_candidate,neighbor_fraction,True,immune;vessel,tertile_extremes,244,124,120,0.654,0.654 ± 0.105,fail,0.739,0.739 ± 0.072,fail,drop_composition_leak,False,组成 0.654 已能抄走，不能当空间题。表达 0.739 只作记录。

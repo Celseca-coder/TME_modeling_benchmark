@@ -1,0 +1,14 @@
+panel,motif_id,role,spatial,residual_on,n_labeled_v2,auc_composition,composition_label_version,auc_expression_v2,gate1_composition,gate2_expression,decision,in_formal_set,notes
+composition_then_expression,tumor_high,control,False,,366,0.998,v2,0.914,pass_control,pass_control,keep_control,True,对照：组成和表达都应能抄走肿瘤丰度。
+composition_then_expression,cd8_high,control,False,,366,0.995,v2,0.903,pass_control,pass_control,keep_control,True,对照：组成和表达都应能抄走 CD8 丰度。
+composition_then_expression,cd8_clustering,spatial,True,cd8,223,0.556,v2,0.558,pass,pass,keep_spatial,True,两关都接近随机。唯一通过表达筛选的空间题。
+composition_then_expression,tls_like,spatial,True,b_cell;t_cell,231,0.514,v2,0.686,pass,hold,hold,False,组成过关；表达 0.69 既非随机也未明确抄走。需要 B–T 交叉特征后再定。
+composition_then_expression,tumor_stroma_mixing,spatial,True,tumor;stroma,213,0.499,v2,0.877,pass,fail,drop_expression_leak,False,组成过关，但 marker 均值（PanCK/Vimentin 隔室）仍能抄走。
+composition_then_expression,interface_immune,spatial,True,immune;tumor,220,0.531,v2,0.784,pass,fail,drop_expression_leak,False,组成过关，表达 0.78 仍泄漏。
+composition_then_expression,immune_exclusion,spatial,True,tumor;cd8,216,0.620,v2,0.770,borderline,fail,drop_expression_leak,False,组成已擦边 0.62；表达 0.77 再确认不是干净空间题。
+composition_then_expression,t_tumor_mixing,spatial,True,tumor;t_cell,238,0.799,v1,0.839,fail,fail,drop_composition_leak,False,组成捷径仍在；表达同样高。
+composition_then_expression,cd8_tumor_contact,spatial,True,tumor;cd8,232,0.702,v1,0.670,fail,hold,drop_composition_leak,False,组成 0.70 已淘汰。
+composition_then_expression,macrophage_tumor_niche,spatial,True,tumor;macrophage,241,0.711,v1,0.817,fail,fail,drop_composition_leak,False,组成和表达都能抄走巨噬细胞–肿瘤接触。
+composition_then_expression,granulocyte_tumor_niche,spatial,True,tumor;granulocyte,236,0.637,v1,0.620,fail,hold,drop_composition_leak,False,组成部分泄漏（0.64）；不作为空间题。
+composition_then_expression,apc_t_contact,spatial,True,apc;t_cell,250,0.733,v1,0.656,fail,hold,drop_composition_leak,False,组成 0.73 已淘汰。
+composition_then_expression,vessel_immune,spatial,True,immune;vessel,244,0.654,v1,0.739,fail,fail,drop_composition_leak,False,组成部分泄漏；表达 0.74 同样不干净。

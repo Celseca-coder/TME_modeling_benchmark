@@ -1,0 +1,14 @@
+panel,motif_id,role,spatial,residual_on,n_labeled_v2,auc_composition,composition_label_version,auc_density,gate1_composition,gate2_density,decision,in_formal_set,notes
+composition_then_density,tumor_high,control,False,,366,0.998,v2,0.994,pass_control,pass_control,keep_control,True,对照：密度编码丰度/隔室面积，高 AUC 不表示空间成功。
+composition_then_density,cd8_high,control,False,,366,0.995,v2,0.992,pass_control,pass_control,keep_control,True,对照：同上。
+composition_then_density,tumor_stroma_mixing,spatial,True,tumor;stroma,213,0.499,v2,0.825,pass,pass,keep_spatial,True,组成随机；密度 0.83 可恢复隔室混合（组织/肿瘤面积与各型密度）。
+composition_then_density,interface_immune,spatial,True,immune;tumor,220,0.531,v2,0.934,pass,pass,keep_spatial_caveat,True,组成过关。密度 0.93 与标签共用肿瘤多边形（tumor_area_ratio / tumor_density），不算独立空间证据。
+composition_then_density,immune_exclusion,spatial,True,tumor;cd8,216,0.620,v2,0.928,borderline,pass,keep_spatial_caveat,True,组成 0.62 擦边。密度 0.93 是多边形泄漏：标签用瘤内/瘤外，密度也用同一 mask。
+composition_then_density,cd8_clustering,spatial,True,cd8,223,0.556,v2,0.639,pass,fail,hold,False,组成过关，但密度仅 0.64：热点 vs 弥散不是面积或每平方毫米计数能读出的。
+composition_then_density,tls_like,spatial,True,b_cell;t_cell,231,0.514,v2,0.628,pass,fail,hold,False,组成过关，密度仅 0.63，B–T 聚团尚未被密度证明可恢复。
+composition_then_density,t_tumor_mixing,spatial,True,tumor;t_cell,238,0.799,v1,,fail,not_tested,drop_composition_leak,False,组成 0.80；未进入密度第二关。
+composition_then_density,cd8_tumor_contact,spatial,True,tumor;cd8,232,0.702,v1,,fail,not_tested,drop_composition_leak,False,组成 0.70。
+composition_then_density,macrophage_tumor_niche,spatial,True,tumor;macrophage,241,0.711,v1,,fail,not_tested,drop_composition_leak,False,组成 0.71。
+composition_then_density,granulocyte_tumor_niche,spatial,True,tumor;granulocyte,236,0.637,v1,,fail,not_tested,drop_composition_leak,False,组成 0.64 部分泄漏。
+composition_then_density,apc_t_contact,spatial,True,apc;t_cell,250,0.733,v1,,fail,not_tested,drop_composition_leak,False,组成 0.73。
+composition_then_density,vessel_immune,spatial,True,immune;vessel,244,0.654,v1,,fail,not_tested,drop_composition_leak,False,组成 0.65 部分泄漏。

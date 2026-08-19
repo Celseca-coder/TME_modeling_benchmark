@@ -1,0 +1,27 @@
+dataset,task,feature_source,scheme,metric,mean,sd,n,score
+hnc_wu2022,motif_tumor_high,composition,cv,auc_roc,0.9977335882616551,0.00284685030032451,15,0.998 ± 0.003
+hnc_wu2022,motif_cd8_high,composition,cv,auc_roc,0.9950940193841743,0.00483825041964265,15,0.995 ± 0.005
+hnc_wu2022,motif_immune_exclusion,composition,cv,auc_roc,0.620302893939375,0.09915812462368254,15,0.620 ± 0.099
+hnc_wu2022,motif_t_tumor_mixing,composition,cv,auc_roc,0.7991799777852819,0.06568632006707895,15,0.799 ± 0.066
+hnc_wu2022,motif_cd8_tumor_contact,composition,cv,auc_roc,0.7021761273958906,0.08202031716149642,15,0.702 ± 0.082
+hnc_wu2022,motif_macrophage_tumor_niche,composition,cv,auc_roc,0.7111838695180642,0.08700875366727946,15,0.711 ± 0.087
+hnc_wu2022,motif_granulocyte_tumor_niche,composition,cv,auc_roc,0.6370161824612732,0.08014435914010098,15,0.637 ± 0.080
+hnc_wu2022,motif_apc_t_contact,composition,cv,auc_roc,0.7332831306221231,0.08822895321032502,15,0.733 ± 0.088
+hnc_wu2022,motif_tls_like,composition,cv,auc_roc,0.5136839591118219,0.12319545237119083,15,0.514 ± 0.123
+hnc_wu2022,motif_interface_immune,composition,cv,auc_roc,0.5306767798059133,0.10081706828056042,15,0.531 ± 0.101
+hnc_wu2022,motif_vessel_immune,composition,cv,auc_roc,0.6542189811993444,0.1054428530697526,15,0.654 ± 0.105
+hnc_wu2022,motif_tumor_stroma_mixing,composition,cv,auc_roc,0.49896064073369645,0.08230976553713087,15,0.499 ± 0.082
+hnc_wu2022,motif_cd8_clustering,composition,cv,auc_roc,0.5557615324384215,0.07776841239939576,15,0.556 ± 0.078
+hnc_wu2022,motif_tumor_high,spatial-distance,cv,auc_roc,0.8529121765701686,0.02885019346258907,15,0.853 ± 0.029
+hnc_wu2022,motif_cd8_high,spatial-distance,cv,auc_roc,0.8063228876247573,0.054719885147691674,15,0.806 ± 0.055
+hnc_wu2022,motif_immune_exclusion,spatial-distance,cv,auc_roc,0.6334617761314099,0.0704594849115314,15,0.633 ± 0.070
+hnc_wu2022,motif_t_tumor_mixing,spatial-distance,cv,auc_roc,0.7093038696963526,0.0698394326082853,15,0.709 ± 0.070
+hnc_wu2022,motif_cd8_tumor_contact,spatial-distance,cv,auc_roc,0.6344805202795051,0.07049454699069138,15,0.634 ± 0.070
+hnc_wu2022,motif_macrophage_tumor_niche,spatial-distance,cv,auc_roc,0.8059931298926456,0.06882483754567792,15,0.806 ± 0.069
+hnc_wu2022,motif_granulocyte_tumor_niche,spatial-distance,cv,auc_roc,0.45396823938517966,0.08554771901329614,15,0.454 ± 0.086
+hnc_wu2022,motif_apc_t_contact,spatial-distance,cv,auc_roc,0.6778114661435981,0.09787636870106753,15,0.678 ± 0.098
+hnc_wu2022,motif_tls_like,spatial-distance,cv,auc_roc,0.45223962760556297,0.08038737620437662,15,0.452 ± 0.080
+hnc_wu2022,motif_interface_immune,spatial-distance,cv,auc_roc,0.6678328191806159,0.09012253924150371,15,0.668 ± 0.090
+hnc_wu2022,motif_vessel_immune,spatial-distance,cv,auc_roc,0.7095870509645965,0.09370491848690181,15,0.710 ± 0.094
+hnc_wu2022,motif_tumor_stroma_mixing,spatial-distance,cv,auc_roc,0.6848160718108445,0.08775534177062769,15,0.685 ± 0.088
+hnc_wu2022,motif_cd8_clustering,spatial-distance,cv,auc_roc,0.6356987432670448,0.08240273491332122,15,0.636 ± 0.082
