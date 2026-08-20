@@ -1,0 +1,2 @@
+dataset,task,scheme,metric,mean,sd,n,score
+luad_sorin2023,OS,cv,c_index,0.5345085924582277,0.045650337526396294,15,0.535 +/- 0.046

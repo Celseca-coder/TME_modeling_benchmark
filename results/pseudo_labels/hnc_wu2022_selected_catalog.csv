@@ -1,0 +1,7 @@
+motif_id,task_type,panel,label_col,score_col,definition,n_labeled,n_0,n_1
+tumor_high,composition_control,control,tumor_high_label_v2,tumor_high_score_used,Tumor-cell fraction >= UPMC median,366.0,191.0,175.0
+cd8_high,composition_control,control,cd8_high_label_v2,cd8_high_score_used,CD8 T-cell fraction >= UPMC median,366.0,183.0,183.0
+cd8_clustering,spatial_arrangement,primary,cd8_clustering_label_v2,cd8_clustering_score_used,CD8 hotspot vs diffuse after residualizing on CD8 fraction,223.0,123.0,100.0
+tumor_stroma_mixing,spatial_mixing,primary,tumor_stroma_mixing_label_v2,tumor_stroma_mixing_score_used,Tumor-stroma neighborhood mixing after residualizing on tumor and stroma fractions,213.0,110.0,103.0
+interface_immune,spatial_compartment,primary,interface_immune_label_v2,interface_immune_score_used,Immune cells at tumor boundary after residualizing on immune and tumor fractions,220.0,98.0,122.0
+immune_exclusion,spatial_compartment,primary,immune_exclusion_label_v2,immune_exclusion_score_used,CD8 outside tumor more than abundance predicts,216.0,107.0,109.0

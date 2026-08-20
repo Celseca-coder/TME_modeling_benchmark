@@ -1,0 +1,13 @@
+motif_id,n_v1_labeled,n_v2_labeled,n_v2_0,n_v2_1,n_uncertain,confidence,n_boot
+tumor_high,536,536,276,260,0,0.9,1000
+cd8_high,536,536,262,274,0,0.9,1000
+immune_exclusion,361,330,152,178,206,0.9,1000
+t_tumor_mixing,356,323,168,155,213,0.9,1000
+cd8_tumor_contact,350,316,164,152,220,0.9,1000
+macrophage_tumor_niche,356,318,156,162,218,0.9,1000
+granulocyte_tumor_niche,351,321,168,153,215,0.9,1000
+apc_t_contact,353,324,174,150,212,0.9,1000
+tls_like,363,329,167,162,207,0.9,1000
+interface_immune,356,326,167,159,210,0.9,1000
+vessel_immune,362,326,164,162,210,0.9,1000
+cd8_clustering,350,314,147,167,222,0.9,1000

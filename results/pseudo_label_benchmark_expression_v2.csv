@@ -1,0 +1,14 @@
+dataset,task,feature_source,scheme,metric,mean,sd,n,score
+hnc_wu2022,motif_tumor_high,expression,cv,auc_roc,0.9140490527364284,0.04984791035397942,15,0.914 ± 0.050
+hnc_wu2022,motif_cd8_high,expression,cv,auc_roc,0.9032898616733925,0.047892375170043605,15,0.903 ± 0.048
+hnc_wu2022,motif_immune_exclusion,expression,cv,auc_roc,0.7700401668764673,0.07313708043228817,15,0.770 ± 0.073
+hnc_wu2022,motif_t_tumor_mixing,expression,cv,auc_roc,0.8390715358336546,0.08800622786775401,15,0.839 ± 0.088
+hnc_wu2022,motif_cd8_tumor_contact,expression,cv,auc_roc,0.670271261004825,0.07875430926529066,15,0.670 ± 0.079
+hnc_wu2022,motif_macrophage_tumor_niche,expression,cv,auc_roc,0.8173143471501679,0.07539573959124896,15,0.817 ± 0.075
+hnc_wu2022,motif_granulocyte_tumor_niche,expression,cv,auc_roc,0.6201472146533308,0.06746298655128588,15,0.620 ± 0.067
+hnc_wu2022,motif_apc_t_contact,expression,cv,auc_roc,0.6563671117771591,0.08050536009983107,15,0.656 ± 0.081
+hnc_wu2022,motif_tls_like,expression,cv,auc_roc,0.6862336444079714,0.0846461925496046,15,0.686 ± 0.085
+hnc_wu2022,motif_interface_immune,expression,cv,auc_roc,0.7842806051168923,0.0570344558979818,15,0.784 ± 0.057
+hnc_wu2022,motif_vessel_immune,expression,cv,auc_roc,0.7389945383001157,0.0722472741299965,15,0.739 ± 0.072
+hnc_wu2022,motif_tumor_stroma_mixing,expression,cv,auc_roc,0.8773677602947582,0.05155142442817741,15,0.877 ± 0.052
+hnc_wu2022,motif_cd8_clustering,expression,cv,auc_roc,0.5582602078208142,0.07151450446466667,15,0.558 ± 0.072

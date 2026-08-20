@@ -1,0 +1,38 @@
+dataset: crc_wu2022
+cell_type_col: cell_type
+inherit_motifs: hnc_wu2022
+radius_um: 50.0
+cell_sets:
+  tumor:
+  - Tumor 1
+  - Tumor 2 (Ki67 Proliferating)
+  - Tumor 3
+  - Tumor 4
+  - Tumor 5
+  - Tumor 7
+  t_cell:
+  - CD4 T cell
+  - CD8 T cell
+  cd8:
+  - CD8 T cell
+  cd4:
+  - CD4 T cell
+  b_cell:
+  - B cell
+  macrophage:
+  - Macrophage
+  apc:
+  - Macrophage
+  - Tumor 6 / DC
+  granulocyte:
+  - Granulocyte
+  vessel:
+  - Blood vessel
+  stroma:
+  - Stroma
+  immune:
+  - B cell
+  - CD4 T cell
+  - CD8 T cell
+  - Macrophage
+  - Granulocyte

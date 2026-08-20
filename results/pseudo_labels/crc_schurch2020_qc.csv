@@ -1,0 +1,14 @@
+motif_id,kind,spatial,label_rule,frac_col,n_labeled,n_positive,positive_rate,n_dropped,spearman_rho,spearman_p,n
+tumor_high,composition,False,median,frac__tumor,140.0,70.0,0.5,0.0,1.0,0.0,140.0
+cd8_high,composition,False,median,frac__cd8,140.0,70.0,0.5,0.0,1.0,0.0,140.0
+immune_exclusion,immune_exclusion,True,tertile_extremes,frac__cd8,90.0,45.0,0.5,50.0,0.071701199869159,0.4085714665457154,135.0
+t_tumor_mixing,neighbor_fraction,True,tertile_extremes,frac__t_cell,94.0,47.0,0.5,46.0,-0.271966003693692,0.0012005521342215932,139.0
+cd8_tumor_contact,neighbor_fraction,True,tertile_extremes,frac__cd8,90.0,45.0,0.5,50.0,-0.18342112964588822,0.03321754276188059,135.0
+macrophage_tumor_niche,neighbor_fraction,True,tertile_extremes,frac__macrophage,94.0,47.0,0.5,46.0,-0.24347379239465566,0.003874710463029645,139.0
+granulocyte_tumor_niche,neighbor_fraction,True,tertile_extremes,frac__granulocyte,90.0,45.0,0.5,50.0,-0.039201101357337405,0.6516913524414103,135.0
+apc_t_contact,neighbor_fraction,True,tertile_extremes,frac__apc,94.0,47.0,0.5,46.0,0.022056392153358056,0.7966198049301085,139.0
+tls_like,tls_like,True,tertile_extremes,frac__b_cell,94.0,47.0,0.5,46.0,0.9145952957829763,4.0265798553806623e-56,140.0
+interface_immune,interface,True,tertile_extremes,frac__immune,94.0,47.0,0.5,46.0,-0.2532508071668514,0.0025359929789280714,140.0
+vessel_immune,neighbor_fraction,True,tertile_extremes,frac__immune,94.0,47.0,0.5,46.0,-0.27851566770899394,0.000861992765005114,140.0
+tumor_stroma_mixing,neighbor_fraction,True,tertile_extremes,frac__tumor,92.0,46.0,0.5,48.0,-0.4322231836872615,1.198678330646116e-07,138.0
+cd8_clustering,neighbor_fraction,True,tertile_extremes,frac__cd8,90.0,45.0,0.5,50.0,0.8776723656976938,2.5764008266349617e-44,135.0

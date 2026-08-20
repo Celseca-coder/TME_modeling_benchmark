@@ -1,0 +1,52 @@
+dataset: luad_sorin2023
+cell_type_col: cell_type
+cv_filter: cohort == 'Discovery'
+inherit_motifs: hnc_wu2022
+radius_um: 50.0
+cell_sets:
+  tumor:
+  - Cancer
+  t_cell:
+  - Tc
+  - Th
+  - Treg
+  - T other
+  cd8:
+  - Tc
+  cd4:
+  - Th
+  - Treg
+  b_cell:
+  - B cell
+  macrophage:
+  - Alt MAC
+  - Cl MAC
+  - Cl Mo
+  - Int Mo
+  - Non-Cl Mo
+  apc:
+  - DCs cell
+  - Alt MAC
+  - Cl MAC
+  - Cl Mo
+  - Int Mo
+  - Non-Cl Mo
+  granulocyte:
+  - Neutrophils
+  vessel:
+  - Endothelial cell
+  immune:
+  - B cell
+  - Tc
+  - Th
+  - Treg
+  - T other
+  - NK cell
+  - Mast cell
+  - DCs cell
+  - Alt MAC
+  - Cl MAC
+  - Cl Mo
+  - Int Mo
+  - Non-Cl Mo
+  - Neutrophils

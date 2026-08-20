@@ -1,0 +1,22 @@
+dataset: nsclc_gnn_hoebel2026
+cell_type_col: cell_type
+inherit_motifs: hnc_wu2022
+radius_um: 50.0
+cell_sets:
+  tumor:
+  - PD-L1+ tumor
+  - PD-L1- tumor
+  t_cell:
+  - FOXP3+
+  - PD-1+ (CD8-)
+  - PD-1+ CD8+
+  - PD-1- CD8+
+  cd8:
+  - PD-1+ CD8+
+  - PD-1- CD8+
+  immune:
+  - FOXP3+
+  - PD-1+ (CD8-)
+  - PD-1+ CD8+
+  - PD-1- CD8+
+  - PD-L1+ immune

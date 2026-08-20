@@ -1,0 +1,51 @@
+dataset: nsclc_aung2025
+cell_type_col: cell_type
+cv_filter: cohort == 'Yale'
+inherit_motifs: hnc_wu2022
+radius_um: 50.0
+cell_sets:
+  tumor:
+  - Tumour
+  - Ki67
+  t_cell:
+  - CD4
+  - CD4_TFH
+  - CD8_cells
+  - Cytotoxic CD8
+  - Exhausted CD8
+  - Treg
+  cd8:
+  - CD8_cells
+  - Cytotoxic CD8
+  - Exhausted CD8
+  cd4:
+  - CD4
+  - CD4_TFH
+  - Treg
+  b_cell:
+  - B_Cells
+  macrophage:
+  - M1_mac
+  - M2_mac
+  apc:
+  - DCs
+  - M1_mac
+  - M2_mac
+  granulocyte:
+  - Granulocytes
+  vessel:
+  - Vessels
+  stroma:
+  - Stroma
+  immune:
+  - B_Cells
+  - CD4
+  - CD4_TFH
+  - CD8_cells
+  - Cytotoxic CD8
+  - Exhausted CD8
+  - Treg
+  - DCs
+  - M1_mac
+  - M2_mac
+  - Granulocytes

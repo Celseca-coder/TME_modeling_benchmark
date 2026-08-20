@@ -1,0 +1,51 @@
+dataset: nsclc_ici_monkman2024
+cell_type_col: cell_type
+inherit_motifs: hnc_wu2022
+radius_um: 50.0
+cell_sets:
+  tumor:
+  - Tumour
+  - CD44 Tumour
+  - HLADR Tumour
+  - Proliferating Tumour
+  t_cell:
+  - CD4 Cells
+  - CD8 Cells
+  - Effector CD4
+  - Treg
+  - CCR7+ CD8/CD4 Cells
+  - Proliferating Lymphocytes
+  cd8:
+  - CD8 Cells
+  cd4:
+  - CD4 Cells
+  - Effector CD4
+  - Treg
+  b_cell:
+  - B Cells
+  macrophage:
+  - Macrophages
+  - Monocytes
+  apc:
+  - Macrophages
+  - Monocytes
+  granulocyte:
+  - Granulocytes
+  vessel:
+  - Blood Vessels
+  - Lymphatics
+  stroma:
+  - Stroma
+  immune:
+  - B Cells
+  - CD4 Cells
+  - CD8 Cells
+  - Effector CD4
+  - Treg
+  - CCR7+ CD8/CD4 Cells
+  - Lymphocytes
+  - Proliferating Lymphocytes
+  - Macrophages
+  - Monocytes
+  - Mast Cells
+  - Granulocytes

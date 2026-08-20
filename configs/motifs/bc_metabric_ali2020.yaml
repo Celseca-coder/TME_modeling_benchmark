@@ -1,0 +1,46 @@
+dataset: bc_metabric_ali2020
+cell_type_col: cell_type
+inherit_motifs: hnc_wu2022
+cd8_definition: T cells (panel has no CD8 vs CD4 split)
+radius_um: 50.0
+cell_sets:
+  tumor:
+  - Basal CKlow
+  - HER2+
+  - HR+ CK7-
+  - HR+ CK7- Ki67+
+  - HR+ CK7- Slug+
+  - HR- CK7+
+  - HR- CK7-
+  - HR- CKlow CK5+
+  - HR- Ki67+
+  - HRlow CKlow
+  - Hypoxia
+  - Myoepithelial
+  t_cell:
+  - T cells
+  cd8:
+  - T cells
+  b_cell:
+  - B cells
+  macrophage:
+  - Macrophages Vim+ CD45low
+  - Macrophages Vim+ Slug+
+  - Macrophages Vim+ Slug-
+  apc:
+  - Macrophages Vim+ CD45low
+  - Macrophages Vim+ Slug+
+  - Macrophages Vim+ Slug-
+  vessel:
+  - Endothelial
+  - Vascular SMA+
+  stroma:
+  - Fibroblasts
+  - Fibroblasts CD68+
+  - Myofibroblasts
+  immune:
+  - B cells
+  - T cells
+  - Macrophages Vim+ CD45low
+  - Macrophages Vim+ Slug+
+  - Macrophages Vim+ Slug-

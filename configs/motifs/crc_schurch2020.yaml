@@ -1,0 +1,64 @@
+dataset: crc_schurch2020
+cell_type_col: cell_type
+inherit_motifs: hnc_wu2022
+radius_um: 50.0
+cell_sets:
+  tumor:
+  - tumor cells
+  t_cell:
+  - CD3+ T cells
+  - CD4+ T cells
+  - CD4+ T cells CD45RO+
+  - CD4+ T cells GATA3+
+  - CD8+ T cells
+  - Tregs
+  cd8:
+  - CD8+ T cells
+  cd4:
+  - CD4+ T cells
+  - CD4+ T cells CD45RO+
+  - CD4+ T cells GATA3+
+  - Tregs
+  b_cell:
+  - B cells
+  macrophage:
+  - CD11b+CD68+ macrophages
+  - CD163+ macrophages
+  - CD68+ macrophages
+  - CD68+ macrophages GzmB+
+  - CD68+CD163+ macrophages
+  apc:
+  - CD11c+ DCs
+  - CD11b+CD68+ macrophages
+  - CD163+ macrophages
+  - CD68+ macrophages
+  - CD68+ macrophages GzmB+
+  - CD68+CD163+ macrophages
+  granulocyte:
+  - granulocytes
+  vessel:
+  - vasculature
+  - lymphatics
+  stroma:
+  - stroma
+  - smooth muscle
+  - adipocytes
+  immune:
+  - B cells
+  - CD3+ T cells
+  - CD4+ T cells
+  - CD4+ T cells CD45RO+
+  - CD4+ T cells GATA3+
+  - CD8+ T cells
+  - Tregs
+  - NK cells
+  - plasma cells
+  - CD11b+ monocytes
+  - CD11b+CD68+ macrophages
+  - CD11c+ DCs
+  - CD163+ macrophages
+  - CD68+ macrophages
+  - CD68+ macrophages GzmB+
+  - CD68+CD163+ macrophages
+  - granulocytes
+  - immune cells

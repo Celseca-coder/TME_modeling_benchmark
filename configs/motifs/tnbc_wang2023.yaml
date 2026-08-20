@@ -1,0 +1,74 @@
+dataset: tnbc_wang2023
+cell_type_col: cell_type
+inherit_motifs: hnc_wu2022
+radius_um: 50.0
+cell_sets:
+  tumor:
+  - AR^{+}LAR
+  - Apoptosis
+  - Basal
+  - CA9^+
+  - CA9^{+}Hypoxia
+  - CD56^{+}NE
+  - CK8/18^{med}
+  - CK^{hi}GATA3^{+}
+  - CK^{lo}GATA3^{+}
+  - PD-L1^{+}GZMB^{+}
+  - PD-L1^{+}IDO^{+}
+  - TCF1^{+}
+  - Vimentin^{+}EMT
+  - pH2AX^{+}DSB
+  - panCK^{med}
+  t_cell:
+  - CD4^+PD1^+T
+  - CD4^+TCF1^+T
+  - CD8^+GZMB^+T
+  - CD8^+PD1^+T_{Ex}
+  - CD8^+T
+  - CD8^+TCF1^+T
+  - Treg
+  cd8:
+  - CD8^+GZMB^+T
+  - CD8^+PD1^+T_{Ex}
+  - CD8^+T
+  - CD8^+TCF1^+T
+  cd4:
+  - CD4^+PD1^+T
+  - CD4^+TCF1^+T
+  - Treg
+  b_cell:
+  - CD20^+B
+  macrophage:
+  - M2 Mac
+  apc:
+  - DCs
+  - PD-L1^+APCs
+  - PD-L1^+IDO^+APCs
+  - M2 Mac
+  granulocyte:
+  - Neutrophils
+  - CD15^{+}
+  vessel:
+  - Endothelial
+  stroma:
+  - Fibroblasts
+  - Myofibroblasts
+  - PDPN^+Stromal
+  immune:
+  - CD20^+B
+  - CD79a^+Plasma
+  - CD4^+PD1^+T
+  - CD4^+TCF1^+T
+  - CD8^+GZMB^+T
+  - CD8^+PD1^+T_{Ex}
+  - CD8^+T
+  - CD8^+TCF1^+T
+  - Treg
+  - Helios^{+}
+  - CD56^+NK
+  - DCs
+  - M2 Mac
+  - PD-L1^+APCs
+  - PD-L1^+IDO^+APCs
+  - Neutrophils
+  - CD15^{+}
