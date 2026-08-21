@@ -94,6 +94,25 @@ def test_hnc_yaml_loads_expanded_catalog():
     assert "Vessel" in catalog.resolve_set("vessel")
 
 
+def test_inherited_catalog_drops_missing_cell_sets():
+    luad = load_motif_catalog(dataset="luad_sorin2023")
+    ids = {m.id for m in luad.motifs}
+    assert luad.dataset == "luad_sorin2023"
+    assert luad.cv_filter == "cohort == 'Discovery'"
+    assert "tumor_high" in ids
+    assert "cd8_clustering" in ids
+    assert "immune_exclusion" in ids
+    assert "tumor_stroma_mixing" not in ids  # no stroma class
+    hoebel = load_motif_catalog(dataset="nsclc_gnn_hoebel2026")
+    h_ids = {m.id for m in hoebel.motifs}
+    assert "cd8_high" in h_ids
+    assert "tls_like" not in h_ids
+    assert "macrophage_tumor_niche" not in h_ids
+    jackson = load_motif_catalog(dataset="bc_jackson2020")
+    assert jackson.cv_filter == "cohort == 'Basel'"
+    assert jackson.resolve_set("cd8") == {"T cell"}
+
+
 def test_composition_score_is_tumor_fraction():
     catalog = _hnc_catalog()
     region = _grid_region(

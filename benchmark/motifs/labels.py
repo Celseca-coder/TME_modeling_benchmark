@@ -8,6 +8,27 @@ from sklearn.linear_model import LinearRegression
 from benchmark.motifs.spec import MotifCatalog, MotifSpec
 
 
+def discovery_mask(table: pd.DataFrame, cv_filter: str | None) -> pd.Series:
+    """Boolean mask of discovery-cohort rows used to fit motif cut-points.
+
+    ``cv_filter`` is a pandas ``eval`` expression (e.g. ``cohort == 'Basel'``).
+    If it is missing, refers to absent columns, or matches nothing, all rows
+    are used.
+    """
+    if not cv_filter:
+        return pd.Series(True, index=table.index)
+    try:
+        mask = table.eval(cv_filter)
+    except Exception:
+        return pd.Series(True, index=table.index)
+    if isinstance(mask, pd.DataFrame):
+        mask = mask.all(axis=1)
+    mask = pd.Series(mask, index=table.index).fillna(False).astype(bool)
+    if not bool(mask.any()):
+        return pd.Series(True, index=table.index)
+    return mask
+
+
 def residualize(score: pd.Series, covariates: pd.DataFrame) -> pd.Series:
     """Return OLS residual of ``score`` on ``covariates`` (NaNs left in place)."""
     cov = covariates.reindex(score.index)

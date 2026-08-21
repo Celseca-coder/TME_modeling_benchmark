@@ -1,0 +1,8 @@
+{
+  "dataset": "hnc_wu2022",
+  "n_domains": 10,
+  "max_dist": 20.0,
+  "n_regions": 366,
+  "method": "native_domain_portraits",
+  "note": "No Lasso/SHAP. Domains fitted unsupervised on labelled regions."
+}

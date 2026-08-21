@@ -28,15 +28,29 @@ def _label_column(spec, label_version: str) -> str:
     raise ValueError(f"Unknown label_version {label_version!r}; expected 'v1' or 'v2'")
 
 
+def _iter_specs(catalog: MotifCatalog, motif_ids: list[str] | None):
+    if motif_ids is None:
+        return catalog.motifs
+    wanted = set(motif_ids)
+    specs = tuple(spec for spec in catalog.motifs if spec.id in wanted)
+    missing = wanted - {spec.id for spec in specs}
+    if missing:
+        raise KeyError(
+            f"Motifs not in catalog for {catalog.dataset}: {sorted(missing)}"
+        )
+    return specs
+
+
 def missing_label_columns(
     labels: pd.DataFrame,
     catalog: MotifCatalog,
     label_version: str = "v1",
+    motif_ids: list[str] | None = None,
 ) -> list[str]:
     cols = set(labels.columns)
     return [
         _label_column(spec, label_version)
-        for spec in catalog.motifs
+        for spec in _iter_specs(catalog, motif_ids)
         if _label_column(spec, label_version) not in cols
     ]
 
@@ -46,15 +60,20 @@ def attach_pseudo_labels(
     labels: pd.DataFrame | str | Path,
     catalog: MotifCatalog,
     label_version: str = "v1",
+    motif_ids: list[str] | None = None,
 ) -> TMEDataset:
     """Merge sidecar labels into in-memory metadata and register motif tasks.
 
     Does not rewrite the dataset YAML. Clinical tasks stay in place; motif tasks
     are appended as ``motif_<id>`` if they are not already present.
+
+    ``motif_ids`` limits which catalog recipes are required and registered.
     """
     if not isinstance(labels, pd.DataFrame):
         labels = pd.read_csv(labels)
-    missing = missing_label_columns(labels, catalog, label_version=label_version)
+    missing = missing_label_columns(
+        labels, catalog, label_version=label_version, motif_ids=motif_ids
+    )
     if missing:
         raise ValueError(
             "Pseudo-label table is missing columns for the current motif catalog: "
@@ -66,7 +85,7 @@ def attach_pseudo_labels(
 
     existing = {t["id"] for t in dataset.config.get("tasks", [])}
     extra = []
-    for spec in catalog.motifs:
+    for spec in _iter_specs(catalog, motif_ids):
         if spec.task_id in existing:
             continue
         cfg = spec.task_config()

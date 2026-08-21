@@ -28,12 +28,10 @@ class LinearClassifier(_TabularModel):
     def fit(self, features: pd.DataFrame, target: pd.Series) -> "LinearClassifier":
         from sklearn.linear_model import LogisticRegression
         Xs = self._prep_fit(features.loc[list(target.index)])
-        if self.l1_ratio <= 0.0:                       # pure L2: fast lbfgs solver
-            kw = dict(solver="lbfgs", penalty="l2")
-        elif self.l1_ratio >= 1.0:                     # pure L1: saga + l1
-            kw = dict(solver="saga", penalty="l1")
-        else:                                          # elastic net
-            kw = dict(solver="saga", penalty="elasticnet", l1_ratio=self.l1_ratio)
+        if self.l1_ratio == 0.0:                       # pure L2: fast lbfgs solver
+            kw = dict(solver="lbfgs")
+        else:                                          # L1 / elastic net: saga solver
+            kw = dict(solver="saga", l1_ratio=self.l1_ratio)
         self._clf = LogisticRegression(
             C=self.C, class_weight=self.class_weight, max_iter=self.max_iter,
             random_state=self.seed, **kw,

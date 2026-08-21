@@ -18,7 +18,7 @@ import pandas as pd
 _CODE = Path(__file__).resolve().parent.parent
 sys.path.insert(0, str(_CODE))
 
-from benchmark.motifs.labels import add_bootstrap_labels  # noqa: E402
+from benchmark.motifs.labels import add_bootstrap_labels, discovery_mask  # noqa: E402
 from benchmark.motifs.spec import load_motif_catalog  # noqa: E402
 
 PRIMARY_SPATIAL = (
@@ -61,12 +61,7 @@ def main() -> None:
         )
     table = pd.read_csv(inp)
 
-    if catalog.cv_filter and "dataset" in table.columns:
-        fit_mask = table.eval(catalog.cv_filter)
-        if not bool(fit_mask.any()):
-            fit_mask = pd.Series(True, index=table.index)
-    else:
-        fit_mask = pd.Series(True, index=table.index)
+    fit_mask = discovery_mask(table, catalog.cv_filter)
 
     motifs = args.motifs
     if args.primary_only:

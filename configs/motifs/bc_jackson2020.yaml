@@ -1,0 +1,41 @@
+dataset: bc_jackson2020
+cell_type_col: cell_type_uniform
+cv_filter: cohort == 'Basel'
+inherit_motifs: hnc_wu2022
+cd8_definition: T cell (panel has no CD8 vs CD4 split)
+radius_um: 50.0
+cell_sets:
+  tumor:
+  - Tumor (Apoptotic)
+  - Tumor (Basal CK)
+  - Tumor (CK lo HR hi p53+)
+  - Tumor (CK lo HR lo)
+  - Tumor (CK+ HR hi)
+  - Tumor (CK+ HR lo)
+  - Tumor (CK+ HR+)
+  - Tumor (CK7+ CK hi Ecadh hi)
+  - Tumor (CK7+)
+  - Tumor (Epithelial low)
+  - Tumor (Hypoxic)
+  - Tumor (Myoepithelial)
+  - Tumor (Proliferative)
+  - Tumor (p53+ EGFR+)
+  t_cell:
+  - T cell
+  cd8:
+  - T cell
+  b_cell:
+  - B cell
+  macrophage:
+  - Macrophage
+  apc:
+  - Macrophage
+  vessel:
+  - Endothelial
+  stroma:
+  - Stromal cells
+  immune:
+  - B cell
+  - T cell
+  - Macrophage
+  - T & B cells

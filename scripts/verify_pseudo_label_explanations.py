@@ -1,10 +1,12 @@
 #!/usr/bin/env python
 """Verify interpretability methods on motif pseudo-labels with known generators.
 
-Protocol: train on hnc_wu2022 v2 selected labels, rank explanations, recover
-the known motif parts, then ablate top features (faithfulness).
+Default panel (10 selected motifs, each on its source dataset):
 
-Tabular Lasso + linear SHAP:
+    python scripts/verify_pseudo_label_explanations.py --panel \\
+        --data-root "$DATA_ROOT" --mode tabular --by-type
+
+Tabular Lasso + linear SHAP on one dataset:
 
     python scripts/verify_pseudo_label_explanations.py \\
         --dataset hnc_wu2022 --data-root "$DATA_ROOT" \\
@@ -13,20 +15,10 @@ Tabular Lasso + linear SHAP:
         --feature-sources composition density point-pattern \\
         --by-type
 
-Embedding probe (precomputed region embeddings):
+Embedding probe (``{dataset}`` is filled when --panel is set):
 
-    python scripts/verify_pseudo_label_explanations.py --mode embedding \\
-        --embeddings-csv path/to/region_embeddings.csv
-
-UTAG / other named region features:
-
-    python scripts/verify_pseudo_label_explanations.py --mode precomputed \\
-        --features-csv results/utag_region_features.csv
-
-GNN-explainer node attributions (CSV with region_id, cell_type, importance):
-
-    python scripts/verify_pseudo_label_explanations.py --mode gnn-explainer \\
-        --explainer-csv results/gnn_explainer_nodes.csv
+    python scripts/verify_pseudo_label_explanations.py --panel --mode embedding \\
+        --embeddings-csv results/pseudo_label_explanations_panel/features/{dataset}_kronos.csv
 """
 from __future__ import annotations
 
@@ -47,10 +39,18 @@ from benchmark.features.density_feats import CellTypeDensityFeaturizer  # noqa: 
 from benchmark.features.point_pattern import PointPatternFeaturizer  # noqa: E402
 from benchmark.models.linear import LinearClassifier  # noqa: E402
 from benchmark.motifs.overlay import attach_pseudo_labels  # noqa: E402
+from benchmark.motifs.panel import (  # noqa: E402
+    jobs_by_dataset,
+    labels_path_for,
+    load_selected_panel,
+    motif_ids_from_tasks,
+    run_tasks_for,
+)
 from benchmark.motifs.recovery import (  # noqa: E402
     GNN_EXPECTED_SETS,
     RULES,
     SELECTED_EXPLAIN_TASKS,
+    UTAG_RULES,
     rank_recovery,
 )
 from benchmark.motifs.spec import load_motif_catalog  # noqa: E402
@@ -142,7 +142,15 @@ def _faithfulness(model: LinearClassifier, X: pd.DataFrame, y: pd.Series, k: int
     return base, drop_top, drop_rand, names
 
 
-def _run_named_features(dataset, tasks, features: pd.DataFrame, seeds, k):
+def _recovery_rules(name: str) -> dict:
+    if name == "utag":
+        return UTAG_RULES
+    if name == "tabular":
+        return RULES
+    raise ValueError(f"Unknown recovery rule set {name!r}")
+
+
+def _run_named_features(dataset, tasks, features: pd.DataFrame, seeds, k, rules=None):
     rows = []
     rank_rows = []
     vcfg = dataset.validation_config
@@ -151,12 +159,13 @@ def _run_named_features(dataset, tasks, features: pd.DataFrame, seeds, k):
     rng = np.random.default_rng(0)
     features = features.copy()
     features.index = features.index.astype(str)
+    rule_map = rules or RULES
 
     for task in tasks:
-        if task not in RULES:
+        if task not in rule_map:
             print(f"skip {task}: no recovery rule", flush=True)
             continue
-        rule = RULES[task]
+        rule = rule_map[task]
         meta = dataset.get_task_metadata(task)
         meta = meta[meta["region_id"].astype(str).isin(features.index)].copy()
         if meta.empty:
@@ -234,43 +243,63 @@ def _run_named_features(dataset, tasks, features: pd.DataFrame, seeds, k):
     return pd.DataFrame(rows), pd.DataFrame(rank_rows)
 
 
+def _method_verdict(kind: str, frac: float, control_frac: float) -> str:
+    if kind == "control":
+        return "pass_control" if frac >= 0.5 else "fail_control"
+    if not np.isfinite(control_frac) or control_frac < 0.5:
+        return "fail_control_block"
+    if frac >= 0.5:
+        return "pass_spatial"
+    return "abundance_only_or_fail"
+
+
 def _summarize(fold_df: pd.DataFrame) -> pd.DataFrame:
     if fold_df.empty:
         return fold_df
-    if fold_df["kind"].eq("control").any():
-        control_frac = float(fold_df.loc[fold_df["kind"].eq("control"), "fold_passed"].mean())
-    else:
-        control_frac = float("nan")
+    has_dataset = "dataset" in fold_df.columns
+    groups = fold_df.groupby("dataset", sort=False) if has_dataset else [(None, fold_df)]
     rows = []
-    for task, sub in fold_df.groupby("task"):
-        kind = sub["kind"].iloc[0]
-        frac_pass = float(sub["fold_passed"].mean())
-        if kind == "control":
-            verdict = "pass_control" if frac_pass >= 0.5 else "fail_control"
-        elif not np.isfinite(control_frac) or control_frac < 0.5:
-            verdict = "fail_control_block"
-        elif frac_pass >= 0.5:
-            verdict = "pass_spatial"
-        else:
-            verdict = "abundance_only_or_fail"
-        rows.append(dict(
-            task=task,
-            kind=kind,
-            n_folds=len(sub),
-            mean_auc_ridge=float(sub["auc_ridge"].mean()),
-            mean_auc_lasso=float(sub["auc_lasso"].mean()),
-            frac_lasso_passed=float(sub["lasso_passed"].mean()),
-            frac_shap_passed=float(sub["shap_passed"].mean()),
-            frac_faithfulness_passed=float(sub["faithfulness_passed"].mean()),
-            frac_fold_passed=frac_pass,
-            mean_drop_top=float(sub["faithfulness_drop_top"].mean()),
-            mean_drop_random=float(sub["faithfulness_drop_random"].mean()),
-            control_frac_passed=control_frac,
-            verdict=verdict,
-        ))
+    for dataset, dsub in groups:
+        ctrl = dsub["kind"].eq("control")
+        lasso_ctrl = float(dsub.loc[ctrl, "lasso_passed"].mean()) if ctrl.any() else float("nan")
+        shap_ctrl = float(dsub.loc[ctrl, "shap_passed"].mean()) if ctrl.any() else float("nan")
+        joint_ctrl = float(dsub.loc[ctrl, "fold_passed"].mean()) if ctrl.any() else float("nan")
+        for task, sub in dsub.groupby("task"):
+            kind = sub["kind"].iloc[0]
+            frac_lasso = float(sub["lasso_passed"].mean())
+            frac_shap = float(sub["shap_passed"].mean())
+            frac_joint = float(sub["fold_passed"].mean())
+            rec = dict(
+                task=task,
+                kind=kind,
+                n_folds=len(sub),
+                mean_auc_ridge=float(sub["auc_ridge"].mean()),
+                mean_auc_lasso=float(sub["auc_lasso"].mean()),
+                frac_lasso_passed=frac_lasso,
+                frac_shap_passed=frac_shap,
+                frac_faithfulness_passed=float(sub["faithfulness_passed"].mean()),
+                frac_fold_passed=frac_joint,
+                mean_drop_top=float(sub["faithfulness_drop_top"].mean()),
+                mean_drop_random=float(sub["faithfulness_drop_random"].mean()),
+                lasso_control_frac=lasso_ctrl,
+                shap_control_frac=shap_ctrl,
+                control_frac_passed=joint_ctrl,
+                lasso_verdict=_method_verdict(kind, frac_lasso, lasso_ctrl),
+                shap_verdict=_method_verdict(kind, frac_shap, shap_ctrl),
+                verdict=_method_verdict(kind, frac_joint, joint_ctrl),
+            )
+            if dataset is not None:
+                rec["dataset"] = dataset
+            if "selected" in sub.columns:
+                rec["selected"] = bool(sub["selected"].iloc[0])
+            rows.append(rec)
     order = {t: i for i, t in enumerate(SELECTED_EXPLAIN_TASKS)}
     out = pd.DataFrame(rows)
-    return out.sort_values("task", key=lambda s: s.map(lambda t: order.get(t, 99)))
+    if out.empty:
+        return out
+    out["_ord"] = out["task"].map(lambda t: order.get(t, 99))
+    by = ["dataset", "_ord"] if "dataset" in out.columns else ["_ord"]
+    return out.sort_values(by).drop(columns="_ord")
 
 
 def _embedding_probe(dataset, tasks, embeddings: pd.DataFrame, seeds):
@@ -305,9 +334,13 @@ def _embedding_probe(dataset, tasks, embeddings: pd.DataFrame, seeds):
                 rows.append(dict(task=task, seed=seed, fold=fold_i, auc=auc))
         if aucs:
             kind = RULES[task].kind if task in RULES else "unknown"
-            passed = (np.nanmean(aucs) >= 0.90) if kind == "control" else (np.nanmean(aucs) >= 0.60)
+            mean_auc = float(np.nanmean(aucs))
+            if kind == "control":
+                passed = mean_auc >= 0.90
+            else:
+                passed = mean_auc >= 0.60
             print(
-                f"  mean AUC={np.nanmean(aucs):.3f}  "
+                f"  mean AUC={mean_auc:.3f}  "
                 f"{'HAS_SIGNAL' if passed else 'NO_SPATIAL_OR_WEAK'}",
                 flush=True,
             )
@@ -448,6 +481,115 @@ def _load_or_extract_features(dataset, tasks, args, catalog, cache: Path) -> pd.
     return features
 
 
+def _format_path(template: str | None, dataset: str) -> str | None:
+    if template is None:
+        return None
+    return template.format(dataset=dataset)
+
+
+def _tag_frame(frame: pd.DataFrame, dataset: str, selected: list[str]) -> pd.DataFrame:
+    if frame.empty:
+        return frame
+    out = frame.copy()
+    out["dataset"] = dataset
+    if "task" in out.columns:
+        out["selected"] = out["task"].isin(set(selected))
+    return out
+
+
+def _write_concat(frames: list[pd.DataFrame], path: Path) -> pd.DataFrame:
+    table = pd.concat(frames, ignore_index=True) if frames else pd.DataFrame()
+    table.to_csv(path, index=False)
+    return table
+
+
+def _run_dataset(args, dataset_name: str, selected: list[str], out_dir: Path):
+    catalog = load_motif_catalog(args.catalog, dataset=dataset_name)
+    labels_path = Path(
+        _format_path(args.labels, dataset_name)
+        or labels_path_for(dataset_name)
+    )
+    dataset = load_dataset(dataset_name, data_root=args.data_root)
+    run_tasks = args.tasks or run_tasks_for(
+        selected, include_matched_controls=not args.no_matched_controls
+    )
+    attach_pseudo_labels(
+        dataset,
+        labels_path,
+        catalog,
+        label_version=args.label_version,
+        motif_ids=motif_ids_from_tasks(run_tasks),
+    )
+    ds_dir = out_dir / dataset_name
+    ds_dir.mkdir(parents=True, exist_ok=True)
+    rules = _recovery_rules(args.rules)
+    print(f"\n######## {dataset_name}  tasks={run_tasks} ########", flush=True)
+
+    if args.mode == "embedding":
+        template = args.embeddings_csv
+        if not template:
+            raise ValueError("--embeddings-csv is required for embedding mode")
+        emb_path = Path(_format_path(template, dataset_name))
+        emb = pd.read_csv(emb_path).set_index(args.region_id_col)
+        emb = emb.select_dtypes(include=[np.number])
+        fold_df = _tag_frame(
+            _embedding_probe(dataset, run_tasks, emb, args.seeds),
+            dataset_name,
+            selected,
+        )
+        fold_df.to_csv(ds_dir / "embedding_probe_folds.csv", index=False)
+        summary = (
+            fold_df.groupby(["dataset", "task"], dropna=False)["auc"]
+            .agg(["mean", "std", "count"]).reset_index()
+            if not fold_df.empty else fold_df
+        )
+        summary.to_csv(ds_dir / "embedding_probe_summary.csv", index=False)
+        print(summary.to_string(index=False), flush=True)
+        return fold_df, summary
+
+    if args.mode == "gnn-explainer":
+        if not args.explainer_csv:
+            raise ValueError("--explainer-csv is required for gnn-explainer mode")
+        table = pd.read_csv(Path(_format_path(args.explainer_csv, dataset_name)))
+        region_df = _tag_frame(
+            _run_gnn_explainer(dataset, catalog, run_tasks, table, args.gnn_top_frac),
+            dataset_name,
+            selected,
+        )
+        summary = _summarize_gnn(region_df)
+        if not summary.empty:
+            summary["dataset"] = dataset_name
+        region_df.to_csv(ds_dir / "gnn_region_recovery.csv", index=False)
+        summary.to_csv(ds_dir / "gnn_summary.csv", index=False)
+        print(summary.to_string(index=False), flush=True)
+        return region_df, summary
+
+    if args.mode == "precomputed":
+        if not args.features_csv:
+            raise ValueError("--features-csv is required for precomputed mode")
+        feat_path = Path(_format_path(args.features_csv, dataset_name))
+        features = pd.read_csv(feat_path).set_index(args.region_id_col)
+        features = features.select_dtypes(include=[np.number])
+        features.index = features.index.astype(str)
+    else:
+        cache_t = args.cache_features or str(out_dir / "{dataset}" / "tabular_features.csv")
+        cache = Path(_format_path(cache_t, dataset_name))
+        features = _load_or_extract_features(dataset, run_tasks, args, catalog, cache)
+
+    fold_df, rank_df = _run_named_features(
+        dataset, run_tasks, features, args.seeds, k=args.top_k, rules=rules
+    )
+    fold_df = _tag_frame(fold_df, dataset_name, selected)
+    rank_df = _tag_frame(rank_df, dataset_name, selected)
+    summary = _summarize(fold_df)
+    fold_df.to_csv(ds_dir / "fold_recovery.csv", index=False)
+    rank_df.to_csv(ds_dir / "feature_ranks.csv", index=False)
+    summary.to_csv(ds_dir / "summary.csv", index=False)
+    print("\n=== summary ===", flush=True)
+    print(summary.to_string(index=False) if not summary.empty else "(empty)", flush=True)
+    return fold_df, rank_df, summary
+
+
 def main() -> None:
     ap = argparse.ArgumentParser(description=__doc__,
                                  formatter_class=argparse.RawDescriptionHelpFormatter)
@@ -457,9 +599,28 @@ def main() -> None:
     ap.add_argument("--labels", default=None)
     ap.add_argument("--label-version", default="v2", choices=["v1", "v2"])
     ap.add_argument(
+        "--panel",
+        nargs="?",
+        const=str(_CODE / "results" / "pseudo_labels_all" / "selected_catalog.csv"),
+        default=None,
+        help="Selected motif catalog. Bare --panel uses "
+             "results/pseudo_labels_all/selected_catalog.csv.",
+    )
+    ap.add_argument(
+        "--no-matched-controls",
+        action="store_true",
+        help="Do not add same-dataset tumor_high/cd8_high when running a panel.",
+    )
+    ap.add_argument(
         "--mode",
         default="tabular",
         choices=["tabular", "embedding", "precomputed", "gnn-explainer"],
+    )
+    ap.add_argument(
+        "--rules",
+        default="tabular",
+        choices=["tabular", "utag"],
+        help="Recovery patterns: composition/point-pattern (tabular) or UTAG names.",
     )
     ap.add_argument(
         "--feature-sources",
@@ -479,63 +640,44 @@ def main() -> None:
     ap.add_argument("--output-dir", default=None)
     args = ap.parse_args()
 
-    catalog = load_motif_catalog(args.catalog, dataset=args.dataset)
-    labels_path = Path(args.labels or (_CODE / "results" / "pseudo_labels" / f"{args.dataset}_v2.csv"))
-    dataset = load_dataset(args.dataset, data_root=args.data_root)
-    attach_pseudo_labels(dataset, labels_path, catalog, label_version=args.label_version)
-    tasks = args.tasks or list(SELECTED_EXPLAIN_TASKS)
-    out_dir = Path(args.output_dir or (_CODE / "results" / "pseudo_label_explanations"))
+    default_out = (
+        _CODE / "results" / "pseudo_label_explanations_panel"
+        if args.panel
+        else _CODE / "results" / "pseudo_label_explanations"
+    )
+    out_dir = Path(args.output_dir or default_out)
     out_dir.mkdir(parents=True, exist_ok=True)
 
-    if args.mode == "embedding":
-        if not args.embeddings_csv:
-            raise ValueError("--embeddings-csv is required for embedding mode")
-        emb = pd.read_csv(args.embeddings_csv)
-        emb = emb.set_index(args.region_id_col)
-        emb = emb.select_dtypes(include=[np.number])
-        fold_df = _embedding_probe(dataset, tasks, emb, args.seeds)
-        fold_df.to_csv(out_dir / "embedding_probe_folds.csv", index=False)
-        summary = (
-            fold_df.groupby("task")["auc"].agg(["mean", "std", "count"]).reset_index()
-            if not fold_df.empty else fold_df
-        )
-        summary.to_csv(out_dir / "embedding_probe_summary.csv", index=False)
-        print(summary.to_string(index=False), flush=True)
+    if args.panel:
+        jobs = jobs_by_dataset(load_selected_panel(args.panel))
+        fold_frames, extra_frames, summaries = [], [], []
+        for dataset_name, selected in jobs.items():
+            result = _run_dataset(args, dataset_name, selected, out_dir)
+            if args.mode in {"embedding", "gnn-explainer"}:
+                fold_frames.append(result[0])
+                summaries.append(result[1])
+            else:
+                fold_frames.append(result[0])
+                extra_frames.append(result[1])
+                summaries.append(result[2])
+        if args.mode == "embedding":
+            folds = _write_concat(fold_frames, out_dir / "embedding_probe_folds.csv")
+            del folds
+            summary = _write_concat(summaries, out_dir / "embedding_probe_summary.csv")
+        elif args.mode == "gnn-explainer":
+            _write_concat(fold_frames, out_dir / "gnn_region_recovery.csv")
+            summary = _write_concat(summaries, out_dir / "gnn_summary.csv")
+        else:
+            _write_concat(fold_frames, out_dir / "fold_recovery.csv")
+            _write_concat(extra_frames, out_dir / "feature_ranks.csv")
+            summary = _write_concat(summaries, out_dir / "summary.csv")
+        print("\n=== panel summary ===", flush=True)
+        print(summary.to_string(index=False) if not summary.empty else "(empty)", flush=True)
         print(f"Wrote {out_dir}", flush=True)
         return
 
-    if args.mode == "gnn-explainer":
-        if not args.explainer_csv:
-            raise ValueError("--explainer-csv is required for gnn-explainer mode")
-        table = pd.read_csv(args.explainer_csv)
-        region_df = _run_gnn_explainer(dataset, catalog, tasks, table, args.gnn_top_frac)
-        summary = _summarize_gnn(region_df)
-        region_df.to_csv(out_dir / "gnn_region_recovery.csv", index=False)
-        summary.to_csv(out_dir / "gnn_summary.csv", index=False)
-        print("\n=== gnn summary ===", flush=True)
-        print(summary.to_string(index=False), flush=True)
-        print(f"Wrote {out_dir}", flush=True)
-        return
-
-    if args.mode == "precomputed":
-        if not args.features_csv:
-            raise ValueError("--features-csv is required for precomputed mode")
-        features = pd.read_csv(args.features_csv).set_index(args.region_id_col)
-        features = features.select_dtypes(include=[np.number])
-        features.index = features.index.astype(str)
-    else:
-        cache = Path(args.cache_features) if args.cache_features else out_dir / "tabular_features.csv"
-        features = _load_or_extract_features(dataset, tasks, args, catalog, cache)
-
-    fold_df, rank_df = _run_named_features(
-        dataset, tasks, features, args.seeds, k=args.top_k
-    )
-    summary = _summarize(fold_df)
-    fold_df.to_csv(out_dir / "fold_recovery.csv", index=False)
-    rank_df.to_csv(out_dir / "feature_ranks.csv", index=False)
-    summary.to_csv(out_dir / "summary.csv", index=False)
-    print("\n=== summary ===", flush=True)
-    print(summary.to_string(index=False), flush=True)
+    selected = args.tasks or list(SELECTED_EXPLAIN_TASKS)
+    _run_dataset(args, args.dataset, selected, out_dir)
     print(f"Wrote {out_dir}", flush=True)
 
 

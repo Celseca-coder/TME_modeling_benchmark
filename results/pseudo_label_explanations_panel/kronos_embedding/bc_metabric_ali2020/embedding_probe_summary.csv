@@ -1,0 +1,5 @@
+dataset,task,mean,std,count
+bc_metabric_ali2020,motif_cd8_high,0.6447154698993605,0.05244312876668298,15
+bc_metabric_ali2020,motif_interface_immune,0.613082833097581,0.0352768906725112,15
+bc_metabric_ali2020,motif_tumor_high,0.7936601299999039,0.03337788543257064,15
+bc_metabric_ali2020,motif_tumor_stroma_mixing,0.5967312768131489,0.0759734724800668,15

@@ -1,0 +1,8 @@
+{
+  "dataset": "bc_jackson2020",
+  "n_domains": 10,
+  "max_dist": 20.0,
+  "n_regions": 708,
+  "method": "native_domain_portraits",
+  "note": "No Lasso/SHAP. Domains fitted unsupervised on labelled regions."
+}

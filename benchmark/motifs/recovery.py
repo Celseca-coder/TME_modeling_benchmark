@@ -12,6 +12,10 @@ SELECTED_EXPLAIN_TASKS = (
     "motif_tumor_stroma_mixing",
     "motif_interface_immune",
     "motif_immune_exclusion",
+    "motif_t_tumor_mixing",
+    "motif_cd8_tumor_contact",
+    "motif_macrophage_tumor_niche",
+    "motif_apc_t_contact",
 )
 
 # Native UTAG domain portraits (majority cell set + centroid markers).
@@ -25,8 +29,8 @@ PORTRAIT_SPECS: dict[str, dict] = {
     ),
     "motif_cd8_high": dict(
         kind="control",
-        hit_sets=("cd8",),
-        hit_markers=("cd8",),
+        hit_sets=("cd8", "t_cell"),
+        hit_markers=("cd8", "cd3"),
         miss_sets=(),
         require_both=False,
     ),
@@ -58,16 +62,48 @@ PORTRAIT_SPECS: dict[str, dict] = {
         miss_sets=("tumor",),
         require_both=False,
     ),
+    "motif_t_tumor_mixing": dict(
+        kind="spatial",
+        hit_sets=("tumor", "t_cell"),
+        hit_markers=("panck", "cd3", "cd8"),
+        miss_sets=(),
+        require_both=True,
+    ),
+    "motif_cd8_tumor_contact": dict(
+        kind="spatial",
+        hit_sets=("tumor", "cd8"),
+        hit_markers=("panck", "cd8", "cd3"),
+        miss_sets=(),
+        require_both=True,
+    ),
+    "motif_macrophage_tumor_niche": dict(
+        kind="spatial",
+        hit_sets=("tumor", "macrophage"),
+        hit_markers=("panck", "cd68"),
+        miss_sets=(),
+        require_both=True,
+    ),
+    "motif_apc_t_contact": dict(
+        kind="spatial",
+        hit_sets=("apc", "t_cell"),
+        hit_markers=("hla-dr", "cd68", "cd3", "cd8"),
+        miss_sets=(),
+        require_both=True,
+    ),
 }
 
 # GNN-explainer / node attributions: expected cell-set keys in the motif catalog.
 GNN_EXPECTED_SETS: dict[str, tuple[str, ...]] = {
     "motif_tumor_high": ("tumor",),
-    "motif_cd8_high": ("cd8",),
+    "motif_cd8_high": ("cd8", "t_cell"),
     "motif_cd8_clustering": ("cd8",),
     "motif_tumor_stroma_mixing": ("tumor", "stroma"),
     "motif_interface_immune": ("immune",),
     "motif_immune_exclusion": ("cd8",),
+    "motif_t_tumor_mixing": ("tumor", "t_cell"),
+    "motif_cd8_tumor_contact": ("tumor", "cd8"),
+    "motif_macrophage_tumor_niche": ("tumor", "macrophage"),
+    "motif_apc_t_contact": ("apc", "t_cell"),
 }
 
 
@@ -94,9 +130,9 @@ RULES: dict[str, RecoveryRule] = {
     "motif_cd8_high": RecoveryRule(
         task="motif_cd8_high",
         hit=(
-            r"composition::.*cd8",
-            r"tissue_density::.*cd8",
-            r"(^|::)cd8 t cell$",
+            r"composition::.*(cd8|t cells?)",
+            r"tissue_density::.*(cd8|t cells?)",
+            r"(^|::)(cd8 t cells?|t cells?)$",
         ),
         miss_as_top=(),
         kind="control",
@@ -152,6 +188,58 @@ RULES: dict[str, RecoveryRule] = {
         ),
         kind="spatial",
     ),
+    "motif_t_tumor_mixing": RecoveryRule(
+        task="motif_t_tumor_mixing",
+        hit=(
+            r"(t cells?|cd8).*[_ ][kl]_r",
+            r"tumor.*[_ ][kl]_r",
+            r"mixing",
+        ),
+        miss_as_top=(
+            r"composition::.*(tumor|t cells?|cd8)",
+            r"tissue_density::.*(tumor|t cells?|cd8)",
+        ),
+        kind="spatial",
+    ),
+    "motif_cd8_tumor_contact": RecoveryRule(
+        task="motif_cd8_tumor_contact",
+        hit=(
+            r"(cd8|t cells?).*[_ ][kl]_r",
+            r"tumor_density::(cd8|t cells?)",
+            r"mixing",
+        ),
+        miss_as_top=(
+            r"composition::.*(tumor|cd8|t cells?)",
+            r"tissue_density::.*(tumor|cd8|t cells?)",
+        ),
+        kind="spatial",
+    ),
+    "motif_macrophage_tumor_niche": RecoveryRule(
+        task="motif_macrophage_tumor_niche",
+        hit=(
+            r"macrophage.*[_ ][kl]_r",
+            r"tumor.*[_ ][kl]_r",
+            r"mixing",
+        ),
+        miss_as_top=(
+            r"composition::.*(tumor|macrophage)",
+            r"tissue_density::.*(tumor|macrophage)",
+        ),
+        kind="spatial",
+    ),
+    "motif_apc_t_contact": RecoveryRule(
+        task="motif_apc_t_contact",
+        hit=(
+            r"(apc|dendritic|macrophage).*[_ ][kl]_r",
+            r"(t cells?|cd8).*[_ ][kl]_r",
+            r"mixing",
+        ),
+        miss_as_top=(
+            r"composition::.*(apc|dendritic|macrophage|t cells?|cd8)",
+            r"tissue_density::.*(apc|dendritic|macrophage|t cells?|cd8)",
+        ),
+        kind="spatial",
+    ),
 }
 
 
@@ -170,8 +258,8 @@ UTAG_RULES: dict[str, RecoveryRule] = {
     "motif_cd8_high": RecoveryRule(
         task="motif_cd8_high",
         hit=(
-            r"utag_mean__.*cd8",
-            r"utag_domain::.*cd8",
+            r"utag_mean__.*(cd8|cd3)",
+            r"utag_domain::.*(cd8|t cell)",
         ),
         miss_as_top=(),
         kind="control",
@@ -206,6 +294,30 @@ UTAG_RULES: dict[str, RecoveryRule] = {
         miss_as_top=(r"utag_mean__.*panck", r"utag_mean__.*cd8", r"utag_domain::.*tumor"),
         kind="spatial",
     ),
+    "motif_t_tumor_mixing": RecoveryRule(
+        task="motif_t_tumor_mixing",
+        hit=(r"utag_domain::.*(t cell|cd8|tumor)",),
+        miss_as_top=(r"utag_mean__.*panck", r"utag_mean__.*(cd3|cd8)"),
+        kind="spatial",
+    ),
+    "motif_cd8_tumor_contact": RecoveryRule(
+        task="motif_cd8_tumor_contact",
+        hit=(r"utag_domain::.*(cd8|t cell|tumor)",),
+        miss_as_top=(r"utag_mean__.*panck", r"utag_mean__.*(cd8|cd3)"),
+        kind="spatial",
+    ),
+    "motif_macrophage_tumor_niche": RecoveryRule(
+        task="motif_macrophage_tumor_niche",
+        hit=(r"utag_domain::.*(macrophage|tumor)",),
+        miss_as_top=(r"utag_mean__.*panck", r"utag_mean__.*cd68"),
+        kind="spatial",
+    ),
+    "motif_apc_t_contact": RecoveryRule(
+        task="motif_apc_t_contact",
+        hit=(r"utag_domain::.*(apc|dendritic|macrophage|t cell|cd8)",),
+        miss_as_top=(r"utag_mean__.*(hla-dr|cd68|cd3|cd8)"),
+        kind="spatial",
+    ),
 }
 
 
@@ -214,7 +326,8 @@ def _norm(name: str) -> str:
 
 
 def _set_types(catalog, set_name: str) -> set[str]:
-    return {str(t).strip().lower() for t in catalog.cell_sets[set_name]}
+    members = catalog.cell_sets.get(set_name) or ()
+    return {str(t).strip().lower() for t in members}
 
 
 def portrait_matches(majority: str, top_markers: list[str], set_fracs: dict[str, float], catalog, spec: dict) -> dict:

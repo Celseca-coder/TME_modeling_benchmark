@@ -43,6 +43,21 @@ class MotifRecoveryTest(unittest.TestCase):
         self.assertEqual(rec["best_hit_rank"], 1)
         self.assertFalse(rec["miss_as_top1"])
 
+    def test_t_tumor_mixing_fails_on_t_cell_fraction(self):
+        rec = rank_recovery(
+            ["composition::T cell", "point-pattern::T cell_K_r50"],
+            RULES["motif_t_tumor_mixing"],
+            k=5,
+        )
+        self.assertTrue(rec["miss_as_top1"])
+        self.assertFalse(rec["passed"])
+        rec_ok = rank_recovery(
+            ["point-pattern::T cell_K_r50", "composition::Tumor"],
+            RULES["motif_t_tumor_mixing"],
+            k=5,
+        )
+        self.assertTrue(rec_ok["passed"])
+
     def test_exclusion_hits_tumor_density_not_fraction(self):
         rec = rank_recovery(
             [

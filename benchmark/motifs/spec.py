@@ -108,6 +108,65 @@ def default_catalog_path(dataset: str) -> Path:
     return _CONFIGS_DIR / f"{dataset}.yaml"
 
 
+def motif_needed_sets(item: dict[str, Any]) -> set[str]:
+    """Cell-set names a motif recipe requires (members + residual covariates)."""
+    needed: set[str] = set()
+    for key in ("cell_set", "source_set", "neighbor_set", "immune_set", "tumor_set"):
+        if item.get(key):
+            needed.add(str(item[key]))
+    needed.update(item.get("required_sets") or [])
+    needed.update(item.get("residual_on") or [])
+    return needed
+
+
+def _resolve_inherit(raw: dict[str, Any], *, _stack: tuple[str, ...] = ()) -> dict[str, Any]:
+    """Merge ``inherit_motifs`` parent recipes; drop motifs whose cell sets are absent."""
+    inherit = raw.get("inherit_motifs")
+    if not inherit:
+        merged = dict(raw)
+    else:
+        parent_name = str(inherit)
+        if parent_name in _stack:
+            raise ValueError(f"Circular inherit_motifs: {_stack + (parent_name,)}")
+        parent_path = _CONFIGS_DIR / f"{parent_name}.yaml"
+        if not parent_path.exists():
+            raise FileNotFoundError(f"inherit_motifs parent not found: {parent_path}")
+        with open(parent_path) as f:
+            parent = yaml.safe_load(f) or {}
+        parent = _resolve_inherit(parent, _stack=_stack + (parent_name,))
+        # Inherit recipes only. Dataset identity, cell sets, and discovery
+        # cut-point filters must come from the child YAML.
+        merged = {
+            key: parent[key]
+            for key in ("motifs", "radius_um", "atlas_n")
+            if key in parent
+        }
+        for key, value in raw.items():
+            if key in ("inherit_motifs", "skip_motifs", "cd8_definition"):
+                continue
+            if key == "motifs" and not value:
+                continue
+            merged[key] = value
+
+    present = {
+        name for name, members in (merged.get("cell_sets") or {}).items() if members
+    }
+    skip = set(raw.get("skip_motifs") or [])
+    kept = []
+    for item in merged.get("motifs") or []:
+        if item.get("id") in skip:
+            continue
+        missing = motif_needed_sets(item) - present
+        if missing:
+            continue
+        kept.append(item)
+    merged["motifs"] = kept
+    merged.pop("inherit_motifs", None)
+    merged.pop("skip_motifs", None)
+    merged.pop("cd8_definition", None)
+    return merged
+
+
 def load_motif_catalog(path: str | Path | None = None, dataset: str | None = None) -> MotifCatalog:
     if path is None:
         if dataset is None:
@@ -118,7 +177,7 @@ def load_motif_catalog(path: str | Path | None = None, dataset: str | None = Non
         raise FileNotFoundError(f"Motif catalog not found: {path}")
     with open(path) as f:
         raw = yaml.safe_load(f) or {}
-    return catalog_from_dict(raw)
+    return catalog_from_dict(_resolve_inherit(raw))
 
 
 def catalog_from_dict(raw: dict[str, Any]) -> MotifCatalog:
