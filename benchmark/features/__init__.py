@@ -8,3 +8,4 @@ from .point_pattern import PointPatternFeaturizer
 from .mixing import MixingFeaturizer
 from .patch_feats import PatchBasedFeaturizer
 from .attention_mil import HandcraftedAttentionMILFeaturizer
+from .combined import CombinedCompositionExpressionFeaturizer
