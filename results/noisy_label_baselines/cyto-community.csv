@@ -1,0 +1,17 @@
+dataset,task,method,scheme,metric,mean,sd,n
+bc_jackson2020,motif_tumor_high,cyto-community,cv,auc_roc,0.9040138273191407,0.03057257195486941,15
+bc_jackson2020,motif_cd8_high,cyto-community,cv,auc_roc,0.8809026689041137,0.026124774955025364,15
+bc_jackson2020,motif_t_tumor_mixing,cyto-community,cv,auc_roc,0.6999593406190503,0.09805479128287937,15
+bc_jackson2020,motif_cd8_tumor_contact,cyto-community,cv,auc_roc,0.6524528857072478,0.07256366048731627,15
+bc_jackson2020,motif_macrophage_tumor_niche,cyto-community,cv,auc_roc,0.6961423115795282,0.07089619343689592,15
+bc_jackson2020,motif_apc_t_contact,cyto-community,cv,auc_roc,0.6039021699257486,0.08362559055210084,15
+hnc_wu2022,motif_tumor_high,cyto-community,cv,auc_roc,0.8815020554288092,0.05134391069874366,15
+hnc_wu2022,motif_cd8_high,cyto-community,cv,auc_roc,0.8898148368817697,0.05445120496352003,15
+hnc_wu2022,motif_cd8_clustering,cyto-community,cv,auc_roc,0.6409042758929423,0.12187196492208702,15
+hnc_wu2022,motif_immune_exclusion,cyto-community,cv,auc_roc,0.7772642735056029,0.1122571972738273,15
+bc_metabric_ali2020,motif_tumor_high,cyto-community,cv,auc_roc,0.9376571712444424,0.027252598426119906,15
+bc_metabric_ali2020,motif_cd8_high,cyto-community,cv,auc_roc,0.8734413157670166,0.04467253565447636,15
+bc_metabric_ali2020,motif_tumor_stroma_mixing,cyto-community,cv,auc_roc,0.9197071662025122,0.04340154511603055,15
+bc_metabric_ali2020,motif_interface_immune,cyto-community,cv,auc_roc,0.5653835777453068,0.06970659217610878,15
+tnbc_wang2023,motif_tumor_high,cyto-community,cv,auc_roc,0.9256146640403097,0.0172814656149485,15
+tnbc_wang2023,motif_cd8_high,cyto-community,cv,auc_roc,0.9086065919365557,0.027556348781616977,15

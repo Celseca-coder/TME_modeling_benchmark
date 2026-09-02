@@ -1,0 +1,17 @@
+dataset,task,method,scheme,metric,mean,sd,n
+bc_jackson2020,motif_tumor_high,spatial-distance,cv,auc_roc,0.8294524844925442,0.03265628134394781,15
+bc_jackson2020,motif_cd8_high,spatial-distance,cv,auc_roc,0.6642444906000605,0.0493009458895014,15
+bc_jackson2020,motif_t_tumor_mixing,spatial-distance,cv,auc_roc,0.6129794985834173,0.06753804032191636,15
+bc_jackson2020,motif_cd8_tumor_contact,spatial-distance,cv,auc_roc,0.5263866081961953,0.0669673989191227,15
+bc_jackson2020,motif_macrophage_tumor_niche,spatial-distance,cv,auc_roc,0.52476700297937,0.07107393305725605,15
+bc_jackson2020,motif_apc_t_contact,spatial-distance,cv,auc_roc,0.5621491351088201,0.08181752701731039,15
+hnc_wu2022,motif_tumor_high,spatial-distance,cv,auc_roc,0.6559865890391511,0.06921730942163733,15
+hnc_wu2022,motif_cd8_high,spatial-distance,cv,auc_roc,0.6741783399269475,0.09893997925542967,15
+hnc_wu2022,motif_cd8_clustering,spatial-distance,cv,auc_roc,0.6700755406752046,0.11708528661675623,15
+hnc_wu2022,motif_immune_exclusion,spatial-distance,cv,auc_roc,0.7180844322492053,0.09165069289020689,15
+bc_metabric_ali2020,motif_tumor_high,spatial-distance,cv,auc_roc,0.7609169015196926,0.03803941710247617,15
+bc_metabric_ali2020,motif_cd8_high,spatial-distance,cv,auc_roc,0.668731281738022,0.04594145026391444,15
+bc_metabric_ali2020,motif_tumor_stroma_mixing,spatial-distance,cv,auc_roc,0.6613577976352546,0.05193567482660626,15
+bc_metabric_ali2020,motif_interface_immune,spatial-distance,cv,auc_roc,0.5908846413517499,0.06070418602089129,15
+tnbc_wang2023,motif_tumor_high,spatial-distance,cv,auc_roc,0.7856577311261316,0.04387463100539326,15
+tnbc_wang2023,motif_cd8_high,spatial-distance,cv,auc_roc,0.8413330911145245,0.028932015384806397,15

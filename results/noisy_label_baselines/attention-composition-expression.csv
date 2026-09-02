@@ -1,0 +1,17 @@
+dataset,task,method,scheme,metric,mean,sd,n
+bc_jackson2020,motif_tumor_high,attention-composition-expression,cv,auc_roc,0.9010003076050147,0.040136213361963595,15
+bc_jackson2020,motif_cd8_high,attention-composition-expression,cv,auc_roc,0.8389771907971991,0.04652605989051563,15
+bc_jackson2020,motif_t_tumor_mixing,attention-composition-expression,cv,auc_roc,0.6336781108387951,0.09463285672570654,15
+bc_jackson2020,motif_cd8_tumor_contact,attention-composition-expression,cv,auc_roc,0.648865682386446,0.058254669889953425,15
+bc_jackson2020,motif_macrophage_tumor_niche,attention-composition-expression,cv,auc_roc,0.6761113623122911,0.0798516532825394,15
+bc_jackson2020,motif_apc_t_contact,attention-composition-expression,cv,auc_roc,0.6558614263340113,0.06438187381802567,15
+hnc_wu2022,motif_tumor_high,attention-composition-expression,cv,auc_roc,0.8386815248261026,0.06050719587470124,15
+hnc_wu2022,motif_cd8_high,attention-composition-expression,cv,auc_roc,0.8421653029148322,0.055190964978730606,15
+hnc_wu2022,motif_cd8_clustering,attention-composition-expression,cv,auc_roc,0.5869012679265287,0.12916072283223792,15
+hnc_wu2022,motif_immune_exclusion,attention-composition-expression,cv,auc_roc,0.7195794099186668,0.10750078447871386,15
+bc_metabric_ali2020,motif_tumor_high,attention-composition-expression,cv,auc_roc,0.9006700980329168,0.0272363238018588,15
+bc_metabric_ali2020,motif_cd8_high,attention-composition-expression,cv,auc_roc,0.8042732785504467,0.037520370949067,15
+bc_metabric_ali2020,motif_tumor_stroma_mixing,attention-composition-expression,cv,auc_roc,0.7188883244531254,0.0432774150788982,15
+bc_metabric_ali2020,motif_interface_immune,attention-composition-expression,cv,auc_roc,0.5568858594805636,0.09400135137454746,15
+tnbc_wang2023,motif_tumor_high,attention-composition-expression,cv,auc_roc,0.8629432704327555,0.03256520924278987,15
+tnbc_wang2023,motif_cd8_high,attention-composition-expression,cv,auc_roc,0.8803479598235239,0.02849536052161837,15

@@ -34,12 +34,30 @@ htmlcov/
 # macOS
 .DS_Store
 
-# Data & large artifacts (uncomment/adjust as needed)
-# data/
-# *.h5ad
-# *.parquet
-
-# Logs
+# Logs / PIDs / nohup
 *.log
+*.pid
+nohup.out
+logs/
+results/nohup_logs/
+
+# Local vendor trees, checkpoints, embeddings (nested git + weights)
+models/
+model_results/
+
+# Binary / array artifacts
+*.pt
+*.ckpt
+*.pkl
+*.gpkl
+*.h5
+*.h5ad
+*.hdf5
+*.npy
+*.npz
+*.parquet
+*.tar
+*.tar.gz
+*.zip
 
 .claude/

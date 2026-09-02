@@ -1,0 +1,17 @@
+dataset,task,method,scheme,metric,mean,sd,n
+bc_jackson2020,motif_tumor_high,point-pattern,cv,auc_roc,0.7711137579252335,0.03458912746012736,15
+bc_jackson2020,motif_cd8_high,point-pattern,cv,auc_roc,0.6002190557076186,0.05173907190316516,15
+bc_jackson2020,motif_t_tumor_mixing,point-pattern,cv,auc_roc,0.5838771247747521,0.08321009101115115,15
+bc_jackson2020,motif_cd8_tumor_contact,point-pattern,cv,auc_roc,0.5613658226893651,0.0970085027276652,15
+bc_jackson2020,motif_macrophage_tumor_niche,point-pattern,cv,auc_roc,0.6101754244362478,0.10377624779071339,15
+bc_jackson2020,motif_apc_t_contact,point-pattern,cv,auc_roc,0.596010166889491,0.05832174621682007,15
+hnc_wu2022,motif_tumor_high,point-pattern,cv,auc_roc,0.5997122145352658,0.06311962972803521,15
+hnc_wu2022,motif_cd8_high,point-pattern,cv,auc_roc,0.7126850042666422,0.0748271099225112,15
+hnc_wu2022,motif_cd8_clustering,point-pattern,cv,auc_roc,0.5732507566859268,0.08268602234402034,15
+hnc_wu2022,motif_immune_exclusion,point-pattern,cv,auc_roc,0.63031832420488,0.09328169699088071,15
+bc_metabric_ali2020,motif_tumor_high,point-pattern,cv,auc_roc,0.7320493235782781,0.041050953234764875,15
+bc_metabric_ali2020,motif_cd8_high,point-pattern,cv,auc_roc,0.5222197318704135,0.05271740763948089,15
+bc_metabric_ali2020,motif_tumor_stroma_mixing,point-pattern,cv,auc_roc,0.6705365477348405,0.07128207136798556,15
+bc_metabric_ali2020,motif_interface_immune,point-pattern,cv,auc_roc,0.6839355682585815,0.07300775182334938,15
+tnbc_wang2023,motif_tumor_high,point-pattern,cv,auc_roc,0.7439633744851991,0.040785381435305246,15
+tnbc_wang2023,motif_cd8_high,point-pattern,cv,auc_roc,0.7022908530934752,0.03479769260579551,15
