@@ -2,6 +2,7 @@
   "sources": [
     "composition",
     "density",
+    "mixing",
     "point-pattern"
   ],
   "by_type": true,

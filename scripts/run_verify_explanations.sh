@@ -106,7 +106,7 @@ echo "[$(date '+%F %T')] [1/4] tabular named features (Lasso and SHAP scored sep
     --data-root "$DATA_ROOT" \
     --label-version v2 \
     --mode tabular \
-    --feature-sources composition density point-pattern \
+    --feature-sources composition density mixing point-pattern \
     --by-type \
     --output-dir "$OUT/tabular"
 

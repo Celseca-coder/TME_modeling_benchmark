@@ -139,7 +139,14 @@ RULES: dict[str, RecoveryRule] = {
     ),
     "motif_cd8_clustering": RecoveryRule(
         task="motif_cd8_clustering",
-        hit=(r"cd8.*[_ ][kl]_r", r"cd8.*ripley", r"cd8.*cluster"),
+        hit=(
+            r"cd8.*[_ ][kl]_r",
+            r"cd8.*ripley",
+            r"cd8.*cluster",
+            r"mixing::neighbor_fraction__.*(cd8|t cell).*__to__.*(cd8|t cell)",
+            r"mixing::same_type_neighbor_fraction",
+            r"mixing::local_mixing",
+        ),
         miss_as_top=(
             r"composition::.*cd8",
             r"tissue_density::.*cd8",

@@ -1,0 +1,301 @@
+nohup: ignoring input
+
+######## bc_jackson2020  tasks=['motif_apc_t_contact', 'motif_cd8_tumor_contact', 'motif_macrophage_tumor_niche', 'motif_t_tumor_mixing', 'motif_tumor_high', 'motif_cd8_high'] ########
+Cache meta mismatch {'sources': ['composition', 'density', 'point-pattern'], 'by_type': True, 'cell_type_col': 'cell_type_uniform'} vs {'sources': ['composition', 'density', 'mixing', 'point-pattern'], 'by_type': True, 'cell_type_col': 'cell_type_uniform'}; re-extracting
+Extracting ['composition', 'density', 'mixing', 'point-pattern'] by_type=True on 708 labelled regions
+Wrote feature cache results/pseudo_label_explanations_panel/tabular/bc_jackson2020/tabular_features.csv  shape=(708, 668)
+=== motif_apc_t_contact  n=315  kind=spatial ===
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold0  ridgeAUC=0.530  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Macrophage__to__T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold1  ridgeAUC=0.705  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Macrophage__to__T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold2  ridgeAUC=0.627  lasso=True shap=True faith=False  shap_top1=mixing::neighbor_fraction__Macrophage__to__T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold3  ridgeAUC=0.679  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Macrophage__to__T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold4  ridgeAUC=0.693  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Macrophage__to__T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold0  ridgeAUC=0.696  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Macrophage__to__T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold1  ridgeAUC=0.677  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Macrophage__to__T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold2  ridgeAUC=0.730  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Tumor (Hypoxic)__to__Tumor (CK lo
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold3  ridgeAUC=0.627  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Macrophage__to__T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold4  ridgeAUC=0.738  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Macrophage__to__T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold0  ridgeAUC=0.732  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Tumor (CK7+ CK hi Ecadh hi)__to__
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold1  ridgeAUC=0.623  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Macrophage__to__T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold2  ridgeAUC=0.677  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Tumor (Hypoxic)__to__Tumor (CK lo
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold3  ridgeAUC=0.812  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Macrophage__to__T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold4  ridgeAUC=0.665  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Macrophage__to__T cell
+  TASK motif_apc_t_contact: 14/15 folds passed
+=== motif_cd8_tumor_contact  n=381  kind=spatial ===
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold0  ridgeAUC=0.858  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Endothelial__to__Tumor (CK lo HR 
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold1  ridgeAUC=0.873  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__T cell__to__T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold2  ridgeAUC=0.841  lasso=True shap=True faith=True  shap_top1=mixing::local_mixing_std
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold3  ridgeAUC=0.914  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__T cell__to__Stromal cells
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold4  ridgeAUC=0.922  lasso=True shap=True faith=True  shap_top1=mixing::local_mixing_std
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold0  ridgeAUC=0.950  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__T cell__to__T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold1  ridgeAUC=0.900  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__T cell__to__Stromal cells
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold2  ridgeAUC=0.905  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__T cell__to__Stromal cells
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold3  ridgeAUC=0.824  lasso=True shap=True faith=True  shap_top1=mixing::local_mixing_std
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold4  ridgeAUC=0.841  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__T cell__to__Stromal cells
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold0  ridgeAUC=0.834  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__T cell__to__Tumor (CK lo HR lo)
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold1  ridgeAUC=0.899  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__T cell__to__Stromal cells
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold2  ridgeAUC=0.885  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__T cell__to__Stromal cells
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold3  ridgeAUC=0.807  lasso=True shap=True faith=True  shap_top1=mixing::local_mixing_std
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold4  ridgeAUC=0.881  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__T cell__to__Stromal cells
+  TASK motif_cd8_tumor_contact: 15/15 folds passed
+=== motif_macrophage_tumor_niche  n=301  kind=spatial ===
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold0  ridgeAUC=0.853  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Macrophage__to__Stromal cells
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold1  ridgeAUC=0.760  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Macrophage__to__Stromal cells
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold2  ridgeAUC=0.725  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Endothelial__to__Tumor (CK lo HR 
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold3  ridgeAUC=0.789  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Macrophage__to__Stromal cells
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold4  ridgeAUC=0.735  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Tumor (CK lo HR hi p53+)__to__T &
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold0  ridgeAUC=0.793  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Macrophage__to__Stromal cells
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold1  ridgeAUC=0.776  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Macrophage__to__Stromal cells
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold2  ridgeAUC=0.851  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Macrophage__to__Stromal cells
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold3  ridgeAUC=0.840  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Macrophage__to__Stromal cells
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold4  ridgeAUC=0.732  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Macrophage__to__Stromal cells
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold0  ridgeAUC=0.834  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Endothelial__to__Tumor (CK lo HR 
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold1  ridgeAUC=0.783  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Macrophage__to__Stromal cells
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold2  ridgeAUC=0.750  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Macrophage__to__Stromal cells
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold3  ridgeAUC=0.842  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Macrophage__to__Stromal cells
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold4  ridgeAUC=0.808  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Macrophage__to__Stromal cells
+  TASK motif_macrophage_tumor_niche: 15/15 folds passed
+=== motif_t_tumor_mixing  n=385  kind=spatial ===
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold0  ridgeAUC=0.785  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__T cell__to__T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold1  ridgeAUC=0.890  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__T cell__to__Stromal cells
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold2  ridgeAUC=0.850  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__T cell__to__Stromal cells
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold3  ridgeAUC=0.913  lasso=True shap=True faith=True  shap_top1=mixing::shannon_entropy_global
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold4  ridgeAUC=0.947  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__T cell__to__Stromal cells
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold0  ridgeAUC=0.929  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__T cell__to__T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold1  ridgeAUC=0.877  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__T cell__to__Stromal cells
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold2  ridgeAUC=0.895  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__T cell__to__Tumor (CK lo HR lo)
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold3  ridgeAUC=0.851  lasso=True shap=True faith=True  shap_top1=mixing::local_mixing_std
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold4  ridgeAUC=0.865  lasso=True shap=True faith=True  shap_top1=mixing::local_mixing_std
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold0  ridgeAUC=0.861  lasso=True shap=True faith=True  shap_top1=mixing::shannon_entropy_global
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold1  ridgeAUC=0.920  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Endothelial__to__Tumor (CK lo HR 
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold2  ridgeAUC=0.901  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__T cell__to__Stromal cells
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold3  ridgeAUC=0.842  lasso=True shap=True faith=True  shap_top1=mixing::local_mixing_std
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold4  ridgeAUC=0.881  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__T cell__to__Stromal cells
+  TASK motif_t_tumor_mixing: 15/15 folds passed
+=== motif_tumor_high  n=708  kind=control ===
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold0  ridgeAUC=0.975  lasso=True shap=True faith=True  shap_top1=composition::Stromal cells
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold1  ridgeAUC=0.964  lasso=True shap=True faith=True  shap_top1=density::tumor_area_ratio
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold2  ridgeAUC=0.959  lasso=True shap=True faith=True  shap_top1=density::tumor_area_ratio
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold3  ridgeAUC=0.984  lasso=True shap=True faith=True  shap_top1=density::tumor_area_ratio
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold4  ridgeAUC=0.983  lasso=True shap=True faith=True  shap_top1=density::tumor_area_ratio
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold0  ridgeAUC=0.976  lasso=True shap=True faith=True  shap_top1=density::tumor_area_ratio
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold1  ridgeAUC=0.986  lasso=True shap=True faith=True  shap_top1=composition::Stromal cells
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold2  ridgeAUC=0.951  lasso=True shap=True faith=True  shap_top1=density::tumor_area_ratio
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold3  ridgeAUC=0.947  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Tumor (CK7+)__to__Tumor (p53+ EGF
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold4  ridgeAUC=0.983  lasso=True shap=True faith=True  shap_top1=density::tumor_area_ratio
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold0  ridgeAUC=0.975  lasso=True shap=True faith=True  shap_top1=composition::Stromal cells
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold1  ridgeAUC=0.974  lasso=True shap=True faith=True  shap_top1=density::tumor_area_ratio
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold2  ridgeAUC=0.978  lasso=True shap=True faith=True  shap_top1=density::tumor_area_ratio
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold3  ridgeAUC=0.967  lasso=True shap=True faith=True  shap_top1=density::tumor_area_ratio
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold4  ridgeAUC=0.979  lasso=True shap=True faith=True  shap_top1=composition::Stromal cells
+  TASK motif_tumor_high: 15/15 folds passed
+=== motif_cd8_high  n=708  kind=control ===
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold0  ridgeAUC=0.964  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Stromal cells__to__T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold1  ridgeAUC=0.983  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Stromal cells__to__T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold2  ridgeAUC=0.986  lasso=True shap=True faith=True  shap_top1=composition::T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold3  ridgeAUC=0.980  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Stromal cells__to__T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed0/fold4  ridgeAUC=0.959  lasso=True shap=True faith=True  shap_top1=composition::T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold0  ridgeAUC=0.945  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Stromal cells__to__T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold1  ridgeAUC=0.968  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Stromal cells__to__T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold2  ridgeAUC=0.961  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Stromal cells__to__T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold3  ridgeAUC=0.965  lasso=True shap=True faith=True  shap_top1=composition::T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed1/fold4  ridgeAUC=0.967  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Stromal cells__to__T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold0  ridgeAUC=0.958  lasso=True shap=True faith=True  shap_top1=composition::T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold1  ridgeAUC=0.993  lasso=True shap=True faith=True  shap_top1=composition::T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold2  ridgeAUC=0.976  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Stromal cells__to__T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold3  ridgeAUC=0.923  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Stromal cells__to__T cell
+/autofs/nas8/tywang/tjzou/Miniconda3/envs/p3/lib/python3.10/site-packages/sklearn/linear_model/_logistic.py:1221: UserWarning: l1_ratio parameter is only used when penalty is 'elasticnet'. Got (penalty=l2)
+  warnings.warn(
+  seed2/fold4  ridgeAUC=0.954  lasso=True shap=True faith=True  shap_top1=mixing::neighbor_fraction__Stromal cells__to__T cell
+  TASK motif_cd8_high: 15/15 folds passed
+
+=== summary ===
+                        task    kind  n_folds  mean_auc_ridge  mean_auc_lasso  frac_lasso_passed  frac_shap_passed  frac_faithfulness_passed  frac_fold_passed  mean_drop_top  mean_drop_random  lasso_control_frac  shap_control_frac  control_frac_passed lasso_verdict shap_verdict      verdict        dataset  selected
+            motif_tumor_high control       15        0.972107        0.972927                1.0               1.0                  1.000000          1.000000       0.025904          0.000106                 1.0                1.0                  1.0  pass_control pass_control pass_control bc_jackson2020      True
+              motif_cd8_high control       15        0.965479        0.950676                1.0               1.0                  1.000000          1.000000       0.059668          0.000664                 1.0                1.0                  1.0  pass_control pass_control pass_control bc_jackson2020     False
+        motif_t_tumor_mixing spatial       15        0.880417        0.883242                1.0               1.0                  1.000000          1.000000       0.049182          0.000527                 1.0                1.0                  1.0  pass_spatial pass_spatial pass_spatial bc_jackson2020      True
+     motif_cd8_tumor_contact spatial       15        0.875702        0.881098                1.0               1.0                  1.000000          1.000000       0.045495          0.002042                 1.0                1.0                  1.0  pass_spatial pass_spatial pass_spatial bc_jackson2020      True
+motif_macrophage_tumor_niche spatial       15        0.791378        0.789970                1.0               1.0                  1.000000          1.000000       0.098448          0.003894                 1.0                1.0                  1.0  pass_spatial pass_spatial pass_spatial bc_jackson2020      True
+         motif_apc_t_contact spatial       15        0.680689        0.683987                1.0               1.0                  0.933333          0.933333       0.080998          0.002540                 1.0                1.0                  1.0  pass_spatial pass_spatial pass_spatial bc_jackson2020      True
+
+######## hnc_wu2022  tasks=['motif_cd8_clustering', 'motif_immune_exclusion', 'motif_tumor_high', 'motif_cd8_high'] ########
+Cache meta mismatch {'sources': ['composition', 'density', 'point-pattern'], 'by_type': True, 'cell_type_col': 'cell_type_uniform'} vs {'sources': ['composition', 'density', 'mixing', 'point-pattern'], 'by_type': True, 'cell_type_col': 'cell_type_uniform'}; re-extracting
+Extracting ['composition', 'density', 'mixing', 'point-pattern'] by_type=True on 366 labelled regions

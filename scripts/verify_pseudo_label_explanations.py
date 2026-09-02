@@ -12,7 +12,7 @@ Tabular Lasso + linear SHAP on one dataset:
         --dataset hnc_wu2022 --data-root "$DATA_ROOT" \\
         --labels results/pseudo_labels/hnc_wu2022_v2.csv \\
         --label-version v2 \\
-        --feature-sources composition density point-pattern \\
+        --feature-sources composition density mixing point-pattern \\
         --by-type
 
 Embedding probe (``{dataset}`` is filled when --panel is set):
@@ -36,7 +36,9 @@ sys.path.insert(0, str(_CODE))
 
 from benchmark.features.basic_feats import CompositionFeaturizer  # noqa: E402
 from benchmark.features.density_feats import CellTypeDensityFeaturizer  # noqa: E402
+from benchmark.features.mixing import MixingFeaturizer  # noqa: E402
 from benchmark.features.point_pattern import PointPatternFeaturizer  # noqa: E402
+from benchmark.features.spatial_distance import SpatialDistanceFeaturizer  # noqa: E402
 from benchmark.models.linear import LinearClassifier  # noqa: E402
 from benchmark.motifs.overlay import attach_pseudo_labels  # noqa: E402
 from benchmark.motifs.panel import (  # noqa: E402
@@ -63,6 +65,10 @@ def _featurizer(name: str, cell_type_col: str, by_type: bool):
         return CompositionFeaturizer(cell_type_col=cell_type_col)
     if name == "density":
         return CellTypeDensityFeaturizer(cell_type_col=cell_type_col)
+    if name == "mixing":
+        return MixingFeaturizer(cell_type_col=cell_type_col)
+    if name == "spatial-distance":
+        return SpatialDistanceFeaturizer(cell_type_col=cell_type_col, k=1)
     if name == "point-pattern":
         return PointPatternFeaturizer(
             cell_type_col=cell_type_col,
@@ -625,7 +631,7 @@ def main() -> None:
     ap.add_argument(
         "--feature-sources",
         nargs="+",
-        default=["composition", "density", "point-pattern"],
+        default=["composition", "density", "mixing", "point-pattern"],
     )
     ap.add_argument("--by-type", action="store_true")
     ap.add_argument("--features-csv", default=None)
