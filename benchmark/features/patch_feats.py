@@ -15,11 +15,11 @@ from scipy.spatial import KDTree
 
 from benchmark.data.dataset import RegionData
 from .base import BaseFeatureExtractor
-from .combined import CombinedCompositionExpressionFeaturizer
+from .local_window import VALID_WINDOW_GROUPS, LocalWindowInstanceFeaturizer
 
 
 class PatchBasedFeaturizer(BaseFeatureExtractor):
-    """Extract patch-level cell composition/expression and aggregate.
+    """Extract patch-level features and aggregate with MIL-style pooling.
 
     Parameters
     ----------
@@ -27,11 +27,11 @@ class PatchBasedFeaturizer(BaseFeatureExtractor):
         Side length of each square window in microns.
     step_um : float, default=None
         Step size between windows (if None, equals window_size, i.e. non-overlapping).
-    feature_type : {"composition", "expression"}, default="composition"
+    feature_type : str, default="composition"
         Legacy single-group interface. Ignored when ``feature_groups`` is supplied.
-    feature_groups : tuple of {"composition", "expression"}, optional
-        One or both local feature groups. With both groups, cell-type fractions and
-        mean marker expression are concatenated before the fixed statistical pooling.
+    feature_groups : tuple of local groups, optional
+        ``composition``, ``expression``, ``mixing``, ``celltype_density``,
+        plus the attention-style ``density`` / ``entropy`` groups.
     cell_type_col : str, default="cell_type"
         Column name for cell types (used only for composition).
     aggregations : tuple, default=("mean", "max", "std")
@@ -43,6 +43,8 @@ class PatchBasedFeaturizer(BaseFeatureExtractor):
     min_cells_per_window : int, default=1
         Minimum number of cells required in a window to include it (others ignored).
     """
+
+    VALID_GROUPS = VALID_WINDOW_GROUPS
 
     def __init__(
         self,
@@ -60,7 +62,7 @@ class PatchBasedFeaturizer(BaseFeatureExtractor):
         self.step = step_um if step_um is not None else window_size_um
         self.feature_type = feature_type
         self.feature_groups = tuple(feature_groups or (feature_type,))
-        unknown = set(self.feature_groups) - {"composition", "expression"}
+        unknown = set(self.feature_groups) - self.VALID_GROUPS
         if unknown:
             raise ValueError(f"Unknown feature group(s): {sorted(unknown)}")
         self.cell_type_col = cell_type_col
@@ -71,7 +73,7 @@ class PatchBasedFeaturizer(BaseFeatureExtractor):
         self.cell_types_: list[str] = []
         self.markers_: list[str] = []
         self.vocab_: list[str] = []   # prefixed output dimensions
-        self.local_features_: CombinedCompositionExpressionFeaturizer | None = None
+        self.instances_: LocalWindowInstanceFeaturizer | None = None
 
     # -- vocabulary -------------------------------------------------------
     def _col(self, region: RegionData) -> str | None:
@@ -82,13 +84,13 @@ class PatchBasedFeaturizer(BaseFeatureExtractor):
         return None
 
     def fit(self, regions: list[RegionData]) -> "PatchBasedFeaturizer":
-        self.local_features_ = CombinedCompositionExpressionFeaturizer(
-            cell_type_col=self.cell_type_col,
+        self.instances_ = LocalWindowInstanceFeaturizer(
             feature_groups=self.feature_groups,
+            cell_type_col=self.cell_type_col,
         ).fit(regions)
-        self.cell_types_ = self.local_features_.cell_types_
-        self.markers_ = self.local_features_.markers_
-        self.vocab_ = self.local_features_.feature_names()
+        self.cell_types_ = self.instances_.cell_types_
+        self.markers_ = self.instances_.markers_
+        self.vocab_ = self.instances_.feature_names()
         return self
 
     # -- feature names ----------------------------------------------------
@@ -153,14 +155,9 @@ class PatchBasedFeaturizer(BaseFeatureExtractor):
 
         if int(inside.sum()) < self.min_cells:
             return None
-        if self.local_features_ is None:
+        if self.instances_ is None:
             raise RuntimeError("PatchBasedFeaturizer must be fitted before extraction")
-
-        # Apply exactly the same composition + mean-expression extractor used by
-        # the global baseline, then concatenate its columns in the fitted order.
-        cell_ids = region.coordinates.index[inside]
-        values = self.local_features_.extract_cells(region, cell_ids)
-        return np.asarray([values[name] for name in self.vocab_], dtype=float)
+        return self.instances_.extract_vector(region, inside, self.window_size)
 
     # -- extraction -------------------------------------------------------
     def extract_region(self, region: RegionData) -> dict[str, float]:

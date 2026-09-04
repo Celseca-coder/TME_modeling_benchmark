@@ -1,0 +1,17 @@
+dataset,task,method,feature_groups,scheme,metric,mean,sd,n,labels,score
+bc_jackson2020,motif_apc_t_contact,attention,celltype_density,cv,auc_roc,0.648841642359276,0.060736715610118744,15,/autofs/nas8/tywang/tjzou/PseudoNoisyDataset/per_dataset/bc_jackson2020_v2_noisy.csv,0.649 +/- 0.061
+bc_jackson2020,motif_cd8_tumor_contact,attention,celltype_density,cv,auc_roc,0.684791201156448,0.06310982651719574,15,/autofs/nas8/tywang/tjzou/PseudoNoisyDataset/per_dataset/bc_jackson2020_v2_noisy.csv,0.685 +/- 0.063
+bc_jackson2020,motif_macrophage_tumor_niche,attention,celltype_density,cv,auc_roc,0.6507380519267218,0.07572976192801097,15,/autofs/nas8/tywang/tjzou/PseudoNoisyDataset/per_dataset/bc_jackson2020_v2_noisy.csv,0.651 +/- 0.076
+bc_jackson2020,motif_t_tumor_mixing,attention,celltype_density,cv,auc_roc,0.737137615703489,0.07719109943029315,15,/autofs/nas8/tywang/tjzou/PseudoNoisyDataset/per_dataset/bc_jackson2020_v2_noisy.csv,0.737 +/- 0.077
+bc_jackson2020,motif_tumor_high,attention,celltype_density,cv,auc_roc,0.9104692677572596,0.03447331500369121,15,/autofs/nas8/tywang/tjzou/PseudoNoisyDataset/per_dataset/bc_jackson2020_v2_noisy.csv,0.910 +/- 0.034
+bc_jackson2020,motif_cd8_high,attention,celltype_density,cv,auc_roc,0.8404145711373852,0.038702060122063134,15,/autofs/nas8/tywang/tjzou/PseudoNoisyDataset/per_dataset/bc_jackson2020_v2_noisy.csv,0.840 +/- 0.039
+hnc_wu2022,motif_cd8_clustering,attention,celltype_density,cv,auc_roc,0.7599956134964959,0.09631375758248269,15,/autofs/nas8/tywang/tjzou/PseudoNoisyDataset/per_dataset/hnc_wu2022_v2_noisy.csv,0.760 +/- 0.096
+hnc_wu2022,motif_immune_exclusion,attention,celltype_density,cv,auc_roc,0.694136395602079,0.1095600876658281,15,/autofs/nas8/tywang/tjzou/PseudoNoisyDataset/per_dataset/hnc_wu2022_v2_noisy.csv,0.694 +/- 0.110
+hnc_wu2022,motif_tumor_high,attention,celltype_density,cv,auc_roc,0.8619532648775848,0.05095952550446405,15,/autofs/nas8/tywang/tjzou/PseudoNoisyDataset/per_dataset/hnc_wu2022_v2_noisy.csv,0.862 +/- 0.051
+hnc_wu2022,motif_cd8_high,attention,celltype_density,cv,auc_roc,0.8995330073653283,0.03500981719286189,15,/autofs/nas8/tywang/tjzou/PseudoNoisyDataset/per_dataset/hnc_wu2022_v2_noisy.csv,0.900 +/- 0.035
+tnbc_wang2023,motif_cd8_high,attention,celltype_density,cv,auc_roc,0.9053172269563011,0.02227850786316508,15,/autofs/nas8/tywang/tjzou/PseudoNoisyDataset/per_dataset/tnbc_wang2023_v2_noisy.csv,0.905 +/- 0.022
+tnbc_wang2023,motif_tumor_high,attention,celltype_density,cv,auc_roc,0.891991563949617,0.023445183570014967,15,/autofs/nas8/tywang/tjzou/PseudoNoisyDataset/per_dataset/tnbc_wang2023_v2_noisy.csv,0.892 +/- 0.023
+bc_metabric_ali2020,motif_interface_immune,attention,celltype_density,cv,auc_roc,0.5434916840227524,0.06622183357977582,15,/autofs/nas8/tywang/tjzou/PseudoNoisyDataset/per_dataset/bc_metabric_ali2020_v2_noisy.csv,0.543 +/- 0.066
+bc_metabric_ali2020,motif_tumor_stroma_mixing,attention,celltype_density,cv,auc_roc,0.7000977095292938,0.07196976878019042,15,/autofs/nas8/tywang/tjzou/PseudoNoisyDataset/per_dataset/bc_metabric_ali2020_v2_noisy.csv,0.700 +/- 0.072
+bc_metabric_ali2020,motif_tumor_high,attention,celltype_density,cv,auc_roc,0.9093793820133373,0.03256556954548326,15,/autofs/nas8/tywang/tjzou/PseudoNoisyDataset/per_dataset/bc_metabric_ali2020_v2_noisy.csv,0.909 +/- 0.033
+bc_metabric_ali2020,motif_cd8_high,attention,celltype_density,cv,auc_roc,0.8321394502388636,0.03602342032718926,15,/autofs/nas8/tywang/tjzou/PseudoNoisyDataset/per_dataset/bc_metabric_ali2020_v2_noisy.csv,0.832 +/- 0.036

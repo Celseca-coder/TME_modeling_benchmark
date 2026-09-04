@@ -90,20 +90,51 @@ class AttentionMILModel(RegionModel):
         self._std[self._std < 1e-8] = 1.0
         self._input_dim = all_x.shape[1]
 
+    def keep_indices(self, n: int, training: bool = False) -> np.ndarray:
+        """Windows actually scored when a bag exceeds ``max_instances``."""
+        if n <= 0:
+            return np.zeros(0, dtype=int)
+        if not self.max_instances or n <= self.max_instances:
+            return np.arange(n, dtype=int)
+        if training:
+            rng = getattr(self, "_rng", np.random.default_rng(self.seed))
+            return np.sort(rng.choice(n, self.max_instances, replace=False))
+        return np.linspace(0, n - 1, self.max_instances, dtype=int)
+
     def _bag_tensor(self, bag: np.ndarray, training: bool = False):
         if bag.ndim != 2 or bag.shape[1] != self._input_dim:
             raise ValueError(f"Invalid bag shape {bag.shape}; expected (*, {self._input_dim})")
         if len(bag) == 0:
             bag = np.zeros((1, self._input_dim), dtype=np.float32)
-        if self.max_instances and len(bag) > self.max_instances:
-            if training:
-                ids = self._rng.choice(len(bag), self.max_instances, replace=False)
-            else:
-                ids = np.linspace(0, len(bag) - 1, self.max_instances, dtype=int)
-            bag = bag[ids]
+        else:
+            bag = bag[self.keep_indices(len(bag), training=training)]
         bag = np.where(np.isnan(bag), self._median[None, :], bag)
         bag = (bag - self._mean[None, :]) / self._std[None, :]
         return torch.as_tensor(bag, dtype=torch.float32, device=self.device_)
+
+    def _positive_index(self) -> int:
+        classes = list(self.classes_)
+        if 1 in classes:
+            return classes.index(1)
+        return len(classes) - 1
+
+    def positive_logit(self, bag: np.ndarray) -> float:
+        """Positive-class logit for one bag."""
+        self._net.eval()
+        with torch.no_grad():
+            logits, _ = self._net(self._bag_tensor(bag))
+            return float(logits[self._positive_index()].cpu())
+
+    def positive_proba(self, bag: np.ndarray) -> float:
+        """Positive-class probability for one bag."""
+        self._net.eval()
+        with torch.no_grad():
+            logits, _ = self._net(self._bag_tensor(bag))
+            return float(torch.softmax(logits, dim=0)[self._positive_index()].cpu())
+
+    def forward_scaled(self, tensor: torch.Tensor):
+        """Gated-attention forward on an already-scaled bag tensor."""
+        return self._net(tensor)
 
     @staticmethod
     def _cox_loss(risk: torch.Tensor, time: torch.Tensor, event: torch.Tensor):

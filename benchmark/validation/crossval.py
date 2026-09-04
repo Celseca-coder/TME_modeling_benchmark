@@ -106,6 +106,68 @@ def cross_validate(
     return fold_metrics
 
 
+def cross_validate_precomputed(
+    dataset,
+    task_id: str,
+    features,
+    model_factory: Callable[[dict, int], object],
+    *,
+    seeds: Sequence[int] = (0,),
+    n_folds: int | None = None,
+    patient_col: str | None = None,
+    cv_filter: str | None = None,
+) -> list[dict]:
+    """Same splits and models as :func:`cross_validate`, but features are already extracted.
+
+    ``features`` is a DataFrame indexed by ``region_id``.  Folds only retrain the
+    model; window / region features are not recomputed.
+    """
+    vcfg = dataset.validation_config
+    n_folds = n_folds or vcfg.get("n_folds", 5)
+    patient_col = patient_col or vcfg.get("patient_col", "patient_id")
+    cv_filter = cv_filter if cv_filter is not None else vcfg.get("cv_filter")
+    task_cfg = dataset.get_task_config(task_id)
+
+    meta = dataset.get_task_metadata(task_id)
+    if len(meta) == 0:
+        return []
+    if cv_filter:
+        sub = meta.query(cv_filter)
+        meta = sub if len(sub) else meta
+
+    index = features.index.astype(str)
+    table = features.copy()
+    table.index = index
+
+    fold_metrics: list[dict] = []
+    for seed in seeds:
+        folds = safe_patient_kfold(meta, n_folds, patient_col, stratify_column(task_cfg), seed)
+        if folds is None:
+            continue
+        for fold_i, (train_ids, val_ids) in enumerate(folds):
+            train_ids = [str(i) for i in train_ids if str(i) in table.index]
+            val_ids = [str(i) for i in val_ids if str(i) in table.index]
+            if not train_ids or not val_ids:
+                continue
+            X_tr = table.loc[train_ids]
+            X_va = table.loc[val_ids]
+            y_tr = dataset.build_target(list(X_tr.index), task_id)
+            y_va = dataset.build_target(list(X_va.index), task_id)
+            try:
+                model = model_factory(task_cfg, seed).fit(X_tr, y_tr)
+                metrics = score_predictions(
+                    task_cfg, y_va, model.predict(X_va), getattr(model, "classes_", None)
+                )
+            except Exception:
+                metrics = _nan_metrics(task_cfg["type"])
+            metrics.update({
+                "seed": seed, "fold": fold_i,
+                "n_train": len(X_tr), "n_val": len(X_va),
+            })
+            fold_metrics.append(metrics)
+    return fold_metrics
+
+
 def cohort_split_test(
     dataset,
     task_id: str,

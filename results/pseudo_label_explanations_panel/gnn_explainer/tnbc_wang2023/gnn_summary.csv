@@ -1,0 +1,2 @@
+task,kind,n_regions,mean_enrichment,frac_passed,control_frac_passed,verdict,dataset
+motif_cd8_high,control,766,1.3951440752669428,0.4765013054830287,0.4765013054830287,fail_control,tnbc_wang2023

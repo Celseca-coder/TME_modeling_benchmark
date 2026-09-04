@@ -99,20 +99,18 @@ class MixingFeaturizer(BaseFeatureExtractor):
 
         tree = KDTree(coords)
         # Query k+1 neighbors (first is self)
-        dists, indices = tree.query(coords, k=k + 1)
-        indices = indices[:, 1:]  # exclude self
-        labels_arr = labels.values
+        _, indices = tree.query(coords, k=k + 1)
+        if np.ndim(indices) == 1:
+            indices = indices[:, None]
+        indices = np.asarray(indices)[:, 1:]
+        labels_arr = np.asarray(labels)
 
-        # For each cell, compute Gini-Simpson index = 1 - sum(p_i^2)
-        # where p_i are proportions of each type among the k neighbors.
-        scores = []
-        for i in range(n):
-            neigh_labels = labels_arr[indices[i]]
-            # Simpler: use pandas Series
-            counts = pd.Series(neigh_labels).value_counts()
-            probs = counts / k
-            gini = 1 - (probs**2).sum()
-            scores.append(gini)
+        codes, uniques = pd.factorize(labels_arr, sort=False)
+        neigh_codes = codes[indices]
+        n_classes = int(uniques.size)
+        counts = np.zeros((n, n_classes), dtype=np.float64)
+        np.add.at(counts, (np.repeat(np.arange(n), k), neigh_codes.reshape(-1)), 1)
+        scores = 1.0 - ((counts / k) ** 2).sum(axis=1)
 
         same_type = labels_arr[indices] == labels_arr[:, None]
         features = {

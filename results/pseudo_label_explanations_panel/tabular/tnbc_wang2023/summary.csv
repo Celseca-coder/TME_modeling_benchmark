@@ -1,3 +1,2 @@
-task,kind,n_folds,mean_auc_ridge,mean_auc_lasso,frac_lasso_passed,frac_shap_passed,frac_faithfulness_passed,frac_fold_passed,mean_drop_top,mean_drop_random,control_frac_passed,verdict,dataset,selected
-motif_tumor_high,control,15,0.9788637954440902,0.9790163180245905,1.0,1.0,1.0,1.0,0.035793983212048165,0.0031637121248581164,1.0,pass_control,tnbc_wang2023,False
-motif_cd8_high,control,15,0.9721318866681172,0.9695809539640092,1.0,1.0,1.0,1.0,0.05490731270814498,0.0005236810951776565,1.0,pass_control,tnbc_wang2023,True
+task,kind,n_folds,mean_auc_ridge,mean_auc_lasso,frac_lasso_passed,frac_shap_passed,frac_faithfulness_passed,frac_fold_passed,mean_drop_top,mean_drop_random,lasso_control_frac,shap_control_frac,control_frac_passed,lasso_verdict,shap_verdict,verdict,dataset,selected
+motif_cd8_high,control,15,0.9772897004106226,0.9752298485299818,0.0,0.2,0.9333333333333333,0.0,0.0021732424379100833,-7.536397152105856e-05,0.0,0.2,0.0,fail_control,fail_control,fail_control,tnbc_wang2023,True

@@ -107,7 +107,8 @@ def main():
     ap.add_argument("--window-size", type=float, default=100, help="Window side length (um)")
     ap.add_argument("--step", type=float, default=50, help="Step size (um)")
     ap.add_argument(
-        "--feature-groups", nargs="+", choices=["composition", "expression"],
+        "--feature-groups", nargs="+",
+        choices=sorted(PatchBasedFeaturizer.VALID_GROUPS),
         default=["composition", "expression"],
         help=(
             "Per-window feature groups. By default, concatenate global-style "

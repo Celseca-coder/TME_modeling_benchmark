@@ -1,0 +1,3 @@
+task,kind,n_regions,mean_enrichment,frac_passed,control_frac_passed,verdict,dataset
+motif_interface_immune,spatial,273,1.0408620412954068,0.31868131868131866,,fail_control_block,bc_metabric_ali2020
+motif_tumor_stroma_mixing,spatial,307,0.9883395714963069,0.009771986970684038,,fail_control_block,bc_metabric_ali2020

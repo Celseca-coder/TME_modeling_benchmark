@@ -1,0 +1,17 @@
+dataset,task,method,feature_groups,scheme,metric,mean,sd,n,labels,score
+bc_jackson2020,motif_apc_t_contact,linear_mean,mixing,cv,auc_roc,0.6671440748591201,0.07739556772445097,15,/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/results/pseudo_labels/bc_jackson2020_v2.csv,0.667 +/- 0.077
+bc_jackson2020,motif_cd8_tumor_contact,linear_mean,mixing,cv,auc_roc,0.6411682176535469,0.12022443663472149,15,/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/results/pseudo_labels/bc_jackson2020_v2.csv,0.641 +/- 0.120
+bc_jackson2020,motif_macrophage_tumor_niche,linear_mean,mixing,cv,auc_roc,0.5503143461761498,0.07423172209078835,15,/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/results/pseudo_labels/bc_jackson2020_v2.csv,0.550 +/- 0.074
+bc_jackson2020,motif_t_tumor_mixing,linear_mean,mixing,cv,auc_roc,0.6493785450199313,0.08158849559031414,15,/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/results/pseudo_labels/bc_jackson2020_v2.csv,0.649 +/- 0.082
+bc_jackson2020,motif_tumor_high,linear_mean,mixing,cv,auc_roc,0.916374522087209,0.028724934768074188,15,/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/results/pseudo_labels/bc_jackson2020_v2.csv,0.916 +/- 0.029
+bc_jackson2020,motif_cd8_high,linear_mean,mixing,cv,auc_roc,0.8801532033267225,0.02653943719920321,15,/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/results/pseudo_labels/bc_jackson2020_v2.csv,0.880 +/- 0.027
+hnc_wu2022,motif_cd8_clustering,linear_mean,mixing,cv,auc_roc,0.6653686113503289,0.0666096946182725,15,/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/results/pseudo_labels/hnc_wu2022_v2.csv,0.665 +/- 0.067
+hnc_wu2022,motif_immune_exclusion,linear_mean,mixing,cv,auc_roc,0.7762826069746864,0.09428660794946603,15,/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/results/pseudo_labels/hnc_wu2022_v2.csv,0.776 +/- 0.094
+hnc_wu2022,motif_tumor_high,linear_mean,mixing,cv,auc_roc,0.8467013168495757,0.05623072270582621,15,/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/results/pseudo_labels/hnc_wu2022_v2.csv,0.847 +/- 0.056
+hnc_wu2022,motif_cd8_high,linear_mean,mixing,cv,auc_roc,0.8184196292676459,0.04202215629596371,15,/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/results/pseudo_labels/hnc_wu2022_v2.csv,0.818 +/- 0.042
+tnbc_wang2023,motif_cd8_high,linear_mean,mixing,cv,auc_roc,0.8780796985979618,0.02454240027608743,15,/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/results/pseudo_labels/tnbc_wang2023_v2.csv,0.878 +/- 0.025
+tnbc_wang2023,motif_tumor_high,linear_mean,mixing,cv,auc_roc,0.8266243577268073,0.02960721491117391,15,/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/results/pseudo_labels/tnbc_wang2023_v2.csv,0.827 +/- 0.030
+bc_metabric_ali2020,motif_interface_immune,linear_mean,mixing,cv,auc_roc,0.5542941331645036,0.07718957184072336,15,/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/results/pseudo_labels/bc_metabric_ali2020_v2.csv,0.554 +/- 0.077
+bc_metabric_ali2020,motif_tumor_stroma_mixing,linear_mean,mixing,cv,auc_roc,0.7790863660642346,0.0476929714328872,15,/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/results/pseudo_labels/bc_metabric_ali2020_v2.csv,0.779 +/- 0.048
+bc_metabric_ali2020,motif_tumor_high,linear_mean,mixing,cv,auc_roc,0.8599543440579953,0.03518195728435329,15,/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/results/pseudo_labels/bc_metabric_ali2020_v2.csv,0.860 +/- 0.035
+bc_metabric_ali2020,motif_cd8_high,linear_mean,mixing,cv,auc_roc,0.8136029751979089,0.04159860594173161,15,/autofs/nas8/tywang/tjzou/TME_modeling_benchmark/results/pseudo_labels/bc_metabric_ali2020_v2.csv,0.814 +/- 0.042

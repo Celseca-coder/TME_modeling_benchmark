@@ -39,12 +39,40 @@ htmlcov/
 # *.h5ad
 # *.parquet
 
-# Logs
+# Logs and local run dumps
 *.log
-
+*.out
+*.pid
+nohup.out
 .claude/
-/models/
 /logs/
 /log/
-/model_results/
 /nan_logs/
+
+# Weights, caches, archives (do not push)
+*.pt
+*.pkl
+*.npz
+*.tar
+*.tar.gz
+*.tgz
+*.zip
+
+# Checkpoints and native model caches (~100GB+)
+/model_results/
+
+# SHAP per-observation dumps (tens of MB each)
+*_observation_values.csv
+
+# MIL bags, GNN node attributions, packed result dumps
+results/**/cache/
+results/**/mil_bags.pkl
+results/**/nohup_logs/
+results/pseudo_label_explanations_panel/features/*_gnn_explainer*.csv
+results/pseudo_label_explanations_panel/mil/
+results/pseudo_label_explanations_panel/mil_noisy*/
+results/pseudo_label_explanations_panel/*.tar
+results/pseudo_label_explanations_panel/*.tar.gz
+
+# Third-party model trees may contain large binaries; already-tracked files stay tracked
+/models/

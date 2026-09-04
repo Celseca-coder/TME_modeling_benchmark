@@ -9,3 +9,9 @@ from .point_pattern import PointPatternFeaturizer
 from .mixing import MixingFeaturizer
 from .patch_feats import PatchBasedFeaturizer
 from .attention_mil import HandcraftedAttentionMILFeaturizer
+from .local_window import (
+    LocalWindowInstanceFeaturizer,
+    MOTIF_MIL_COMBOS,
+    MOTIF_MIL_GROUPS,
+    VALID_WINDOW_GROUPS,
+)

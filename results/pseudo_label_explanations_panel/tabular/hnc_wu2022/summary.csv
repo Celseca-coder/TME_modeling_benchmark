@@ -1,5 +1,3 @@
-task,kind,n_folds,mean_auc_ridge,mean_auc_lasso,frac_lasso_passed,frac_shap_passed,frac_faithfulness_passed,frac_fold_passed,mean_drop_top,mean_drop_random,control_frac_passed,verdict,dataset,selected
-motif_tumor_high,control,15,0.9775133564072367,0.9779650748958838,1.0,1.0,1.0,1.0,0.08522565643436476,0.003033746322916257,1.0,pass_control,hnc_wu2022,False
-motif_cd8_high,control,15,0.9919942222306297,0.990805391938792,1.0,1.0,1.0,1.0,0.2592439598983453,0.01003407880775539,1.0,pass_control,hnc_wu2022,False
-motif_cd8_clustering,spatial,15,0.9218439330738416,0.9137049491182537,1.0,1.0,1.0,1.0,0.3076717885432009,0.019590740696631307,1.0,pass_spatial,hnc_wu2022,True
-motif_immune_exclusion,spatial,15,0.932807913796936,0.9326412563193851,1.0,0.8666666666666667,1.0,0.8666666666666667,0.20137642065282665,0.020940670646890626,1.0,pass_spatial,hnc_wu2022,True
+task,kind,n_folds,mean_auc_ridge,mean_auc_lasso,frac_lasso_passed,frac_shap_passed,frac_faithfulness_passed,frac_fold_passed,mean_drop_top,mean_drop_random,lasso_control_frac,shap_control_frac,control_frac_passed,lasso_verdict,shap_verdict,verdict,dataset,selected
+motif_cd8_clustering,spatial,15,0.9510262882344303,0.9481648231981356,1.0,1.0,1.0,1.0,0.17138469959718666,0.006121625254035501,,,,fail_control_block,fail_control_block,fail_control_block,hnc_wu2022,True
+motif_immune_exclusion,spatial,15,0.9795306247910294,0.9785176911026952,0.0,0.0,0.8666666666666667,0.0,0.035049563073145336,0.0017554970332918974,,,,fail_control_block,fail_control_block,fail_control_block,hnc_wu2022,True
