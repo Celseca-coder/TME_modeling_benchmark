@@ -7,14 +7,23 @@ import torch
 from benchmark.data.dataset import RegionData
 from benchmark.models.attention_mil import AttentionMILModel
 from benchmark.models.mil_explainers import (
+    aggregate_feature_attributions,
     aupc,
     explain_bag,
     faithfulness_metrics,
+    ig_attributions,
+    ig_scores,
     one_removed_scores,
     perturbation_curve,
+    rank_feature_order,
 )
 from benchmark.motifs.mil_evidence import evidence_for_bag, window_inside_mask
-from benchmark.motifs.mil_run import localization_metrics, summarize_mil
+from benchmark.motifs.mil_run import (
+    localization_metrics,
+    summarize_mil,
+    summarize_mil_features,
+)
+from benchmark.motifs.recovery import MIL_FEATURE_RULES, rank_recovery
 from benchmark.motifs.spec import MotifCatalog, MotifSpec
 
 
@@ -117,6 +126,53 @@ def test_morf_drops_faster_than_lerf_when_ranking_is_right():
     assert aupc(morf) <= aupc(lerf) + 1e-6
     faith = faithfulness_metrics(model, bag, scores, np.random.default_rng(0).standard_normal(len(bag)))
     assert "aupc_morf" in faith
+
+
+def test_ig_attributions_keep_the_feature_axis():
+    model, bag = _trained_model()
+    attr = ig_attributions(model, bag)
+    assert attr.shape == bag.shape
+    np.testing.assert_allclose(attr.sum(axis=1), ig_scores(model, bag), rtol=1e-5, atol=1e-6)
+
+
+def test_feature_aggregation_names_the_driving_column():
+    model, bag = _trained_model()
+    attr = ig_attributions(model, bag)
+    names = ["key_feature", "noise_feature"]
+    for agg in ("abs", "signed", "top"):
+        importance, net = aggregate_feature_attributions(attr, agg, top_frac=0.5)
+        assert importance.shape == net.shape == (2,)
+        assert rank_feature_order(importance, names)[0] == 0
+
+
+def test_mil_rules_separate_local_mixing_from_local_abundance():
+    rule = MIL_FEATURE_RULES["motif_cd8_clustering"]
+    spatial = rank_recovery(
+        ["mixing__neighbor_fraction__CD8 T cell__to__CD8 T cell", "composition__CD8 T cell"],
+        rule,
+    )
+    abundance = rank_recovery(
+        ["composition__CD8 T cell", "mixing__neighbor_fraction__CD8 T cell__to__CD8 T cell"],
+        rule,
+    )
+    assert spatial["passed"]
+    assert abundance["recovered"] and not abundance["passed"]
+
+
+def test_summarize_mil_features_blocks_spatial_when_controls_fail():
+    recovery = pd.DataFrame([
+        dict(task="motif_cd8_high", kind="control", explainer="ig", aggregation="abs",
+             auc=0.6, auc_passed=True, top1="mixing__local_mixing_mean", hit_in_top="",
+             n_hit_in_top=0, best_hit_rank=None, miss_as_top1=False,
+             recovered=False, passed=False),
+        dict(task="motif_cd8_clustering", kind="spatial", explainer="ig", aggregation="abs",
+             auc=0.8, auc_passed=True, top1="mixing__same_type_neighbor_fraction",
+             hit_in_top="mixing__same_type_neighbor_fraction", n_hit_in_top=1,
+             best_hit_rank=1, miss_as_top1=False, recovered=True, passed=True),
+    ])
+    summary = summarize_mil_features(recovery)
+    spatial = summary[summary.task == "motif_cd8_clustering"].iloc[0]
+    assert spatial["verdict"] == "fail_control_block"
 
 
 def test_summarize_mil_blocks_spatial_when_controls_fail():

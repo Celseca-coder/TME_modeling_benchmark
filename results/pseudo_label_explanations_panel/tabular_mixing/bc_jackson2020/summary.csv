@@ -1,0 +1,7 @@
+task,kind,n_folds,mean_auc_ridge,mean_auc_lasso,frac_lasso_passed,frac_shap_passed,frac_faithfulness_passed,frac_fold_passed,mean_drop_top,mean_drop_random,lasso_control_frac,shap_control_frac,control_frac_passed,lasso_verdict,shap_verdict,verdict,dataset,selected
+motif_tumor_high,control,15,0.9523718973773203,0.9545169711182696,0.0,0.0,0.9333333333333333,0.0,0.02723379124176384,0.0003862089000135294,0.0,0.0,0.0,fail_control,fail_control,fail_control,bc_jackson2020,True
+motif_cd8_high,control,15,0.96713817711124,0.9572978004852526,0.0,0.0,1.0,0.0,0.08904349268408156,0.002478588526032118,0.0,0.0,0.0,fail_control,fail_control,fail_control,bc_jackson2020,False
+motif_t_tumor_mixing,spatial,15,0.850438310963519,0.8521725289187927,1.0,1.0,1.0,1.0,0.08465468594380729,-0.002568650071222452,0.0,0.0,0.0,fail_control_block,fail_control_block,fail_control_block,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,15,0.8494097561568501,0.8547215192752168,1.0,1.0,1.0,1.0,0.08177752950000956,0.006434456297203414,0.0,0.0,0.0,fail_control_block,fail_control_block,fail_control_block,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,15,0.7997177443754765,0.8024220275358543,1.0,1.0,1.0,1.0,0.09164221846052592,-0.0011797080863608386,0.0,0.0,0.0,fail_control_block,fail_control_block,fail_control_block,bc_jackson2020,True
+motif_apc_t_contact,spatial,15,0.6746942745806737,0.678097593639352,1.0,1.0,1.0,1.0,0.10509330146657789,0.0024630309193967768,0.0,0.0,0.0,fail_control_block,fail_control_block,fail_control_block,bc_jackson2020,True

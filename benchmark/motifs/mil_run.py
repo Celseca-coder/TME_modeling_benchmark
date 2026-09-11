@@ -9,17 +9,23 @@ from benchmark.features.attention_mil import HandcraftedAttentionMILFeaturizer
 from benchmark.models.attention_mil import AttentionMILModel
 from benchmark.models.mil_explainers import (
     EXPLAINERS,
+    FEATURE_AGGS,
+    aggregate_feature_attributions,
     explain_bag,
     faithfulness_metrics,
+    ig_attributions,
     random_scores,
+    rank_feature_order,
 )
 from benchmark.motifs.mil_evidence import evidence_for_bag, spec_for_task, task_kind
+from benchmark.motifs.recovery import MIL_FEATURE_RULES, rank_recovery
 from benchmark.validation.splits import safe_patient_kfold, stratify_column
 
 CONTROL_AUC = 0.90
 SPATIAL_AUC = 0.60
 TOP_FRAC = 0.10
 ENRICH_MIN = 1.25
+FEATURE_RANKS_KEPT = 20
 
 
 def _safe_auc(y: np.ndarray, score: np.ndarray) -> float:
@@ -84,19 +90,49 @@ def extract_mil_bags(dataset, region_ids, catalog, groups, args) -> pd.DataFrame
     ).fit(regions)
     table = feat.transform(regions)
     table.index = table.index.astype(str)
+    # Feature-level IG attribution needs the window vocabulary, which is only
+    # known here; callers persist it next to the pickled bags.
+    table.attrs["feature_names"] = list(feat.feature_names())
     return table
 
 
-def run_mil_explanations(dataset, catalog, tasks, bags: pd.DataFrame, args) -> pd.DataFrame:
+def run_mil_explanations(
+    dataset,
+    catalog,
+    tasks,
+    bags: pd.DataFrame,
+    args,
+    feature_names: list[str] | None = None,
+) -> tuple[pd.DataFrame, pd.DataFrame, pd.DataFrame]:
+    """Window-level protocol, plus IG feature-level attribution when possible.
+
+    Returns ``(fold_df, feature_rank_df, feature_recovery_df)``.  The two feature
+    frames are empty unless ``ig`` is among the explainers and ``feature_names``
+    describes the window vocabulary, because only IG carries a feature axis.
+    """
     explainers = tuple(args.mil_explainers)
     unknown = [name for name in explainers if name not in EXPLAINERS]
     if unknown:
         raise ValueError(f"Unknown --mil-explainers {unknown}; expected {EXPLAINERS}")
+    feature_names = list(feature_names or [])
+    aggs = tuple(getattr(args, "mil_feature_aggs", None) or FEATURE_AGGS)
+    bad_aggs = [a for a in aggs if a not in FEATURE_AGGS]
+    if bad_aggs:
+        raise ValueError(f"Unknown --mil-feature-aggs {bad_aggs}; expected {FEATURE_AGGS}")
+    want_features = bool(
+        getattr(args, "mil_feature_attribution", True)
+        and "ig" in explainers
+        and feature_names
+    )
+    feat_top_frac = float(getattr(args, "mil_feature_top_frac", TOP_FRAC))
+    top_k = int(getattr(args, "top_k", 5))
     vcfg = dataset.validation_config
     patient_col = vcfg.get("patient_col", "patient_id")
     n_folds = vcfg.get("n_folds", 5)
     rng = np.random.default_rng(0)
     rows = []
+    rank_rows: list[dict] = []
+    feature_rows: list[dict] = []
     for task in tasks:
         spec = spec_for_task(catalog, task)
         kind = task_kind(task)
@@ -140,9 +176,16 @@ def run_mil_explanations(dataset, catalog, tasks, bags: pd.DataFrame, args) -> p
                             task, kind, seed, fold_i, name, y_tr, y_va, auc, auc_passed,
                             loc_df=None, faith_df=None,
                         ))
+                    if want_features:
+                        feature_rows.extend(
+                            _blocked_feature_rows(task, kind, seed, fold_i, auc, aggs)
+                        )
                     continue
                 loc_chunks = {name: [] for name in explainers}
                 faith_chunks = {name: [] for name in explainers}
+                n_attr_bags = 0
+                importance_acc = {a: np.zeros(len(feature_names)) for a in aggs} if want_features else {}
+                net_acc = {a: np.zeros(len(feature_names)) for a in aggs} if want_features else {}
                 for rid, y_i in y_va.items():
                     bag, centers = _align_bag(
                         model,
@@ -159,10 +202,14 @@ def run_mil_explanations(dataset, catalog, tasks, bags: pd.DataFrame, args) -> p
                         args.window_size,
                     )
                     rand = random_scores(bag, rng)
+                    attr = ig_attributions(model, bag, steps=args.ig_steps) if want_features else None
                     for name in explainers:
-                        scores = explain_bag(
-                            model, bag, name, rng=rng, ig_steps=args.ig_steps
-                        )
+                        if name == "ig" and attr is not None:
+                            scores = attr.sum(axis=1)
+                        else:
+                            scores = explain_bag(
+                                model, bag, name, rng=rng, ig_steps=args.ig_steps
+                            )
                         loc_chunks[name].append(
                             localization_metrics(scores, evidence["pos"], evidence["neg"])
                         )
@@ -171,6 +218,25 @@ def run_mil_explanations(dataset, catalog, tasks, bags: pd.DataFrame, args) -> p
                                 model, bag, scores, rand, step_frac=args.morf_frac
                             )
                         )
+                    if attr is not None and attr.shape[1] == len(feature_names):
+                        window_scores = attr.sum(axis=1)
+                        for agg in aggs:
+                            importance, net = aggregate_feature_attributions(
+                                attr,
+                                agg,
+                                instance_scores=window_scores,
+                                top_frac=feat_top_frac,
+                            )
+                            importance_acc[agg] += np.nan_to_num(importance)
+                            net_acc[agg] += np.nan_to_num(net)
+                        n_attr_bags += 1
+                if want_features:
+                    new_ranks, new_recovery = _feature_rows(
+                        task, kind, seed, fold_i, auc, aggs, feature_names,
+                        importance_acc, net_acc, n_attr_bags, top_k,
+                    )
+                    rank_rows.extend(new_ranks)
+                    feature_rows.extend(new_recovery)
                 for name in explainers:
                     loc = loc_chunks[name]
                     faith = faith_chunks[name]
@@ -180,7 +246,53 @@ def run_mil_explanations(dataset, catalog, tasks, bags: pd.DataFrame, args) -> p
                         task, kind, seed, fold_i, name, y_tr, y_va, auc, auc_passed,
                         loc_df=loc_df, faith_df=faith_df,
                     ))
-    return pd.DataFrame(rows)
+    return pd.DataFrame(rows), pd.DataFrame(rank_rows), pd.DataFrame(feature_rows)
+
+
+def _blocked_feature_rows(task, kind, seed, fold_i, auc, aggs) -> list[dict]:
+    """Feature rows for a fold with no bag signal, so denominators stay aligned."""
+    return [
+        dict(
+            task=task, kind=kind, seed=seed, fold=fold_i, explainer="ig", aggregation=agg,
+            n_bags=0, auc=auc, auc_passed=False, top1="", hit_in_top="",
+            n_hit_in_top=0, best_hit_rank=None, miss_as_top1=False,
+            recovered=False, passed=False, fold_passed=False,
+        )
+        for agg in aggs
+    ]
+
+
+def _feature_rows(
+    task, kind, seed, fold_i, auc, aggs, feature_names,
+    importance_acc, net_acc, n_bags, top_k,
+) -> tuple[list[dict], list[dict]]:
+    """Rank the fold's mean IG feature attributions and score them against rules."""
+    if not n_bags:
+        return [], _blocked_feature_rows(task, kind, seed, fold_i, auc, aggs)
+    rule = MIL_FEATURE_RULES.get(task)
+    ranks, recovery = [], []
+    for agg in aggs:
+        importance = importance_acc[agg] / n_bags
+        net = net_acc[agg] / n_bags
+        order = rank_feature_order(importance, feature_names)
+        for rank, i in enumerate(order[:FEATURE_RANKS_KEPT], start=1):
+            ranks.append(dict(
+                task=task, kind=kind, seed=seed, fold=fold_i, explainer="ig", aggregation=agg,
+                rank=rank, feature=feature_names[i],
+                importance=float(importance[i]), net_attribution=float(net[i]),
+            ))
+        if rule is None:
+            continue
+        rec = rank_recovery([feature_names[i] for i in order], rule, k=top_k)
+        recovery.append(dict(
+            task=task, kind=kind, seed=seed, fold=fold_i, explainer="ig", aggregation=agg,
+            n_bags=n_bags, auc=auc, auc_passed=True,
+            top1=rec["top1"], hit_in_top=rec[f"hit_in_top{top_k}"],
+            n_hit_in_top=rec["n_hit_in_top"], best_hit_rank=rec["best_hit_rank"],
+            miss_as_top1=rec["miss_as_top1"], recovered=rec["recovered"],
+            passed=bool(rec["passed"]), fold_passed=bool(rec["passed"]),
+        ))
+    return ranks, recovery
 
 
 def _paired_morf_p(sub: pd.DataFrame) -> float:
@@ -239,6 +351,60 @@ def _fold_row(task, kind, seed, fold_i, name, y_tr, y_va, auc, auc_passed, loc_d
         faith_passed=faith_passed,
         fold_passed=bool(auc_passed and loc_passed and faith_passed),
     )
+
+
+def _feature_verdict(kind: str, frac: float, control_frac: float) -> str:
+    if kind == "control":
+        return "pass_control" if frac >= 0.5 else "fail_control"
+    if not np.isfinite(control_frac) or control_frac < 0.5:
+        return "fail_control_block"
+    return "pass_spatial" if frac >= 0.5 else "abundance_only_or_fail"
+
+
+def summarize_mil_features(recovery_df: pd.DataFrame) -> pd.DataFrame:
+    """Per-task IG feature recovery, scored like the global Lasso/SHAP protocol.
+
+    ``frac_recovered`` is the raw score (an expected feature reached the top-k)
+    and ``frac_passed`` additionally requires that a pure local-abundance
+    feature is not rank 1, which is the only way to tell a spatial arrangement
+    apart from "this window simply holds many cells of one type".
+    """
+    if recovery_df is None or recovery_df.empty:
+        return pd.DataFrame()
+    has_dataset = "dataset" in recovery_df.columns
+    groups = recovery_df.groupby("dataset", sort=False) if has_dataset else [(None, recovery_df)]
+    rows = []
+    for dataset, dsub in groups:
+        for agg, asub in dsub.groupby("aggregation"):
+            ctrl = asub["kind"].eq("control")
+            control_frac = float(asub.loc[ctrl, "passed"].mean()) if ctrl.any() else float("nan")
+            for task, sub in asub.groupby("task"):
+                kind = sub["kind"].iloc[0]
+                frac = float(sub["passed"].mean())
+                top1 = sub.loc[sub["top1"].astype(bool), "top1"]
+                best_rank = pd.to_numeric(sub["best_hit_rank"], errors="coerce")
+                rec = dict(
+                    task=task,
+                    kind=kind,
+                    explainer="ig",
+                    aggregation=agg,
+                    n_folds=len(sub),
+                    mean_auc=float(sub["auc"].mean()),
+                    frac_auc_passed=float(sub["auc_passed"].mean()),
+                    frac_recovered=float(sub["recovered"].mean()),
+                    frac_passed=frac,
+                    frac_miss_as_top1=float(sub["miss_as_top1"].mean()),
+                    mean_best_hit_rank=float(best_rank.mean()) if best_rank.notna().any() else float("nan"),
+                    modal_top1=str(top1.mode().iloc[0]) if not top1.empty else "",
+                    control_frac_passed=control_frac,
+                    verdict=_feature_verdict(kind, frac, control_frac),
+                )
+                if dataset is not None:
+                    rec["dataset"] = dataset
+                if "selected" in sub.columns:
+                    rec["selected"] = bool(sub["selected"].iloc[0])
+                rows.append(rec)
+    return pd.DataFrame(rows)
 
 
 def summarize_mil(fold_df: pd.DataFrame) -> pd.DataFrame:

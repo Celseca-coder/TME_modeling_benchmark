@@ -1,0 +1,3 @@
+task,kind,n_folds,mean_auc_ridge,mean_auc_lasso,frac_lasso_passed,frac_shap_passed,frac_faithfulness_passed,frac_fold_passed,mean_drop_top,mean_drop_random,lasso_control_frac,shap_control_frac,control_frac_passed,lasso_verdict,shap_verdict,verdict,dataset,selected
+motif_tumor_high,control,15,0.9539840075771193,0.9555237728168119,0.0,0.0,0.6666666666666666,0.0,0.0011817088635786455,0.00011234824406619973,0.0,0.0,0.0,fail_control,fail_control,fail_control,tnbc_wang2023,False
+motif_cd8_high,control,15,0.9757692536344155,0.9742323438369341,0.0,0.0,0.8666666666666667,0.0,0.0023885178096772525,-0.00021655008642054163,0.0,0.0,0.0,fail_control,fail_control,fail_control,tnbc_wang2023,True

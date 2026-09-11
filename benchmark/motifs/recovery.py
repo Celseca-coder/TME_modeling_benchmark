@@ -250,6 +250,146 @@ RULES: dict[str, RecoveryRule] = {
 }
 
 
+# MIL window features (benchmark/features/local_window.py) use "__" instead of
+# "::" and live at 100 um rather than region scale:
+#   composition__<type>, celltype_density__<type>, expression__<marker>,
+#   local_cell_density_per_mm2, local_celltype_entropy,
+#   mixing__local_mixing_*, mixing__same_type_neighbor_fraction,
+#   mixing__neighbor_fraction__<source>__to__<neighbor>
+#
+# The window already localizes the motif, so these rules ask the remaining
+# question: inside the windows the model used, is the top-ranked measurement the
+# spatial arrangement, or is it just how many cells of one type sit there?
+MIL_FEATURE_RULES: dict[str, RecoveryRule] = {
+    "motif_tumor_high": RecoveryRule(
+        task="motif_tumor_high",
+        hit=(
+            r"composition__.*tumor",
+            r"celltype_density__.*tumor",
+            r"expression__.*panck",
+        ),
+        miss_as_top=(),
+        kind="control",
+    ),
+    "motif_cd8_high": RecoveryRule(
+        task="motif_cd8_high",
+        hit=(
+            r"composition__.*(cd8|t cells?)",
+            r"celltype_density__.*(cd8|t cells?)",
+            r"expression__.*(cd8|cd3)",
+        ),
+        miss_as_top=(),
+        kind="control",
+    ),
+    "motif_cd8_clustering": RecoveryRule(
+        task="motif_cd8_clustering",
+        hit=(
+            r"neighbor_fraction__.*(cd8|t cell).*__to__.*(cd8|t cell)",
+            r"mixing__same_type_neighbor_fraction",
+            r"mixing__local_mixing",
+        ),
+        miss_as_top=(
+            r"composition__.*(cd8|t cells?)",
+            r"celltype_density__.*(cd8|t cells?)",
+        ),
+        kind="spatial",
+    ),
+    "motif_tumor_stroma_mixing": RecoveryRule(
+        task="motif_tumor_stroma_mixing",
+        hit=(
+            r"neighbor_fraction__.*(stroma|fibroblast).*__to__.*tumor",
+            r"neighbor_fraction__.*tumor.*__to__.*(stroma|fibroblast)",
+            r"mixing__local_mixing",
+            r"mixing__shannon_entropy",
+        ),
+        miss_as_top=(
+            r"composition__.*(tumor|stroma|fibroblast)",
+            r"celltype_density__.*(tumor|stroma|fibroblast)",
+        ),
+        kind="spatial",
+    ),
+    "motif_interface_immune": RecoveryRule(
+        task="motif_interface_immune",
+        hit=(
+            r"neighbor_fraction__.*(cd8|cd4|b cell|macrophage|immune|t cell).*__to__.*tumor",
+            r"neighbor_fraction__.*tumor.*__to__.*(cd8|cd4|b cell|macrophage|immune|t cell)",
+            r"mixing__local_mixing",
+        ),
+        miss_as_top=(
+            r"composition__.*(cd8|cd4|b cell|macrophage|immune|t cells?)",
+            r"celltype_density__.*(cd8|cd4|b cell|macrophage|immune|t cells?)",
+        ),
+        kind="spatial",
+    ),
+    "motif_immune_exclusion": RecoveryRule(
+        task="motif_immune_exclusion",
+        hit=(
+            r"neighbor_fraction__.*(cd8|t cell).*__to__.*tumor",
+            r"neighbor_fraction__.*tumor.*__to__.*(cd8|t cell)",
+            r"mixing__same_type_neighbor_fraction",
+            r"mixing__local_mixing",
+        ),
+        miss_as_top=(
+            r"composition__.*(cd8|t cells?)",
+            r"celltype_density__.*(cd8|t cells?)",
+        ),
+        kind="spatial",
+    ),
+    "motif_t_tumor_mixing": RecoveryRule(
+        task="motif_t_tumor_mixing",
+        hit=(
+            r"neighbor_fraction__.*(t cell|cd8).*__to__.*tumor",
+            r"neighbor_fraction__.*tumor.*__to__.*(t cell|cd8)",
+            r"mixing__local_mixing",
+        ),
+        miss_as_top=(
+            r"composition__.*(tumor|t cells?|cd8)",
+            r"celltype_density__.*(tumor|t cells?|cd8)",
+        ),
+        kind="spatial",
+    ),
+    "motif_cd8_tumor_contact": RecoveryRule(
+        task="motif_cd8_tumor_contact",
+        hit=(
+            r"neighbor_fraction__.*(cd8|t cell).*__to__.*tumor",
+            r"neighbor_fraction__.*tumor.*__to__.*(cd8|t cell)",
+            r"mixing__local_mixing",
+        ),
+        miss_as_top=(
+            r"composition__.*(tumor|cd8|t cells?)",
+            r"celltype_density__.*(tumor|cd8|t cells?)",
+        ),
+        kind="spatial",
+    ),
+    "motif_macrophage_tumor_niche": RecoveryRule(
+        task="motif_macrophage_tumor_niche",
+        hit=(
+            r"neighbor_fraction__.*macrophage.*__to__.*tumor",
+            r"neighbor_fraction__.*tumor.*__to__.*macrophage",
+            r"mixing__local_mixing",
+        ),
+        miss_as_top=(
+            r"composition__.*(tumor|macrophage)",
+            r"celltype_density__.*(tumor|macrophage)",
+        ),
+        kind="spatial",
+    ),
+    "motif_apc_t_contact": RecoveryRule(
+        task="motif_apc_t_contact",
+        hit=(
+            r"neighbor_fraction__.*(apc|dendritic|macrophage).*__to__.*(t cell|cd8)",
+            r"neighbor_fraction__.*(t cell|cd8).*__to__.*(apc|dendritic|macrophage)",
+            r"mixing__local_mixing",
+        ),
+        miss_as_top=(
+            r"composition__.*(apc|dendritic|macrophage|t cells?|cd8)",
+            r"celltype_density__.*(apc|dendritic|macrophage|t cells?|cd8)",
+        ),
+        kind="spatial",
+    ),
+}
+
+
 # UTAG columns are either smoothed marker summaries (utag_mean__/utag_std__)
 # or train-fold domains named by majority cell type (utag_domain::<type>__kk).
 UTAG_RULES: dict[str, RecoveryRule] = {

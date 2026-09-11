@@ -1,0 +1,13 @@
+task,kind,explainer,aggregation,n_folds,mean_auc,frac_auc_passed,frac_recovered,frac_passed,frac_miss_as_top1,mean_best_hit_rank,modal_top1,control_frac_passed,verdict,dataset,selected
+motif_cd8_clustering,spatial,ig,abs,15,0.7318662003304972,0.9333333333333333,0.4666666666666667,0.4666666666666667,0.0,5.285714285714286,mixing__neighbor_fraction__CD8 T cell__to__CD8 T cell,0.0,fail_control_block,hnc_wu2022,True
+motif_cd8_high,control,ig,abs,15,0.8618096646531102,0.06666666666666667,0.0,0.0,0.0,38.0,mixing__neighbor_fraction__B cell__to__Tumor (Proliferating),0.0,fail_control,hnc_wu2022,False
+motif_immune_exclusion,spatial,ig,abs,15,0.8045144141901969,1.0,0.5333333333333333,0.5333333333333333,0.0,7.533333333333333,mixing__neighbor_fraction__Other__to__Vessel,0.0,fail_control_block,hnc_wu2022,True
+motif_tumor_high,control,ig,abs,15,0.8886991746787627,0.4666666666666667,0.0,0.0,0.0,28.142857142857142,mixing__neighbor_fraction__CD8 T cell__to__Tumor (Proliferating),0.0,fail_control,hnc_wu2022,False
+motif_cd8_clustering,spatial,ig,signed,15,0.7318662003304972,0.9333333333333333,0.6,0.5333333333333333,0.06666666666666667,5.214285714285714,mixing__neighbor_fraction__Naive immune cell__to__B cell,0.0,fail_control_block,hnc_wu2022,True
+motif_cd8_high,control,ig,signed,15,0.8618096646531102,0.06666666666666667,0.0,0.0,0.0,52.0,mixing__neighbor_fraction__B cell__to__Tumor (Proliferating),0.0,fail_control,hnc_wu2022,False
+motif_immune_exclusion,spatial,ig,signed,15,0.8045144141901969,1.0,0.06666666666666667,0.06666666666666667,0.0,15.2,mixing__neighbor_fraction__Other__to__Vessel,0.0,fail_control_block,hnc_wu2022,True
+motif_tumor_high,control,ig,signed,15,0.8886991746787627,0.4666666666666667,0.0,0.0,0.0,24.571428571428573,mixing__neighbor_fraction__APC/Dendritic cell__to__Macrophage,0.0,fail_control,hnc_wu2022,False
+motif_cd8_clustering,spatial,ig,top,15,0.7318662003304972,0.9333333333333333,0.8666666666666667,0.8,0.06666666666666667,2.5714285714285716,mixing__neighbor_fraction__CD8 T cell__to__CD8 T cell,0.03333333333333333,fail_control_block,hnc_wu2022,True
+motif_cd8_high,control,ig,top,15,0.8618096646531102,0.06666666666666667,0.0,0.0,0.0,39.0,mixing__neighbor_fraction__Tumor__to__CD8 T cell,0.03333333333333333,fail_control,hnc_wu2022,False
+motif_immune_exclusion,spatial,ig,top,15,0.8045144141901969,1.0,0.06666666666666667,0.06666666666666667,0.0,19.533333333333335,mixing__neighbor_fraction__Other__to__Vessel,0.03333333333333333,fail_control_block,hnc_wu2022,True
+motif_tumor_high,control,ig,top,15,0.8886991746787627,0.4666666666666667,0.06666666666666667,0.06666666666666667,0.0,23.714285714285715,mixing__neighbor_fraction__CD8 T cell__to__Tumor (Proliferating),0.03333333333333333,fail_control,hnc_wu2022,False

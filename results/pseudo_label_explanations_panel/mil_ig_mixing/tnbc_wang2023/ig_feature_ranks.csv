@@ -1,0 +1,301 @@
+task,kind,seed,fold,explainer,aggregation,rank,feature,importance,net_attribution,dataset,selected
+motif_cd8_high,control,1,4,ig,abs,1,mixing__neighbor_fraction__CD56^+NK__to__CA9^+,0.002595446650840788,-0.002528590745660244,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,abs,2,mixing__neighbor_fraction__CA9^+__to__CD56^+NK,0.0020139412824615502,-0.0019134895956228915,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,abs,3,mixing__neighbor_fraction__CD56^{+}NE__to__PDPN^+Stromal,0.001918259358431773,0.0014315317887185288,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,abs,4,mixing__neighbor_fraction__M2 Mac__to__CA9^+,0.001756254833711686,-0.000418521959196443,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,abs,5,mixing__neighbor_fraction__CA9^+__to__CA9^+,0.001752647413147294,-0.000831900623064486,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,abs,6,mixing__neighbor_fraction__PDPN^+Stromal__to__CA9^+,0.0016761304680297576,-0.0007215401786765316,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,abs,7,mixing__neighbor_fraction__CA9^{+}Hypoxia__to__CD56^+NK,0.0016409371219917835,-0.001186680823025446,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,abs,8,mixing__neighbor_fraction__Neutrophils__to__Basal,0.0011020137275604073,-0.0007030372365075476,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,abs,9,mixing__neighbor_fraction__Myofibroblasts__to__Endothelial,0.0010709198820286648,0.0003783109216674225,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,abs,10,mixing__neighbor_fraction__Apoptosis__to__Endothelial,0.0010448078427859624,0.0004863143060324213,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,abs,11,mixing__neighbor_fraction__Myofibroblasts__to__PD-L1^{+}IDO^{+},0.0010445600511257477,0.0008839078177223036,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,abs,12,mixing__neighbor_fraction__Vimentin^{+}EMT__to__DCs,0.00102513057297969,0.00017283477767975224,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,abs,13,mixing__neighbor_fraction__CK^{hi}GATA3^{+}__to__Helios^{+},0.0010155454040344585,0.0008218081123459462,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,abs,14,mixing__neighbor_fraction__Fibroblasts__to__Endothelial,0.0010100569745192525,0.00025071332527307357,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,abs,15,mixing__neighbor_fraction__DCs__to__Endothelial,0.0009951939683117304,0.00031870287812966845,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,abs,16,mixing__neighbor_fraction__CD56^+NK__to__DCs,0.0009909374886505622,0.0005571125724759256,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,abs,17,mixing__neighbor_fraction__Basal__to__DCs,0.0009833627146496493,0.00025365888309588616,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,abs,18,mixing__neighbor_fraction__CK^{lo}GATA3^{+}__to__Vimentin^{+}EMT,0.0009828496301834439,-0.0003762954346396126,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,abs,19,mixing__neighbor_fraction__CD4^+PD1^+T__to__Vimentin^{+}EMT,0.0009791796895718642,-0.00016075766756163263,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,abs,20,mixing__neighbor_fraction__CD8^+GZMB^+T__to__Endothelial,0.0009748535759253717,0.00048407742974250717,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,signed,1,mixing__neighbor_fraction__CD56^{+}NE__to__PDPN^+Stromal,0.15496062541941283,0.12195430075329743,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,signed,2,mixing__neighbor_fraction__CA9^{+}Hypoxia__to__CD56^+NK,0.11031025760974539,-0.10271873725385171,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,signed,3,mixing__neighbor_fraction__Neutrophils__to__Basal,0.09943726005568874,-0.07117616220712633,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,signed,4,mixing__neighbor_fraction__Myofibroblasts__to__PD-L1^{+}IDO^{+},0.09882589598861444,0.08862935766144986,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,signed,5,mixing__neighbor_fraction__CK^{hi}GATA3^{+}__to__Helios^{+},0.09033381211021277,0.08270230186163917,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,signed,6,mixing__neighbor_fraction__Apoptosis__to__Endothelial,0.08752705246642828,0.05044179171844538,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,signed,7,mixing__neighbor_fraction__CA9^+__to__CD56^+NK,0.08394130361602996,-0.07836653935670303,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,signed,8,mixing__neighbor_fraction__Myofibroblasts__to__Endothelial,0.07785738867363302,0.03935301396883136,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,signed,9,mixing__neighbor_fraction__Helios^{+}__to__Neutrophils,0.07779406797787393,-0.0701041509855151,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,signed,10,mixing__neighbor_fraction__CA9^+__to__CA9^+,0.0777862275832183,-0.05933282871055675,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,signed,11,mixing__neighbor_fraction__CD56^+NK__to__DCs,0.0725579045275323,0.051592116584230165,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,signed,12,mixing__neighbor_fraction__Basal__to__DCs,0.07224189594675705,0.026354709764011296,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,signed,13,mixing__neighbor_fraction__Helios^{+}__to__CD8^+GZMB^+T,0.06832704473209918,0.04515155413540886,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,signed,14,mixing__neighbor_fraction__CK^{lo}GATA3^{+}__to__Basal,0.06812147255899617,-0.03384306152887423,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,signed,15,mixing__neighbor_fraction__CD8^+GZMB^+T__to__Endothelial,0.06782557714533115,0.047986336172587594,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,signed,16,mixing__neighbor_fraction__CD4^+PD1^+T__to__Vimentin^{+}EMT,0.06701438644541803,-0.01898399233896849,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,signed,17,mixing__neighbor_fraction__PDPN^+Stromal__to__CA9^+,0.06632597915643207,-0.05120853691649669,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,signed,18,mixing__neighbor_fraction__Treg__to__Vimentin^{+}EMT,0.06582342916532731,-0.022449408498763108,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,signed,19,mixing__neighbor_fraction__Treg__to__pH2AX^{+}DSB,0.06428992403473595,-0.029698405365216403,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,signed,20,mixing__neighbor_fraction__PD-L1^{+}GZMB^{+}__to__CA9^{+}Hypoxia,0.06339248634150448,-0.03377088494731548,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,top,1,mixing__neighbor_fraction__CD56^{+}NE__to__PDPN^+Stromal,0.013772762632029492,0.011803427446482547,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,top,2,mixing__neighbor_fraction__CK^{hi}GATA3^{+}__to__Helios^{+},0.008934390876569024,0.00850913236140596,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,top,3,mixing__neighbor_fraction__Myofibroblasts__to__PD-L1^{+}IDO^{+},0.008791826295894414,0.008236005253747165,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,top,4,mixing__neighbor_fraction__Apoptosis__to__Endothelial,0.008136125749797015,0.005187395859640781,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,top,5,mixing__neighbor_fraction__CD56^+NK__to__DCs,0.007475021665692914,0.005247084456793458,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,top,6,mixing__neighbor_fraction__Myofibroblasts__to__Endothelial,0.007098654931220288,0.004199480667245881,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,top,7,mixing__neighbor_fraction__CD8^+GZMB^+T__to__Endothelial,0.007019929394744495,0.004800880063161372,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,top,8,mixing__neighbor_fraction__DCs__to__Endothelial,0.006376792005977544,0.0029624396913186636,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,top,9,mixing__neighbor_fraction__Helios^{+}__to__CD8^+GZMB^+T,0.006281332860934656,0.004686915659233514,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,top,10,mixing__neighbor_fraction__Fibroblasts__to__Endothelial,0.006090255739661138,0.002758043209651134,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,top,11,mixing__neighbor_fraction__Vimentin^{+}EMT__to__DCs,0.005724906250251774,0.0018505007459493211,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,top,12,mixing__neighbor_fraction__Endothelial__to__CD8^+GZMB^+T,0.005341149261574258,0.003416287981415595,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,top,13,mixing__neighbor_fraction__Endothelial__to__Endothelial,0.005285088505874452,0.0025773132287701746,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,top,14,mixing__neighbor_fraction__Myofibroblasts__to__DCs,0.005134301872524605,0.002928227129231509,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,top,15,mixing__neighbor_fraction__PD-L1^+APCs__to__CD8^+GZMB^+T,0.004857180040739003,0.002745057947907589,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,top,16,mixing__neighbor_fraction__Vimentin^{+}EMT__to__M2 Mac,0.004800078316583569,0.002267460745775459,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,top,17,mixing__neighbor_fraction__PDPN^+Stromal__to__Endothelial,0.0045401465431367805,-0.0016573561371043411,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,top,18,mixing__neighbor_fraction__CA9^{+}Hypoxia__to__CD8^+TCF1^+T,0.00447426750210296,0.0036470658564662583,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,top,19,mixing__neighbor_fraction__CD8^+T__to__M2 Mac,0.004450383870671803,0.0021529995633326857,tnbc_wang2023,True
+motif_cd8_high,control,1,4,ig,top,20,mixing__neighbor_fraction__CD56^+NK__to__PDPN^+Stromal,0.004336482012553204,0.0023011962177999852,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,abs,1,mixing__neighbor_fraction__CD56^{+}NE__to__PDPN^+Stromal,0.0030127656038683556,0.0023717766057462153,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,abs,2,mixing__neighbor_fraction__CD56^+NK__to__CA9^+,0.002701873870115225,-0.002609236893081096,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,abs,3,mixing__neighbor_fraction__CA9^+__to__CA9^+,0.002066149222816078,-0.0009480972903367516,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,abs,4,mixing__neighbor_fraction__M2 Mac__to__CA9^+,0.0018520745470544356,-0.00038230206083253205,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,abs,5,mixing__neighbor_fraction__Treg__to__MHC I&II^{hi},0.0018071440546168563,-0.001037987089757768,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,abs,6,mixing__neighbor_fraction__Myofibroblasts__to__PDPN^+Stromal,0.0017887874532521168,0.0010491878607314488,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,abs,7,mixing__neighbor_fraction__Myofibroblasts__to__Endothelial,0.0016669169913507854,0.000734152134545992,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,abs,8,mixing__neighbor_fraction__MHC I&II^{hi}__to__CK^{lo}GATA3^{+},0.001581017731928538,-0.0005802912847025089,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,abs,9,mixing__neighbor_fraction__PDPN^+Stromal__to__MHC I&II^{hi},0.0014927055699178035,-0.0009538564280376687,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,abs,10,mixing__neighbor_fraction__Vimentin^{+}EMT__to__PDPN^+Stromal,0.0014425097683927596,0.000498709362472107,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,abs,11,mixing__neighbor_fraction__Fibroblasts__to__Endothelial,0.001433519634167679,0.0001778435003631185,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,abs,12,mixing__neighbor_fraction__MHC I&II^{hi}__to__Myofibroblasts,0.0014228333549712792,0.0011218201091114256,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,abs,13,mixing__neighbor_fraction__Myofibroblasts__to__Fibroblasts,0.0014096399922893003,-0.0002562441361091809,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,abs,14,mixing__neighbor_fraction__CA9^+__to__CD56^+NK,0.0013918137825669917,-0.0012693314332508534,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,abs,15,mixing__local_mixing_std,0.001373635680906225,-0.0004311781112731556,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,abs,16,mixing__neighbor_fraction__Basal__to__MHC I&II^{hi},0.0012745699974595597,-0.0005809773263712448,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,abs,17,mixing__neighbor_fraction__CD15^{+}__to__CK^{lo}GATA3^{+},0.0012557344854349864,0.0002504651853198393,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,abs,18,mixing__neighbor_fraction__CD56^+NK__to__PDPN^+Stromal,0.0012199337316128264,0.000781803724913501,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,abs,19,mixing__neighbor_fraction__CD8^+GZMB^+T__to__Endothelial,0.0011412276061255966,0.0004945936065693283,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,abs,20,mixing__neighbor_fraction__Fibroblasts__to__PDPN^+Stromal,0.0011161397475242777,0.00020688741143582814,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,signed,1,mixing__neighbor_fraction__CD56^{+}NE__to__PDPN^+Stromal,0.24429852205406244,0.19526355655677294,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,signed,2,mixing__neighbor_fraction__Treg__to__MHC I&II^{hi},0.1482886255593235,-0.10489510825107713,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,signed,3,mixing__neighbor_fraction__Myofibroblasts__to__PDPN^+Stromal,0.13953799034289002,0.10014106533984367,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,signed,4,mixing__neighbor_fraction__MHC I&II^{hi}__to__Myofibroblasts,0.13569669828063657,0.1122947087370567,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,signed,5,mixing__neighbor_fraction__MHC I&II^{hi}__to__CK^{lo}GATA3^{+},0.13028610069692279,-0.06249741858141427,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,signed,6,mixing__neighbor_fraction__PDPN^+Stromal__to__MHC I&II^{hi},0.1257336646575725,-0.0943769541176092,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,signed,7,mixing__neighbor_fraction__Myofibroblasts__to__Endothelial,0.12070858744840252,0.07156047985015611,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,signed,8,mixing__neighbor_fraction__Basal__to__MHC I&II^{hi},0.10695791394109747,-0.058425351192489,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,signed,9,mixing__neighbor_fraction__Vimentin^{+}EMT__to__PDPN^+Stromal,0.1031384748210255,0.04849194423263807,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,signed,10,mixing__neighbor_fraction__CD15^{+}__to__CK^{lo}GATA3^{+},0.09844669939467304,0.02759659455028887,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,signed,11,mixing__neighbor_fraction__Apoptosis__to__Endothelial,0.08873628917902701,0.04952350143931595,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,signed,12,mixing__neighbor_fraction__panCK^{med}__to__CD79a^+Plasma,0.0885348501947333,0.0455848705713449,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,signed,13,mixing__neighbor_fraction__Myofibroblasts__to__Fibroblasts,0.08785285535753899,-0.006157644647558317,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,signed,14,mixing__neighbor_fraction__CD8^+GZMB^+T__to__Endothelial,0.07902251346688487,0.04941997772963159,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,signed,15,mixing__neighbor_fraction__CK8/18^{med}__to__CD4^+TCF1^+T,0.0785348859633137,0.049590157844999656,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,signed,16,mixing__local_mixing_std,0.07824039543523247,-0.047032993737220384,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,signed,17,mixing__neighbor_fraction__DCs__to__Myofibroblasts,0.0780650402505415,0.04116765694571962,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,signed,18,mixing__neighbor_fraction__CD56^+NK__to__PDPN^+Stromal,0.07801961098116653,0.054514739808807985,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,signed,19,mixing__neighbor_fraction__CA9^+__to__CA9^+,0.0779720263117023,-0.05797895051461752,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,signed,20,mixing__neighbor_fraction__M2 Mac__to__CK^{lo}GATA3^{+},0.07726276817159228,-0.05174568228418371,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,top,1,mixing__neighbor_fraction__CD56^{+}NE__to__PDPN^+Stromal,0.02459336147951254,0.02191560461053394,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,top,2,mixing__neighbor_fraction__Myofibroblasts__to__PDPN^+Stromal,0.012259909078722058,0.009130910184470195,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,top,3,mixing__neighbor_fraction__Myofibroblasts__to__Endothelial,0.011779612361459116,0.007171886483111386,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,top,4,mixing__neighbor_fraction__Vimentin^{+}EMT__to__PDPN^+Stromal,0.008900633275022761,0.004232782396548618,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,top,5,mixing__neighbor_fraction__MHC I&II^{hi}__to__Myofibroblasts,0.008880335018496336,0.007478114164767468,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,top,6,mixing__neighbor_fraction__Apoptosis__to__Endothelial,0.008228206281721195,0.004717329523920218,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,top,7,mixing__neighbor_fraction__CD8^+GZMB^+T__to__Endothelial,0.008128360433685805,0.004859402175275078,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,top,8,mixing__neighbor_fraction__DCs__to__Myofibroblasts,0.007885124258833665,0.0045101367007758155,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,top,9,mixing__neighbor_fraction__Fibroblasts__to__Endothelial,0.00755912513596058,0.002833847839092335,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,top,10,mixing__neighbor_fraction__CK8/18^{med}__to__CD4^+TCF1^+T,0.0075491016670873315,0.00503205304428167,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,top,11,mixing__neighbor_fraction__panCK^{med}__to__CD79a^+Plasma,0.007466480176578207,0.004501887229426916,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,top,12,mixing__neighbor_fraction__CD56^+NK__to__Fibroblasts,0.007159869161191833,0.004379454510263166,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,top,13,mixing__neighbor_fraction__CD8^+T__to__M2 Mac,0.007136279948070043,0.003954578715821361,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,top,14,mixing__neighbor_fraction__CD56^+NK__to__M2 Mac,0.006844990588619543,0.0043918265691804785,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,top,15,mixing__neighbor_fraction__Myofibroblasts__to__CD8^+T,0.006804084893478041,0.00462885982854757,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,top,16,mixing__neighbor_fraction__CD8^+T__to__PDPN^+Stromal,0.006620578442078145,0.003900780499052721,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,top,17,mixing__neighbor_fraction__CD8^+PD1^+T_{Ex}__to__M2 Mac,0.006590570782799503,0.0028193279347890595,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,top,18,mixing__neighbor_fraction__Myofibroblasts__to__DCs,0.006495655097260667,0.003119249532590182,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,top,19,mixing__neighbor_fraction__CD56^+NK__to__PDPN^+Stromal,0.006390065987207427,0.004710731650303919,tnbc_wang2023,True
+motif_cd8_high,control,2,0,ig,top,20,mixing__neighbor_fraction__Myofibroblasts__to__Fibroblasts,0.006302359507714379,-0.000754683229781161,tnbc_wang2023,True
+motif_tumor_high,control,0,3,ig,abs,1,mixing__neighbor_fraction__AR^{+}LAR__to__panCK^{med},0.0021187816468438907,0.001614951406771878,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,abs,2,mixing__neighbor_fraction__CA9^+__to__Vimentin^{+}EMT,0.002017799807006461,0.0015708755394862014,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,abs,3,mixing__neighbor_fraction__Vimentin^{+}EMT__to__Vimentin^{+}EMT,0.001918457106971213,0.0009466041335345125,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,abs,4,mixing__neighbor_fraction__Neutrophils__to__CA9^{+}Hypoxia,0.0017078208592177912,0.0013112643661156284,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,abs,5,mixing__neighbor_fraction__CD56^{+}NE__to__Myofibroblasts,0.0015798152696554922,-0.0013679724378981896,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,abs,6,mixing__neighbor_fraction__CK^{lo}GATA3^{+}__to__Vimentin^{+}EMT,0.0015024541030532015,0.0007315252439028544,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,abs,7,mixing__neighbor_fraction__MHC I&II^{hi}__to__Myofibroblasts,0.0015012864376428344,-0.001188844758071272,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,abs,8,mixing__neighbor_fraction__CA9^+__to__CK^{hi}GATA3^{+},0.00146708072222659,0.0014573492549694663,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,abs,9,mixing__neighbor_fraction__Fibroblasts__to__Vimentin^{+}EMT,0.0013973209680593335,0.0007529716847852924,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,abs,10,mixing__neighbor_fraction__CD56^+NK__to__Endothelial,0.0013183297636979153,-0.0008903751909504372,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,abs,11,mixing__neighbor_fraction__Myofibroblasts__to__PD-L1^+IDO^+APCs,0.0013168400607905253,-0.001056469049572597,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,abs,12,mixing__neighbor_fraction__M2 Mac__to__Vimentin^{+}EMT,0.0012965846519347227,0.0006871680737742861,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,abs,13,mixing__neighbor_fraction__CD15^{+}__to__Vimentin^{+}EMT,0.0012694592051404683,0.00035374120765679153,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,abs,14,mixing__neighbor_fraction__Apoptosis__to__panCK^{med},0.0012004147182553572,0.0006778932229263266,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,abs,15,mixing__neighbor_fraction__CA9^{+}Hypoxia__to__Myofibroblasts,0.0011947039783677751,0.0010177298948143394,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,abs,16,mixing__local_mixing_std,0.0011655663571995512,0.0001183172963476081,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,abs,17,mixing__neighbor_fraction__pH2AX^{+}DSB__to__Vimentin^{+}EMT,0.0011586838753479905,0.0004502620383165267,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,abs,18,mixing__neighbor_fraction__Basal__to__Vimentin^{+}EMT,0.0011572198608958053,0.0001767210737353637,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,abs,19,mixing__neighbor_fraction__DCs__to__Endothelial,0.0011531513810826963,0.00043525327603718093,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,abs,20,mixing__local_mixing_min,0.001118043335391774,0.00021635288818141508,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,signed,1,mixing__neighbor_fraction__AR^{+}LAR__to__panCK^{med},0.17904783113986436,0.13975530675469539,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,signed,2,mixing__neighbor_fraction__CA9^+__to__Vimentin^{+}EMT,0.15452037118252374,0.12824850992684453,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,signed,3,mixing__neighbor_fraction__CA9^+__to__CK^{hi}GATA3^{+},0.14507777405348724,0.14430374683118583,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,signed,4,mixing__neighbor_fraction__CD56^{+}NE__to__Myofibroblasts,0.14159419229406142,-0.1274516456801764,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,signed,5,mixing__neighbor_fraction__MHC I&II^{hi}__to__Myofibroblasts,0.13777105977243637,-0.11402861534551015,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,signed,6,mixing__neighbor_fraction__Vimentin^{+}EMT__to__Vimentin^{+}EMT,0.13419604658070497,0.06826320859677751,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,signed,7,mixing__neighbor_fraction__Myofibroblasts__to__PD-L1^+IDO^+APCs,0.1240486782560451,-0.10585235182940246,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,signed,8,mixing__neighbor_fraction__CK^{lo}GATA3^{+}__to__Vimentin^{+}EMT,0.10486339140370042,0.05865416202181005,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,signed,9,mixing__neighbor_fraction__CD56^+NK__to__Endothelial,0.10083952582396728,-0.07793177884329636,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,signed,10,mixing__neighbor_fraction__Fibroblasts__to__Vimentin^{+}EMT,0.1004776486215717,0.057747685508785444,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,signed,11,mixing__neighbor_fraction__Neutrophils__to__CA9^{+}Hypoxia,0.09909221971599173,0.06897604173502003,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,signed,12,mixing__neighbor_fraction__PD-L1^+APCs__to__CA9^+,0.09810389322870149,0.08470891391114892,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,signed,13,mixing__neighbor_fraction__Apoptosis__to__panCK^{med},0.09706387444500993,0.0670473693023003,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,signed,14,mixing__neighbor_fraction__CD15^{+}__to__Vimentin^{+}EMT,0.09451428391896884,0.033456936690547855,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,signed,15,mixing__neighbor_fraction__CA9^{+}Hypoxia__to__Myofibroblasts,0.09099194583815118,0.07669086676380367,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,signed,16,mixing__neighbor_fraction__CK^{lo}GATA3^{+}__to__Myofibroblasts,0.08652215012734589,0.06059885877840602,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,signed,17,mixing__neighbor_fraction__Basal__to__Vimentin^{+}EMT,0.08596785404907042,0.01850442628018233,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,signed,18,mixing__neighbor_fraction__Treg__to__CA9^+,0.0851162711792715,0.07253079298079727,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,signed,19,mixing__neighbor_fraction__TCF1^{+}__to__Myofibroblasts,0.08429567032988451,0.06027282383241235,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,signed,20,mixing__neighbor_fraction__Endothelial__to__AR^{+}LAR,0.08006854796008078,0.01896317431809158,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,top,1,mixing__neighbor_fraction__AR^{+}LAR__to__panCK^{med},0.017021285441214104,0.01474632551825813,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,top,2,mixing__neighbor_fraction__CA9^+__to__Vimentin^{+}EMT,0.01596927118546264,0.01450837892662932,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,top,3,mixing__neighbor_fraction__CA9^+__to__CK^{hi}GATA3^{+},0.014496273306400208,0.014439913142602229,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,top,4,mixing__neighbor_fraction__Vimentin^{+}EMT__to__Vimentin^{+}EMT,0.011515217569769469,0.00792624445426939,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,top,5,mixing__neighbor_fraction__Neutrophils__to__CA9^{+}Hypoxia,0.00998921404476811,0.007918096476912061,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,top,6,mixing__neighbor_fraction__M2 Mac__to__Vimentin^{+}EMT,0.009402613076572395,0.006522643890823706,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,top,7,mixing__neighbor_fraction__Fibroblasts__to__Vimentin^{+}EMT,0.008933781378624056,0.006189515488116175,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,top,8,mixing__neighbor_fraction__PD-L1^+APCs__to__CA9^+,0.008787975657331207,0.007840376080020762,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,top,9,mixing__neighbor_fraction__CK^{lo}GATA3^{+}__to__Vimentin^{+}EMT,0.008713615116203756,0.005938645892447525,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,top,10,mixing__neighbor_fraction__Apoptosis__to__panCK^{med},0.008676723872080476,0.0058467805237914245,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,top,11,mixing__neighbor_fraction__CA9^{+}Hypoxia__to__Myofibroblasts,0.008171614536318376,0.007395897274682111,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,top,12,mixing__neighbor_fraction__Treg__to__CA9^+,0.007563565916463813,0.006425046684878098,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,top,13,mixing__neighbor_fraction__CK^{hi}GATA3^{+}__to__CA9^{+}Hypoxia,0.007379092475170405,0.007095675751243636,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,top,14,mixing__neighbor_fraction__Basal__to__Vimentin^{+}EMT,0.006674445298787681,0.0024797771896688373,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,top,15,mixing__neighbor_fraction__CD15^{+}__to__Vimentin^{+}EMT,0.0066686340539666225,0.003137290768457158,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,top,16,mixing__neighbor_fraction__panCK^{med}__to__pH2AX^{+}DSB,0.006634928622181349,0.0034105785384157335,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,top,17,mixing__neighbor_fraction__CA9^+__to__Myofibroblasts,0.006450969898901213,0.006050029772819316,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,top,18,mixing__neighbor_fraction__Helios^{+}__to__CA9^+,0.006251187673530156,0.005702268084697432,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,top,19,mixing__neighbor_fraction__panCK^{med}__to__Vimentin^{+}EMT,0.006181903163632741,0.0033308886627991777,tnbc_wang2023,False
+motif_tumor_high,control,0,3,ig,top,20,mixing__neighbor_fraction__pH2AX^{+}DSB__to__Vimentin^{+}EMT,0.006084447336554592,0.004239970046096859,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,abs,1,mixing__neighbor_fraction__CD8^+T__to__Basal,0.001517346199972707,0.0008506363626198592,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,abs,2,mixing__neighbor_fraction__Vimentin^{+}EMT__to__Vimentin^{+}EMT,0.0013711692330489061,0.00044081051153740833,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,abs,3,mixing__neighbor_fraction__PDPN^+Stromal__to__Vimentin^{+}EMT,0.0011874618510785203,0.00043735362494374576,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,abs,4,mixing__neighbor_fraction__CD15^{+}__to__Vimentin^{+}EMT,0.0011571030717602248,0.0004028683097897824,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,abs,5,mixing__neighbor_fraction__CD15^{+}__to__PDPN^+Stromal,0.0011239905346586143,-0.0006816148599530667,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,abs,6,mixing__neighbor_fraction__Endothelial__to__AR^{+}LAR,0.0011133575682219447,0.0003069674212956615,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,abs,7,mixing__neighbor_fraction__CD4^+PD1^+T__to__Basal,0.0011129361529675548,0.0005738725309081144,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,abs,8,mixing__local_mixing_std,0.0010857226168501368,0.00039018220544703215,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,abs,9,mixing__neighbor_fraction__TCF1^{+}__to__Treg,0.001059853740807153,0.0005566039405523782,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,abs,10,mixing__local_mixing_min,0.0010568653585811992,0.0003705730168964748,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,abs,11,mixing__neighbor_fraction__Basal__to__Vimentin^{+}EMT,0.0010058680220753954,0.000492087655462841,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,abs,12,mixing__neighbor_fraction__Fibroblasts__to__Vimentin^{+}EMT,0.001002480918287931,0.0003917172874284386,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,abs,13,mixing__neighbor_fraction__CD4^+PD1^+T__to__Vimentin^{+}EMT,0.0009936752651210075,0.0005638705449329869,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,abs,14,mixing__neighbor_fraction__CD8^+GZMB^+T__to__Endothelial,0.000992338945689857,-0.0004375067019219848,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,abs,15,mixing__neighbor_fraction__M2 Mac__to__Basal,0.0009706600360866001,0.00035634411623565546,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,abs,16,mixing__neighbor_fraction__CK^{lo}GATA3^{+}__to__Vimentin^{+}EMT,0.0009586990638757137,0.00027310739902420563,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,abs,17,mixing__neighbor_fraction__PD-L1^{+}GZMB^{+}__to__CK8/18^{med},0.0009557805946972171,0.0006657641708492594,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,abs,18,mixing__neighbor_fraction__TCF1^{+}__to__Fibroblasts,0.0009523404907333056,0.00013354362687120183,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,abs,19,mixing__neighbor_fraction__CD8^+TCF1^+T__to__Vimentin^{+}EMT,0.0009397312480207135,0.0006068249297450562,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,abs,20,mixing__neighbor_fraction__panCK^{med}__to__pH2AX^{+}DSB,0.0009393588293252369,0.00020654259174135014,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,signed,1,mixing__neighbor_fraction__CD8^+T__to__Basal,0.1276451963439128,0.08630258346355676,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,signed,2,mixing__neighbor_fraction__Vimentin^{+}EMT__to__Vimentin^{+}EMT,0.11188339063632743,0.04261860586916631,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,signed,3,mixing__neighbor_fraction__Endothelial__to__AR^{+}LAR,0.10300011160512895,0.031928167943808324,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,signed,4,mixing__neighbor_fraction__CD15^{+}__to__PDPN^+Stromal,0.09425539956967578,-0.06788146416519744,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,signed,5,mixing__neighbor_fraction__CD15^{+}__to__Vimentin^{+}EMT,0.09293295875456047,0.03943715445188018,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,signed,6,mixing__neighbor_fraction__CD4^+PD1^+T__to__Basal,0.09289576369870534,0.058402054028488984,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,signed,7,mixing__neighbor_fraction__PDPN^+Stromal__to__Vimentin^{+}EMT,0.09075030554716149,0.04297971826238475,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,signed,8,mixing__neighbor_fraction__PD-L1^{+}GZMB^{+}__to__CK8/18^{med},0.09005710975986256,0.06702906918495631,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,signed,9,mixing__neighbor_fraction__MHC I&II^{hi}__to__CA9^+,0.08840201273708644,0.075634577061164,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,signed,10,mixing__neighbor_fraction__TCF1^{+}__to__Treg,0.08703297918884274,0.05390956030904357,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,signed,11,mixing__neighbor_fraction__Vimentin^{+}EMT__to__CA9^+,0.08641597935967213,0.0681895915419616,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,signed,12,mixing__neighbor_fraction__Basal__to__Vimentin^{+}EMT,0.08467858687224866,0.04890930773781658,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,signed,13,mixing__neighbor_fraction__TCF1^{+}__to__CD20^+B,0.08100033541621993,-0.06649522278849901,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,signed,14,mixing__neighbor_fraction__Fibroblasts__to__Vimentin^{+}EMT,0.08087577550034147,0.038078492657322556,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,signed,15,mixing__neighbor_fraction__CD8^+TCF1^+T__to__Vimentin^{+}EMT,0.07948014897363148,0.059828301210378756,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,signed,16,mixing__neighbor_fraction__M2 Mac__to__Basal,0.07830612580967272,0.03648379788284559,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,signed,17,mixing__neighbor_fraction__CD4^+PD1^+T__to__CK8/18^{med},0.07830411841035284,0.044069809031493754,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,signed,18,mixing__neighbor_fraction__CD4^+PD1^+T__to__Vimentin^{+}EMT,0.07714928570690308,0.055291652259049924,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,signed,19,mixing__neighbor_fraction__PD-L1^+APCs__to__Neutrophils,0.07481916007712491,-0.04823931051979136,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,signed,20,mixing__neighbor_fraction__Treg__to__TCF1^{+},0.07319054266597447,0.04323325245862734,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,top,1,mixing__neighbor_fraction__CD8^+T__to__Basal,0.010215792181042299,0.007266271897104625,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,top,2,mixing__neighbor_fraction__MHC I&II^{hi}__to__CA9^+,0.008302062521728442,0.00754204971851181,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,top,3,mixing__neighbor_fraction__Vimentin^{+}EMT__to__Vimentin^{+}EMT,0.008171896464966641,0.0036671430243867147,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,top,4,mixing__neighbor_fraction__Vimentin^{+}EMT__to__CA9^+,0.00796329739889308,0.0065904245650162925,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,top,5,mixing__neighbor_fraction__CD4^+PD1^+T__to__Basal,0.007418945902446219,0.004704568771579377,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,top,6,mixing__neighbor_fraction__PDPN^+Stromal__to__Vimentin^{+}EMT,0.007319995042407962,0.003506022175512274,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,top,7,mixing__neighbor_fraction__CD8^+TCF1^+T__to__Vimentin^{+}EMT,0.006756232478226095,0.004951921580760702,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,top,8,mixing__neighbor_fraction__Endothelial__to__AR^{+}LAR,0.0066838164466591025,0.003129588793110564,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,top,9,mixing__neighbor_fraction__CD15^{+}__to__Vimentin^{+}EMT,0.006672410375256606,0.0037496266438503826,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,top,10,mixing__neighbor_fraction__TCF1^{+}__to__Treg,0.006591386654691504,0.004019756586887015,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,top,11,mixing__neighbor_fraction__PD-L1^{+}GZMB^{+}__to__CK8/18^{med},0.006572061802330272,0.005099402282055904,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,top,12,mixing__neighbor_fraction__Treg__to__Basal,0.006356284445214371,0.003478780253373744,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,top,13,mixing__neighbor_fraction__CD8^+TCF1^+T__to__CA9^{+}Hypoxia,0.00622476560307426,0.005344618610644888,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,top,14,mixing__neighbor_fraction__CD4^+PD1^+T__to__Vimentin^{+}EMT,0.006210004557910577,0.003951169560998588,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,top,15,mixing__neighbor_fraction__Treg__to__TCF1^{+},0.006195595570916064,0.0040154024160528904,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,top,16,mixing__neighbor_fraction__CA9^+__to__CD15^{+},0.006128467124131459,0.005347620394739829,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,top,17,mixing__neighbor_fraction__M2 Mac__to__Basal,0.006065847257748303,0.0033777122788043405,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,top,18,mixing__local_mixing_std,0.006037746386513834,0.003115905736718731,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,top,19,mixing__neighbor_fraction__CD15^{+}__to__CA9^+,0.005938911872852139,0.0049584843072699265,tnbc_wang2023,False
+motif_tumor_high,control,0,4,ig,top,20,mixing__neighbor_fraction__CD4^+PD1^+T__to__CK8/18^{med},0.005918880078923496,0.003922006299545854,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,abs,1,mixing__neighbor_fraction__AR^{+}LAR__to__M2 Mac,0.00275471407249737,-0.0022846774410912674,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,abs,2,mixing__neighbor_fraction__CD4^+PD1^+T__to__AR^{+}LAR,0.0016963214870760945,0.0012246537531324915,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,abs,3,mixing__neighbor_fraction__Fibroblasts__to__Endothelial,0.001522038893568141,-0.0005759243543660735,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,abs,4,mixing__shannon_entropy_normalized,0.0013883278997352596,0.0006620769216585726,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,abs,5,mixing__neighbor_fraction__Fibroblasts__to__CD4^+PD1^+T,0.001284905244585432,-0.0006749791650684403,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,abs,6,mixing__neighbor_fraction__PDPN^+Stromal__to__Vimentin^{+}EMT,0.0012767848905309086,0.00022834931230332028,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,abs,7,mixing__neighbor_fraction__DCs__to__Basal,0.0012263577267501067,0.0004818266120922604,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,abs,8,mixing__neighbor_fraction__Endothelial__to__AR^{+}LAR,0.0012138369502764158,0.0005598139590418055,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,abs,9,mixing__neighbor_fraction__Helios^{+}__to__Fibroblasts,0.0012113317336559727,-9.813442144308061e-05,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,abs,10,mixing__neighbor_fraction__Fibroblasts__to__Basal,0.0012020849359048675,0.00034718201810460047,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,abs,11,mixing__neighbor_fraction__Basal__to__Basal,0.0011936932460722674,0.00024491438743508715,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,abs,12,mixing__neighbor_fraction__PD-L1^+APCs__to__Fibroblasts,0.0011928058155844456,-4.7730761763734074e-05,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,abs,13,mixing__neighbor_fraction__panCK^{med}__to__AR^{+}LAR,0.0011918420716366196,0.000671079165813326,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,abs,14,mixing__neighbor_fraction__PDPN^+Stromal__to__PDPN^+Stromal,0.0011833527513257357,8.999785991889057e-05,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,abs,15,mixing__neighbor_fraction__Fibroblasts__to__AR^{+}LAR,0.0011641159006333785,0.000426817088780995,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,abs,16,mixing__neighbor_fraction__Endothelial__to__Endothelial,0.0011593981202718097,-0.0003550231084024026,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,abs,17,mixing__local_mixing_min,0.0011396686802143498,0.00039487521788765154,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,abs,18,mixing__neighbor_fraction__CD8^+GZMB^+T__to__Endothelial,0.001115578927198183,-0.0005430463694214413,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,abs,19,mixing__neighbor_fraction__Helios^{+}__to__PDPN^+Stromal,0.001110557988581562,-0.00038400371549394757,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,abs,20,mixing__neighbor_fraction__AR^{+}LAR__to__Fibroblasts,0.0011014763528218387,-0.00048286589973322544,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,signed,1,mixing__neighbor_fraction__AR^{+}LAR__to__M2 Mac,0.22826392054547384,-0.19503794752111683,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,signed,2,mixing__neighbor_fraction__CD4^+PD1^+T__to__AR^{+}LAR,0.13809063943333086,0.10475526012620288,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,signed,3,mixing__neighbor_fraction__panCK^{med}__to__AR^{+}LAR,0.10974889148360863,0.06801600892646761,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,signed,4,mixing__neighbor_fraction__PD-L1^+IDO^+APCs__to__AR^{+}LAR,0.10219282439981033,0.07393815883159023,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,signed,5,mixing__neighbor_fraction__Endothelial__to__AR^{+}LAR,0.10149702822111986,0.053787559277421376,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,signed,6,mixing__neighbor_fraction__Fibroblasts__to__AR^{+}LAR,0.09921978395013326,0.04208140517127082,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,signed,7,mixing__neighbor_fraction__PDPN^+Stromal__to__Vimentin^{+}EMT,0.08891162312268878,0.024060815609676562,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,signed,8,mixing__neighbor_fraction__Fibroblasts__to__Basal,0.08828893554093685,0.026990216708236384,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,signed,9,mixing__neighbor_fraction__AR^{+}LAR__to__CD4^+PD1^+T,0.08788924392405328,-0.0681067535363158,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,signed,10,mixing__neighbor_fraction__DCs__to__Basal,0.0877284754890119,0.03652162038974432,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,signed,11,mixing__shannon_entropy_normalized,0.08744277614609765,0.05540968670204843,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,signed,12,mixing__neighbor_fraction__Basal__to__Basal,0.08588340633036765,0.017615753336055532,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,signed,13,mixing__neighbor_fraction__AR^{+}LAR__to__Fibroblasts,0.08468711978787115,-0.046411146438765795,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,signed,14,mixing__neighbor_fraction__Helios^{+}__to__PDPN^+Stromal,0.08414277155222438,-0.038675316114517085,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,signed,15,mixing__neighbor_fraction__Fibroblasts__to__CD4^+PD1^+T,0.08378276185332624,-0.061721978641831564,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,signed,16,mixing__neighbor_fraction__M2 Mac__to__AR^{+}LAR,0.0807565946402885,0.051114561636467166,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,signed,17,mixing__neighbor_fraction__Fibroblasts__to__Endothelial,0.0794575869108993,-0.05159677395169463,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,signed,18,mixing__neighbor_fraction__Helios^{+}__to__Fibroblasts,0.07850821508312367,-0.012449935576764382,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,signed,19,mixing__neighbor_fraction__PDPN^+Stromal__to__PDPN^+Stromal,0.0766041571799321,0.006977088967248294,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,signed,20,mixing__neighbor_fraction__PD-L1^+APCs__to__Fibroblasts,0.07382799331444219,-0.007224973951322891,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,top,1,mixing__neighbor_fraction__CD4^+PD1^+T__to__AR^{+}LAR,0.011756741849465575,0.010100058898097628,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,top,2,mixing__neighbor_fraction__PD-L1^+IDO^+APCs__to__AR^{+}LAR,0.009178230079840635,0.007847084194522107,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,top,3,mixing__neighbor_fraction__panCK^{med}__to__AR^{+}LAR,0.008820921884212527,0.006225608719565623,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,top,4,mixing__shannon_entropy_normalized,0.007681438862155655,0.005522328858847581,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,top,5,mixing__neighbor_fraction__PDPN^+Stromal__to__Vimentin^{+}EMT,0.007554705126504723,0.0020380565329920102,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,top,6,mixing__neighbor_fraction__CA9^+__to__CK^{hi}GATA3^{+},0.007305068478130733,0.007270492097025348,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,top,7,mixing__neighbor_fraction__Endothelial__to__AR^{+}LAR,0.007024719946159763,0.004763797767835645,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,top,8,mixing__neighbor_fraction__CK^{hi}GATA3^{+}__to__CA9^+,0.006270406871473567,0.006179194963379515,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,top,9,mixing__neighbor_fraction__M2 Mac__to__AR^{+}LAR,0.006260625867813956,0.004788583402011261,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,top,10,mixing__same_type_neighbor_fraction,0.006133375051021289,0.0041193279602458645,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,top,11,mixing__neighbor_fraction__Myofibroblasts__to__Basal,0.006023446183919685,0.0045344005316757426,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,top,12,mixing__local_mixing_min,0.005886924166605821,0.003712120430512464,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,top,13,mixing__neighbor_fraction__CK^{hi}GATA3^{+}__to__CA9^{+}Hypoxia,0.005845554266087646,0.005568616841261652,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,top,14,mixing__neighbor_fraction__DCs__to__Basal,0.00582724279050159,0.003322508783824826,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,top,15,mixing__neighbor_fraction__CA9^+__to__Basal,0.0057181759717612095,0.004543261216118849,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,top,16,mixing__local_mixing_mean,0.005716087739379135,0.0039934844118006425,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,top,17,mixing__neighbor_fraction__Fibroblasts__to__AR^{+}LAR,0.005697167039236563,0.0033868227578973484,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,top,18,mixing__neighbor_fraction__CK8/18^{med}__to__Endothelial,0.005514482440876052,0.001986802988637456,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,top,19,mixing__neighbor_fraction__CK8/18^{med}__to__AR^{+}LAR,0.005488063739929466,-0.003677436713066253,tnbc_wang2023,False
+motif_tumor_high,control,2,0,ig,top,20,mixing__neighbor_fraction__Basal__to__Basal,0.005440091840582926,0.00223300665982468,tnbc_wang2023,False

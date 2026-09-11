@@ -1,0 +1,1141 @@
+task,kind,seed,fold,explainer,aggregation,rank,feature,importance,net_attribution,dataset,selected
+motif_interface_immune,spatial,0,0,ig,abs,1,mixing__neighbor_fraction__HR- CK7-__to__T cells,0.007803241858896268,0.005462231622070855,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,abs,2,mixing__neighbor_fraction__B cells__to__HR- CKlow CK5+,0.0073831319414285786,-0.006782904319583911,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,abs,3,mixing__neighbor_fraction__HR- CK7-__to__Fibroblasts,0.006729612494211462,0.0039062266447361296,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,abs,4,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR- CKlow CK5+,0.006193382290778581,0.004873261683264859,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,abs,5,mixing__neighbor_fraction__B cells__to__HRlow CKlow,0.006130469146579277,0.005546806595949659,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,abs,6,mixing__neighbor_fraction__B cells__to__Basal CKlow,0.005167248654298596,0.004797936505956641,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,abs,7,mixing__neighbor_fraction__HRlow CKlow__to__HR- CKlow CK5+,0.00509219177126736,-0.0035868972984511205,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,abs,8,mixing__neighbor_fraction__Hypoxia__to__Fibroblasts,0.004811179157211153,-0.00376798208721372,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,abs,9,mixing__neighbor_fraction__HR- CK7-__to__Fibroblasts CD68+,0.004763185393952966,0.0012404199735352867,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,abs,10,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__Fibroblasts CD68+,0.004533033527044243,0.0020190086113864554,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,abs,11,mixing__same_type_neighbor_fraction,0.004530450786030937,-0.002054449201365555,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,abs,12,mixing__neighbor_fraction__B cells__to__HR+ CK7- Ki67+,0.004424792285927623,0.0033768146331268583,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,abs,13,mixing__neighbor_fraction__HER2+__to__HR- CKlow CK5+,0.00440470326895121,-0.0034607262542583504,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,abs,14,mixing__neighbor_fraction__HR+ CK7-__to__Macrophages Vim+ CD45low,0.004389479546013075,0.0023707463925908548,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,abs,15,mixing__neighbor_fraction__Fibroblasts__to__Macrophages Vim+ CD45low,0.004339224807925246,0.0019167140961609396,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,abs,16,mixing__neighbor_fraction__HR- CK7+__to__HR- CK7+,0.004236918675376796,0.0010226113351636782,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,abs,17,mixing__neighbor_fraction__HR- CK7-__to__Macrophages Vim+ CD45low,0.004142379899480719,0.00294041069993306,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,abs,18,mixing__neighbor_fraction__HR- CKlow CK5+__to__HRlow CKlow,0.0040494684699623985,-0.0022134177626634876,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,abs,19,mixing__neighbor_fraction__B cells__to__Fibroblasts CD68+,0.0039916978406459944,0.002477373971058191,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,abs,20,mixing__neighbor_fraction__T cells__to__HRlow CKlow,0.003968632979750679,0.0013796379664105835,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,signed,1,mixing__neighbor_fraction__B cells__to__HR+ CK7- Ki67+,0.3142069820432142,0.28626563085727014,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,signed,2,mixing__neighbor_fraction__HR- CK7-__to__Macrophages Vim+ CD45low,0.2849833569168773,0.24876121122236206,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,signed,3,mixing__neighbor_fraction__HR+ CK7-__to__Macrophages Vim+ CD45low,0.24855331830879654,0.1944481690002244,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,signed,4,mixing__neighbor_fraction__HR- CK7+__to__HR- CK7+,0.24066359345562022,0.09298850327134885,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,signed,5,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__Fibroblasts CD68+,0.21479392728813096,0.13932836330560458,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,signed,6,mixing__neighbor_fraction__Hypoxia__to__Endothelial,0.21214568533543232,-0.1852348677985049,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,signed,7,mixing__neighbor_fraction__Fibroblasts__to__Macrophages Vim+ CD45low,0.20904744088781055,0.15534707898515784,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,signed,8,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__Vascular SMA+,0.20690302209326267,-0.17490743988525018,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,signed,9,mixing__neighbor_fraction__Vascular SMA+__to__HR+ CK7- Slug+,0.20560086202669686,0.18692081970948582,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,signed,10,mixing__neighbor_fraction__HR- CK7-__to__T cells,0.20287806846208364,0.12114635595565365,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,signed,11,mixing__neighbor_fraction__Vascular SMA+__to__HR- CK7+,0.19484864479273786,0.12670764578004262,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,signed,12,mixing__neighbor_fraction__HR- CK7-__to__Fibroblasts CD68+,0.18225501032826597,0.09356238031359139,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,signed,13,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__HR- CKlow CK5+,0.17934686326780624,-0.15959613943939685,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,signed,14,mixing__neighbor_fraction__HR- CK7-__to__Fibroblasts,0.17218443674448095,0.0786248014839846,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,signed,15,mixing__neighbor_fraction__HR- CK7+__to__Macrophages Vim+ CD45low,0.16585720854183317,-0.11411062867440702,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,signed,16,mixing__neighbor_fraction__Hypoxia__to__Fibroblasts,0.15936306846151294,-0.11724422410838974,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,signed,17,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__Macrophages Vim+ CD45low,0.15350021579233875,-0.10124728381360468,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,signed,18,mixing__neighbor_fraction__HR- Ki67+__to__Hypoxia,0.14508168210857497,0.10464729701527814,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,signed,19,mixing__same_type_neighbor_fraction,0.14306029076296906,-0.05693928929727003,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,signed,20,mixing__neighbor_fraction__HR- CKlow CK5+__to__Macrophages Vim+ CD45low,0.13938431185764688,-0.11274461316610247,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,top,1,mixing__neighbor_fraction__HR- CK7-__to__T cells,0.0427477073408115,0.03297629018313117,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,top,2,mixing__neighbor_fraction__B cells__to__HR+ CK7- Ki67+,0.03751897975031722,0.03498424322862473,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,top,3,mixing__neighbor_fraction__B cells__to__HR- CKlow CK5+,0.03719894693293216,-0.03512152403058831,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,top,4,mixing__neighbor_fraction__HR- CK7-__to__Fibroblasts,0.03327031557910047,0.02432470819602591,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,top,5,mixing__neighbor_fraction__HR- CK7-__to__Macrophages Vim+ CD45low,0.03167076365034616,0.026742421991501227,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,top,6,mixing__neighbor_fraction__B cells__to__HRlow CKlow,0.02967593723310453,0.029059934222269147,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,top,7,mixing__neighbor_fraction__HR+ CK7-__to__Macrophages Vim+ CD45low,0.02910271649875332,0.02150981838606429,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,top,8,mixing__neighbor_fraction__Fibroblasts__to__Macrophages Vim+ CD45low,0.027203393130945618,0.01974904456332506,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,top,9,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__Fibroblasts CD68+,0.026905117333811315,0.018883422371788902,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,top,10,mixing__neighbor_fraction__HR- CK7-__to__Fibroblasts CD68+,0.026444553119942513,0.015592754354232106,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,top,11,mixing__neighbor_fraction__B cells__to__Basal CKlow,0.025919215002140387,0.024282445625129274,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,top,12,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR- CKlow CK5+,0.023893209657563946,0.019506956852305173,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,top,13,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__Fibroblasts,0.023543635210006412,0.018023530704312313,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,top,14,mixing__neighbor_fraction__Vascular SMA+__to__HR- CK7+,0.022243429760530602,0.017123689820547728,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,top,15,mixing__same_type_neighbor_fraction,0.018620791851851535,-0.010985995137981527,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,top,16,mixing__neighbor_fraction__B cells__to__Fibroblasts CD68+,0.018303737803517958,0.013152970494666783,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,top,17,mixing__neighbor_fraction__HR+ CK7-__to__Myoepithelial,0.016870268981004227,0.01118188340346451,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,top,18,mixing__neighbor_fraction__HR- CK7+__to__HR- CK7+,0.01667899260372867,0.00784075060324972,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,top,19,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__Fibroblasts CD68+,0.0165256486700245,0.006041922761116697,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,top,20,mixing__neighbor_fraction__Vascular SMA+__to__HR+ CK7- Slug+,0.0161776669789891,0.014778995019879372,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,abs,1,mixing__neighbor_fraction__Myoepithelial__to__Myoepithelial,0.004412208852938647,0.003442282351134352,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,abs,2,mixing__neighbor_fraction__Myofibroblasts__to__Fibroblasts,0.003587571571212194,-0.002442428379605909,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,abs,3,mixing__neighbor_fraction__Endothelial__to__HR- CKlow CK5+,0.0033489804122536675,0.0028402965239442413,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,abs,4,mixing__neighbor_fraction__Myofibroblasts__to__Myoepithelial,0.003299915657604891,0.002443804694477951,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,abs,5,mixing__neighbor_fraction__Fibroblasts__to__Myoepithelial,0.0032413596617956856,0.0024514610109118247,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,abs,6,mixing__neighbor_fraction__Fibroblasts CD68+__to__Myofibroblasts,0.003139695312480867,-4.01765611901321e-05,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,abs,7,mixing__neighbor_fraction__HR- CK7-__to__HR+ CK7-,0.0031329197628628836,0.0006403942469905341,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,abs,8,mixing__neighbor_fraction__Myofibroblasts__to__HR- CKlow CK5+,0.0030443696840135315,-0.0014038351547338871,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,abs,9,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7-,0.003038381471160416,-0.0017396826531174935,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,abs,10,mixing__neighbor_fraction__Fibroblasts CD68+__to__Macrophages Vim+ Slug+,0.0028604578564945977,-0.0013900392474964583,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,abs,11,mixing__neighbor_fraction__HR- CK7-__to__Fibroblasts,0.0028535437363318736,0.0006989615437880133,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,abs,12,mixing__neighbor_fraction__B cells__to__HR- CKlow CK5+,0.0028398085750588205,-0.002229408999466837,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,abs,13,mixing__neighbor_fraction__T cells__to__Fibroblasts,0.0027891013290084303,-0.0018872660643169756,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,abs,14,mixing__neighbor_fraction__HR- CKlow CK5+__to__Fibroblasts,0.002612291057889144,0.00025244922256727225,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,abs,15,mixing__neighbor_fraction__HR- CKlow CK5+__to__Myofibroblasts,0.0025675940010420526,-0.0007908780034732081,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,abs,16,composition__Myoepithelial,0.0025116706691370384,0.0018810413808349373,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,abs,17,mixing__neighbor_fraction__Fibroblasts__to__HR+ CK7-,0.0024890503048757475,0.000548096398485783,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,abs,18,mixing__neighbor_fraction__Basal CKlow__to__HR- CK7-,0.0024511110721333255,-0.0006403115953344666,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,abs,19,mixing__neighbor_fraction__Myofibroblasts__to__T cells,0.0023215769678918935,-0.0009378085665781621,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,abs,20,mixing__neighbor_fraction__Fibroblasts__to__Basal CKlow,0.002314171962668459,-0.0009912206636233422,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,signed,1,mixing__neighbor_fraction__Myoepithelial__to__Myoepithelial,0.23473198668217518,0.201900231825658,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,signed,2,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7-,0.21561578206176127,-0.17854744269289172,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,signed,3,mixing__neighbor_fraction__Endothelial__to__HR- CKlow CK5+,0.2099625776061324,0.1933566992889168,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,signed,4,mixing__neighbor_fraction__HR- CK7-__to__HR+ CK7-,0.17058509664268492,0.018415044093763423,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,signed,5,mixing__neighbor_fraction__B cells__to__HR+ CK7- Ki67+,0.16684357628775046,0.14689068206003061,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,signed,6,mixing__neighbor_fraction__Fibroblasts CD68+__to__Macrophages Vim+ Slug+,0.16159294331257532,-0.10534403197972343,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,signed,7,mixing__neighbor_fraction__Basal CKlow__to__Myoepithelial,0.16115086723369978,0.13683913862018107,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,signed,8,mixing__neighbor_fraction__Basal CKlow__to__HR- CK7-,0.15265811961330752,-0.08794351606086154,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,signed,9,mixing__neighbor_fraction__Myofibroblasts__to__Myoepithelial,0.14845947208296484,0.11510340231236535,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,signed,10,mixing__neighbor_fraction__HRlow CKlow__to__B cells,0.13972177793104715,0.10478649741554302,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,signed,11,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__HR+ CK7-,0.1380974962687194,0.004512789065939861,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,signed,12,mixing__neighbor_fraction__Hypoxia__to__Fibroblasts,0.13795352448702825,-0.08231977175517129,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,signed,13,mixing__neighbor_fraction__HR- CKlow CK5+__to__Myofibroblasts,0.13285168347909723,-0.06238811990554905,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,signed,14,mixing__neighbor_fraction__Fibroblasts__to__HR+ CK7-,0.1308507873149833,-0.01208329627114902,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,signed,15,mixing__neighbor_fraction__Macrophages Vim+ Slug+__to__Fibroblasts CD68+,0.12846106892897405,-0.06304951268068625,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,signed,16,mixing__neighbor_fraction__Fibroblasts__to__Basal CKlow,0.12279676585366447,-0.09916630548467235,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,signed,17,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__Basal CKlow,0.12241351023924506,-0.09162295281403655,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,signed,18,mixing__neighbor_fraction__Myofibroblasts__to__HR- CKlow CK5+,0.12234322051418864,-0.08651736663895708,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,signed,19,mixing__neighbor_fraction__HR- CK7+__to__HR- CKlow CK5+,0.11765852829266016,0.07852931090075001,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,signed,20,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7- Slug+,0.11706475495028522,-0.09790717845785377,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,top,1,mixing__neighbor_fraction__Myoepithelial__to__Myoepithelial,0.032962337414179706,0.029618869593584497,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,top,2,mixing__neighbor_fraction__Endothelial__to__HR- CKlow CK5+,0.029436396626700893,0.027640397661239356,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,top,3,mixing__neighbor_fraction__Fibroblasts__to__Myoepithelial,0.024003028957738676,0.021276583384716472,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,top,4,mixing__neighbor_fraction__Myofibroblasts__to__Myoepithelial,0.02195183830311019,0.019503003809708843,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,top,5,composition__Myoepithelial,0.01646537331917453,0.014618138780883517,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,top,6,mixing__neighbor_fraction__Macrophages Vim+ Slug+__to__Myoepithelial,0.01561200417317519,0.013900159425894544,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,top,7,mixing__neighbor_fraction__B cells__to__HR+ CK7- Ki67+,0.015499592965821037,0.01404200124308636,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,top,8,mixing__neighbor_fraction__HR+ CK7-__to__Myoepithelial,0.012693147389463677,0.008846827023193823,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,top,9,mixing__neighbor_fraction__HRlow CKlow__to__B cells,0.01225456880632078,0.009718965638963305,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,top,10,mixing__neighbor_fraction__Vascular SMA+__to__Myoepithelial,0.01213835724227366,0.010608736019106765,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,top,11,mixing__neighbor_fraction__Myofibroblasts__to__Fibroblasts,0.011911805637196324,-0.0075110336164896235,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,top,12,mixing__neighbor_fraction__Basal CKlow__to__Myoepithelial,0.011754262712031435,0.010540047896955286,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,top,13,mixing__neighbor_fraction__HR- CK7-__to__Fibroblasts,0.011009305904235255,0.005479850375125772,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,top,14,mixing__neighbor_fraction__HR- CKlow CK5+__to__Macrophages Vim+ Slug-,0.010923624967396444,0.008526092783155904,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,top,15,mixing__neighbor_fraction__HR- CKlow CK5+__to__Endothelial,0.01063724421963364,0.009498611699784143,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,top,16,mixing__neighbor_fraction__HR- CK7-__to__HR+ CK7-,0.009531148224031368,0.005954423854642103,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,top,17,mixing__neighbor_fraction__Myoepithelial__to__Macrophages Vim+ Slug+,0.009494550672670087,0.007611346873366611,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,top,18,mixing__neighbor_fraction__Fibroblasts__to__HR- CKlow CK5+,0.009422301975847244,0.005511889404154394,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,top,19,mixing__neighbor_fraction__B cells__to__Basal CKlow,0.009421427719623428,0.008108959792656694,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,top,20,mixing__neighbor_fraction__T cells__to__Basal CKlow,0.009224258007803353,0.004518364309320327,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,abs,1,mixing__neighbor_fraction__B cells__to__Basal CKlow,0.011541006561974595,0.010907198392079388,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,abs,2,mixing__neighbor_fraction__Vascular SMA+__to__Fibroblasts,0.00919061730663598,-0.00770665057211222,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,abs,3,mixing__neighbor_fraction__HR- CK7-__to__Fibroblasts,0.008974416055218938,0.004391142673883146,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,abs,4,mixing__neighbor_fraction__HRlow CKlow__to__HR- CKlow CK5+,0.008925579396308178,-0.00617573100388249,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,abs,5,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR- CKlow CK5+,0.00733399439281992,0.005478135559974532,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,abs,6,mixing__neighbor_fraction__B cells__to__Vascular SMA+,0.007191128872114096,-0.00609213722693534,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,abs,7,mixing__neighbor_fraction__HR- CK7-__to__T cells,0.00704191209958491,0.005145877203163413,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,abs,8,mixing__neighbor_fraction__B cells__to__HRlow CKlow,0.00697192778210231,0.006284300131481151,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,abs,9,mixing__neighbor_fraction__Vascular SMA+__to__B cells,0.00640539750165472,-0.0038730795799302685,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,abs,10,mixing__neighbor_fraction__B cells__to__HR- CKlow CK5+,0.006265465395203331,-0.005811949965045181,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,abs,11,mixing__neighbor_fraction__Vascular SMA+__to__HR- CKlow CK5+,0.006108332025360253,-0.005643824050356578,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,abs,12,mixing__local_mixing_max,0.005505294390805642,-0.0005960519953163741,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,abs,13,mixing__neighbor_fraction__Basal CKlow__to__HRlow CKlow,0.005168905277906997,-0.003380265122958236,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,abs,14,mixing__local_mixing_std,0.005055632255837327,0.00165638720110846,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,abs,15,mixing__neighbor_fraction__HR- CK7-__to__HR+ CK7-,0.004973530262023591,0.0026836838816917926,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,abs,16,mixing__neighbor_fraction__Basal CKlow__to__HR+ CK7- Ki67+,0.00493982475064527,-0.0032351091908794528,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,abs,17,mixing__neighbor_fraction__HR- CK7+__to__HR+ CK7- Ki67+,0.0048549658865034515,-0.0016788127554014777,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,abs,18,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7- Ki67+,0.004681681463189499,0.0032043721251617317,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,abs,19,mixing__neighbor_fraction__HR- CK7-__to__HR+ CK7- Ki67+,0.004665592363680239,-0.0012685035214608945,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,abs,20,mixing__same_type_neighbor_fraction,0.004353491509107033,-0.0016669974466245409,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,signed,1,mixing__neighbor_fraction__HR+ CK7- Slug+__to__HRlow CKlow,0.24245807479232898,0.19816947840951116,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,signed,2,mixing__neighbor_fraction__HR- CK7-__to__Fibroblasts,0.2404056600431182,0.10321606072597528,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,signed,3,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__B cells,0.22112539663086841,-0.19996388132276735,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,signed,4,mixing__neighbor_fraction__HRlow CKlow__to__HR- CKlow CK5+,0.21915685184893108,-0.13847507421961971,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,signed,5,mixing__neighbor_fraction__HR- CK7+__to__Macrophages Vim+ CD45low,0.21112384461859518,-0.1360907278684163,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,signed,6,mixing__neighbor_fraction__Endothelial__to__HRlow CKlow,0.2108131315697955,-0.18144003719617965,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,signed,7,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__HR+ CK7-,0.19626518576791427,0.014655319427717415,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,signed,8,mixing__neighbor_fraction__HR- CK7-__to__T cells,0.1955975478893865,0.13326656978204718,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,signed,9,mixing__neighbor_fraction__Vascular SMA+__to__B cells,0.18624383474350095,-0.15413384262474494,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,signed,10,mixing__neighbor_fraction__HR- CK7-__to__B cells,0.17355329653255805,-0.13975419496647043,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,signed,11,mixing__local_mixing_max,0.17291183433275778,-0.08455097426603915,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,signed,12,mixing__neighbor_fraction__Myoepithelial__to__B cells,0.17148886334600402,0.13828950343976784,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,signed,13,mixing__neighbor_fraction__B cells__to__Basal CKlow,0.16695060071211196,0.13904314389802427,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,signed,14,mixing__neighbor_fraction__Myofibroblasts__to__HR- CKlow CK5+,0.16611868493326606,-0.09803658898315534,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,signed,15,mixing__neighbor_fraction__HR- CK7-__to__HR+ CK7-,0.16466301009268136,0.05935875661068548,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,signed,16,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7-,0.1645360890134376,-0.11558329669593241,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,signed,17,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.16415654827737708,-0.024878215543624044,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,signed,18,mixing__neighbor_fraction__HR- Ki67+__to__HR+ CK7-,0.16303323705934938,-0.06741911705972091,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,signed,19,mixing__neighbor_fraction__HR+ CK7-__to__Macrophages Vim+ CD45low,0.1580431449740666,0.09489384913878553,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,signed,20,mixing__neighbor_fraction__HR+ CK7-__to__Myoepithelial,0.1577506902219225,0.09488613454051677,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,top,1,mixing__neighbor_fraction__B cells__to__Basal CKlow,0.06266184314430454,0.06041158490444438,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,top,2,mixing__neighbor_fraction__HR- CK7-__to__Fibroblasts,0.040316823646293125,0.027363710262149496,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,top,3,mixing__neighbor_fraction__HR- CK7-__to__T cells,0.038363474250712605,0.030214733087243945,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,top,4,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR- CKlow CK5+,0.03461878538510486,0.029932182704077777,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,top,5,mixing__neighbor_fraction__B cells__to__HRlow CKlow,0.032144763346629364,0.03146192053869865,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,top,6,mixing__neighbor_fraction__HRlow CKlow__to__HR- CKlow CK5+,0.03009577160510261,-0.024946542919384234,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,top,7,mixing__neighbor_fraction__HR+ CK7- Slug+__to__HRlow CKlow,0.026876544704457227,0.0228471049411837,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,top,8,mixing__neighbor_fraction__B cells__to__HR- CKlow CK5+,0.026548463248983616,-0.025215476250323977,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,top,9,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7- Ki67+,0.02552038440619004,0.021713872670028632,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,top,10,mixing__neighbor_fraction__HR- CK7-__to__Myoepithelial,0.02435042570265374,0.019440503571744643,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,top,11,mixing__neighbor_fraction__HR+ CK7-__to__Myoepithelial,0.02171127043409194,0.015249352935190516,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,top,12,mixing__neighbor_fraction__Basal CKlow__to__HRlow CKlow,0.021507034156540858,-0.01687459106303255,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,top,13,mixing__neighbor_fraction__B cells__to__Fibroblasts CD68+,0.02045751216881783,0.0163151008929652,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,top,14,mixing__neighbor_fraction__HR+ CK7-__to__Macrophages Vim+ CD45low,0.018571044740102603,0.009395488171401362,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,top,15,mixing__neighbor_fraction__HR- CK7+__to__Fibroblasts,0.017712935594544357,0.008843322564308743,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,top,16,mixing__neighbor_fraction__HR+ CK7-__to__Macrophages Vim+ Slug-,0.01715431503343546,0.009916929107840929,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,top,17,mixing__neighbor_fraction__HR- CKlow CK5+__to__Macrophages Vim+ Slug+,0.016954968982336022,0.015203127394585805,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,top,18,composition__HR- CKlow CK5+,0.01685132921069305,0.012630074642896743,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,top,19,mixing__neighbor_fraction__HR- CK7-__to__HR+ CK7-,0.01681892847993904,0.01340092168109232,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,top,20,mixing__neighbor_fraction__HR- CK7-__to__Fibroblasts CD68+,0.016433661127199854,0.005047578076061119,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,abs,1,mixing__neighbor_fraction__HRlow CKlow__to__HR- CKlow CK5+,0.007797298479869745,0.005977544558852327,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,abs,2,mixing__neighbor_fraction__HR- CK7-__to__Basal CKlow,0.007369645476392383,-0.005982395893821117,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,abs,3,mixing__neighbor_fraction__T cells__to__HR- CKlow CK5+,0.0069979723697697,0.005832835480818614,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,abs,4,mixing__neighbor_fraction__Vascular SMA+__to__Fibroblasts,0.0065615815276428525,-0.0053950590029179955,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,abs,5,composition__Basal CKlow,0.0061124257948119405,-0.004816421736837931,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,abs,6,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR- CKlow CK5+,0.006111717682055734,-0.005196906749732269,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,abs,7,mixing__neighbor_fraction__HR+ CK7-__to__Macrophages Vim+ Slug+,0.005077378035180566,-0.0026921340112669857,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,abs,8,mixing__neighbor_fraction__HR- CKlow CK5+__to__T cells,0.004780741063079412,0.0032151873578823865,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,abs,9,mixing__neighbor_fraction__HR- Ki67+__to__HR- CK7-,0.004715207835629026,0.0026980196461691827,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,abs,10,mixing__local_mixing_std,0.004667827777100608,0.0012567228920544375,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,abs,11,composition__HR- CKlow CK5+,0.004595311122660557,0.0022227142469731587,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,abs,12,mixing__neighbor_fraction__Basal CKlow__to__Basal CKlow,0.004029572248127911,0.0036893795676829788,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,abs,13,mixing__neighbor_fraction__HR- CK7-__to__Fibroblasts,0.003954600450314307,0.0015783198904229293,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,abs,14,mixing__neighbor_fraction__Vascular SMA+__to__HR- CKlow CK5+,0.003774360302612846,0.0031997642564862705,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,abs,15,mixing__neighbor_fraction__B cells__to__Basal CKlow,0.0036188641541932353,0.003217497128045944,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,abs,16,mixing__neighbor_fraction__B cells__to__HR- CKlow CK5+,0.0035153491350787907,0.0029026761249359265,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,abs,17,mixing__neighbor_fraction__Fibroblasts__to__Fibroblasts,0.00347253698909081,-0.0017265265329438394,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,abs,18,mixing__neighbor_fraction__HER2+__to__HRlow CKlow,0.003446424401575048,-0.0015921889698269312,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,abs,19,mixing__neighbor_fraction__HR+ CK7-__to__Fibroblasts,0.0033463564788935073,-0.0011452253612720502,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,abs,20,mixing__shannon_entropy_global,0.0033145136342542223,0.00021724614318222,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,signed,1,mixing__neighbor_fraction__HR+ CK7-__to__Macrophages Vim+ Slug+,0.3180077117032954,-0.2384164487972109,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,signed,2,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR- CKlow CK5+,0.2052863751788442,-0.17250007178817792,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,signed,3,mixing__neighbor_fraction__HRlow CKlow__to__HR- CKlow CK5+,0.194619165487538,0.15311768162602357,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,signed,4,mixing__neighbor_fraction__Endothelial__to__HR- CKlow CK5+,0.19167229270654998,-0.1646200274557162,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,signed,5,mixing__neighbor_fraction__Hypoxia__to__B cells,0.19021649500081503,0.18857720345578946,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,signed,6,mixing__neighbor_fraction__HR- CK7-__to__Basal CKlow,0.17502198940023672,-0.14272771475847948,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,signed,7,mixing__neighbor_fraction__Fibroblasts CD68+__to__Macrophages Vim+ Slug+,0.17420938802813205,-0.13975198194116367,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,signed,8,mixing__neighbor_fraction__HR- Ki67+__to__HR- CK7-,0.16813807598856376,0.09621296811789362,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,signed,9,composition__Basal CKlow,0.16409457789926285,-0.1308682529788771,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,signed,10,mixing__neighbor_fraction__Hypoxia__to__Basal CKlow,0.1631745456410928,-0.1504614518729987,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,signed,11,mixing__neighbor_fraction__Hypoxia__to__Macrophages Vim+ Slug+,0.1591950695100288,-0.1414357023244074,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,signed,12,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__Macrophages Vim+ Slug+,0.15810285723977824,-0.11113656306388169,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,signed,13,mixing__neighbor_fraction__Vascular SMA+__to__Fibroblasts,0.1563877980691304,-0.1102097134071679,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,signed,14,mixing__neighbor_fraction__T cells__to__HR- CKlow CK5+,0.14377551200704833,0.10725997040658415,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,signed,15,mixing__neighbor_fraction__HER2+__to__Basal CKlow,0.14326699403545926,0.10440898344340549,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,signed,16,mixing__local_mixing_std,0.1432200443763922,0.03083739319481283,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,signed,17,mixing__neighbor_fraction__HR+ CK7-__to__Fibroblasts,0.13632549767302982,-0.07460322999166084,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,signed,18,mixing__shannon_entropy_global,0.1309524486837844,-0.07796588719975792,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,signed,19,mixing__neighbor_fraction__HR- CK7-__to__Fibroblasts,0.12942510256549772,0.05598904797937949,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,signed,20,mixing__neighbor_fraction__HR+ CK7- Slug+__to__HER2+,0.12828161994317683,-0.09617570900545004,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,top,1,mixing__neighbor_fraction__HRlow CKlow__to__HR- CKlow CK5+,0.04282027711249986,0.03811244444838509,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,top,2,mixing__neighbor_fraction__T cells__to__HR- CKlow CK5+,0.03826218942765355,0.035118538933284545,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,top,3,mixing__neighbor_fraction__HR- CKlow CK5+__to__T cells,0.025135259646841962,0.020370643882773966,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,top,4,mixing__neighbor_fraction__HR- Ki67+__to__HR- CK7-,0.02272250970740174,0.015416386964467007,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,top,5,composition__HR- CKlow CK5+,0.020461555918538925,0.018902815152053866,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,top,6,mixing__neighbor_fraction__Hypoxia__to__B cells,0.01904610472062549,0.018831591617413424,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,top,7,mixing__neighbor_fraction__B cells__to__Basal CKlow,0.01877125762797609,0.017392513101579753,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,top,8,mixing__neighbor_fraction__B cells__to__Vascular SMA+,0.01780520652454325,0.0166546406211824,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,top,9,mixing__neighbor_fraction__HR- CKlow CK5+__to__Hypoxia,0.016114535593051347,0.015352373259301211,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,top,10,mixing__neighbor_fraction__Hypoxia__to__Fibroblasts,0.015921838612999714,0.01421111113360104,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,top,11,mixing__neighbor_fraction__B cells__to__HR- CKlow CK5+,0.01522579086286658,0.014309185901335201,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,top,12,mixing__neighbor_fraction__Basal CKlow__to__HRlow CKlow,0.014287764266479324,-0.0101789168724968,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,top,13,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR- CKlow CK5+,0.013551773584910663,-0.0123416498658423,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,top,14,mixing__neighbor_fraction__Vascular SMA+__to__HR- CKlow CK5+,0.013064538892482663,0.011482195803729982,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,top,15,mixing__neighbor_fraction__HRlow CKlow__to__Basal CKlow,0.012695574421164499,-0.00950098488880715,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,top,16,mixing__neighbor_fraction__HR- CKlow CK5+__to__Myofibroblasts,0.0124623610377541,0.007660727982017138,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,top,17,mixing__neighbor_fraction__HR- CK7-__to__HR+ CK7-,0.010992573145968595,0.007469559541439265,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,top,18,mixing__neighbor_fraction__T cells__to__Basal CKlow,0.010638587226703428,0.00736331156497833,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,top,19,mixing__neighbor_fraction__HR- CK7-__to__Fibroblasts,0.010366318750671993,0.005851058788128943,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,top,20,mixing__neighbor_fraction__HR- CK7-__to__Endothelial,0.01019555155911886,0.0070688277369148735,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,abs,1,mixing__neighbor_fraction__Myoepithelial__to__Fibroblasts,0.008595529520531258,0.007531938499298859,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,abs,2,mixing__neighbor_fraction__T cells__to__Endothelial,0.007731482717925195,-0.004880066024428599,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,abs,3,mixing__neighbor_fraction__HR- CK7+__to__Myoepithelial,0.007368739705772557,-0.0056029261353710705,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,abs,4,mixing__local_mixing_std,0.006952084953614842,0.0030197674229524504,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,abs,5,mixing__neighbor_fraction__Myoepithelial__to__Myoepithelial,0.006474729592301424,-0.0050251161671455375,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,abs,6,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__Fibroblasts,0.005782933358790251,-0.003330237416292104,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,abs,7,mixing__neighbor_fraction__Myoepithelial__to__Myofibroblasts,0.005666051903898234,0.002061276089704311,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,abs,8,mixing__neighbor_fraction__Fibroblasts CD68+__to__Fibroblasts,0.005662012055930067,-0.0012770090864329142,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,abs,9,mixing__neighbor_fraction__HR- CK7-__to__Myofibroblasts,0.0053544912857683424,0.00023390759270355688,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,abs,10,mixing__neighbor_fraction__HR- Ki67+__to__Fibroblasts CD68+,0.005190930857243196,0.003031919538064022,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,abs,11,mixing__neighbor_fraction__HR- CK7-__to__Macrophages Vim+ CD45low,0.005125801669699817,-0.003396718188434638,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,abs,12,mixing__neighbor_fraction__Myofibroblasts__to__HR+ CK7-,0.005087507798154435,0.00039826854450395534,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,abs,13,mixing__neighbor_fraction__HR+ CK7-__to__Myoepithelial,0.005062704534745915,-0.0033846041874702956,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,abs,14,mixing__neighbor_fraction__Fibroblasts__to__Myoepithelial,0.004985980050582327,0.00409772658519216,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,abs,15,mixing__neighbor_fraction__T cells__to__Fibroblasts CD68+,0.004911263760087171,-0.0019104670285001065,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,abs,16,mixing__shannon_entropy_global,0.0047408069632052866,-0.0015093901468511074,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,abs,17,mixing__neighbor_fraction__Endothelial__to__HR- CK7+,0.004675599120658351,0.003196518284399855,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,abs,18,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.004664694591872615,-0.0007448832142277222,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,abs,19,mixing__neighbor_fraction__Endothelial__to__Fibroblasts,0.004639337718732861,0.0037716730022674004,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,abs,20,mixing__neighbor_fraction__Endothelial__to__Myofibroblasts,0.004296839190307831,0.0024773350867725533,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,signed,1,mixing__neighbor_fraction__Myoepithelial__to__HR- Ki67+,0.26674217744881545,-0.22055017711317432,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,signed,2,mixing__neighbor_fraction__HR+ CK7- Slug+__to__B cells,0.2494312910965122,-0.23836527282850822,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,signed,3,mixing__neighbor_fraction__Hypoxia__to__T cells,0.22489927230657183,-0.18787807473765458,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,signed,4,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__Fibroblasts,0.211631930686759,-0.1400761000107249,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,signed,5,mixing__neighbor_fraction__HR- CK7-__to__Macrophages Vim+ CD45low,0.19825924842742484,-0.1534261949594465,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,signed,6,mixing__neighbor_fraction__T cells__to__Endothelial,0.19498358817437683,-0.11786547435726463,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,signed,7,mixing__neighbor_fraction__Fibroblasts CD68+__to__Fibroblasts,0.1906989823266316,-0.0320586142608703,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,signed,8,mixing__shannon_entropy_global,0.17076785557412189,-0.09378970577688181,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,signed,9,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR- CKlow CK5+,0.16873535677725005,-0.10829744286479866,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,signed,10,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__Basal CKlow,0.1637790054915929,-0.1319730143481892,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,signed,11,mixing__neighbor_fraction__Myofibroblasts__to__Myofibroblasts,0.1624653455299464,-0.04356736236103233,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,signed,12,mixing__neighbor_fraction__HR- CKlow CK5+__to__Macrophages Vim+ Slug-,0.15735646545923104,-0.13240799816968152,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,signed,13,mixing__neighbor_fraction__HR- CK7-__to__Myofibroblasts,0.15182934305548038,0.023213087213174992,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,signed,14,mixing__neighbor_fraction__HR+ CK7-__to__Fibroblasts CD68+,0.14906569594993094,-0.07107478560838325,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,signed,15,mixing__local_mixing_std,0.14615021761908012,0.020844744595407454,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,signed,16,mixing__neighbor_fraction__Myoepithelial__to__Myofibroblasts,0.14478662972574532,0.04617236545498967,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,signed,17,mixing__neighbor_fraction__T cells__to__Macrophages Vim+ CD45low,0.14277955591508323,-0.10822641928327091,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,signed,18,mixing__neighbor_fraction__Myoepithelial__to__Hypoxia,0.13979455968063345,0.12291002607302197,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,signed,19,mixing__neighbor_fraction__Endothelial__to__HR- CKlow CK5+,0.13894974079575753,-0.10275999622777415,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,signed,20,mixing__neighbor_fraction__HR+ CK7-__to__T cells,0.13805800779284952,0.0687513361522414,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,top,1,mixing__neighbor_fraction__Myoepithelial__to__Fibroblasts,0.019746932558893687,0.016709085435737892,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,top,2,mixing__neighbor_fraction__HR- Ki67+__to__Fibroblasts CD68+,0.010903908704695308,0.00760523223607462,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,top,3,mixing__neighbor_fraction__Endothelial__to__Fibroblasts,0.01039691973803732,0.007352066498339502,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,top,4,mixing__local_mixing_std,0.010382472802282688,0.004384967370972719,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,top,5,mixing__neighbor_fraction__Myofibroblasts__to__HR+ CK7-,0.010316228846922033,0.0015390671705783777,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,top,6,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__Myofibroblasts,0.010092939473142656,0.002985212341070972,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,top,7,mixing__neighbor_fraction__Hypoxia__to__Fibroblasts CD68+,0.00989477320813527,0.007693348026652826,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,top,8,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR- CK7-,0.009854914835924485,0.0067140265866999504,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,top,9,mixing__neighbor_fraction__HR+ CK7-__to__T cells,0.009194070085349922,0.0044438025023395425,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,top,10,mixing__neighbor_fraction__Myofibroblasts__to__Endothelial,0.009144243119160187,0.0057668792148803,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,top,11,mixing__neighbor_fraction__T cells__to__Myoepithelial,0.009141266797061098,0.005434870642461894,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,top,12,mixing__neighbor_fraction__Myoepithelial__to__Myofibroblasts,0.009103211083922157,0.003223244684927211,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,top,13,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR+ CK7-,0.008682319398121753,0.0037774229439564567,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,top,14,mixing__neighbor_fraction__HR- CK7-__to__Fibroblasts,0.00852229981953472,0.0005954636806705893,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,top,15,mixing__neighbor_fraction__Myoepithelial__to__T cells,0.008178266882393991,0.005677221548503578,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,top,16,mixing__neighbor_fraction__HR- CK7-__to__Myofibroblasts,0.008037233805671428,0.00046448451511237954,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,top,17,mixing__neighbor_fraction__Endothelial__to__Myofibroblasts,0.007745161950404538,0.0038158291266556003,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,top,18,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR- CK7-,0.0076238514583135365,0.0012202016446435165,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,top,19,mixing__neighbor_fraction__Fibroblasts CD68+__to__Myofibroblasts,0.0075544961692769795,0.0034718160026909386,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,top,20,mixing__neighbor_fraction__HR- CK7-__to__HR+ CK7-,0.007503182082247355,0.00039913481274428446,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,abs,1,mixing__neighbor_fraction__HR+ CK7-__to__Fibroblasts,0.00935867424978652,-0.005946755249299624,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,abs,2,mixing__local_mixing_std,0.006139503971882312,0.0020787287003270053,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,abs,3,mixing__neighbor_fraction__HR- CKlow CK5+__to__Myofibroblasts,0.005884236247208715,-0.003643534535687424,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,abs,4,mixing__neighbor_fraction__HER2+__to__HRlow CKlow,0.005703008390470306,-0.0037365312907150007,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,abs,5,mixing__shannon_entropy_normalized,0.0047564861293713425,-0.0015135418195677717,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,abs,6,mixing__neighbor_fraction__Myofibroblasts__to__Myofibroblasts,0.004491087088537028,-0.0013345830083067052,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,abs,7,mixing__neighbor_fraction__Fibroblasts__to__Myofibroblasts,0.003989019236131668,-0.0004043412864249712,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,abs,8,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__Myofibroblasts,0.0037614009291583243,0.0013215313320356057,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,abs,9,mixing__neighbor_fraction__Fibroblasts__to__Fibroblasts,0.0037552865891631007,-0.000888025891906953,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,abs,10,mixing__shannon_entropy_global,0.003751088563821668,0.0006659001074058197,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,abs,11,mixing__neighbor_fraction__HR+ CK7-__to__Fibroblasts CD68+,0.003740517171940536,-0.00014500174862569457,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,abs,12,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.0037255413886789534,-0.0010015946998733528,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,abs,13,mixing__neighbor_fraction__HER2+__to__B cells,0.003701329973661752,-0.0029203148564778164,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,abs,14,mixing__neighbor_fraction__HR- CK7-__to__HR+ CK7-,0.003659585936934945,-0.00040670921040348315,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,abs,15,mixing__neighbor_fraction__Myofibroblasts__to__HR- CKlow CK5+,0.003578516344766642,-0.0015409990646262283,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,abs,16,mixing__neighbor_fraction__HR+ CK7-__to__HR+ CK7-,0.003503365679964616,0.0015157524341183708,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,abs,17,mixing__neighbor_fraction__T cells__to__HR+ CK7-,0.0034989574018177328,-0.0007245670346872461,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,abs,18,mixing__neighbor_fraction__Fibroblasts CD68+__to__Fibroblasts,0.0034621529853142425,-0.00011377380760656196,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,abs,19,mixing__neighbor_fraction__HR- CK7-__to__Myofibroblasts,0.003357680650755268,-0.0004802932082094916,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,abs,20,mixing__neighbor_fraction__Endothelial__to__HR- CKlow CK5+,0.003202894340580395,-0.0023466781422913255,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,signed,1,mixing__neighbor_fraction__Vascular SMA+__to__HR+ CK7- Slug+,0.25753834415743976,-0.23698636723641917,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,signed,2,mixing__neighbor_fraction__HR- CKlow CK5+__to__Myofibroblasts,0.232406462521101,-0.15989954802650383,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,signed,3,mixing__neighbor_fraction__HR- CK7+__to__Macrophages Vim+ CD45low,0.190544476111252,-0.13542183441569478,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,signed,4,mixing__neighbor_fraction__HR+ CK7-__to__Fibroblasts,0.18988076032284945,-0.024003316364926443,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,signed,5,mixing__neighbor_fraction__HRlow CKlow__to__Vascular SMA+,0.17863194792537654,-0.13972288346764128,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,signed,6,mixing__neighbor_fraction__HR+ CK7-__to__Fibroblasts CD68+,0.17715177014804329,-0.0796550901361217,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,signed,7,mixing__neighbor_fraction__Endothelial__to__HRlow CKlow,0.17375149265924913,-0.11463298493028952,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,signed,8,mixing__neighbor_fraction__Myofibroblasts__to__Myofibroblasts,0.17287123595393164,-0.08140168446678882,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,signed,9,mixing__neighbor_fraction__Vascular SMA+__to__Macrophages Vim+ Slug+,0.1717491355403431,-0.14920891563976854,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,signed,10,mixing__neighbor_fraction__T cells__to__Vascular SMA+,0.17117227508014798,-0.12964486265423117,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,signed,11,mixing__local_mixing_std,0.16364685164352116,-0.02216804111808525,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,signed,12,mixing__neighbor_fraction__HR- CK7+__to__HR+ CK7- Slug+,0.1557305414647407,-0.12071981577117324,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,signed,13,mixing__neighbor_fraction__Endothelial__to__HR- CKlow CK5+,0.15427594330086894,-0.11806000937591157,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,signed,14,mixing__neighbor_fraction__HER2+__to__B cells,0.15281048212018658,-0.11720767650910868,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,signed,15,mixing__shannon_entropy_global,0.15097741832238293,-0.019756842329820726,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,signed,16,mixing__shannon_entropy_normalized,0.15047094535834957,-0.024482240895172425,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,signed,17,mixing__neighbor_fraction__T cells__to__Fibroblasts CD68+,0.14539345682961233,-0.03337727431112814,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,signed,18,mixing__neighbor_fraction__HR+ CK7- Slug+__to__Vascular SMA+,0.14281296860972054,-0.1274698612887344,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,signed,19,mixing__neighbor_fraction__HR- CKlow CK5+__to__Fibroblasts CD68+,0.1408629143967855,-0.08643248159769394,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,signed,20,mixing__neighbor_fraction__T cells__to__HR- CKlow CK5+,0.13878753585588172,0.09057042050250663,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,top,1,mixing__neighbor_fraction__T cells__to__HR- CKlow CK5+,0.015029781315950994,0.010725160842450017,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,top,2,mixing__neighbor_fraction__HR- CKlow CK5+__to__T cells,0.012440350949528197,0.0075292586331456674,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,top,3,mixing__neighbor_fraction__HR- CKlow CK5+__to__B cells,0.011681516402653894,0.009715553100529567,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,top,4,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR+ CK7-,0.010442124782917887,0.006358474577494321,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,top,5,mixing__neighbor_fraction__HR- Ki67+__to__HR- CK7-,0.01019432847540003,0.0038986934622435134,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,top,6,mixing__neighbor_fraction__Myofibroblasts__to__Endothelial,0.009858327435722822,0.005675585473152701,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,top,7,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR- CK7+,0.009701188145396058,0.008535959273563523,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,top,8,mixing__neighbor_fraction__Fibroblasts__to__Endothelial,0.009032521397821982,0.005819471919147386,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,top,9,mixing__neighbor_fraction__HRlow CKlow__to__HR+ CK7-,0.008854653379550768,0.00040410258911437305,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,top,10,mixing__neighbor_fraction__Endothelial__to__HR- CK7+,0.00874176320640698,0.005566408325260335,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,top,11,mixing__neighbor_fraction__HRlow CKlow__to__HR- Ki67+,0.008573661615490172,0.004433463559997049,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,top,12,mixing__neighbor_fraction__HR- CK7-__to__HR+ CK7-,0.008353954504320207,-1.1744462159769586e-05,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,top,13,composition__HR- CKlow CK5+,0.008312520196369893,0.004205837781832932,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,top,14,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7-,0.008025823021785184,0.004917489772978697,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,top,15,composition__Endothelial,0.00800811240743332,0.004888858667267996,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,top,16,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__Myofibroblasts,0.007975281885634108,0.003828691413918616,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,top,17,mixing__neighbor_fraction__Endothelial__to__Endothelial,0.007825192099754326,0.0043530564928261,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,top,18,mixing__neighbor_fraction__HR- Ki67+__to__Fibroblasts CD68+,0.007795882131461771,0.002317991492790832,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,top,19,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.007326496019155019,0.0016325069185822323,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,top,20,mixing__neighbor_fraction__HRlow CKlow__to__Endothelial,0.007057302168885446,0.004813283589704587,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,abs,1,mixing__neighbor_fraction__HR- CKlow CK5+__to__Fibroblasts,0.0074481707148650305,0.006070636555559993,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,abs,2,mixing__neighbor_fraction__Hypoxia__to__HR- CKlow CK5+,0.006305907109781774,0.005934968469123298,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,abs,3,mixing__neighbor_fraction__Fibroblasts CD68+__to__Myofibroblasts,0.006233425857765049,-0.000404888533401657,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,abs,4,mixing__local_mixing_std,0.006205482559416145,0.0023326996663051124,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,abs,5,mixing__neighbor_fraction__Fibroblasts CD68+__to__Fibroblasts,0.006144856958379026,-0.0021124899182832875,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,abs,6,mixing__neighbor_fraction__Fibroblasts__to__HR- CKlow CK5+,0.006061541604085663,-0.00448734232044153,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,abs,7,mixing__neighbor_fraction__HR- CK7-__to__Myofibroblasts,0.005541447862110113,0.00012577664912136427,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,abs,8,mixing__neighbor_fraction__Myofibroblasts__to__HR- CKlow CK5+,0.005271791394374027,-0.0027285048461569016,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,abs,9,mixing__neighbor_fraction__T cells__to__Myofibroblasts,0.0050814734629500685,-0.0004711300542635179,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,abs,10,mixing__neighbor_fraction__HR- CK7+__to__HRlow CKlow,0.004913359192293242,0.001810273051951558,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,abs,11,mixing__neighbor_fraction__HR- CK7-__to__Fibroblasts,0.00488682360949761,-0.00030317949613703,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,abs,12,mixing__neighbor_fraction__HR- Ki67+__to__Fibroblasts CD68+,0.004879212339608973,0.0020205621592418576,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,abs,13,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.004783507181841962,-0.00028022325674400384,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,abs,14,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR- CK7-,0.004753158770237994,0.00022427024566396198,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,abs,15,mixing__neighbor_fraction__Myofibroblasts__to__Fibroblasts CD68+,0.004517482673092194,2.4763233200870998e-06,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,abs,16,mixing__neighbor_fraction__HR+ CK7-__to__Basal CKlow,0.004493804690833266,-0.0031501932587874363,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,abs,17,mixing__shannon_entropy_global,0.004344664377158153,4.758986680406226e-06,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,abs,18,mixing__neighbor_fraction__Macrophages Vim+ Slug+__to__HR- CK7-,0.004230259938852915,-0.0013699168823720323,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,abs,19,mixing__neighbor_fraction__T cells__to__HR- CKlow CK5+,0.0041189596647707325,-0.0030065411760571647,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,abs,20,mixing__neighbor_fraction__Fibroblasts__to__Fibroblasts CD68+,0.00409479168330259,-0.00044259728954543676,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,signed,1,mixing__neighbor_fraction__HR+ CK7- Slug+__to__B cells,0.2307191921995336,-0.21687555575330578,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,signed,2,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__B cells,0.20016971245039225,0.17486022949273353,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,signed,3,mixing__neighbor_fraction__HR- CKlow CK5+__to__B cells,0.19996330768946424,0.17553653727816407,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,signed,4,mixing__neighbor_fraction__Fibroblasts CD68+__to__Myofibroblasts,0.1937205588456512,-0.050474223843769754,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,signed,5,mixing__neighbor_fraction__Fibroblasts CD68+__to__Fibroblasts,0.19102432845960912,-0.05504340563178252,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,signed,6,mixing__neighbor_fraction__HR- Ki67+__to__B cells,0.1806210331684073,0.12925533120964836,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,signed,7,mixing__neighbor_fraction__HR- CK7-__to__Myofibroblasts,0.17633863365199598,0.0044682578174819595,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,signed,8,mixing__neighbor_fraction__HR- CK7-__to__Fibroblasts,0.16871240209450047,0.002965173393132194,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,signed,9,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR- CK7-,0.16426741809078405,0.024493544664752065,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,signed,10,mixing__neighbor_fraction__T cells__to__Myofibroblasts,0.16029469806083377,-0.05110887061744553,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,signed,11,mixing__neighbor_fraction__Endothelial__to__HR- CKlow CK5+,0.1527951117343243,-0.11375838219365975,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,signed,12,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.15208233518214093,0.0031546358570763875,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,signed,13,mixing__shannon_entropy_global,0.14807274274302737,-0.06634579047706357,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,signed,14,mixing__neighbor_fraction__HR- CKlow CK5+__to__Endothelial,0.14738585207732768,0.10486914604841042,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,signed,15,mixing__neighbor_fraction__Endothelial__to__Vascular SMA+,0.14687124117647032,-0.10863796343919943,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,signed,16,mixing__neighbor_fraction__Myofibroblasts__to__Myofibroblasts,0.14676290908147144,-0.06071504830010898,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,signed,17,mixing__neighbor_fraction__HR- CKlow CK5+__to__Fibroblasts,0.14558467547943743,0.09567133705273868,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,signed,18,mixing__neighbor_fraction__Endothelial__to__Fibroblasts,0.14516593030819158,0.04535170951582046,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,signed,19,mixing__neighbor_fraction__Endothelial__to__B cells,0.14454956374378197,-0.12888907915784664,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,signed,20,mixing__neighbor_fraction__T cells__to__Vascular SMA+,0.14365660428975496,-0.10750834860145171,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,top,1,mixing__neighbor_fraction__Hypoxia__to__HR- CKlow CK5+,0.04721702317473806,0.04562153393822495,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,top,2,mixing__neighbor_fraction__HR- CK7+__to__HRlow CKlow,0.029133925348201004,0.022430141529296795,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,top,3,mixing__neighbor_fraction__HR- CKlow CK5+__to__B cells,0.025188165670757205,0.022522129486869238,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,top,4,mixing__neighbor_fraction__HR- CK7+__to__HR- CK7-,0.020428560913664646,0.014282039587965034,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,top,5,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.01919077428986358,0.004770698997382857,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,top,6,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR- CK7-,0.018784744018377608,0.008815611870278035,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,top,7,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__B cells,0.018201260589877578,0.016143052294040734,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,top,8,mixing__neighbor_fraction__HR- CK7-__to__Fibroblasts,0.016570819902044648,0.0025395998944999333,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,top,9,mixing__neighbor_fraction__HR- Ki67+__to__B cells,0.016153924308470888,0.012451796697137836,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,top,10,mixing__neighbor_fraction__Myofibroblasts__to__B cells,0.015619891697019495,0.012726876800682277,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,top,11,mixing__neighbor_fraction__Basal CKlow__to__B cells,0.015576385124127304,0.014125457215159454,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,top,12,mixing__neighbor_fraction__HR- Ki67+__to__Fibroblasts CD68+,0.014977235501904943,0.005880626045106751,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,top,13,mixing__neighbor_fraction__Macrophages Vim+ Slug+__to__HR- CK7-,0.014409824672505695,-0.008304257357968877,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,top,14,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__Myofibroblasts,0.013129050189464328,0.0015685822625823992,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,top,15,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR+ CK7-,0.01305531665663171,0.0023166431958231803,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,top,16,mixing__neighbor_fraction__Basal CKlow__to__HR- CK7-,0.012858989211180815,0.005980491176727751,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,top,17,mixing__neighbor_fraction__HR- CK7-__to__Myofibroblasts,0.012816697181628737,0.0023212781473099346,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,top,18,mixing__neighbor_fraction__Myofibroblasts__to__HR- CKlow CK5+,0.012499525439628739,-0.0055983135826043785,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,top,19,mixing__neighbor_fraction__Fibroblasts__to__HR+ CK7-,0.012226250070143576,0.003935681506663484,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,top,20,mixing__neighbor_fraction__HR- CK7-__to__B cells,0.011802936726090861,0.009342873917799279,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,abs,1,mixing__neighbor_fraction__Myoepithelial__to__Fibroblasts,0.0109222175886078,0.010011801872130315,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,abs,2,mixing__neighbor_fraction__Myoepithelial__to__Myofibroblasts,0.0068522366026550745,0.0022772264183735856,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,abs,3,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.006689610224157297,0.0005070953518976884,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,abs,4,mixing__local_mixing_std,0.005911784462986512,0.002245318830494398,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,abs,5,mixing__neighbor_fraction__HR- CK7+__to__Myoepithelial,0.005785582160745676,-0.00426545852722683,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,abs,6,mixing__neighbor_fraction__Endothelial__to__Fibroblasts,0.0052920517387264445,0.00404188009538445,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,abs,7,mixing__neighbor_fraction__Myofibroblasts__to__Endothelial,0.00485284858702151,0.003258338702536136,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,abs,8,mixing__neighbor_fraction__T cells__to__Fibroblasts CD68+,0.004658150370044542,0.00038592649033160695,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,abs,9,mixing__shannon_entropy_global,0.004598522389434554,-0.0002941626285209528,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,abs,10,mixing__neighbor_fraction__Endothelial__to__HR- CK7+,0.004558954982291184,0.002969026586813254,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,abs,11,mixing__neighbor_fraction__Myofibroblasts__to__Myofibroblasts,0.004506684040219407,0.0001144560283067093,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,abs,12,composition__Endothelial,0.0045005634075067505,0.0034251609454924335,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,abs,13,mixing__neighbor_fraction__T cells__to__Fibroblasts,0.004459936942835691,-0.002544808294504448,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,abs,14,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__Fibroblasts,0.004399358915618267,-0.00258446324566758,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,abs,15,mixing__neighbor_fraction__Macrophages Vim+ Slug+__to__Fibroblasts,0.004374747072922808,-0.0022381171114595234,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,abs,16,mixing__neighbor_fraction__HR+ CK7-__to__Fibroblasts CD68+,0.004203661592840218,-0.0010224157059603681,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,abs,17,mixing__shannon_entropy_normalized,0.004171853093672221,-0.001469043040862078,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,abs,18,mixing__neighbor_fraction__Myofibroblasts__to__HR+ CK7-,0.004132059537123561,-0.0012891922091961506,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,abs,19,mixing__neighbor_fraction__HR- Ki67+__to__HR+ CK7-,0.003986640964357941,0.0007877095845609661,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,abs,20,mixing__neighbor_fraction__HR+ CK7-__to__Fibroblasts,0.003940579987901208,-0.0010017638429498433,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,signed,1,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.25396731924292226,0.10324850375803407,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,signed,2,mixing__neighbor_fraction__HR+ CK7-__to__Fibroblasts CD68+,0.21453981819193058,-0.14146973418263664,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,signed,3,mixing__neighbor_fraction__Myoepithelial__to__HRlow CKlow,0.2115871110754124,0.18189363413187887,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,signed,4,mixing__neighbor_fraction__HR- Ki67+__to__HR+ CK7-,0.20968909279244485,0.12910676712506586,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,signed,5,mixing__neighbor_fraction__T cells__to__Fibroblasts CD68+,0.198650298686032,-0.0826105665944975,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,signed,6,mixing__neighbor_fraction__Myoepithelial__to__HR+ CK7- Slug+,0.19398224667259956,0.16790636280091387,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,signed,7,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__HRlow CKlow,0.18004915746951877,0.14535160341087827,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,signed,8,mixing__shannon_entropy_global,0.17770138895907417,-0.07858094571309104,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,signed,9,mixing__neighbor_fraction__HR- CK7-__to__HR- CKlow CK5+,0.15687044934408867,-0.11746061938157926,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,signed,10,mixing__neighbor_fraction__HR- CK7-__to__HR+ CK7- Ki67+,0.1535177864807853,-0.02021818485100546,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,signed,11,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR- CKlow CK5+,0.15327280633936236,-0.10713257244728214,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,signed,12,mixing__neighbor_fraction__Myofibroblasts__to__HRlow CKlow,0.15243843503345134,0.07091901197063932,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,signed,13,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__Vascular SMA+,0.15219693716321597,-0.1168652817277241,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,signed,14,mixing__neighbor_fraction__HR- CKlow CK5+__to__Myofibroblasts,0.14904193076170014,-0.027524654298894724,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,signed,15,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__Myofibroblasts,0.14873382261350265,-0.01601359967748195,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,signed,16,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__Myofibroblasts,0.14866521693804313,0.040314863537122436,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,signed,17,mixing__local_mixing_std,0.14631225664266534,0.010377481661451249,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,signed,18,mixing__neighbor_fraction__HR- CKlow CK5+__to__Fibroblasts CD68+,0.14509578686331198,-0.11132221649178647,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,signed,19,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__Fibroblasts CD68+,0.1429843260236423,0.0702544135926304,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,signed,20,mixing__neighbor_fraction__Myofibroblasts__to__Myofibroblasts,0.1428798156151947,-0.001792858780725659,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,top,1,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.027216406594960284,0.01186217564032649,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,top,2,mixing__neighbor_fraction__Myoepithelial__to__HRlow CKlow,0.023266607223745416,0.01994336088209963,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,top,3,mixing__neighbor_fraction__Myoepithelial__to__Fibroblasts,0.020499065625062225,0.016749042659568256,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,top,4,mixing__neighbor_fraction__HR- Ki67+__to__HR+ CK7-,0.01943968790357625,0.01103499189535143,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,top,5,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__Myofibroblasts,0.018162064875114917,0.004880192523385589,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,top,6,mixing__neighbor_fraction__Vascular SMA+__to__HRlow CKlow,0.01745617463922439,0.014761680113134225,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,top,7,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__HRlow CKlow,0.01671856080828453,0.013837550363541389,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,top,8,mixing__neighbor_fraction__HR- CKlow CK5+__to__T cells,0.015747240639180458,0.007718207272533741,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,top,9,mixing__local_mixing_std,0.015394583996137733,0.002840625668802563,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,top,10,mixing__neighbor_fraction__Myoepithelial__to__HR+ CK7- Slug+,0.0149982271157314,0.013519591943486122,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,top,11,mixing__neighbor_fraction__HER2+__to__HRlow CKlow,0.014446692881551981,-0.00860093813170028,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,top,12,mixing__neighbor_fraction__HR- CK7+__to__HRlow CKlow,0.014016953973061375,0.0065195459557141,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,top,13,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR- CK7+,0.01390183671230841,0.010099869890122105,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,top,14,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR+ CK7-,0.013782243639982603,0.005696745595746571,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,top,15,mixing__neighbor_fraction__Myofibroblasts__to__HRlow CKlow,0.013640947555671792,0.008167674258592161,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,top,16,mixing__neighbor_fraction__HRlow CKlow__to__Myofibroblasts,0.013538948480170182,0.003723454810973439,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,top,17,mixing__neighbor_fraction__Endothelial__to__Fibroblasts,0.013361282310555804,0.008771153680298658,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,top,18,mixing__neighbor_fraction__Fibroblasts CD68+__to__Myofibroblasts,0.01250483946071445,0.004559607387803974,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,top,19,mixing__neighbor_fraction__HR- CK7-__to__Myofibroblasts,0.012076867813025404,-0.0007967816273363709,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,top,20,mixing__shannon_entropy_normalized,0.01177712073020931,-0.0024621986443644286,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,abs,1,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR- CKlow CK5+,0.009097868324914668,-0.0071080894711113415,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,abs,2,mixing__neighbor_fraction__Basal CKlow__to__HR- CKlow CK5+,0.006752149145796181,0.005399833822782316,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,abs,3,mixing__neighbor_fraction__HR+ CK7- Slug+__to__Vascular SMA+,0.006185013550222131,-0.005665840082864523,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,abs,4,mixing__neighbor_fraction__Myofibroblasts__to__Myofibroblasts,0.005866011569045017,-0.0022191536554462083,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,abs,5,mixing__neighbor_fraction__Vascular SMA+__to__Fibroblasts CD68+,0.0058261054294613404,-0.0034428729080355565,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,abs,6,mixing__neighbor_fraction__Hypoxia__to__Myofibroblasts,0.0057444347152620714,-0.004862123228292796,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,abs,7,mixing__neighbor_fraction__B cells__to__Endothelial,0.005740303945032845,-0.004508143458564749,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,abs,8,mixing__local_mixing_std,0.005505271761254554,0.0026646670951770515,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,abs,9,mixing__neighbor_fraction__HRlow CKlow__to__HR- CKlow CK5+,0.005501629894074365,0.003072105335235049,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,abs,10,mixing__neighbor_fraction__Myofibroblasts__to__HR- CKlow CK5+,0.005394017937529503,-0.0032516074262806936,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,abs,11,mixing__neighbor_fraction__HRlow CKlow__to__Endothelial,0.0049688515103637875,0.003900600299898444,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,abs,12,mixing__shannon_entropy_global,0.004945509362236495,0.00017056466261979188,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,abs,13,mixing__neighbor_fraction__Hypoxia__to__Vascular SMA+,0.004867988311052281,0.004720316508407611,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,abs,14,mixing__neighbor_fraction__Fibroblasts__to__Fibroblasts CD68+,0.00483341725564486,-0.0007409018691212783,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,abs,15,mixing__neighbor_fraction__Vascular SMA+__to__Fibroblasts,0.004689651019241078,-0.0027929884270797077,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,abs,16,mixing__neighbor_fraction__Myofibroblasts__to__Endothelial,0.004456656204778613,0.0019476077024479898,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,abs,17,composition__Fibroblasts CD68+,0.004429713907216469,-0.000497286233998425,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,abs,18,mixing__neighbor_fraction__HR+ CK7-__to__Fibroblasts,0.004348497428517133,-0.001961000132632236,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,abs,19,mixing__neighbor_fraction__HR- CKlow CK5+__to__Basal CKlow,0.00424877663400829,0.0027016694008226835,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,abs,20,mixing__neighbor_fraction__B cells__to__Myoepithelial,0.004145574875741637,-0.0036025702139639514,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,signed,1,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR- CKlow CK5+,0.2521160821601064,-0.18522419704732973,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,signed,2,mixing__neighbor_fraction__HR+ CK7- Slug+__to__Vascular SMA+,0.23451839903632468,-0.2134969588947095,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,signed,3,mixing__neighbor_fraction__HR- CK7-__to__Myoepithelial,0.22215540670883743,-0.18016804099482917,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,signed,4,mixing__neighbor_fraction__Vascular SMA+__to__Fibroblasts CD68+,0.2126756772648993,-0.1432521832025279,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,signed,5,mixing__neighbor_fraction__Basal CKlow__to__HR- CKlow CK5+,0.1908301482630409,0.14473199009930732,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,signed,6,mixing__neighbor_fraction__Vascular SMA+__to__Endothelial,0.18046896483460798,-0.1392507744730561,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,signed,7,mixing__neighbor_fraction__Basal CKlow__to__Macrophages Vim+ Slug+,0.17697924480336547,-0.1325182347275812,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,signed,8,mixing__neighbor_fraction__HER2+__to__Myoepithelial,0.17643473096521894,-0.13644334704534383,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,signed,9,mixing__neighbor_fraction__Myofibroblasts__to__Myofibroblasts,0.1704353155335965,-0.06930563365481458,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,signed,10,mixing__neighbor_fraction__HR- Ki67+__to__Myoepithelial,0.16808320250687503,-0.10863667943648442,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,signed,11,mixing__neighbor_fraction__T cells__to__Macrophages Vim+ Slug+,0.16745506345226155,-0.09718272294073409,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,signed,12,mixing__neighbor_fraction__Myoepithelial__to__Myoepithelial,0.16484011253473535,-0.10278711220263326,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,signed,13,mixing__neighbor_fraction__HR- Ki67+__to__HR- CK7-,0.16306128850635124,0.04425756211874782,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,signed,14,mixing__neighbor_fraction__HRlow CKlow__to__HR- CKlow CK5+,0.1618273490701755,0.1014037796171127,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,signed,15,mixing__shannon_entropy_global,0.15963146756067786,-0.03990786623561945,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,signed,16,mixing__neighbor_fraction__Fibroblasts__to__Fibroblasts CD68+,0.15841381070453753,-0.060121994047664246,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,signed,17,mixing__neighbor_fraction__Basal CKlow__to__Myoepithelial,0.1576063808503161,-0.1174860611786815,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,signed,18,mixing__neighbor_fraction__Vascular SMA+__to__Fibroblasts,0.1448074594762987,-0.07852296732648092,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,signed,19,composition__Fibroblasts CD68+,0.14336365894755132,-0.03976834528752451,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,signed,20,mixing__neighbor_fraction__HR- CK7+__to__Macrophages Vim+ CD45low,0.1427747095245589,-0.06323178467138862,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,top,1,mixing__neighbor_fraction__Basal CKlow__to__HR- CKlow CK5+,0.029911670457844104,0.025792689762947713,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,top,2,mixing__neighbor_fraction__HRlow CKlow__to__HR- CKlow CK5+,0.02671819900306734,0.022242338678176803,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,top,3,mixing__neighbor_fraction__Vascular SMA+__to__HER2+,0.020283438867578624,0.018379117872938302,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,top,4,mixing__neighbor_fraction__HR- CKlow CK5+__to__Basal CKlow,0.018326589867504246,0.015003080345968915,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,top,5,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR- CKlow CK5+,0.017928426397750694,-0.01608324591026063,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,top,6,mixing__neighbor_fraction__Hypoxia__to__Vascular SMA+,0.016222286180361305,0.015490146031353534,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,top,7,mixing__neighbor_fraction__Vascular SMA+__to__HR- CKlow CK5+,0.016055815589033143,0.013893202207474887,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,top,8,mixing__neighbor_fraction__Myofibroblasts__to__HR- CKlow CK5+,0.01580840809064368,-0.01128806831249584,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,top,9,mixing__neighbor_fraction__HR- Ki67+__to__HR- CK7-,0.01529766734276309,0.006240294030415285,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,top,10,mixing__neighbor_fraction__HR- CKlow CK5+__to__T cells,0.015155308620397679,0.010134488489457034,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,top,11,mixing__neighbor_fraction__HRlow CKlow__to__Myofibroblasts,0.014942376479046794,0.007152534282327899,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,top,12,mixing__neighbor_fraction__HR+ CK7-__to__T cells,0.014760547934155464,0.005958285451018671,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,top,13,mixing__neighbor_fraction__Endothelial__to__Endothelial,0.013980328567912379,0.008199578208917932,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,top,14,mixing__neighbor_fraction__HRlow CKlow__to__Myoepithelial,0.01380149064670786,0.01188921959511082,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,top,15,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__Fibroblasts CD68+,0.013524517861837712,0.007108087254711187,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,top,16,mixing__neighbor_fraction__B cells__to__HR- CKlow CK5+,0.013513484671877084,0.011757391998025,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,top,17,mixing__neighbor_fraction__HRlow CKlow__to__Endothelial,0.013190820320007533,0.0108203899184117,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,top,18,mixing__neighbor_fraction__HR- CK7-__to__Myofibroblasts,0.01297432161613437,0.0036241238476426847,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,top,19,mixing__neighbor_fraction__HR- CKlow CK5+__to__HRlow CKlow,0.012558199230189568,0.008114043527030816,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,top,20,composition__HR- CKlow CK5+,0.012556811083137958,0.009100787084105093,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,abs,1,mixing__local_mixing_std,0.008211566115642182,0.0016209987249543693,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,abs,2,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.007967885108043719,0.001193591026227498,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,abs,3,mixing__neighbor_fraction__Myofibroblasts__to__HR+ CK7-,0.007639699638871601,0.001970655732567223,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,abs,4,mixing__neighbor_fraction__Myofibroblasts__to__Fibroblasts CD68+,0.006272971338338249,-0.0003881962501643341,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,abs,5,mixing__shannon_entropy_global,0.006136404281679811,0.002914074548046912,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,abs,6,mixing__neighbor_fraction__Myofibroblasts__to__Myofibroblasts,0.0059112183957800565,0.0009808816550971216,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,abs,7,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR- CKlow CK5+,0.005709231915409456,-0.0018275617830063107,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,abs,8,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__HR+ CK7-,0.005591831840233237,0.001597897464841553,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,abs,9,mixing__neighbor_fraction__Fibroblasts CD68+__to__Fibroblasts,0.0055398071612096905,0.0010845477133000145,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,abs,10,mixing__neighbor_fraction__HR- CK7-__to__Myofibroblasts,0.005478320325163705,-0.0017838440648648799,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,abs,11,mixing__neighbor_fraction__Fibroblasts__to__Fibroblasts,0.005289982050290333,-0.0020619797172900726,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,abs,12,mixing__neighbor_fraction__Fibroblasts CD68+__to__Myofibroblasts,0.005207265941835221,0.00014720915177245342,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,abs,13,mixing__shannon_entropy_normalized,0.004995523981823473,-0.0005788745321537369,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,abs,14,mixing__neighbor_fraction__Fibroblasts__to__Basal CKlow,0.004879909864539713,-0.002183709193889367,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,abs,15,mixing__neighbor_fraction__Fibroblasts__to__Fibroblasts CD68+,0.004830446580551139,-0.00023409133874186867,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,abs,16,mixing__neighbor_fraction__Myofibroblasts__to__HR- CKlow CK5+,0.004721058600905425,-0.001077234920252047,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,abs,17,mixing__local_mixing_min,0.004680168046545396,0.0004121302829460087,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,abs,18,mixing__neighbor_fraction__HR- CK7-__to__HR+ CK7-,0.004669038296513735,-0.0006336905571374212,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,abs,19,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR- CK7-,0.004533670814606635,0.0002677958860844491,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,abs,20,mixing__neighbor_fraction__HR- CK7+__to__HR- CK7-,0.004285503466128308,0.0009330498652525398,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,signed,1,mixing__neighbor_fraction__HRlow CKlow__to__Vascular SMA+,0.2307959893339186,-0.1934683601219638,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,signed,2,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.21346383352748413,0.01838376296605404,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,signed,3,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR- CKlow CK5+,0.20131441827494892,-0.11245250419874474,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,signed,4,mixing__neighbor_fraction__Myofibroblasts__to__HR+ CK7-,0.19987008048720936,0.024333268635409713,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,signed,5,mixing__local_mixing_std,0.19733316064046105,0.002028258163603099,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,signed,6,mixing__neighbor_fraction__HR- CKlow CK5+__to__Fibroblasts CD68+,0.18755293173482673,-0.13272896604419893,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,signed,7,mixing__neighbor_fraction__Myofibroblasts__to__Fibroblasts CD68+,0.18743969216924738,-0.06092673079891502,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,signed,8,mixing__neighbor_fraction__Endothelial__to__Basal CKlow,0.1873226662993503,0.13554643136305145,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,signed,9,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__HR+ CK7-,0.18443069527666434,-0.0028629344495133624,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,signed,10,mixing__neighbor_fraction__Fibroblasts__to__Fibroblasts CD68+,0.17977531786145243,-0.07841027114820825,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,signed,11,mixing__neighbor_fraction__HER2+__to__Fibroblasts CD68+,0.17710615411344396,0.08911772087687198,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,signed,12,mixing__neighbor_fraction__Myofibroblasts__to__Myofibroblasts,0.17631169600838828,-0.020698208404978623,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,signed,13,mixing__neighbor_fraction__Fibroblasts__to__Basal CKlow,0.1726604284992517,-0.11517095933874409,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,signed,14,mixing__neighbor_fraction__Fibroblasts CD68+__to__Myofibroblasts,0.1714749775921813,-0.033348604095491785,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,signed,15,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR+ CK7-,0.16999272530589202,0.07879306323767254,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,signed,16,mixing__neighbor_fraction__Fibroblasts CD68+__to__Fibroblasts,0.16359434965155564,-0.0018491330127988117,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,signed,17,mixing__neighbor_fraction__Endothelial__to__Fibroblasts,0.16089682977019493,0.051647633169537445,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,signed,18,mixing__neighbor_fraction__Macrophages Vim+ Slug+__to__Basal CKlow,0.16059604347985112,0.12638626099983716,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,signed,19,mixing__neighbor_fraction__HR- CK7-__to__Myofibroblasts,0.16035100480244133,-0.015319641075450363,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,signed,20,mixing__neighbor_fraction__HR- Ki67+__to__Basal CKlow,0.15873106233389167,0.11293563884306919,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,top,1,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.029964825134591002,0.013995786882398895,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,top,2,mixing__neighbor_fraction__Myofibroblasts__to__HR+ CK7-,0.02479741458864814,0.006242645717414959,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,top,3,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__Myofibroblasts,0.020846811661806037,0.004402958156548323,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,top,4,mixing__neighbor_fraction__Macrophages Vim+ Slug+__to__Basal CKlow,0.020663573510974982,0.017667214999327413,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,top,5,mixing__neighbor_fraction__Endothelial__to__Basal CKlow,0.01964818101913595,0.015345216863904936,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,top,6,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR+ CK7-,0.01945479472357705,0.010653503287167607,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,top,7,mixing__neighbor_fraction__HER2+__to__Fibroblasts CD68+,0.017307749175874285,0.009153071188759174,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,top,8,mixing__neighbor_fraction__HR- CK7-__to__HR+ CK7-,0.016538188645821912,-0.0008169049086921011,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,top,9,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7-,0.01651639458480742,0.006338603418396323,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,top,10,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7- Ki67+,0.016232599250197363,0.008734360371976047,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,top,11,mixing__neighbor_fraction__HR- CKlow CK5+__to__Vascular SMA+,0.016081627367660518,0.013140857079841814,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,top,12,mixing__neighbor_fraction__Fibroblasts__to__Basal CKlow,0.015511399051029835,-0.008445085537383042,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,top,13,mixing__neighbor_fraction__HR- CK7-__to__Myofibroblasts,0.015169664141912311,-0.0019181275389683408,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,top,14,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR- CK7-,0.015132945521538009,0.004561125429753669,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,top,15,mixing__neighbor_fraction__HR- CK7+__to__HR- CK7-,0.014953402228953071,0.005462312573275578,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,top,16,mixing__neighbor_fraction__HRlow CKlow__to__Myofibroblasts,0.014782505428967313,0.002243123077059417,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,top,17,mixing__neighbor_fraction__Endothelial__to__Fibroblasts,0.014423013173293557,0.00402691892001034,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,top,18,mixing__neighbor_fraction__Macrophages Vim+ Slug+__to__HR- CK7-,0.014223830912822746,0.006790960389423598,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,top,19,mixing__neighbor_fraction__Myofibroblasts__to__Myofibroblasts,0.014018258712781968,0.004125671975219616,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,top,20,mixing__neighbor_fraction__HR+ CK7-__to__HR- CK7-,0.014006301226160329,-0.0049128732381194095,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,abs,1,mixing__local_mixing_std,0.0073850566237518254,0.0021632044676289527,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,abs,2,mixing__shannon_entropy_normalized,0.006866268989057071,-0.002329655945715975,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,abs,3,mixing__neighbor_fraction__HR- CK7-__to__Myofibroblasts,0.006416018759303882,0.00010079189825722268,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,abs,4,mixing__neighbor_fraction__HR- CK7-__to__Macrophages Vim+ Slug+,0.006078633963958122,-0.003816145113249138,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,abs,5,mixing__neighbor_fraction__Myoepithelial__to__Myofibroblasts,0.005918296504344591,0.0035887320532627318,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,abs,6,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.005819702704707334,-0.00046825868721680217,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,abs,7,mixing__neighbor_fraction__HR+ CK7-__to__Macrophages Vim+ Slug+,0.005579915237790237,-0.0023821983217216206,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,abs,8,mixing__neighbor_fraction__T cells__to__Fibroblasts CD68+,0.0053305970731677655,-0.0023885729069114984,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,abs,9,mixing__neighbor_fraction__Endothelial__to__Fibroblasts CD68+,0.004990351526670633,-0.002727762133768607,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,abs,10,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR+ CK7-,0.00473575598803874,0.0018081857155519405,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,abs,11,composition__Macrophages Vim+ Slug+,0.004688350919278887,-0.002108342945815282,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,abs,12,mixing__neighbor_fraction__Fibroblasts CD68+__to__Fibroblasts,0.004636268319911165,-0.00037365442945118025,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,abs,13,mixing__neighbor_fraction__Myofibroblasts__to__Myofibroblasts,0.004359959286134832,-0.000805929900089409,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,abs,14,mixing__shannon_entropy_global,0.004346385142267068,-0.00033248929295990275,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,abs,15,mixing__neighbor_fraction__Fibroblasts CD68+__to__Myofibroblasts,0.004306596273235892,-0.0004114094601959421,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,abs,16,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR- CK7-,0.004291540044567733,0.0004209309314616934,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,abs,17,composition__Endothelial,0.004228058545185719,0.002635320555063576,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,abs,18,mixing__neighbor_fraction__Myofibroblasts__to__Macrophages Vim+ Slug+,0.004217986944415433,0.002079230138558902,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,abs,19,mixing__neighbor_fraction__Hypoxia__to__HR+ CK7-,0.004198656848560701,0.003514239296311684,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,abs,20,mixing__neighbor_fraction__Myofibroblasts__to__Endothelial,0.004145394550238592,0.0021959333958881055,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,signed,1,mixing__neighbor_fraction__HR- CK7-__to__Macrophages Vim+ Slug+,0.28272473155472133,-0.2219802095396582,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,signed,2,mixing__neighbor_fraction__HR+ CK7-__to__Macrophages Vim+ Slug+,0.26207419210544297,-0.17797285347438838,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,signed,3,mixing__neighbor_fraction__HR- Ki67+__to__Macrophages Vim+ Slug+,0.2598492146424243,-0.20608339977242005,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,signed,4,mixing__neighbor_fraction__HR- CK7-__to__Myofibroblasts,0.2104934265167994,0.025438385886077088,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,signed,5,mixing__shannon_entropy_normalized,0.19932653272735387,-0.0927064980286016,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,signed,6,mixing__neighbor_fraction__Endothelial__to__HR- CKlow CK5+,0.19224156557718858,-0.14304588713581795,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,signed,7,mixing__neighbor_fraction__Macrophages Vim+ Slug+__to__Macrophages Vim+ Slug+,0.19198341725734258,-0.15271547931687143,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,signed,8,mixing__neighbor_fraction__Endothelial__to__Fibroblasts CD68+,0.1867346316362695,-0.11864348656215498,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,signed,9,mixing__neighbor_fraction__T cells__to__Fibroblasts CD68+,0.18598273757052727,-0.07965994193864101,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,signed,10,mixing__neighbor_fraction__Myofibroblasts__to__Macrophages Vim+ Slug+,0.18444715656281524,0.13249727939415998,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,signed,11,mixing__neighbor_fraction__T cells__to__Macrophages Vim+ Slug+,0.17296317170977155,-0.12150323071392514,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,signed,12,mixing__neighbor_fraction__HR- CK7-__to__HR+ CK7- Ki67+,0.17091737947730345,-0.034558756208585756,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,signed,13,mixing__shannon_entropy_global,0.1636468728111658,-0.08771168572418632,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,signed,14,mixing__neighbor_fraction__Myofibroblasts__to__Myofibroblasts,0.16156022955571325,-0.04099285359366921,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,signed,15,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.16046807709739305,0.0030123642544140237,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,signed,16,mixing__neighbor_fraction__B cells__to__HR- CK7-,0.16020301211803567,0.12680113784329836,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,signed,17,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR+ CK7-,0.15760623592587503,0.0800441885939303,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,signed,18,mixing__neighbor_fraction__HR+ CK7-__to__Fibroblasts CD68+,0.15721457431538072,-0.09754495822878247,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,signed,19,mixing__neighbor_fraction__HR+ CK7-__to__HR- CKlow CK5+,0.1561471541700952,-0.10936117920474661,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,signed,20,mixing__neighbor_fraction__T cells__to__Endothelial,0.15550135717657768,-0.08254922383782407,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,top,1,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR+ CK7-,0.024780237431056073,0.01668188622460851,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,top,2,mixing__neighbor_fraction__Hypoxia__to__HR+ CK7-,0.018244972316455263,0.016272434545208613,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,top,3,mixing__neighbor_fraction__Myoepithelial__to__Myofibroblasts,0.015040930267336114,0.007249853916454847,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,top,4,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__Myofibroblasts,0.015036057280289882,0.005248137906189196,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,top,5,mixing__neighbor_fraction__Vascular SMA+__to__HR- CK7-,0.014463177034047352,0.010567558891016637,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,top,6,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.014315593336288374,0.0021568234230347995,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,top,7,mixing__neighbor_fraction__Endothelial__to__HR- CK7+,0.014030728996344399,0.009257144726013074,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,top,8,mixing__neighbor_fraction__HR- CK7-__to__Myofibroblasts,0.013575056230457074,0.00045154960422737905,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,top,9,mixing__neighbor_fraction__Hypoxia__to__HR- CK7-,0.013245174772812769,0.010548631988158266,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,top,10,mixing__neighbor_fraction__T cells__to__HR- CKlow CK5+,0.01318526753322732,0.008117432268013649,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,top,11,mixing__neighbor_fraction__HR- CKlow CK5+__to__T cells,0.012984686916583778,0.0065257569193981155,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,top,12,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__B cells,0.012510335594078823,0.011349093337975104,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,top,13,composition__Endothelial,0.012452783235316442,0.006654147521276739,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,top,14,mixing__neighbor_fraction__HR- Ki67+__to__HR- CKlow CK5+,0.012166236807231464,0.009791310757482727,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,top,15,mixing__local_mixing_std,0.011944095336847196,-0.0018118834563348792,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,top,16,mixing__neighbor_fraction__B cells__to__HR- CK7-,0.01175078770063359,0.010029237182039763,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,top,17,mixing__neighbor_fraction__Myoepithelial__to__Macrophages Vim+ Slug+,0.011617187985097878,0.008881468085274097,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,top,18,mixing__neighbor_fraction__Macrophages Vim+ Slug+__to__B cells,0.011391974012487238,0.009510083210932538,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,top,19,mixing__neighbor_fraction__HR- CK7+__to__HR- CK7-,0.011091152338644225,-4.310146935122911e-05,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,top,20,mixing__neighbor_fraction__HRlow CKlow__to__Macrophages Vim+ Slug-,0.011078626129064883,0.00530946774276625,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,abs,1,mixing__local_mixing_std,0.01047112833570889,0.004732194536319749,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,abs,2,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR- CKlow CK5+,0.009660083803553137,-0.00781564193272565,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,abs,3,mixing__neighbor_fraction__Myofibroblasts__to__HR- CKlow CK5+,0.009332033829802569,-0.00568734941092922,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,abs,4,mixing__neighbor_fraction__Fibroblasts__to__HR- CKlow CK5+,0.008734808779469066,-0.0064501107172015544,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,abs,5,mixing__local_mixing_min,0.008204221862386113,0.003205807745485958,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,abs,6,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__Myoepithelial,0.007226258580781863,-0.005372563937542995,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,abs,7,composition__HR- CKlow CK5+,0.006885065096304302,-0.004732854117968384,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,abs,8,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.006780315179273816,-0.000877154986602238,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,abs,9,mixing__neighbor_fraction__HR- CK7-__to__HR- CKlow CK5+,0.0064805131176292425,-0.0031131451752366597,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,abs,10,mixing__neighbor_fraction__Myofibroblasts__to__HR+ CK7-,0.006321805151461723,-1.4941712898583355e-05,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,abs,11,mixing__neighbor_fraction__T cells__to__HR- CKlow CK5+,0.006206643524194476,-0.0035367118803442273,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,abs,12,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__Myoepithelial,0.0061305824524519595,-0.004926857769483746,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,abs,13,mixing__shannon_entropy_normalized,0.005977228313053074,-0.0015290449104781603,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,abs,14,mixing__neighbor_fraction__HR+ CK7- Slug+__to__Fibroblasts,0.005724320039034477,-0.0036012355825059796,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,abs,15,mixing__neighbor_fraction__Myoepithelial__to__Basal CKlow,0.005681107826007399,-0.004667392296453046,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,abs,16,mixing__neighbor_fraction__T cells__to__Endothelial,0.00552535205601816,-0.003069282547094787,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,abs,17,mixing__neighbor_fraction__Endothelial__to__Myoepithelial,0.00497443403226757,-0.0029244371385009384,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,abs,18,mixing__neighbor_fraction__Myofibroblasts__to__Fibroblasts CD68+,0.00494545646705135,0.001547264902969797,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,abs,19,mixing__shannon_entropy_global,0.0049266901965205525,0.0007125593978911421,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,abs,20,mixing__neighbor_fraction__HER2+__to__B cells,0.004796866253163348,-0.003911151512055604,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,signed,1,mixing__neighbor_fraction__HR- CK7-__to__HR- CKlow CK5+,0.31894991892282204,-0.23726973425459386,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,signed,2,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR- CKlow CK5+,0.3101916020603064,-0.2575707918019431,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,signed,3,mixing__neighbor_fraction__Myofibroblasts__to__HR- CKlow CK5+,0.292163572525936,-0.21865758354564752,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,signed,4,mixing__local_mixing_std,0.2590700476809511,0.06362119877376048,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,signed,5,mixing__neighbor_fraction__Fibroblasts__to__HR- CKlow CK5+,0.2386262178469906,-0.18912442376717462,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,signed,6,mixing__neighbor_fraction__B cells__to__HR+ CK7- Slug+,0.23463891285031893,-0.21995703745487574,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,signed,7,mixing__local_mixing_min,0.23102023548895972,0.09054304416724322,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,signed,8,mixing__neighbor_fraction__HR+ CK7- Slug+__to__Fibroblasts,0.21483568633772107,-0.1435980773956422,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,signed,9,mixing__neighbor_fraction__HER2+__to__B cells,0.20439305907253527,-0.17402551026895652,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,signed,10,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.20412309102077295,-0.007206843966842321,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,signed,11,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__Myoepithelial,0.203663370373275,-0.16689516562076212,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,signed,12,mixing__neighbor_fraction__HR- CK7+__to__Macrophages Vim+ CD45low,0.19267353388212746,-0.13376803858325792,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,signed,13,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__Myoepithelial,0.18859307756926522,-0.14676044843155905,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,signed,14,mixing__neighbor_fraction__HRlow CKlow__to__HR- CKlow CK5+,0.18402250818999305,0.09989480322458924,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,signed,15,composition__HR- CKlow CK5+,0.1806177873447427,-0.13983973895708007,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,signed,16,mixing__shannon_entropy_normalized,0.17783436676695838,-0.04542874275907151,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,signed,17,mixing__neighbor_fraction__Myofibroblasts__to__HR+ CK7-,0.17089968715683487,-0.022478216323077557,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,signed,18,mixing__neighbor_fraction__HRlow CKlow__to__Fibroblasts CD68+,0.16951200899856372,-0.03346210117737341,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,signed,19,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__HR+ CK7-,0.16803846756506585,0.009183259897023444,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,signed,20,mixing__neighbor_fraction__Basal CKlow__to__Myofibroblasts,0.16318243709136482,0.01779183783336348,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,top,1,mixing__neighbor_fraction__HR- CKlow CK5+__to__T cells,0.01804191253694801,0.013316251245393537,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,top,2,mixing__neighbor_fraction__HR- CKlow CK5+__to__Hypoxia,0.01739072533582913,0.016501646415131088,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,top,3,mixing__local_mixing_std,0.017195084551813993,0.007898667106158748,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,top,4,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.016889368021920745,0.004965680968052366,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,top,5,mixing__neighbor_fraction__Basal CKlow__to__Myofibroblasts,0.01634364755412773,0.008634326502398475,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,top,6,mixing__neighbor_fraction__Myofibroblasts__to__HR+ CK7-,0.014692203200107572,0.002607920861831969,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,top,7,mixing__neighbor_fraction__Hypoxia__to__HR- CKlow CK5+,0.014285979750914602,0.013667214279594145,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,top,8,mixing__neighbor_fraction__HR- CKlow CK5+__to__Endothelial,0.014047466735152819,0.010916080338294304,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,top,9,mixing__neighbor_fraction__T cells__to__Basal CKlow,0.013017758196740833,0.0068538510414981055,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,top,10,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__Myofibroblasts,0.012168454131471731,0.004420942059794883,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,top,11,mixing__neighbor_fraction__HR- CK7-__to__Myofibroblasts,0.011775825958257238,-0.0018549658602058055,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,top,12,mixing__local_mixing_min,0.011371789581979793,0.004911099594076098,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,top,13,mixing__neighbor_fraction__Endothelial__to__Macrophages Vim+ Slug-,0.011365667103210004,0.005615670832354496,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,top,14,mixing__neighbor_fraction__Myofibroblasts__to__Fibroblasts CD68+,0.011321559357861824,0.00432401788567807,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,top,15,mixing__neighbor_fraction__Endothelial__to__HR- CK7+,0.011085619442611806,0.006063278831464777,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,top,16,mixing__neighbor_fraction__HR- CK7-__to__HR+ CK7-,0.010949537616093895,0.00046000991030147915,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,top,17,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR+ CK7-,0.010605053858922627,0.0038115402078683497,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,top,18,composition__Endothelial,0.010571103432378907,0.006656443789093332,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,top,19,mixing__neighbor_fraction__Myofibroblasts__to__HR- CKlow CK5+,0.01056142688733008,-0.003848206757962067,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,top,20,mixing__neighbor_fraction__HR- CKlow CK5+__to__Myofibroblasts,0.010266295738423852,0.007602636636106039,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,abs,1,mixing__neighbor_fraction__HR+ CK7-__to__Fibroblasts,0.011313516398400744,-0.0086752655564274,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,abs,2,mixing__neighbor_fraction__HR- CKlow CK5+__to__Myofibroblasts,0.009393060147885055,-0.006598301081308063,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,abs,3,mixing__neighbor_fraction__HR+ CK7- Slug+__to__Vascular SMA+,0.007516780646074624,-0.007010217754479267,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,abs,4,mixing__shannon_entropy_normalized,0.0052273203136833655,-0.0024703439274112696,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,abs,5,mixing__neighbor_fraction__Myofibroblasts__to__HR- CKlow CK5+,0.0052170107626549125,-0.0031910989859383542,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,abs,6,mixing__neighbor_fraction__Myofibroblasts__to__Fibroblasts CD68+,0.005075617429960963,0.00015268360551931085,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,abs,7,mixing__neighbor_fraction__Fibroblasts__to__Myofibroblasts,0.0049481178723730975,-0.0029439040323342392,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,abs,8,mixing__neighbor_fraction__Fibroblasts CD68+__to__Fibroblasts,0.004916545380709581,-0.0020381233671216137,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,abs,9,mixing__neighbor_fraction__HR- CK7+__to__Myoepithelial,0.004810998512004386,-0.003655590396616722,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,abs,10,mixing__local_mixing_std,0.004573653053336274,0.0017454836774435203,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,abs,11,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7-,0.004457613333425731,0.002055661700844945,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,abs,12,mixing__neighbor_fraction__HR- CK7-__to__Myofibroblasts,0.004351296113248797,0.0003392968199140232,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,abs,13,mixing__neighbor_fraction__Myoepithelial__to__Myoepithelial,0.00431951450392884,-0.0028346141722496,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,abs,14,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__Myofibroblasts,0.004267838501491163,0.0012449304730210479,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,abs,15,mixing__neighbor_fraction__Myofibroblasts__to__Myofibroblasts,0.004237968696317327,-0.0018057479498558779,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,abs,16,mixing__neighbor_fraction__Fibroblasts CD68+__to__Myofibroblasts,0.0039923575414868425,-0.0011057370747684636,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,abs,17,mixing__neighbor_fraction__HR+ CK7-__to__Fibroblasts CD68+,0.003866165997081166,-0.0004879753770771028,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,abs,18,mixing__neighbor_fraction__HR- CKlow CK5+__to__Fibroblasts CD68+,0.0038460715295668807,-0.0016549553248367045,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,abs,19,composition__Fibroblasts CD68+,0.003732970775978247,-0.00010821196042892144,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,abs,20,mixing__neighbor_fraction__HR- CKlow CK5+__to__Fibroblasts,0.0036589108867293735,0.0018682065946825823,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,signed,1,mixing__neighbor_fraction__HR- CKlow CK5+__to__Myofibroblasts,0.3522003919504208,-0.26946293571296104,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,signed,2,mixing__neighbor_fraction__HR+ CK7- Slug+__to__Vascular SMA+,0.33755249046421215,-0.3154865908887447,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,signed,3,mixing__neighbor_fraction__HR- CKlow CK5+__to__Vascular SMA+,0.25849001569113883,0.2184043408726153,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,signed,4,mixing__neighbor_fraction__HR+ CK7-__to__Fibroblasts,0.22378785306250412,-0.1440448642359515,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,signed,5,mixing__neighbor_fraction__HR- CKlow CK5+__to__Fibroblasts CD68+,0.21047475587098236,-0.15163413551503188,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,signed,6,mixing__neighbor_fraction__Fibroblasts__to__Myofibroblasts,0.19395180686578803,-0.12490586859349416,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,signed,7,mixing__neighbor_fraction__Myofibroblasts__to__HR- CKlow CK5+,0.1920883118484759,-0.13742158615934438,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,signed,8,mixing__neighbor_fraction__Vascular SMA+__to__HR+ CK7- Slug+,0.18521052856718442,-0.16774073323990515,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,signed,9,mixing__neighbor_fraction__Myofibroblasts__to__Fibroblasts CD68+,0.18322082596033568,-0.07811737668732119,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,signed,10,mixing__neighbor_fraction__Fibroblasts CD68+__to__Fibroblasts,0.17691798463004305,-0.09645776086932961,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,signed,11,mixing__neighbor_fraction__HR- Ki67+__to__Myoepithelial,0.16403808208178652,-0.10294719195359038,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,signed,12,mixing__neighbor_fraction__Fibroblasts CD68+__to__Myofibroblasts,0.16047755894824453,-0.09459329191318076,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,signed,13,mixing__neighbor_fraction__HR+ CK7-__to__Fibroblasts CD68+,0.1558110174625995,-0.07552932062809453,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,signed,14,mixing__neighbor_fraction__HR- CK7-__to__Myofibroblasts,0.15575836279180313,0.0449324423539275,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,signed,15,composition__Fibroblasts CD68+,0.14814882762852888,-0.07914814059465547,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,signed,16,mixing__shannon_entropy_normalized,0.1460077769945011,-0.0877919278388308,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,signed,17,mixing__neighbor_fraction__Myofibroblasts__to__Myofibroblasts,0.1459483646956719,-0.08450109573250812,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,signed,18,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7-,0.13961056344712613,0.06473356076689044,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,signed,19,mixing__neighbor_fraction__T cells__to__HR- CKlow CK5+,0.1337514660583937,0.09995502720589677,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,signed,20,mixing__neighbor_fraction__Vascular SMA+__to__Macrophages Vim+ Slug+,0.1269091562267701,-0.10258772586731742,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,top,1,mixing__neighbor_fraction__HR- CKlow CK5+__to__Vascular SMA+,0.025746686580423925,0.02383802811272292,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,top,2,mixing__neighbor_fraction__T cells__to__HR- CKlow CK5+,0.015765190127082922,0.011740193516184669,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,top,3,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7-,0.014693029725188777,0.011966948645318713,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,top,4,mixing__neighbor_fraction__HR- CKlow CK5+__to__T cells,0.010575999868148637,0.006379037120241954,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,top,5,composition__HR- CKlow CK5+,0.010095949236174935,0.008421122213322915,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,top,6,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__Myofibroblasts,0.010005094755489174,0.005771340966307201,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,top,7,mixing__neighbor_fraction__Fibroblasts__to__HR- CKlow CK5+,0.009710855141349915,0.008127705441883204,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,top,8,mixing__neighbor_fraction__HRlow CKlow__to__HR- CKlow CK5+,0.008577338936869882,0.005821847577485411,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,top,9,mixing__neighbor_fraction__HR+ CK7-__to__Fibroblasts,0.006857161747696456,-0.0033315361322120924,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,top,10,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.006814926196264533,0.0014954670474092739,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,top,11,mixing__neighbor_fraction__HR- CKlow CK5+__to__Myofibroblasts,0.006750812791208088,-0.0005058412672058361,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,top,12,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__HR- CK7-,0.0067239260972299045,0.0032693635079806406,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,top,13,mixing__neighbor_fraction__HR- CK7-__to__HR+ CK7-,0.006469098165702253,0.001343914802223402,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,top,14,mixing__local_mixing_std,0.006254308157063398,0.0015655810218565482,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,top,15,mixing__neighbor_fraction__Hypoxia__to__HR- CKlow CK5+,0.005979616757357295,0.0052978678795542414,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,top,16,mixing__shannon_entropy_normalized,0.005678200351088887,-0.0023848703949944723,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,top,17,mixing__neighbor_fraction__HR- Ki67+__to__HR- CK7-,0.0055339019141625615,0.001284066452091664,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,top,18,mixing__neighbor_fraction__Fibroblasts CD68+__to__Fibroblasts,0.005447316907192772,-0.0009803160587214166,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,top,19,mixing__neighbor_fraction__HR- CK7+__to__HRlow CKlow,0.00533076465260377,0.00016842276407069313,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,top,20,mixing__neighbor_fraction__HR- CKlow CK5+__to__HRlow CKlow,0.00522973815638698,0.0030157245712357002,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,abs,1,mixing__neighbor_fraction__HER2+__to__HRlow CKlow,0.005779902967552194,-0.004040507733552775,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,abs,2,mixing__local_mixing_std,0.005538888522356493,0.0011287720187889165,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,abs,3,mixing__neighbor_fraction__HR- CKlow CK5+__to__Myofibroblasts,0.005115093290160014,-0.0021873110547553456,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,abs,4,mixing__neighbor_fraction__HR- CKlow CK5+__to__Vascular SMA+,0.004373074069191393,-0.003830563419882385,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,abs,5,mixing__neighbor_fraction__Basal CKlow__to__HR+ CK7-,0.004027871910298122,-0.002766684971537483,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,abs,6,mixing__local_mixing_min,0.0040196887203002955,0.0010386550054932314,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,abs,7,mixing__neighbor_fraction__Fibroblasts CD68+__to__Myofibroblasts,0.004013881340194371,-0.0007504575521911997,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,abs,8,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.0037579949237543458,-0.0010968699677290706,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,abs,9,mixing__neighbor_fraction__Myofibroblasts__to__HR- CKlow CK5+,0.0036327900551094486,-0.0014221061065920106,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,abs,10,mixing__shannon_entropy_normalized,0.0035825094691031255,-0.0008153933780188148,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,abs,11,mixing__neighbor_fraction__HR- CK7-__to__Myofibroblasts,0.003476652222713463,-0.0006060046467068068,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,abs,12,mixing__neighbor_fraction__Endothelial__to__Vascular SMA+,0.0034635036716394946,-0.00250736474830151,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,abs,13,mixing__neighbor_fraction__Myofibroblasts__to__Myofibroblasts,0.003429175906393803,-0.0006376271457239443,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,abs,14,mixing__neighbor_fraction__HR+ CK7-__to__Fibroblasts CD68+,0.003312168565551458,-0.0005138068392310907,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,abs,15,mixing__neighbor_fraction__Myofibroblasts__to__HR+ CK7-,0.003308430554207119,-0.0006408784619447826,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,abs,16,mixing__neighbor_fraction__HR- CKlow CK5+__to__T cells,0.003255028037354097,9.164458672131291e-05,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,abs,17,mixing__neighbor_fraction__Vascular SMA+__to__B cells,0.00317623433985315,-0.002520625134003105,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,abs,18,mixing__neighbor_fraction__HR+ CK7-__to__Myofibroblasts,0.0031469240518974284,-0.0007512426737647599,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,abs,19,mixing__neighbor_fraction__HR- CKlow CK5+__to__B cells,0.0031019712790476568,0.002487562920158827,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,abs,20,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__Myofibroblasts,0.0030893478583526603,0.00024844525661091966,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,signed,1,mixing__neighbor_fraction__Endothelial__to__Vascular SMA+,0.2991569473234919,-0.2599340846388719,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,signed,2,mixing__neighbor_fraction__HR- CKlow CK5+__to__Myofibroblasts,0.28445541165739624,-0.16379585939537727,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,signed,3,mixing__neighbor_fraction__Vascular SMA+__to__B cells,0.26574308387189044,-0.23268146216373434,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,signed,4,mixing__neighbor_fraction__Hypoxia__to__B cells,0.2330213581279731,0.2314879338509997,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,signed,5,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR- CK7+,0.23043456303584126,0.15050103299419504,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,signed,6,mixing__neighbor_fraction__HR- CKlow CK5+__to__Vascular SMA+,0.2011473933692947,-0.1755097743035242,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,signed,7,mixing__neighbor_fraction__Fibroblasts CD68+__to__Myofibroblasts,0.19391545161474127,-0.08720411224911415,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,signed,8,mixing__neighbor_fraction__Myofibroblasts__to__Myofibroblasts,0.18658974672742215,-0.08028221900429465,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,signed,9,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__HR+ CK7- Ki67+,0.18542688052163966,0.14708491207406202,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,signed,10,mixing__local_mixing_std,0.18017345980481758,-0.04351455530596699,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,signed,11,mixing__neighbor_fraction__HR- CK7+__to__HER2+,0.17463708193203542,0.11850973106014308,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,signed,12,mixing__neighbor_fraction__HR- Ki67+__to__B cells,0.17064926886011833,0.1139484368503183,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,signed,13,mixing__neighbor_fraction__Endothelial__to__HR- CKlow CK5+,0.16871933991440344,-0.1207939135831841,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,signed,14,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__Vascular SMA+,0.1670120827185677,-0.130800116046742,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,signed,15,mixing__neighbor_fraction__Myofibroblasts__to__HR+ CK7-,0.15571330715069004,-0.00905049934926449,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,signed,16,mixing__neighbor_fraction__HR- CKlow CK5+__to__B cells,0.15521297507988682,0.12274051250396614,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,signed,17,mixing__local_mixing_min,0.14572281345694574,-0.0015559940244620684,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,signed,18,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7-,0.14492549226629084,0.05633485340645662,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,signed,19,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.14353120641666683,-0.04695165593487939,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,signed,20,mixing__neighbor_fraction__HR+ CK7-__to__Myofibroblasts,0.141796494274684,0.0334596973924709,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,top,1,mixing__neighbor_fraction__Hypoxia__to__B cells,0.023264559475928294,0.023186818163127287,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,top,2,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR- CK7+,0.021729536649921655,0.016890826975503054,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,top,3,mixing__neighbor_fraction__HR- CKlow CK5+__to__HER2+,0.01955987792783659,0.017288649289256327,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,top,4,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__HR+ CK7- Ki67+,0.019141532526582388,0.014717508940460214,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,top,5,mixing__neighbor_fraction__HR- CKlow CK5+__to__B cells,0.01676094414639916,0.014976848514409549,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,top,6,mixing__neighbor_fraction__B cells__to__Fibroblasts,0.01649209990213759,0.009701837781942897,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,top,7,mixing__neighbor_fraction__HER2+__to__HR- CKlow CK5+,0.015444628560723058,0.014013637767976614,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,top,8,mixing__neighbor_fraction__HR- CK7+__to__HER2+,0.014898561145602842,0.01118021410919512,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,top,9,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__Myofibroblasts,0.013006961796498672,0.004160056760896929,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,top,10,mixing__neighbor_fraction__HR- CKlow CK5+__to__Hypoxia,0.011853043115767018,0.010810166567762828,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,top,11,mixing__neighbor_fraction__HR- CKlow CK5+__to__T cells,0.01149166147211412,0.007824992407675965,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,top,12,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7-,0.011379864553274124,0.004476526846209962,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,top,13,mixing__neighbor_fraction__HR- CK7-__to__Myofibroblasts,0.010696702572891011,0.0011935042749504127,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,top,14,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.010581269504789739,-0.0009712611029085766,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,top,15,mixing__neighbor_fraction__HRlow CKlow__to__B cells,0.01043587407612995,0.00796632075838247,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,top,16,mixing__neighbor_fraction__Myofibroblasts__to__HR+ CK7-,0.0102270026444453,0.0013552077872875704,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,top,17,mixing__neighbor_fraction__Hypoxia__to__HR- CK7-,0.010122418463059816,0.009432954044273203,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,top,18,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR+ CK7-,0.009143566614162582,0.002732425454386118,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,top,19,mixing__neighbor_fraction__HR+ CK7-__to__T cells,0.008586334836637536,0.0025242301571311346,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,top,20,mixing__neighbor_fraction__Fibroblasts CD68+__to__Fibroblasts,0.008478700985896185,0.00011011651761957082,bc_metabric_ali2020,True
+motif_tumor_high,control,0,3,ig,abs,1,mixing__neighbor_fraction__HR- CKlow CK5+__to__Fibroblasts,0.006034485889106544,-0.00420713962743279,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,abs,2,mixing__neighbor_fraction__Vascular SMA+__to__HR- CKlow CK5+,0.004952546189128479,-0.0044991979244765525,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,abs,3,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7-,0.0046797589707658765,0.003142348813254281,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,abs,4,mixing__neighbor_fraction__Basal CKlow__to__HR+ CK7-,0.00463517578378378,0.00285185914187713,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,abs,5,mixing__neighbor_fraction__Basal CKlow__to__HR- CK7-,0.003605124196354827,0.001960023041347439,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,abs,6,mixing__neighbor_fraction__Fibroblasts__to__Fibroblasts,0.0033048173167365778,-0.0017039437764903738,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,abs,7,composition__Fibroblasts,0.0031235756923435128,-0.0016648327220769817,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,abs,8,mixing__neighbor_fraction__Myoepithelial__to__HR+ CK7-,0.003123162914120302,0.0013077735086459961,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,abs,9,mixing__neighbor_fraction__HR- CK7+__to__HR+ CK7-,0.0028589853192059022,0.0004762094541651603,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,abs,10,mixing__local_mixing_std,0.002850655888361008,7.26658605935265e-05,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,abs,11,mixing__neighbor_fraction__HR+ CK7-__to__Myofibroblasts,0.002804089004423235,-0.0006347156893196719,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,abs,12,mixing__neighbor_fraction__Fibroblasts__to__HR+ CK7-,0.0027659112318086493,0.00032816387583592095,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,abs,13,mixing__neighbor_fraction__HR- Ki67+__to__HR- CKlow CK5+,0.00272597271497185,-0.001974462428671341,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,abs,14,mixing__neighbor_fraction__HR- CKlow CK5+__to__Myofibroblasts,0.002666984158688333,-0.0009798260711594367,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,abs,15,mixing__neighbor_fraction__Fibroblasts CD68+__to__Fibroblasts,0.00262092578395092,-0.0013866077735533592,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,abs,16,composition__HR+ CK7-,0.002582425054346705,-0.0004902236358814273,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,abs,17,mixing__neighbor_fraction__HR+ CK7-__to__Fibroblasts,0.0025560767823954375,-0.0005405858250859826,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,abs,18,mixing__neighbor_fraction__Fibroblasts__to__HR- CK7-,0.0024989785140649063,-0.00021060594872172815,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,abs,19,mixing__neighbor_fraction__HR+ CK7-__to__HR+ CK7-,0.002488618142718901,-0.00013121674072351199,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,abs,20,composition__Myofibroblasts,0.0024508756583771175,0.00022029687757015457,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,signed,1,mixing__neighbor_fraction__Vascular SMA+__to__HR- CKlow CK5+,0.2578530581024307,-0.2378642793110537,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,signed,2,mixing__neighbor_fraction__Basal CKlow__to__HR+ CK7-,0.24330501928933232,0.1955596878767794,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,signed,3,mixing__neighbor_fraction__Basal CKlow__to__HR- CK7-,0.23378448454267398,0.1786777557565706,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,signed,4,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7-,0.2313334061444079,0.17831194992353624,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,signed,5,mixing__neighbor_fraction__HR- CK7+__to__HR+ CK7-,0.17569060936573763,0.06769516366192947,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,signed,6,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__HR- CKlow CK5+,0.16650913148789032,-0.13100856759971077,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,signed,7,mixing__neighbor_fraction__Myoepithelial__to__HR+ CK7-,0.16534771311257662,0.08180404967025214,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,signed,8,mixing__neighbor_fraction__HR- CKlow CK5+__to__Fibroblasts,0.15810371282144137,-0.0719294083750979,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,signed,9,mixing__neighbor_fraction__Vascular SMA+__to__HR+ CK7- Ki67+,0.15790853034610727,0.12645208743695693,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,signed,10,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7- Slug+,0.14330126072989754,-0.11643302652594027,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,signed,11,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR- CK7+,0.13220892752593877,0.07140109558989817,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,signed,12,mixing__neighbor_fraction__HR- CK7+__to__T cells,0.12564001156507015,-0.08676034053514069,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,signed,13,mixing__neighbor_fraction__HR- CKlow CK5+__to__Macrophages Vim+ CD45low,0.12421715737782828,-0.08763019593809843,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,signed,14,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__Vascular SMA+,0.12164450458781961,0.09502558436828723,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,signed,15,mixing__neighbor_fraction__Endothelial__to__HR- CK7+,0.12031134466055496,0.03948709521745877,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,signed,16,mixing__neighbor_fraction__Macrophages Vim+ Slug+__to__HR+ CK7-,0.11735058361324403,0.049744674150082574,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,signed,17,mixing__neighbor_fraction__HR+ CK7-__to__Myofibroblasts,0.11591648042918881,-0.041910460889945045,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,signed,18,mixing__neighbor_fraction__Fibroblasts__to__HR- CK7-,0.1155949289223277,0.02310694076554587,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,signed,19,mixing__neighbor_fraction__HR+ CK7-__to__T cells,0.11054121005391768,-0.06912235516396235,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,signed,20,mixing__neighbor_fraction__Basal CKlow__to__Myoepithelial,0.10844674946535772,-0.06920816838122441,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,top,1,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7-,0.03474384135408826,0.027789211175572832,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,top,2,mixing__neighbor_fraction__Basal CKlow__to__HR+ CK7-,0.032131256762609604,0.02465162299785336,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,top,3,mixing__neighbor_fraction__Basal CKlow__to__HR- CK7-,0.026191342613475596,0.02016382496819795,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,top,4,mixing__neighbor_fraction__Myoepithelial__to__HR+ CK7-,0.018689389585871942,0.01192379701957568,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,top,5,mixing__neighbor_fraction__Vascular SMA+__to__HR+ CK7- Ki67+,0.018573515286574787,0.01510616040287958,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,top,6,mixing__neighbor_fraction__HR- CK7+__to__HR+ CK7-,0.01585060750021724,0.00732538248103261,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,top,7,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__Vascular SMA+,0.01461398890561741,0.011858572942230545,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,top,8,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR- CK7+,0.013677251268279653,0.009053974645274923,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,top,9,mixing__neighbor_fraction__Fibroblasts__to__HR+ CK7-,0.012204786273754532,0.005902836937636503,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,top,10,mixing__neighbor_fraction__Fibroblasts__to__HR- CK7-,0.011590603540265884,0.0031377391150627354,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,top,11,mixing__neighbor_fraction__Macrophages Vim+ Slug+__to__HR+ CK7-,0.011570391077960348,0.006131673199101544,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,top,12,mixing__local_mixing_std,0.011267549067144795,0.004574497766080252,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,top,13,mixing__neighbor_fraction__HRlow CKlow__to__Basal CKlow,0.0112503883085446,0.005541946728777289,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,top,14,mixing__neighbor_fraction__Endothelial__to__HR- CK7+,0.01079782417844892,0.0036790832874248683,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,top,15,mixing__neighbor_fraction__HR- CK7+__to__HER2+,0.0104414430681257,0.004864943603678213,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,top,16,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.01030518607115844,0.004361384353833474,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,top,17,mixing__neighbor_fraction__HR- CKlow CK5+__to__HRlow CKlow,0.00993930984459244,0.005676353633304075,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,top,18,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__Basal CKlow,0.009911016323361277,0.006449145518061654,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,top,19,mixing__neighbor_fraction__HER2+__to__HR- CK7+,0.009732122679446228,0.004312131875951448,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,top,20,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__Myofibroblasts,0.009413231117860599,-0.0003936168543510051,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,abs,1,composition__Fibroblasts,0.007336872283471226,-0.005317099472085826,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,abs,2,mixing__neighbor_fraction__Fibroblasts__to__Fibroblasts,0.0058692071564768735,-0.0038982066813479576,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,abs,3,mixing__neighbor_fraction__Myofibroblasts__to__Fibroblasts,0.005499059420952088,-0.004045345232686205,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,abs,4,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7-,0.0054927109343969665,0.002783049300999621,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,abs,5,mixing__local_mixing_std,0.004895514402635068,-0.0015962069344463018,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,abs,6,composition__HR+ CK7-,0.004617663601838446,-0.001441520960788024,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,abs,7,mixing__neighbor_fraction__T cells__to__Fibroblasts,0.004529622838094576,-0.0029713373038012833,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,abs,8,composition__Endothelial,0.004375786217174863,-0.0022780163803392626,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,abs,9,mixing__neighbor_fraction__HR+ CK7-__to__Myofibroblasts,0.00408089768825119,2.7292751877981176e-05,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,abs,10,mixing__neighbor_fraction__Vascular SMA+__to__HR- CKlow CK5+,0.004075767793193013,-0.0031851174135239155,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,abs,11,mixing__neighbor_fraction__Endothelial__to__HR- CK7+,0.003929526535367598,0.002238868310705792,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,abs,12,mixing__neighbor_fraction__HR- CKlow CK5+__to__Fibroblasts,0.003876047935602356,-0.0015347812064645874,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,abs,13,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.0036616250447454512,0.0005788395076686554,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,abs,14,mixing__local_mixing_max,0.0035638151549972383,-0.001619350376370873,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,abs,15,mixing__neighbor_fraction__HR+ CK7-__to__HR+ CK7-,0.0035310883543722893,-0.0009420062133559425,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,abs,16,mixing__local_mixing_min,0.003372864248916474,-7.90115695098141e-05,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,abs,17,mixing__neighbor_fraction__Myofibroblasts__to__HR+ CK7-,0.003315662921669971,-0.0012810633734933322,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,abs,18,mixing__neighbor_fraction__B cells__to__Basal CKlow,0.003282664910983284,-0.0026718085284561984,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,abs,19,mixing__neighbor_fraction__Basal CKlow__to__HR+ CK7-,0.003280501485168836,0.001410389443545977,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,abs,20,mixing__neighbor_fraction__T cells__to__Endothelial,0.0032518703909455854,-0.0019539637763275205,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,signed,1,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7-,0.32404942752398136,0.25131405902687926,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,signed,2,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__HR- CKlow CK5+,0.23638750407533896,-0.21099014075218084,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,signed,3,mixing__neighbor_fraction__Hypoxia__to__B cells,0.23638264024823658,0.23387699905059722,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,signed,4,mixing__neighbor_fraction__Basal CKlow__to__HR+ CK7-,0.18871029687940766,0.13932943505515394,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,signed,5,composition__HR+ CK7-,0.16672563603724483,0.03407899200061075,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,signed,6,mixing__neighbor_fraction__Vascular SMA+__to__HR- CKlow CK5+,0.16523938026821502,-0.13367104433222987,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,signed,7,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.16215473734155933,0.09691775156105437,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,signed,8,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR+ CK7-,0.15706163201913756,0.10105407360735073,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,signed,9,mixing__neighbor_fraction__HR+ CK7-__to__Myofibroblasts,0.15659214740296595,-0.04128771826186474,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,signed,10,mixing__neighbor_fraction__HR- CK7+__to__HR+ CK7-,0.15306905444027946,0.025028356906597903,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,signed,11,mixing__neighbor_fraction__HR+ CK7-__to__HR+ CK7-,0.14440565963069718,-0.009757329549020248,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,signed,12,composition__Fibroblasts,0.14301079553887605,-0.03660771983838335,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,signed,13,mixing__neighbor_fraction__Macrophages Vim+ Slug+__to__Basal CKlow,0.14239769573090302,0.10927722145661894,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,signed,14,mixing__neighbor_fraction__HR- CK7+__to__HR+ CK7- Slug+,0.13493758763504163,0.09450069087401843,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,signed,15,mixing__neighbor_fraction__HR- CK7-__to__HR+ CK7-,0.1276600899725796,0.025167225652834576,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,signed,16,mixing__neighbor_fraction__T cells__to__HR+ CK7- Ki67+,0.12473607454482263,0.049387314179538934,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,signed,17,mixing__neighbor_fraction__Basal CKlow__to__HR- CK7-,0.12376395392926105,0.06383777831007743,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,signed,18,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR+ CK7- Ki67+,0.12321231459038928,0.06431930460182511,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,signed,19,mixing__local_mixing_std,0.12299962947888608,0.04638639243900876,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,signed,20,composition__Endothelial,0.12271084726972413,-0.06024803398733849,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,top,1,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7-,0.03688341718571538,0.029260824546748734,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,top,2,mixing__neighbor_fraction__Hypoxia__to__B cells,0.023627532664841657,0.023397763981870375,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,top,3,mixing__neighbor_fraction__Basal CKlow__to__HR+ CK7-,0.02318099445752387,0.015994962136284017,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,top,4,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.02167442238305443,0.010653256113280076,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,top,5,mixing__neighbor_fraction__Macrophages Vim+ Slug+__to__Basal CKlow,0.019343728364765504,0.016217359148341808,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,top,6,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR+ CK7-,0.019099230226751522,0.013005164760111784,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,top,7,mixing__neighbor_fraction__Endothelial__to__HR- CK7+,0.018868659882545553,0.013385082424913895,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,top,8,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR- CK7+,0.015182755969975726,0.010323105510692562,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,top,9,mixing__neighbor_fraction__HR- CK7+__to__HR+ CK7- Slug+,0.014249448807343586,0.010303302372958168,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,top,10,mixing__neighbor_fraction__HR- CK7+__to__HR+ CK7-,0.01361741491052106,0.0016225549117277237,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,top,11,composition__HR+ CK7-,0.013494391480900711,0.005006365746992107,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,top,12,mixing__local_mixing_std,0.013254668461664046,0.004078904200691168,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,top,13,mixing__neighbor_fraction__Basal CKlow__to__HR- CK7-,0.01296052004557872,0.007352154198976317,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,top,14,mixing__local_mixing_min,0.012492635948616949,0.0048459060024722165,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,top,15,mixing__neighbor_fraction__T cells__to__HR+ CK7- Ki67+,0.012467483827927107,0.005888169612928203,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,top,16,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__Basal CKlow,0.012344859554524256,0.008370257510688706,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,top,17,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR+ CK7- Ki67+,0.012304735100293455,0.0070357928188294365,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,top,18,mixing__neighbor_fraction__Fibroblasts__to__HR+ CK7-,0.011906791261653026,0.005177700746801041,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,top,19,mixing__neighbor_fraction__HR- CK7-__to__HR+ CK7-,0.011851800387983301,0.0036347883984326197,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,top,20,mixing__neighbor_fraction__HR- CK7+__to__Macrophages Vim+ Slug+,0.011816758578646806,0.007229886760664756,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,abs,1,mixing__local_mixing_std,0.005771679550199908,-0.001480953502464318,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,abs,2,mixing__neighbor_fraction__HER2+__to__Fibroblasts CD68+,0.005211358693884635,-0.003702058580678644,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,abs,3,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__HR- CKlow CK5+,0.00506276648016423,-0.004163467865699645,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,abs,4,mixing__neighbor_fraction__HR- CK7-__to__HR+ CK7-,0.0049105005193657075,0.0006082861034750014,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,abs,5,mixing__local_mixing_max,0.004617657051514968,-0.0018975662782357728,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,abs,6,composition__Fibroblasts,0.004555488595951843,-0.0022493423861662163,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,abs,7,mixing__local_mixing_min,0.004528618689051903,-0.00020741114611471376,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,abs,8,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.004335865281744914,0.0002527902014806903,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,abs,9,mixing__neighbor_fraction__HRlow CKlow__to__HR+ CK7-,0.004190762298142332,0.000673903817039595,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,abs,10,mixing__neighbor_fraction__HRlow CKlow__to__Basal CKlow,0.004122907984641677,0.0027937852281034767,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,abs,11,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7-,0.004097051734564343,0.0012088177437444658,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,abs,12,mixing__neighbor_fraction__Fibroblasts CD68+__to__Fibroblasts,0.004027773822341963,-0.0012072736157389583,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,abs,13,mixing__neighbor_fraction__HR+ CK7-__to__Myofibroblasts,0.0038743975241149623,0.0004899989811197601,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,abs,14,composition__HR+ CK7-,0.003838952318648349,-0.0010317436178172712,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,abs,15,mixing__neighbor_fraction__Basal CKlow__to__HR+ CK7-,0.0037770884318431707,0.0021072792535576936,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,abs,16,mixing__neighbor_fraction__HR- CK7-__to__Myofibroblasts,0.0037744664171758947,0.0008368238039629893,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,abs,17,mixing__neighbor_fraction__Fibroblasts__to__Fibroblasts,0.003733602210002938,-0.0013636825068527145,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,abs,18,mixing__neighbor_fraction__Fibroblasts__to__HR- CK7-,0.003707295800526113,-0.00020927362102527466,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,abs,19,mixing__neighbor_fraction__Vascular SMA+__to__HR- CKlow CK5+,0.0035576005200418106,-0.003103176621646704,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,abs,20,mixing__neighbor_fraction__Basal CKlow__to__HRlow CKlow,0.0034234647040358194,0.0022848497721243166,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,signed,1,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__HR- CKlow CK5+,0.258065368042968,-0.23171373586683802,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,signed,2,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7-,0.22622947983997993,0.14778338029924964,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,signed,3,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.1986029552202859,0.0996412018058272,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,signed,4,mixing__neighbor_fraction__HR- CK7-__to__HR+ CK7-,0.1955204900899426,0.06144971080592431,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,signed,5,mixing__neighbor_fraction__HRlow CKlow__to__HR+ CK7-,0.1431548833884702,0.04048235228336988,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,signed,6,mixing__neighbor_fraction__Vascular SMA+__to__Macrophages Vim+ Slug+,0.13282267312289264,0.10561839884127372,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,signed,7,mixing__neighbor_fraction__HR+ CK7-__to__Myofibroblasts,0.12770174630957684,-0.03001115393996239,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,signed,8,mixing__neighbor_fraction__Basal CKlow__to__HR+ CK7-,0.1272019381003438,0.08140307354169023,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,signed,9,mixing__neighbor_fraction__HRlow CKlow__to__Basal CKlow,0.12705224781827276,0.0874150317454565,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,signed,10,composition__HR+ CK7-,0.12529049638461343,-0.006790520442773938,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,signed,11,mixing__neighbor_fraction__Endothelial__to__Basal CKlow,0.12325669036468324,-0.100803046619019,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,signed,12,mixing__neighbor_fraction__HR- CKlow CK5+__to__Macrophages Vim+ CD45low,0.12263146995778987,-0.10423618136426915,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,signed,13,mixing__neighbor_fraction__HR- CK7-__to__Myofibroblasts,0.12215403592350928,-0.010719515216330761,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,signed,14,mixing__local_mixing_std,0.1219996616060361,0.0347968050757306,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,signed,15,mixing__neighbor_fraction__Myofibroblasts__to__HR- CK7+,0.12073193890915232,0.024860114124050637,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,signed,16,mixing__neighbor_fraction__HR- CK7+__to__HR+ CK7-,0.12022210695575371,0.03460964434030061,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,signed,17,composition__Endothelial,0.11905745447914039,-0.054352428309919376,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,signed,18,mixing__neighbor_fraction__HR+ CK7-__to__Fibroblasts CD68+,0.1185401511568792,-0.05278806626641015,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,signed,19,mixing__local_mixing_min,0.11170248065983822,0.04293688310328273,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,signed,20,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__HR+ CK7- Ki67+,0.11078229447504181,0.0684959024833949,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,top,1,mixing__neighbor_fraction__HR- CK7-__to__HR+ CK7-,0.024488793741566726,0.011920520135631786,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,top,2,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7-,0.02430434626867612,0.015345645719632608,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,top,3,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.023279328886787826,0.01033459880820309,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,top,4,mixing__neighbor_fraction__Vascular SMA+__to__Macrophages Vim+ Slug+,0.02137577901260312,0.019738399231057305,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,top,5,mixing__neighbor_fraction__HRlow CKlow__to__HR+ CK7-,0.01907493448067537,0.011579876431080239,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,top,6,mixing__neighbor_fraction__HRlow CKlow__to__Basal CKlow,0.018735507409544053,0.012303329361598963,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,top,7,mixing__local_mixing_std,0.018714795880369242,0.007083831611858897,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,top,8,mixing__neighbor_fraction__Basal CKlow__to__HR+ CK7-,0.018364305180911374,0.011569748580671991,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,top,9,mixing__local_mixing_min,0.0172025204182672,0.006988682583115077,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,top,10,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__HR+ CK7- Ki67+,0.014964562301011447,0.009911777643382873,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,top,11,mixing__neighbor_fraction__HR- CK7+__to__HR+ CK7-,0.01477186956788299,0.006963538423345151,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,top,12,mixing__neighbor_fraction__HRlow CKlow__to__Fibroblasts CD68+,0.01361922649348263,-0.0004704293970875594,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,top,13,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__HR+ CK7- Ki67+,0.013071421972946378,0.0010549367769894518,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,top,14,mixing__neighbor_fraction__HR- CKlow CK5+__to__HRlow CKlow,0.01257640914367061,0.007941029226065476,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,top,15,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR- CK7+,0.012298142054191276,0.006991966451301931,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,top,16,mixing__neighbor_fraction__Myofibroblasts__to__HR- CK7+,0.012228858189221386,0.0028953373663404033,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,top,17,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR+ CK7- Ki67+,0.011909319847494562,0.005937048677363551,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,top,18,mixing__neighbor_fraction__B cells__to__HR+ CK7- Ki67+,0.011836803288980012,0.010528250756613348,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,top,19,mixing__local_mixing_max,0.011812294165821982,-0.0014776788397806858,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,top,20,mixing__neighbor_fraction__HR- CK7-__to__Macrophages Vim+ Slug+,0.011763731321408684,0.006048909096364424,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,abs,1,mixing__neighbor_fraction__Basal CKlow__to__HR+ CK7-,0.00635598773179517,0.004130707251915191,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,abs,2,mixing__neighbor_fraction__B cells__to__Vascular SMA+,0.00491114187592875,-0.004477621360221703,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,abs,3,mixing__neighbor_fraction__Myoepithelial__to__Myofibroblasts,0.004904345140140186,0.002791965446484301,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,abs,4,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7-,0.004615139523680639,0.0020280192911585593,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,abs,5,mixing__neighbor_fraction__HR- CK7+__to__HR+ CK7-,0.0046112435368987036,0.0020507326563662955,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,abs,6,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.004499465307532275,0.0010227097955525877,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,abs,7,mixing__neighbor_fraction__HR+ CK7-__to__Fibroblasts,0.004404397601578563,-0.0019587416558133216,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,abs,8,mixing__neighbor_fraction__Fibroblasts__to__HR- CK7-,0.004034581497404873,-0.0006995063413081927,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,abs,9,mixing__local_mixing_std,0.0039843210073032395,-0.0012167852543361363,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,abs,10,composition__HR+ CK7-,0.003977215841380879,-0.0007109939633717705,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,abs,11,mixing__neighbor_fraction__HR- CK7-__to__HR+ CK7-,0.0038303185765526052,0.0013941486539371262,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,abs,12,mixing__neighbor_fraction__Myoepithelial__to__Basal CKlow,0.0036488135083838835,-0.0026898470009858212,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,abs,13,composition__Fibroblasts,0.0036174032241325406,-0.0018796117435361695,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,abs,14,composition__Endothelial,0.0036138383570679666,-0.001864428994156409,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,abs,15,mixing__neighbor_fraction__T cells__to__Fibroblasts,0.003525531321250643,-0.0010859670267530503,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,abs,16,mixing__local_mixing_max,0.0035040737068487066,-0.0005550246343507146,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,abs,17,mixing__neighbor_fraction__HR- CK7-__to__Macrophages Vim+ Slug+,0.003373903276610219,0.0015332133867336482,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,abs,18,mixing__neighbor_fraction__HR+ CK7-__to__Myofibroblasts,0.003336078848425889,0.00020280539290504576,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,abs,19,mixing__neighbor_fraction__Myofibroblasts__to__HR+ CK7-,0.003285615968590364,-0.0007409605914395331,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,abs,20,mixing__local_mixing_min,0.0032035179832851975,-0.0005341047670944698,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,signed,1,mixing__neighbor_fraction__Basal CKlow__to__HR+ CK7-,0.3170369897096041,0.2672049438198739,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,signed,2,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7-,0.2389306822963386,0.15411855262545876,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,signed,3,mixing__neighbor_fraction__HR- CK7+__to__HR+ CK7-,0.2048873732065788,0.10058477111522546,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,signed,4,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.18913918408763375,0.09033309143824812,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,signed,5,mixing__neighbor_fraction__HR- CK7-__to__HR+ CK7-,0.17689879813078965,0.08665383917087517,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,signed,6,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__HR- CKlow CK5+,0.1707007263242692,-0.13494698328693502,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,signed,7,mixing__neighbor_fraction__HR- CK7+__to__T cells,0.16765570683325617,-0.12392940904540233,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,signed,8,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__HR- CK7+,0.16562747931415187,0.09206672347817575,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,signed,9,mixing__neighbor_fraction__Fibroblasts__to__HR- CK7-,0.16068039561387285,0.006676161089647476,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,signed,10,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR+ CK7- Ki67+,0.15994861021035892,0.08243779088143759,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,signed,11,mixing__neighbor_fraction__HR- Ki67+__to__Vascular SMA+,0.15003948928872554,0.10064503658653427,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,signed,12,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR- CKlow CK5+,0.14803398329052936,-0.12850157694133427,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,signed,13,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HRlow CKlow,0.14498628896413532,0.10369593725512996,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,signed,14,composition__HR+ CK7-,0.14384257682632876,-0.0008707968949892646,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,signed,15,mixing__neighbor_fraction__HR- CKlow CK5+__to__HRlow CKlow,0.14247065969842732,0.09159741259185118,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,signed,16,mixing__neighbor_fraction__HR- CK7-__to__Macrophages Vim+ Slug+,0.14142661672777537,0.08733243247042026,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,signed,17,mixing__neighbor_fraction__T cells__to__Fibroblasts,0.13150691337842313,-0.06207168918166476,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,signed,18,mixing__neighbor_fraction__HR+ CK7-__to__Fibroblasts CD68+,0.13101743276088468,-0.07995431338617474,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,signed,19,mixing__neighbor_fraction__B cells__to__Vascular SMA+,0.1296530570197262,-0.11434834220888118,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,signed,20,mixing__neighbor_fraction__HR+ CK7-__to__T cells,0.12726522254615102,-0.07815679747047875,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,top,1,mixing__neighbor_fraction__Basal CKlow__to__HR+ CK7-,0.04655083467222911,0.03796324264788104,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,top,2,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7-,0.029313591482892584,0.020851030736869516,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,top,3,mixing__neighbor_fraction__HR- CK7+__to__HR+ CK7-,0.025822648600292313,0.01474331544675309,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,top,4,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.02574276424736786,0.013765074590075803,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,top,5,mixing__neighbor_fraction__HR- CK7-__to__HR+ CK7-,0.022022727819724072,0.014768640120263197,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,top,6,mixing__neighbor_fraction__HR- Ki67+__to__Vascular SMA+,0.02127965220868195,0.017004573849064557,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,top,7,mixing__neighbor_fraction__HR- CK7-__to__Macrophages Vim+ Slug+,0.0204855812869267,0.015223226758192869,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,top,8,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__HR- CK7+,0.020423139048737864,0.01354837975031674,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,top,9,mixing__neighbor_fraction__HR- CKlow CK5+__to__HRlow CKlow,0.01627853581329655,0.008733688004808516,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,top,10,mixing__neighbor_fraction__Fibroblasts__to__HR- CK7-,0.01595498615101429,0.004949012239713881,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,top,11,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR+ CK7- Ki67+,0.015789514398359305,0.007874941177857355,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,top,12,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HRlow CKlow,0.015635359160831454,0.012117668815431148,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,top,13,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR+ CK7-,0.014478314335301138,0.008708818481127159,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,top,14,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR- CK7-,0.013222354328289063,0.008409001791503017,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,top,15,mixing__neighbor_fraction__Macrophages Vim+ Slug+__to__HR+ CK7-,0.01297692264731518,0.008901517979626334,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,top,16,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__HR- CK7-,0.01255079984109266,0.008602008149235122,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,top,17,mixing__neighbor_fraction__Myoepithelial__to__Myofibroblasts,0.012013963622458428,0.005224081377904999,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,top,18,mixing__neighbor_fraction__Basal CKlow__to__HR- CK7-,0.011982188534869811,0.007518211185241396,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,top,19,mixing__neighbor_fraction__T cells__to__HR- CK7-,0.011399168552672046,0.005867068952601693,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,top,20,mixing__local_mixing_std,0.011169658134103467,0.0029926441089385357,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,abs,1,composition__Fibroblasts,0.006804849950700867,-0.005658252743543449,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,abs,2,mixing__neighbor_fraction__HR+ CK7-__to__Fibroblasts,0.005210584283595448,-0.0026485140686012443,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,abs,3,mixing__local_mixing_max,0.0049045820609683885,-0.0031201273645282647,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,abs,4,mixing__shannon_entropy_normalized,0.0048962778654621205,0.0018699341235071058,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,abs,5,mixing__neighbor_fraction__Fibroblasts__to__Fibroblasts,0.0048893136182904355,-0.003501868447413939,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,abs,6,mixing__neighbor_fraction__HR- CKlow CK5+__to__Fibroblasts,0.0048586519267089165,-0.0032757591313966198,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,abs,7,mixing__same_type_neighbor_fraction,0.004566819841670007,0.0016731248148377132,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,abs,8,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.004401798203439422,0.0007849035725720433,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,abs,9,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7-,0.004189742941661918,0.0010898016834591463,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,abs,10,mixing__neighbor_fraction__Endothelial__to__HR- CK7+,0.003978969686403966,0.002059604500036945,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,abs,11,composition__HR+ CK7-,0.0039380223673359405,-0.0021672831070441143,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,abs,12,mixing__local_mixing_std,0.0039029414056805907,-0.0016481867356839932,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,abs,13,mixing__neighbor_fraction__HR+ CK7-__to__HR+ CK7-,0.0037253933321799004,-0.0018938351466237459,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,abs,14,mixing__neighbor_fraction__HR+ CK7-__to__Myofibroblasts,0.0037215549428224245,-4.3815654090358e-05,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,abs,15,mixing__local_mixing_min,0.003636295671581944,0.000713826779412548,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,abs,16,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__HR- CKlow CK5+,0.003595700811886368,-0.0028366216118587686,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,abs,17,mixing__neighbor_fraction__HR+ CK7-__to__Fibroblasts CD68+,0.0035533206083898216,-4.656072999905352e-05,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,abs,18,mixing__neighbor_fraction__HR- CK7+__to__HR+ CK7-,0.003540602120601387,0.00040923526567389356,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,abs,19,mixing__neighbor_fraction__HER2+__to__Fibroblasts CD68+,0.003406033593861648,-0.0015180404438791312,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,abs,20,mixing__neighbor_fraction__Myofibroblasts__to__Fibroblasts,0.003376422006461359,-0.0018029919790430132,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,signed,1,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__HR- CKlow CK5+,0.2265793040033555,-0.20317310143786485,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,signed,2,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.19293279143474842,0.11249513903340277,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,signed,3,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7-,0.16823045799884673,0.07803082648154715,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,signed,4,mixing__neighbor_fraction__HR- CK7+__to__HR+ CK7-,0.1637739995771643,0.04074255665663272,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,signed,5,mixing__neighbor_fraction__Basal CKlow__to__HR+ CK7-,0.16051301793173375,0.11603403046093004,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,signed,6,mixing__neighbor_fraction__Basal CKlow__to__HR- CK7-,0.15520727926224476,0.1052343334523538,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,signed,7,mixing__neighbor_fraction__Endothelial__to__HR- CK7+,0.14593968515747618,0.07521056769276084,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,signed,8,mixing__neighbor_fraction__HR+ CK7-__to__Fibroblasts CD68+,0.144115365332831,-0.062471296498229426,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,signed,9,mixing__neighbor_fraction__HR+ CK7-__to__HR+ CK7-,0.13973204251207963,-0.048556977267403836,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,signed,10,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR+ CK7- Ki67+,0.1388281558016793,0.07469142118375442,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,signed,11,mixing__neighbor_fraction__HR- CK7-__to__HR+ CK7-,0.13822252820890218,-0.0038473968858888253,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,signed,12,mixing__neighbor_fraction__Vascular SMA+__to__HR- CK7-,0.13438337864551825,0.08247109401405651,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,signed,13,composition__HR+ CK7-,0.13177517225947288,-0.025292332935341597,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,signed,14,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__Fibroblasts CD68+,0.12954474818037387,-0.05419370734849701,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,signed,15,mixing__neighbor_fraction__HR- CK7+__to__T cells,0.12484476206418431,-0.07040812796018699,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,signed,16,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__Fibroblasts CD68+,0.12434332059526068,-0.06987358802171988,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,signed,17,mixing__neighbor_fraction__HER2+__to__Fibroblasts CD68+,0.1207051779548935,-0.06560734400028882,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,signed,18,mixing__neighbor_fraction__HR- Ki67+__to__Vascular SMA+,0.11988460975715654,0.08067316341227027,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,signed,19,mixing__neighbor_fraction__Myoepithelial__to__HR- CK7-,0.1153638695440314,-0.06011275711391239,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,signed,20,mixing__neighbor_fraction__HRlow CKlow__to__HR+ CK7-,0.11346086658742924,0.0016234870017968154,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,top,1,mixing__neighbor_fraction__Fibroblasts CD68+__to__HR+ CK7-,0.02319555570560025,0.01226549539306574,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,top,2,mixing__neighbor_fraction__Endothelial__to__HR- CK7+,0.020614797711717158,0.013937062922784281,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,top,3,mixing__neighbor_fraction__Basal CKlow__to__HR+ CK7-,0.01950846525845237,0.013094275552281973,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,top,4,mixing__neighbor_fraction__HR- CK7+__to__HR+ CK7-,0.01796629862724939,0.007598294743642992,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,top,5,mixing__neighbor_fraction__HR- CKlow CK5+__to__HR+ CK7-,0.01729216851276021,0.009721288118254793,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,top,6,mixing__neighbor_fraction__Basal CKlow__to__HR- CK7-,0.015076499178614323,0.01056771484038919,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,top,7,mixing__neighbor_fraction__HR- CKlow CK5+__to__HRlow CKlow,0.014427172206533737,0.007220536275856357,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,top,8,mixing__neighbor_fraction__HR- Ki67+__to__Vascular SMA+,0.013462820141387563,0.009842094285065408,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,top,9,mixing__neighbor_fraction__HR- CK7-__to__HR+ CK7-,0.013062924864345514,0.0036552559946440044,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,top,10,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR+ CK7- Ki67+,0.012812941807506374,0.0075453269806703156,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,top,11,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__Basal CKlow,0.012668049784119286,0.009025935666314244,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,top,12,mixing__neighbor_fraction__Vascular SMA+__to__HR- CK7-,0.012597145075707852,0.007151160056720158,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,top,13,mixing__neighbor_fraction__T cells__to__HR- CK7-,0.012152957080606862,0.004289850475586847,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,top,14,mixing__local_mixing_min,0.011592264016135941,0.002676119219102823,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,top,15,mixing__neighbor_fraction__HRlow CKlow__to__Basal CKlow,0.011555377657309698,0.007191401788891384,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,top,16,mixing__shannon_entropy_normalized,0.011205863208081314,0.003069786046782893,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,top,17,mixing__neighbor_fraction__HRlow CKlow__to__HR+ CK7-,0.010757966774542821,0.004306248193425413,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,top,18,mixing__local_mixing_std,0.010695884432508032,0.002025461574082007,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,top,19,mixing__neighbor_fraction__HR- Ki67+__to__HR- CK7+,0.01024372803657852,0.006776276786837518,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,top,20,mixing__neighbor_fraction__HR+ CK7- Ki67+__to__Myofibroblasts,0.010139418524094067,0.0005299721508142354,bc_metabric_ali2020,False

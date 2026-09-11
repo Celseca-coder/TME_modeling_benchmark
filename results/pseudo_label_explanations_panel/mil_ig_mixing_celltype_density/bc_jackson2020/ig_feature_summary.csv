@@ -1,0 +1,19 @@
+task,kind,explainer,aggregation,n_folds,mean_auc,frac_auc_passed,frac_recovered,frac_passed,frac_miss_as_top1,mean_best_hit_rank,modal_top1,control_frac_passed,verdict,dataset,selected
+motif_apc_t_contact,spatial,ig,abs,15,0.6083670590997095,0.5333333333333333,0.4,0.4,0.0,3.875,mixing__neighbor_fraction__B cell__to__Tumor (Hypoxic),0.0,fail_control_block,bc_jackson2020,True
+motif_cd8_high,control,ig,abs,15,0.8254457083193966,0.0,0.0,0.0,0.0,,,0.0,fail_control,bc_jackson2020,False
+motif_cd8_tumor_contact,spatial,ig,abs,15,0.6704409552898877,0.8,0.3333333333333333,0.3333333333333333,0.0,5.916666666666667,mixing__local_mixing_max,0.0,fail_control_block,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,ig,abs,15,0.5432685550313695,0.2,0.13333333333333333,0.13333333333333333,0.0,5.666666666666667,mixing__neighbor_fraction__B cell__to__Tumor (CK7+),0.0,fail_control_block,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,ig,abs,15,0.6799567164678612,0.9333333333333333,0.6666666666666666,0.6666666666666666,0.0,4.285714285714286,mixing__local_mixing_std,0.0,fail_control_block,bc_jackson2020,True
+motif_tumor_high,control,ig,abs,15,0.826977864668795,0.06666666666666667,0.0,0.0,0.0,44.0,mixing__neighbor_fraction__Stromal cells__to__Stromal cells,0.0,fail_control,bc_jackson2020,True
+motif_apc_t_contact,spatial,ig,signed,15,0.6083670590997095,0.5333333333333333,0.06666666666666667,0.06666666666666667,0.0,9.25,mixing__neighbor_fraction__Stromal cells__to__Tumor (CK lo HR hi p53+),0.0,fail_control_block,bc_jackson2020,True
+motif_cd8_high,control,ig,signed,15,0.8254457083193966,0.0,0.0,0.0,0.0,,,0.0,fail_control,bc_jackson2020,False
+motif_cd8_tumor_contact,spatial,ig,signed,15,0.6704409552898877,0.8,0.26666666666666666,0.26666666666666666,0.0,8.333333333333334,mixing__neighbor_fraction__B cell__to__Tumor (Apoptotic),0.0,fail_control_block,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,ig,signed,15,0.5432685550313695,0.2,0.13333333333333333,0.13333333333333333,0.0,4.0,mixing__neighbor_fraction__Tumor (CK lo HR hi p53+)__to__Tumor (CK+ HR+),0.0,fail_control_block,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,ig,signed,15,0.6799567164678612,0.9333333333333333,0.4,0.4,0.0,8.571428571428571,mixing__neighbor_fraction__B cell__to__Endothelial,0.0,fail_control_block,bc_jackson2020,True
+motif_tumor_high,control,ig,signed,15,0.826977864668795,0.06666666666666667,0.0,0.0,0.0,19.0,mixing__neighbor_fraction__T & B cells__to__Tumor (Epithelial low),0.0,fail_control,bc_jackson2020,True
+motif_apc_t_contact,spatial,ig,top,15,0.6083670590997095,0.5333333333333333,0.2,0.2,0.0,6.25,mixing__neighbor_fraction__B cell__to__Tumor (Hypoxic),0.0,fail_control_block,bc_jackson2020,True
+motif_cd8_high,control,ig,top,15,0.8254457083193966,0.0,0.0,0.0,0.0,,,0.0,fail_control,bc_jackson2020,False
+motif_cd8_tumor_contact,spatial,ig,top,15,0.6704409552898877,0.8,0.4666666666666667,0.4666666666666667,0.0,5.833333333333333,mixing__neighbor_fraction__B cell__to__Tumor (Myoepithelial),0.0,fail_control_block,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,ig,top,15,0.5432685550313695,0.2,0.13333333333333333,0.13333333333333333,0.0,4.666666666666667,mixing__neighbor_fraction__B cell__to__Tumor (CK7+),0.0,fail_control_block,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,ig,top,15,0.6799567164678612,0.9333333333333333,0.4,0.4,0.0,6.857142857142857,mixing__neighbor_fraction__Macrophage__to__Tumor (Myoepithelial),0.0,fail_control_block,bc_jackson2020,True
+motif_tumor_high,control,ig,top,15,0.826977864668795,0.06666666666666667,0.0,0.0,0.0,16.0,mixing__neighbor_fraction__Stromal cells__to__Tumor (Apoptotic),0.0,fail_control,bc_jackson2020,True

@@ -15,6 +15,11 @@ Tabular Lasso + linear SHAP on one dataset:
         --feature-sources composition density mixing point-pattern \\
         --by-type
 
+Single families or pairwise tables (each combo needs its own --output-dir):
+
+    bash scripts/run_tabular_family_combos.sh
+    MODE=singles bash scripts/run_tabular_family_combos.sh
+
 Embedding probe (``{dataset}`` is filled when --panel is set):
 
     python scripts/verify_pseudo_label_explanations.py --panel --mode embedding \\
@@ -29,6 +34,16 @@ Attention is the baseline, not the decision decomposition:
         --label-version v2 --mode mil --feature-groups composition mixing \\
         --data-root "$DATA_ROOT" --device cuda \\
         --output-dir results/pseudo_label_explanations_panel/mil_noisy
+
+IG additionally reports which window feature drove the decision, because it is
+the only instance explainer with a feature axis (attention emits one scalar per
+window).  Restricting to it writes ig_feature_{ranks,folds,summary}.csv:
+
+    python scripts/verify_pseudo_label_explanations.py --panel --mode mil \\
+        --mil-explainers ig --feature-groups composition mixing \\
+        --labels /autofs/nas8/tywang/tjzou/PseudoNoisyDataset/per_dataset/{dataset}_v2_noisy.csv \\
+        --label-version v2 --data-root "$DATA_ROOT" --device cuda \\
+        --output-dir results/pseudo_label_explanations_panel/mil_noisy_ig_features
 """
 from __future__ import annotations
 
@@ -50,7 +65,13 @@ from benchmark.features.mixing import MixingFeaturizer  # noqa: E402
 from benchmark.features.point_pattern import PointPatternFeaturizer  # noqa: E402
 from benchmark.features.spatial_distance import SpatialDistanceFeaturizer  # noqa: E402
 from benchmark.models.linear import LinearClassifier  # noqa: E402
-from benchmark.motifs.mil_run import extract_mil_bags, run_mil_explanations, summarize_mil  # noqa: E402
+from benchmark.models.mil_explainers import FEATURE_AGGS  # noqa: E402
+from benchmark.motifs.mil_run import (  # noqa: E402
+    extract_mil_bags,
+    run_mil_explanations,
+    summarize_mil,
+    summarize_mil_features,
+)
 from benchmark.motifs.overlay import attach_pseudo_labels  # noqa: E402
 from benchmark.motifs.panel import (  # noqa: E402
     jobs_by_dataset,
@@ -574,6 +595,7 @@ def _run_dataset(args, dataset_name: str, selected: list[str], out_dir: Path):
         groups = tuple(args.feature_groups)
         cache_t = args.cache_features or str(out_dir / "{dataset}" / "mil_bags.pkl")
         cache = Path(_format_path(cache_t, dataset_name))
+        names_path = cache.with_name(f"{cache.stem}_features.json")
         if cache.exists():
             print(f"Loading cached MIL bags {cache}", flush=True)
             bags = pd.read_pickle(cache)
@@ -584,20 +606,42 @@ def _run_dataset(args, dataset_name: str, selected: list[str], out_dir: Path):
             bags = extract_mil_bags(dataset, sorted(set(labeled)), catalog, groups, args)
             cache.parent.mkdir(parents=True, exist_ok=True)
             bags.to_pickle(cache)
+            names_path.write_text(
+                json.dumps(list(bags.attrs.get("feature_names") or []), indent=2)
+            )
             print(f"Wrote {cache}", flush=True)
-        fold_df = _tag_frame(
-            run_mil_explanations(dataset, catalog, run_tasks, bags, args),
-            dataset_name,
-            selected,
+        feature_names = list(bags.attrs.get("feature_names") or [])
+        if not feature_names and names_path.exists():
+            feature_names = json.loads(names_path.read_text())
+        if not feature_names and args.mil_feature_attribution:
+            print(
+                f"WARNING: {cache} carries no window feature names, so IG "
+                "feature-level attribution is skipped. Delete the cache to rebuild it.",
+                flush=True,
+            )
+        fold_df, rank_df, feat_df = run_mil_explanations(
+            dataset, catalog, run_tasks, bags, args, feature_names=feature_names
         )
+        fold_df = _tag_frame(fold_df, dataset_name, selected)
+        rank_df = _tag_frame(rank_df, dataset_name, selected)
+        feat_df = _tag_frame(feat_df, dataset_name, selected)
         summary = summarize_mil(fold_df)
         if not summary.empty:
             summary["dataset"] = dataset_name
+        feat_summary = summarize_mil_features(feat_df)
+        if not feat_summary.empty:
+            feat_summary["dataset"] = dataset_name
         fold_df.to_csv(ds_dir / "fold_recovery.csv", index=False)
         summary.to_csv(ds_dir / "summary.csv", index=False)
         print("\n=== mil summary ===", flush=True)
         print(summary.to_string(index=False) if not summary.empty else "(empty)", flush=True)
-        return fold_df, summary
+        if not feat_df.empty:
+            rank_df.to_csv(ds_dir / "ig_feature_ranks.csv", index=False)
+            feat_df.to_csv(ds_dir / "ig_feature_folds.csv", index=False)
+            feat_summary.to_csv(ds_dir / "ig_feature_summary.csv", index=False)
+            print("\n=== mil ig feature attribution ===", flush=True)
+            print(feat_summary.to_string(index=False), flush=True)
+        return fold_df, summary, rank_df, feat_df, feat_summary
 
     if args.mode == "gnn-explainer":
         if not args.explainer_csv:
@@ -696,6 +740,25 @@ def main() -> None:
         default=["attention", "single", "one_removed", "ig", "random"],
         help="Instance explainers for --mode mil.",
     )
+    ap.add_argument(
+        "--mil-feature-aggs",
+        nargs="+",
+        default=list(FEATURE_AGGS),
+        help="How IG collapses its (window x feature) attributions onto window "
+             f"features: any of {list(FEATURE_AGGS)}. Needs 'ig' in --mil-explainers.",
+    )
+    ap.add_argument(
+        "--no-mil-feature-attribution",
+        dest="mil_feature_attribution",
+        action="store_false",
+        help="Score window localization only; skip the IG feature-level ranking.",
+    )
+    ap.add_argument(
+        "--mil-feature-top-frac",
+        type=float,
+        default=0.10,
+        help="Window fraction kept by the 'top' feature aggregation.",
+    )
     ap.add_argument("--window-size", type=float, default=100.0)
     ap.add_argument("--step", type=float, default=50.0)
     ap.add_argument("--min-cells", type=int, default=10)
@@ -723,9 +786,16 @@ def main() -> None:
     if args.panel:
         jobs = jobs_by_dataset(load_selected_panel(args.panel))
         fold_frames, extra_frames, summaries = [], [], []
+        mil_ranks, mil_feats, mil_feat_summaries = [], [], []
         for dataset_name, selected in jobs.items():
             result = _run_dataset(args, dataset_name, selected, out_dir)
-            if args.mode in {"embedding", "gnn-explainer", "mil"}:
+            if args.mode == "mil":
+                fold_frames.append(result[0])
+                summaries.append(result[1])
+                mil_ranks.append(result[2])
+                mil_feats.append(result[3])
+                mil_feat_summaries.append(result[4])
+            elif args.mode in {"embedding", "gnn-explainer"}:
                 fold_frames.append(result[0])
                 summaries.append(result[1])
             else:
@@ -742,6 +812,17 @@ def main() -> None:
         elif args.mode == "mil":
             _write_concat(fold_frames, out_dir / "fold_recovery.csv")
             summary = _write_concat(summaries, out_dir / "summary.csv")
+            nonempty = [f for f in mil_feats if not f.empty]
+            if nonempty:
+                _write_concat([f for f in mil_ranks if not f.empty],
+                              out_dir / "ig_feature_ranks.csv")
+                _write_concat(nonempty, out_dir / "ig_feature_folds.csv")
+                feat_summary = _write_concat(
+                    [f for f in mil_feat_summaries if not f.empty],
+                    out_dir / "ig_feature_summary.csv",
+                )
+                print("\n=== panel ig feature attribution ===", flush=True)
+                print(feat_summary.to_string(index=False), flush=True)
         else:
             _write_concat(fold_frames, out_dir / "fold_recovery.csv")
             _write_concat(extra_frames, out_dir / "feature_ranks.csv")

@@ -3,10 +3,16 @@
 Attention is the baseline, not the decision decomposition.  Single and
 one-removed follow MILLI; IG attributes the positive logit to window features
 and sums per instance.  Random is the null ranking for AUPC tests.
+
+Attention, single and one-removed are structurally instance-level: they emit one
+number per window and cannot say which measurement inside that window mattered.
+IG is the exception — it produces a full ``(window, feature)`` matrix, so
+:func:`ig_attributions` keeps that matrix and :func:`aggregate_feature_attributions`
+collapses it onto named window features for a Lasso/SHAP-style ranking.
 """
 from __future__ import annotations
 
-from collections.abc import Callable
+from collections.abc import Callable, Sequence
 
 import numpy as np
 import torch
@@ -14,6 +20,7 @@ import torch
 from benchmark.models.attention_mil import AttentionMILModel
 
 EXPLAINERS = ("attention", "single", "one_removed", "ig", "random")
+FEATURE_AGGS = ("abs", "signed", "top")
 
 
 def _as_bag(bag: np.ndarray) -> np.ndarray:
@@ -52,7 +59,14 @@ def one_removed_scores(model: AttentionMILModel, bag: np.ndarray) -> np.ndarray:
     return scores
 
 
-def ig_scores(model: AttentionMILModel, bag: np.ndarray, steps: int = 32) -> np.ndarray:
+def ig_attributions(model: AttentionMILModel, bag: np.ndarray, steps: int = 32) -> np.ndarray:
+    """Integrated Gradients of the positive logit, shaped ``(window, feature)``.
+
+    The path baseline is the zero vector of the model's scaled input space, which
+    is the mean training window, so an entry reads as "how much this window's
+    deviation from an average window pushed the positive logit".  Attributions
+    therefore live in scaled units and are comparable across features.
+    """
     bag = _as_bag(bag)
     model._net.eval()
     x = model._bag_tensor(bag)
@@ -66,7 +80,60 @@ def ig_scores(model: AttentionMILModel, bag: np.ndarray, steps: int = 32) -> np.
         logit.backward()
         acc = acc + t.grad.detach()
     attr = (x - baseline) * acc / steps
-    return attr.sum(dim=1).detach().cpu().numpy().astype(float)
+    return attr.detach().cpu().numpy().astype(float)
+
+
+def ig_scores(model: AttentionMILModel, bag: np.ndarray, steps: int = 32) -> np.ndarray:
+    return ig_attributions(model, bag, steps=steps).sum(axis=1)
+
+
+def aggregate_feature_attributions(
+    attr: np.ndarray,
+    mode: str = "abs",
+    *,
+    instance_scores: np.ndarray | None = None,
+    top_frac: float = 0.10,
+) -> tuple[np.ndarray, np.ndarray]:
+    """Collapse a ``(window, feature)`` attribution matrix onto features.
+
+    Returns ``(importance, net)``.  ``importance`` is non-negative and is what
+    the ranking uses; ``net`` keeps the sign, so a reader can tell whether the
+    feature pushed toward the positive class or away from it.
+
+    ``abs``     mean absolute attribution over every window; the direct
+                analogue of the mean-|SHAP| ranking used on global features.
+    ``signed``  attribution summed over windows, ranked by magnitude, so
+                windows carrying opposite evidence cancel.
+    ``top``     mean absolute attribution over the top ``top_frac`` windows
+                only, i.e. "inside the windows the model actually used, which
+                measurement drove it".
+    """
+    attr = np.asarray(attr, dtype=float)
+    if attr.ndim != 2:
+        raise ValueError(f"attributions must be 2-D, got {attr.shape}")
+    if attr.size == 0:
+        empty = np.zeros(attr.shape[1], dtype=float)
+        return empty, empty.copy()
+    if mode == "signed":
+        net = attr.sum(axis=0)
+        return np.abs(net), net
+    if mode == "top":
+        scores = attr.sum(axis=1) if instance_scores is None else np.asarray(instance_scores, dtype=float)
+        k = max(1, int(np.ceil(float(top_frac) * len(attr))))
+        attr = attr[np.argsort(-scores)[:k]]
+    elif mode != "abs":
+        raise ValueError(f"Unknown feature aggregation {mode!r}; expected {FEATURE_AGGS}")
+    return np.abs(attr).mean(axis=0), attr.mean(axis=0)
+
+
+def rank_feature_order(importance: np.ndarray, feature_names: Sequence[str]) -> np.ndarray:
+    """Indices of ``feature_names`` sorted by descending importance."""
+    importance = np.asarray(importance, dtype=float)
+    if importance.shape[0] != len(feature_names):
+        raise ValueError(
+            f"{importance.shape[0]} importances for {len(feature_names)} feature names"
+        )
+    return np.argsort(-np.nan_to_num(importance, nan=-np.inf))
 
 
 def random_scores(bag: np.ndarray, rng: np.random.Generator) -> np.ndarray:

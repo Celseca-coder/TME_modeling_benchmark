@@ -1,0 +1,1441 @@
+task,seed,fold,method,rank,feature,dataset,selected
+motif_cd8_clustering,0,0,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,0,0,lasso,2,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,0,0,lasso,3,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,0,0,lasso,4,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,0,0,lasso,5,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,0,0,lasso,6,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,0,0,lasso,7,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,0,0,lasso,8,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,0,0,lasso,9,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,0,0,lasso,10,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,0,0,lasso,11,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,0,0,lasso,12,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,0,0,shap,1,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,0,0,shap,2,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,0,0,shap,3,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,0,0,shap,4,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,0,0,shap,5,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,0,0,shap,6,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,0,0,shap,7,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,0,0,shap,8,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,0,0,shap,9,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,0,0,shap,10,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,0,0,shap,11,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,0,0,shap,12,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,0,1,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,0,1,lasso,2,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,0,1,lasso,3,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,0,1,lasso,4,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,0,1,lasso,5,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,0,1,lasso,6,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,0,1,lasso,7,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,0,1,lasso,8,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,0,1,lasso,9,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,0,1,lasso,10,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,0,1,lasso,11,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,0,1,lasso,12,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,0,1,shap,1,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,0,1,shap,2,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,0,1,shap,3,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,0,1,shap,4,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,0,1,shap,5,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,0,1,shap,6,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,0,1,shap,7,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,0,1,shap,8,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,0,1,shap,9,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,0,1,shap,10,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,0,1,shap,11,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,0,1,shap,12,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,0,2,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,0,2,lasso,2,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,0,2,lasso,3,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,0,2,lasso,4,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,0,2,lasso,5,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,0,2,lasso,6,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,0,2,lasso,7,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,0,2,lasso,8,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,0,2,lasso,9,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,0,2,lasso,10,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,0,2,lasso,11,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,0,2,lasso,12,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,0,2,shap,1,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,0,2,shap,2,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,0,2,shap,3,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,0,2,shap,4,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,0,2,shap,5,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,0,2,shap,6,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,0,2,shap,7,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,0,2,shap,8,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,0,2,shap,9,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,0,2,shap,10,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,0,2,shap,11,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,0,2,shap,12,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,0,3,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,0,3,lasso,2,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,0,3,lasso,3,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,0,3,lasso,4,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,0,3,lasso,5,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,0,3,lasso,6,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,0,3,lasso,7,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,0,3,lasso,8,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,0,3,lasso,9,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,0,3,lasso,10,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,0,3,lasso,11,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,0,3,lasso,12,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,0,3,shap,1,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,0,3,shap,2,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,0,3,shap,3,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,0,3,shap,4,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,0,3,shap,5,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,0,3,shap,6,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,0,3,shap,7,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,0,3,shap,8,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,0,3,shap,9,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,0,3,shap,10,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,0,3,shap,11,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,0,3,shap,12,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,0,4,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,0,4,lasso,2,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,0,4,lasso,3,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,0,4,lasso,4,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,0,4,lasso,5,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,0,4,lasso,6,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,0,4,lasso,7,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,0,4,lasso,8,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,0,4,lasso,9,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,0,4,lasso,10,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,0,4,lasso,11,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,0,4,lasso,12,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,0,4,shap,1,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,0,4,shap,2,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,0,4,shap,3,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,0,4,shap,4,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,0,4,shap,5,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,0,4,shap,6,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,0,4,shap,7,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,0,4,shap,8,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,0,4,shap,9,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,0,4,shap,10,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,0,4,shap,11,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,0,4,shap,12,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,1,0,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,1,0,lasso,2,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,1,0,lasso,3,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,1,0,lasso,4,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,1,0,lasso,5,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,1,0,lasso,6,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,1,0,lasso,7,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,1,0,lasso,8,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,1,0,lasso,9,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,1,0,lasso,10,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,1,0,lasso,11,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,1,0,lasso,12,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,1,0,shap,1,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,1,0,shap,2,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,1,0,shap,3,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,1,0,shap,4,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,1,0,shap,5,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,1,0,shap,6,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,1,0,shap,7,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,1,0,shap,8,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,1,0,shap,9,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,1,0,shap,10,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,1,0,shap,11,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,1,0,shap,12,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,1,1,lasso,1,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,1,1,lasso,2,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,1,1,lasso,3,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,1,1,lasso,4,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,1,1,lasso,5,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,1,1,lasso,6,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,1,1,lasso,7,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,1,1,lasso,8,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,1,1,lasso,9,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,1,1,lasso,10,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,1,1,lasso,11,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,1,1,lasso,12,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,1,1,shap,1,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,1,1,shap,2,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,1,1,shap,3,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,1,1,shap,4,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,1,1,shap,5,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,1,1,shap,6,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,1,1,shap,7,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,1,1,shap,8,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,1,1,shap,9,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,1,1,shap,10,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,1,1,shap,11,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,1,1,shap,12,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,1,2,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,1,2,lasso,2,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,1,2,lasso,3,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,1,2,lasso,4,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,1,2,lasso,5,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,1,2,lasso,6,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,1,2,lasso,7,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,1,2,lasso,8,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,1,2,lasso,9,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,1,2,lasso,10,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,1,2,lasso,11,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,1,2,lasso,12,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,1,2,shap,1,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,1,2,shap,2,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,1,2,shap,3,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,1,2,shap,4,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,1,2,shap,5,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,1,2,shap,6,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,1,2,shap,7,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,1,2,shap,8,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,1,2,shap,9,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,1,2,shap,10,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,1,2,shap,11,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,1,2,shap,12,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,1,3,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,1,3,lasso,2,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,1,3,lasso,3,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,1,3,lasso,4,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,1,3,lasso,5,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,1,3,lasso,6,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,1,3,lasso,7,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,1,3,lasso,8,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,1,3,lasso,9,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,1,3,lasso,10,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,1,3,lasso,11,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,1,3,lasso,12,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,1,3,shap,1,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,1,3,shap,2,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,1,3,shap,3,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,1,3,shap,4,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,1,3,shap,5,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,1,3,shap,6,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,1,3,shap,7,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,1,3,shap,8,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,1,3,shap,9,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,1,3,shap,10,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,1,3,shap,11,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,1,3,shap,12,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,1,4,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,1,4,lasso,2,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,1,4,lasso,3,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,1,4,lasso,4,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,1,4,lasso,5,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,1,4,lasso,6,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,1,4,lasso,7,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,1,4,lasso,8,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,1,4,lasso,9,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,1,4,lasso,10,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,1,4,lasso,11,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,1,4,lasso,12,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,1,4,shap,1,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,1,4,shap,2,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,1,4,shap,3,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,1,4,shap,4,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,1,4,shap,5,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,1,4,shap,6,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,1,4,shap,7,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,1,4,shap,8,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,1,4,shap,9,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,1,4,shap,10,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,1,4,shap,11,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,1,4,shap,12,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,2,0,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,2,0,lasso,2,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,2,0,lasso,3,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,2,0,lasso,4,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,2,0,lasso,5,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,2,0,lasso,6,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,2,0,lasso,7,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,2,0,lasso,8,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,2,0,lasso,9,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,2,0,lasso,10,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,2,0,lasso,11,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,2,0,lasso,12,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,2,0,shap,1,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,2,0,shap,2,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,2,0,shap,3,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,2,0,shap,4,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,2,0,shap,5,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,2,0,shap,6,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,2,0,shap,7,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,2,0,shap,8,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,2,0,shap,9,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,2,0,shap,10,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,2,0,shap,11,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,2,0,shap,12,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,2,1,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,2,1,lasso,2,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,2,1,lasso,3,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,2,1,lasso,4,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,2,1,lasso,5,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,2,1,lasso,6,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,2,1,lasso,7,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,2,1,lasso,8,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,2,1,lasso,9,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,2,1,lasso,10,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,2,1,lasso,11,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,2,1,lasso,12,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,2,1,shap,1,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,2,1,shap,2,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,2,1,shap,3,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,2,1,shap,4,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,2,1,shap,5,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,2,1,shap,6,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,2,1,shap,7,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,2,1,shap,8,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,2,1,shap,9,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,2,1,shap,10,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,2,1,shap,11,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,2,1,shap,12,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,2,2,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,2,2,lasso,2,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,2,2,lasso,3,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,2,2,lasso,4,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,2,2,lasso,5,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,2,2,lasso,6,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,2,2,lasso,7,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,2,2,lasso,8,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,2,2,lasso,9,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,2,2,lasso,10,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,2,2,lasso,11,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,2,2,lasso,12,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,2,2,shap,1,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,2,2,shap,2,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,2,2,shap,3,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,2,2,shap,4,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,2,2,shap,5,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,2,2,shap,6,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,2,2,shap,7,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,2,2,shap,8,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,2,2,shap,9,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,2,2,shap,10,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,2,2,shap,11,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,2,2,shap,12,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,2,3,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,2,3,lasso,2,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,2,3,lasso,3,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,2,3,lasso,4,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,2,3,lasso,5,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,2,3,lasso,6,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,2,3,lasso,7,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,2,3,lasso,8,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,2,3,lasso,9,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,2,3,lasso,10,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,2,3,lasso,11,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,2,3,lasso,12,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,2,3,shap,1,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,2,3,shap,2,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,2,3,shap,3,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,2,3,shap,4,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,2,3,shap,5,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,2,3,shap,6,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,2,3,shap,7,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,2,3,shap,8,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,2,3,shap,9,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,2,3,shap,10,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,2,3,shap,11,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,2,3,shap,12,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,2,4,lasso,1,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,2,4,lasso,2,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,2,4,lasso,3,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,2,4,lasso,4,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,2,4,lasso,5,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,2,4,lasso,6,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,2,4,lasso,7,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,2,4,lasso,8,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,2,4,lasso,9,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,2,4,lasso,10,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,2,4,lasso,11,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,2,4,lasso,12,composition::B cell,hnc_wu2022,True
+motif_cd8_clustering,2,4,shap,1,composition::Granulocyte,hnc_wu2022,True
+motif_cd8_clustering,2,4,shap,2,composition::CD8 T cell,hnc_wu2022,True
+motif_cd8_clustering,2,4,shap,3,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_cd8_clustering,2,4,shap,4,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_cd8_clustering,2,4,shap,5,composition::Stroma,hnc_wu2022,True
+motif_cd8_clustering,2,4,shap,6,composition::Tumor,hnc_wu2022,True
+motif_cd8_clustering,2,4,shap,7,composition::Other,hnc_wu2022,True
+motif_cd8_clustering,2,4,shap,8,composition::Vessel,hnc_wu2022,True
+motif_cd8_clustering,2,4,shap,9,composition::Macrophage,hnc_wu2022,True
+motif_cd8_clustering,2,4,shap,10,composition::CD4 T cell,hnc_wu2022,True
+motif_cd8_clustering,2,4,shap,11,composition::Naive immune cell,hnc_wu2022,True
+motif_cd8_clustering,2,4,shap,12,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,0,0,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,0,0,lasso,2,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,0,0,lasso,3,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,0,0,lasso,4,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,0,0,lasso,5,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,0,0,lasso,6,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,0,0,lasso,7,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,0,0,lasso,8,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,0,0,lasso,9,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,0,0,lasso,10,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,0,0,lasso,11,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,0,0,lasso,12,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,0,0,shap,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,0,0,shap,2,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,0,0,shap,3,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,0,0,shap,4,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,0,0,shap,5,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,0,0,shap,6,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,0,0,shap,7,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,0,0,shap,8,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,0,0,shap,9,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,0,0,shap,10,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,0,0,shap,11,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,0,0,shap,12,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,0,1,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,0,1,lasso,2,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,0,1,lasso,3,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,0,1,lasso,4,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,0,1,lasso,5,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,0,1,lasso,6,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,0,1,lasso,7,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,0,1,lasso,8,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,0,1,lasso,9,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,0,1,lasso,10,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,0,1,lasso,11,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,0,1,lasso,12,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,0,1,shap,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,0,1,shap,2,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,0,1,shap,3,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,0,1,shap,4,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,0,1,shap,5,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,0,1,shap,6,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,0,1,shap,7,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,0,1,shap,8,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,0,1,shap,9,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,0,1,shap,10,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,0,1,shap,11,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,0,1,shap,12,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,0,2,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,0,2,lasso,2,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,0,2,lasso,3,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,0,2,lasso,4,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,0,2,lasso,5,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,0,2,lasso,6,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,0,2,lasso,7,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,0,2,lasso,8,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,0,2,lasso,9,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,0,2,lasso,10,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,0,2,lasso,11,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,0,2,lasso,12,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,0,2,shap,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,0,2,shap,2,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,0,2,shap,3,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,0,2,shap,4,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,0,2,shap,5,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,0,2,shap,6,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,0,2,shap,7,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,0,2,shap,8,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,0,2,shap,9,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,0,2,shap,10,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,0,2,shap,11,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,0,2,shap,12,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,0,3,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,0,3,lasso,2,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,0,3,lasso,3,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,0,3,lasso,4,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,0,3,lasso,5,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,0,3,lasso,6,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,0,3,lasso,7,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,0,3,lasso,8,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,0,3,lasso,9,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,0,3,lasso,10,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,0,3,lasso,11,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,0,3,lasso,12,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,0,3,shap,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,0,3,shap,2,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,0,3,shap,3,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,0,3,shap,4,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,0,3,shap,5,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,0,3,shap,6,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,0,3,shap,7,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,0,3,shap,8,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,0,3,shap,9,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,0,3,shap,10,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,0,3,shap,11,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,0,3,shap,12,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,0,4,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,0,4,lasso,2,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,0,4,lasso,3,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,0,4,lasso,4,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,0,4,lasso,5,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,0,4,lasso,6,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,0,4,lasso,7,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,0,4,lasso,8,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,0,4,lasso,9,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,0,4,lasso,10,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,0,4,lasso,11,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,0,4,lasso,12,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,0,4,shap,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,0,4,shap,2,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,0,4,shap,3,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,0,4,shap,4,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,0,4,shap,5,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,0,4,shap,6,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,0,4,shap,7,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,0,4,shap,8,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,0,4,shap,9,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,0,4,shap,10,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,0,4,shap,11,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,0,4,shap,12,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,1,0,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,1,0,lasso,2,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,1,0,lasso,3,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,1,0,lasso,4,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,1,0,lasso,5,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,1,0,lasso,6,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,1,0,lasso,7,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,1,0,lasso,8,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,1,0,lasso,9,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,1,0,lasso,10,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,1,0,lasso,11,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,1,0,lasso,12,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,1,0,shap,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,1,0,shap,2,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,1,0,shap,3,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,1,0,shap,4,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,1,0,shap,5,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,1,0,shap,6,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,1,0,shap,7,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,1,0,shap,8,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,1,0,shap,9,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,1,0,shap,10,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,1,0,shap,11,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,1,0,shap,12,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,1,1,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,1,1,lasso,2,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,1,1,lasso,3,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,1,1,lasso,4,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,1,1,lasso,5,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,1,1,lasso,6,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,1,1,lasso,7,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,1,1,lasso,8,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,1,1,lasso,9,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,1,1,lasso,10,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,1,1,lasso,11,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,1,1,lasso,12,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,1,1,shap,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,1,1,shap,2,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,1,1,shap,3,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,1,1,shap,4,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,1,1,shap,5,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,1,1,shap,6,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,1,1,shap,7,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,1,1,shap,8,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,1,1,shap,9,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,1,1,shap,10,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,1,1,shap,11,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,1,1,shap,12,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,1,2,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,1,2,lasso,2,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,1,2,lasso,3,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,1,2,lasso,4,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,1,2,lasso,5,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,1,2,lasso,6,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,1,2,lasso,7,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,1,2,lasso,8,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,1,2,lasso,9,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,1,2,lasso,10,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,1,2,lasso,11,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,1,2,lasso,12,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,1,2,shap,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,1,2,shap,2,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,1,2,shap,3,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,1,2,shap,4,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,1,2,shap,5,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,1,2,shap,6,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,1,2,shap,7,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,1,2,shap,8,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,1,2,shap,9,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,1,2,shap,10,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,1,2,shap,11,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,1,2,shap,12,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,1,3,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,1,3,lasso,2,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,1,3,lasso,3,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,1,3,lasso,4,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,1,3,lasso,5,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,1,3,lasso,6,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,1,3,lasso,7,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,1,3,lasso,8,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,1,3,lasso,9,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,1,3,lasso,10,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,1,3,lasso,11,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,1,3,lasso,12,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,1,3,shap,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,1,3,shap,2,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,1,3,shap,3,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,1,3,shap,4,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,1,3,shap,5,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,1,3,shap,6,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,1,3,shap,7,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,1,3,shap,8,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,1,3,shap,9,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,1,3,shap,10,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,1,3,shap,11,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,1,3,shap,12,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,1,4,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,1,4,lasso,2,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,1,4,lasso,3,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,1,4,lasso,4,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,1,4,lasso,5,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,1,4,lasso,6,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,1,4,lasso,7,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,1,4,lasso,8,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,1,4,lasso,9,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,1,4,lasso,10,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,1,4,lasso,11,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,1,4,lasso,12,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,1,4,shap,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,1,4,shap,2,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,1,4,shap,3,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,1,4,shap,4,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,1,4,shap,5,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,1,4,shap,6,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,1,4,shap,7,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,1,4,shap,8,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,1,4,shap,9,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,1,4,shap,10,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,1,4,shap,11,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,1,4,shap,12,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,2,0,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,2,0,lasso,2,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,2,0,lasso,3,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,2,0,lasso,4,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,2,0,lasso,5,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,2,0,lasso,6,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,2,0,lasso,7,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,2,0,lasso,8,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,2,0,lasso,9,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,2,0,lasso,10,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,2,0,lasso,11,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,2,0,lasso,12,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,2,0,shap,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,2,0,shap,2,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,2,0,shap,3,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,2,0,shap,4,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,2,0,shap,5,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,2,0,shap,6,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,2,0,shap,7,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,2,0,shap,8,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,2,0,shap,9,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,2,0,shap,10,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,2,0,shap,11,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,2,0,shap,12,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,2,1,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,2,1,lasso,2,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,2,1,lasso,3,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,2,1,lasso,4,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,2,1,lasso,5,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,2,1,lasso,6,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,2,1,lasso,7,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,2,1,lasso,8,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,2,1,lasso,9,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,2,1,lasso,10,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,2,1,lasso,11,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,2,1,lasso,12,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,2,1,shap,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,2,1,shap,2,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,2,1,shap,3,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,2,1,shap,4,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,2,1,shap,5,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,2,1,shap,6,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,2,1,shap,7,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,2,1,shap,8,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,2,1,shap,9,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,2,1,shap,10,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,2,1,shap,11,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,2,1,shap,12,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,2,2,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,2,2,lasso,2,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,2,2,lasso,3,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,2,2,lasso,4,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,2,2,lasso,5,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,2,2,lasso,6,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,2,2,lasso,7,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,2,2,lasso,8,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,2,2,lasso,9,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,2,2,lasso,10,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,2,2,lasso,11,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,2,2,lasso,12,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,2,2,shap,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,2,2,shap,2,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,2,2,shap,3,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,2,2,shap,4,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,2,2,shap,5,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,2,2,shap,6,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,2,2,shap,7,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,2,2,shap,8,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,2,2,shap,9,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,2,2,shap,10,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,2,2,shap,11,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,2,2,shap,12,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,2,3,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,2,3,lasso,2,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,2,3,lasso,3,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,2,3,lasso,4,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,2,3,lasso,5,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,2,3,lasso,6,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,2,3,lasso,7,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,2,3,lasso,8,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,2,3,lasso,9,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,2,3,lasso,10,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,2,3,lasso,11,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,2,3,lasso,12,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,2,3,shap,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,2,3,shap,2,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,2,3,shap,3,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,2,3,shap,4,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,2,3,shap,5,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,2,3,shap,6,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,2,3,shap,7,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,2,3,shap,8,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,2,3,shap,9,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,2,3,shap,10,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,2,3,shap,11,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,2,3,shap,12,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,2,4,lasso,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,2,4,lasso,2,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,2,4,lasso,3,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,2,4,lasso,4,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,2,4,lasso,5,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,2,4,lasso,6,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,2,4,lasso,7,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,2,4,lasso,8,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,2,4,lasso,9,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,2,4,lasso,10,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,2,4,lasso,11,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,2,4,lasso,12,composition::Naive immune cell,hnc_wu2022,True
+motif_immune_exclusion,2,4,shap,1,composition::CD8 T cell,hnc_wu2022,True
+motif_immune_exclusion,2,4,shap,2,composition::Other,hnc_wu2022,True
+motif_immune_exclusion,2,4,shap,3,composition::Tumor (Proliferating),hnc_wu2022,True
+motif_immune_exclusion,2,4,shap,4,composition::Tumor,hnc_wu2022,True
+motif_immune_exclusion,2,4,shap,5,composition::B cell,hnc_wu2022,True
+motif_immune_exclusion,2,4,shap,6,composition::APC/Dendritic cell,hnc_wu2022,True
+motif_immune_exclusion,2,4,shap,7,composition::Macrophage,hnc_wu2022,True
+motif_immune_exclusion,2,4,shap,8,composition::Vessel,hnc_wu2022,True
+motif_immune_exclusion,2,4,shap,9,composition::Stroma,hnc_wu2022,True
+motif_immune_exclusion,2,4,shap,10,composition::CD4 T cell,hnc_wu2022,True
+motif_immune_exclusion,2,4,shap,11,composition::Granulocyte,hnc_wu2022,True
+motif_immune_exclusion,2,4,shap,12,composition::Naive immune cell,hnc_wu2022,True
+motif_tumor_high,0,0,lasso,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,0,0,lasso,2,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,0,0,lasso,3,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,0,0,lasso,4,composition::B cell,hnc_wu2022,False
+motif_tumor_high,0,0,lasso,5,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,0,0,lasso,6,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,0,0,lasso,7,composition::Other,hnc_wu2022,False
+motif_tumor_high,0,0,lasso,8,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,0,0,lasso,9,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,0,0,lasso,10,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,0,0,lasso,11,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,0,0,lasso,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,0,0,shap,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,0,0,shap,2,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,0,0,shap,3,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,0,0,shap,4,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,0,0,shap,5,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,0,0,shap,6,composition::B cell,hnc_wu2022,False
+motif_tumor_high,0,0,shap,7,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,0,0,shap,8,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,0,0,shap,9,composition::Other,hnc_wu2022,False
+motif_tumor_high,0,0,shap,10,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,0,0,shap,11,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,0,0,shap,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,0,1,lasso,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,0,1,lasso,2,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,0,1,lasso,3,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,0,1,lasso,4,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,0,1,lasso,5,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,0,1,lasso,6,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,0,1,lasso,7,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,0,1,lasso,8,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,0,1,lasso,9,composition::B cell,hnc_wu2022,False
+motif_tumor_high,0,1,lasso,10,composition::Other,hnc_wu2022,False
+motif_tumor_high,0,1,lasso,11,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,0,1,lasso,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,0,1,shap,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,0,1,shap,2,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,0,1,shap,3,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,0,1,shap,4,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,0,1,shap,5,composition::Other,hnc_wu2022,False
+motif_tumor_high,0,1,shap,6,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,0,1,shap,7,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,0,1,shap,8,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,0,1,shap,9,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,0,1,shap,10,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,0,1,shap,11,composition::B cell,hnc_wu2022,False
+motif_tumor_high,0,1,shap,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,0,2,lasso,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,0,2,lasso,2,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,0,2,lasso,3,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,0,2,lasso,4,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,0,2,lasso,5,composition::Other,hnc_wu2022,False
+motif_tumor_high,0,2,lasso,6,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,0,2,lasso,7,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,0,2,lasso,8,composition::B cell,hnc_wu2022,False
+motif_tumor_high,0,2,lasso,9,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,0,2,lasso,10,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,0,2,lasso,11,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,0,2,lasso,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,0,2,shap,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,0,2,shap,2,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,0,2,shap,3,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,0,2,shap,4,composition::B cell,hnc_wu2022,False
+motif_tumor_high,0,2,shap,5,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,0,2,shap,6,composition::Other,hnc_wu2022,False
+motif_tumor_high,0,2,shap,7,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,0,2,shap,8,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,0,2,shap,9,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,0,2,shap,10,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,0,2,shap,11,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,0,2,shap,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,0,3,lasso,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,0,3,lasso,2,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,0,3,lasso,3,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,0,3,lasso,4,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,0,3,lasso,5,composition::B cell,hnc_wu2022,False
+motif_tumor_high,0,3,lasso,6,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,0,3,lasso,7,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,0,3,lasso,8,composition::Other,hnc_wu2022,False
+motif_tumor_high,0,3,lasso,9,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,0,3,lasso,10,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,0,3,lasso,11,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,0,3,lasso,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,0,3,shap,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,0,3,shap,2,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,0,3,shap,3,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,0,3,shap,4,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,0,3,shap,5,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,0,3,shap,6,composition::B cell,hnc_wu2022,False
+motif_tumor_high,0,3,shap,7,composition::Other,hnc_wu2022,False
+motif_tumor_high,0,3,shap,8,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,0,3,shap,9,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,0,3,shap,10,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,0,3,shap,11,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,0,3,shap,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,0,4,lasso,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,0,4,lasso,2,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,0,4,lasso,3,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,0,4,lasso,4,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,0,4,lasso,5,composition::B cell,hnc_wu2022,False
+motif_tumor_high,0,4,lasso,6,composition::Other,hnc_wu2022,False
+motif_tumor_high,0,4,lasso,7,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,0,4,lasso,8,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,0,4,lasso,9,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,0,4,lasso,10,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,0,4,lasso,11,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,0,4,lasso,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,0,4,shap,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,0,4,shap,2,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,0,4,shap,3,composition::Other,hnc_wu2022,False
+motif_tumor_high,0,4,shap,4,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,0,4,shap,5,composition::B cell,hnc_wu2022,False
+motif_tumor_high,0,4,shap,6,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,0,4,shap,7,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,0,4,shap,8,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,0,4,shap,9,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,0,4,shap,10,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,0,4,shap,11,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,0,4,shap,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,1,0,lasso,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,1,0,lasso,2,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,1,0,lasso,3,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,1,0,lasso,4,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,1,0,lasso,5,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,1,0,lasso,6,composition::B cell,hnc_wu2022,False
+motif_tumor_high,1,0,lasso,7,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,1,0,lasso,8,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,1,0,lasso,9,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,1,0,lasso,10,composition::Other,hnc_wu2022,False
+motif_tumor_high,1,0,lasso,11,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,1,0,lasso,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,1,0,shap,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,1,0,shap,2,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,1,0,shap,3,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,1,0,shap,4,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,1,0,shap,5,composition::B cell,hnc_wu2022,False
+motif_tumor_high,1,0,shap,6,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,1,0,shap,7,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,1,0,shap,8,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,1,0,shap,9,composition::Other,hnc_wu2022,False
+motif_tumor_high,1,0,shap,10,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,1,0,shap,11,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,1,0,shap,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,1,1,lasso,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,1,1,lasso,2,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,1,1,lasso,3,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,1,1,lasso,4,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,1,1,lasso,5,composition::B cell,hnc_wu2022,False
+motif_tumor_high,1,1,lasso,6,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,1,1,lasso,7,composition::Other,hnc_wu2022,False
+motif_tumor_high,1,1,lasso,8,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,1,1,lasso,9,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,1,1,lasso,10,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,1,1,lasso,11,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,1,1,lasso,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,1,1,shap,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,1,1,shap,2,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,1,1,shap,3,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,1,1,shap,4,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,1,1,shap,5,composition::Other,hnc_wu2022,False
+motif_tumor_high,1,1,shap,6,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,1,1,shap,7,composition::B cell,hnc_wu2022,False
+motif_tumor_high,1,1,shap,8,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,1,1,shap,9,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,1,1,shap,10,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,1,1,shap,11,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,1,1,shap,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,1,2,lasso,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,1,2,lasso,2,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,1,2,lasso,3,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,1,2,lasso,4,composition::Other,hnc_wu2022,False
+motif_tumor_high,1,2,lasso,5,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,1,2,lasso,6,composition::B cell,hnc_wu2022,False
+motif_tumor_high,1,2,lasso,7,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,1,2,lasso,8,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,1,2,lasso,9,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,1,2,lasso,10,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,1,2,lasso,11,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,1,2,lasso,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,1,2,shap,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,1,2,shap,2,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,1,2,shap,3,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,1,2,shap,4,composition::Other,hnc_wu2022,False
+motif_tumor_high,1,2,shap,5,composition::B cell,hnc_wu2022,False
+motif_tumor_high,1,2,shap,6,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,1,2,shap,7,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,1,2,shap,8,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,1,2,shap,9,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,1,2,shap,10,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,1,2,shap,11,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,1,2,shap,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,1,3,lasso,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,1,3,lasso,2,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,1,3,lasso,3,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,1,3,lasso,4,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,1,3,lasso,5,composition::Other,hnc_wu2022,False
+motif_tumor_high,1,3,lasso,6,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,1,3,lasso,7,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,1,3,lasso,8,composition::B cell,hnc_wu2022,False
+motif_tumor_high,1,3,lasso,9,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,1,3,lasso,10,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,1,3,lasso,11,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,1,3,lasso,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,1,3,shap,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,1,3,shap,2,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,1,3,shap,3,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,1,3,shap,4,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,1,3,shap,5,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,1,3,shap,6,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,1,3,shap,7,composition::B cell,hnc_wu2022,False
+motif_tumor_high,1,3,shap,8,composition::Other,hnc_wu2022,False
+motif_tumor_high,1,3,shap,9,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,1,3,shap,10,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,1,3,shap,11,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,1,3,shap,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,1,4,lasso,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,1,4,lasso,2,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,1,4,lasso,3,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,1,4,lasso,4,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,1,4,lasso,5,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,1,4,lasso,6,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,1,4,lasso,7,composition::Other,hnc_wu2022,False
+motif_tumor_high,1,4,lasso,8,composition::B cell,hnc_wu2022,False
+motif_tumor_high,1,4,lasso,9,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,1,4,lasso,10,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,1,4,lasso,11,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,1,4,lasso,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,1,4,shap,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,1,4,shap,2,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,1,4,shap,3,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,1,4,shap,4,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,1,4,shap,5,composition::Other,hnc_wu2022,False
+motif_tumor_high,1,4,shap,6,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,1,4,shap,7,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,1,4,shap,8,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,1,4,shap,9,composition::B cell,hnc_wu2022,False
+motif_tumor_high,1,4,shap,10,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,1,4,shap,11,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,1,4,shap,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,2,0,lasso,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,2,0,lasso,2,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,2,0,lasso,3,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,2,0,lasso,4,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,2,0,lasso,5,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,2,0,lasso,6,composition::Other,hnc_wu2022,False
+motif_tumor_high,2,0,lasso,7,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,2,0,lasso,8,composition::B cell,hnc_wu2022,False
+motif_tumor_high,2,0,lasso,9,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,2,0,lasso,10,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,2,0,lasso,11,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,2,0,lasso,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,2,0,shap,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,2,0,shap,2,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,2,0,shap,3,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,2,0,shap,4,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,2,0,shap,5,composition::Other,hnc_wu2022,False
+motif_tumor_high,2,0,shap,6,composition::B cell,hnc_wu2022,False
+motif_tumor_high,2,0,shap,7,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,2,0,shap,8,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,2,0,shap,9,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,2,0,shap,10,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,2,0,shap,11,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,2,0,shap,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,2,1,lasso,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,2,1,lasso,2,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,2,1,lasso,3,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,2,1,lasso,4,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,2,1,lasso,5,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,2,1,lasso,6,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,2,1,lasso,7,composition::Other,hnc_wu2022,False
+motif_tumor_high,2,1,lasso,8,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,2,1,lasso,9,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,2,1,lasso,10,composition::B cell,hnc_wu2022,False
+motif_tumor_high,2,1,lasso,11,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,2,1,lasso,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,2,1,shap,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,2,1,shap,2,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,2,1,shap,3,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,2,1,shap,4,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,2,1,shap,5,composition::B cell,hnc_wu2022,False
+motif_tumor_high,2,1,shap,6,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,2,1,shap,7,composition::Other,hnc_wu2022,False
+motif_tumor_high,2,1,shap,8,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,2,1,shap,9,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,2,1,shap,10,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,2,1,shap,11,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,2,1,shap,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,2,2,lasso,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,2,2,lasso,2,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,2,2,lasso,3,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,2,2,lasso,4,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,2,2,lasso,5,composition::B cell,hnc_wu2022,False
+motif_tumor_high,2,2,lasso,6,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,2,2,lasso,7,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,2,2,lasso,8,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,2,2,lasso,9,composition::Other,hnc_wu2022,False
+motif_tumor_high,2,2,lasso,10,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,2,2,lasso,11,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,2,2,lasso,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,2,2,shap,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,2,2,shap,2,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,2,2,shap,3,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,2,2,shap,4,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,2,2,shap,5,composition::Other,hnc_wu2022,False
+motif_tumor_high,2,2,shap,6,composition::B cell,hnc_wu2022,False
+motif_tumor_high,2,2,shap,7,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,2,2,shap,8,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,2,2,shap,9,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,2,2,shap,10,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,2,2,shap,11,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,2,2,shap,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,2,3,lasso,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,2,3,lasso,2,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,2,3,lasso,3,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,2,3,lasso,4,composition::Other,hnc_wu2022,False
+motif_tumor_high,2,3,lasso,5,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,2,3,lasso,6,composition::B cell,hnc_wu2022,False
+motif_tumor_high,2,3,lasso,7,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,2,3,lasso,8,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,2,3,lasso,9,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,2,3,lasso,10,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,2,3,lasso,11,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,2,3,lasso,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,2,3,shap,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,2,3,shap,2,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,2,3,shap,3,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,2,3,shap,4,composition::Other,hnc_wu2022,False
+motif_tumor_high,2,3,shap,5,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,2,3,shap,6,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,2,3,shap,7,composition::B cell,hnc_wu2022,False
+motif_tumor_high,2,3,shap,8,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,2,3,shap,9,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,2,3,shap,10,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,2,3,shap,11,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,2,3,shap,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,2,4,lasso,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,2,4,lasso,2,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,2,4,lasso,3,composition::B cell,hnc_wu2022,False
+motif_tumor_high,2,4,lasso,4,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,2,4,lasso,5,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,2,4,lasso,6,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,2,4,lasso,7,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,2,4,lasso,8,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,2,4,lasso,9,composition::Other,hnc_wu2022,False
+motif_tumor_high,2,4,lasso,10,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,2,4,lasso,11,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,2,4,lasso,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_tumor_high,2,4,shap,1,composition::Tumor,hnc_wu2022,False
+motif_tumor_high,2,4,shap,2,composition::Vessel,hnc_wu2022,False
+motif_tumor_high,2,4,shap,3,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_tumor_high,2,4,shap,4,composition::CD8 T cell,hnc_wu2022,False
+motif_tumor_high,2,4,shap,5,composition::Macrophage,hnc_wu2022,False
+motif_tumor_high,2,4,shap,6,composition::B cell,hnc_wu2022,False
+motif_tumor_high,2,4,shap,7,composition::CD4 T cell,hnc_wu2022,False
+motif_tumor_high,2,4,shap,8,composition::Other,hnc_wu2022,False
+motif_tumor_high,2,4,shap,9,composition::Stroma,hnc_wu2022,False
+motif_tumor_high,2,4,shap,10,composition::Naive immune cell,hnc_wu2022,False
+motif_tumor_high,2,4,shap,11,composition::Granulocyte,hnc_wu2022,False
+motif_tumor_high,2,4,shap,12,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,0,0,lasso,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,0,0,lasso,2,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,0,0,lasso,3,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,0,0,lasso,4,composition::Other,hnc_wu2022,False
+motif_cd8_high,0,0,lasso,5,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,0,0,lasso,6,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,0,0,lasso,7,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,0,0,lasso,8,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,0,0,lasso,9,composition::B cell,hnc_wu2022,False
+motif_cd8_high,0,0,lasso,10,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,0,0,lasso,11,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,0,0,lasso,12,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,0,0,shap,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,0,0,shap,2,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,0,0,shap,3,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,0,0,shap,4,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,0,0,shap,5,composition::Other,hnc_wu2022,False
+motif_cd8_high,0,0,shap,6,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,0,0,shap,7,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,0,0,shap,8,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,0,0,shap,9,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,0,0,shap,10,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,0,0,shap,11,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,0,0,shap,12,composition::B cell,hnc_wu2022,False
+motif_cd8_high,0,1,lasso,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,0,1,lasso,2,composition::Other,hnc_wu2022,False
+motif_cd8_high,0,1,lasso,3,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,0,1,lasso,4,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,0,1,lasso,5,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,0,1,lasso,6,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,0,1,lasso,7,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,0,1,lasso,8,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,0,1,lasso,9,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,0,1,lasso,10,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,0,1,lasso,11,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,0,1,lasso,12,composition::B cell,hnc_wu2022,False
+motif_cd8_high,0,1,shap,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,0,1,shap,2,composition::Other,hnc_wu2022,False
+motif_cd8_high,0,1,shap,3,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,0,1,shap,4,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,0,1,shap,5,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,0,1,shap,6,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,0,1,shap,7,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,0,1,shap,8,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,0,1,shap,9,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,0,1,shap,10,composition::B cell,hnc_wu2022,False
+motif_cd8_high,0,1,shap,11,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,0,1,shap,12,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,0,2,lasso,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,0,2,lasso,2,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,0,2,lasso,3,composition::Other,hnc_wu2022,False
+motif_cd8_high,0,2,lasso,4,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,0,2,lasso,5,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,0,2,lasso,6,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,0,2,lasso,7,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,0,2,lasso,8,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,0,2,lasso,9,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,0,2,lasso,10,composition::B cell,hnc_wu2022,False
+motif_cd8_high,0,2,lasso,11,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,0,2,lasso,12,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,0,2,shap,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,0,2,shap,2,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,0,2,shap,3,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,0,2,shap,4,composition::Other,hnc_wu2022,False
+motif_cd8_high,0,2,shap,5,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,0,2,shap,6,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,0,2,shap,7,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,0,2,shap,8,composition::B cell,hnc_wu2022,False
+motif_cd8_high,0,2,shap,9,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,0,2,shap,10,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,0,2,shap,11,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,0,2,shap,12,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,0,3,lasso,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,0,3,lasso,2,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,0,3,lasso,3,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,0,3,lasso,4,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,0,3,lasso,5,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,0,3,lasso,6,composition::Other,hnc_wu2022,False
+motif_cd8_high,0,3,lasso,7,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,0,3,lasso,8,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,0,3,lasso,9,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,0,3,lasso,10,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,0,3,lasso,11,composition::B cell,hnc_wu2022,False
+motif_cd8_high,0,3,lasso,12,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,0,3,shap,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,0,3,shap,2,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,0,3,shap,3,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,0,3,shap,4,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,0,3,shap,5,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,0,3,shap,6,composition::Other,hnc_wu2022,False
+motif_cd8_high,0,3,shap,7,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,0,3,shap,8,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,0,3,shap,9,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,0,3,shap,10,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,0,3,shap,11,composition::B cell,hnc_wu2022,False
+motif_cd8_high,0,3,shap,12,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,0,4,lasso,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,0,4,lasso,2,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,0,4,lasso,3,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,0,4,lasso,4,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,0,4,lasso,5,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,0,4,lasso,6,composition::Other,hnc_wu2022,False
+motif_cd8_high,0,4,lasso,7,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,0,4,lasso,8,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,0,4,lasso,9,composition::B cell,hnc_wu2022,False
+motif_cd8_high,0,4,lasso,10,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,0,4,lasso,11,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,0,4,lasso,12,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,0,4,shap,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,0,4,shap,2,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,0,4,shap,3,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,0,4,shap,4,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,0,4,shap,5,composition::Other,hnc_wu2022,False
+motif_cd8_high,0,4,shap,6,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,0,4,shap,7,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,0,4,shap,8,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,0,4,shap,9,composition::B cell,hnc_wu2022,False
+motif_cd8_high,0,4,shap,10,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,0,4,shap,11,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,0,4,shap,12,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,1,0,lasso,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,1,0,lasso,2,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,1,0,lasso,3,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,1,0,lasso,4,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,1,0,lasso,5,composition::Other,hnc_wu2022,False
+motif_cd8_high,1,0,lasso,6,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,1,0,lasso,7,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,1,0,lasso,8,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,1,0,lasso,9,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,1,0,lasso,10,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,1,0,lasso,11,composition::B cell,hnc_wu2022,False
+motif_cd8_high,1,0,lasso,12,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,1,0,shap,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,1,0,shap,2,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,1,0,shap,3,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,1,0,shap,4,composition::Other,hnc_wu2022,False
+motif_cd8_high,1,0,shap,5,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,1,0,shap,6,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,1,0,shap,7,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,1,0,shap,8,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,1,0,shap,9,composition::B cell,hnc_wu2022,False
+motif_cd8_high,1,0,shap,10,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,1,0,shap,11,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,1,0,shap,12,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,1,1,lasso,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,1,1,lasso,2,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,1,1,lasso,3,composition::Other,hnc_wu2022,False
+motif_cd8_high,1,1,lasso,4,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,1,1,lasso,5,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,1,1,lasso,6,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,1,1,lasso,7,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,1,1,lasso,8,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,1,1,lasso,9,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,1,1,lasso,10,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,1,1,lasso,11,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,1,1,lasso,12,composition::B cell,hnc_wu2022,False
+motif_cd8_high,1,1,shap,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,1,1,shap,2,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,1,1,shap,3,composition::Other,hnc_wu2022,False
+motif_cd8_high,1,1,shap,4,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,1,1,shap,5,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,1,1,shap,6,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,1,1,shap,7,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,1,1,shap,8,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,1,1,shap,9,composition::B cell,hnc_wu2022,False
+motif_cd8_high,1,1,shap,10,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,1,1,shap,11,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,1,1,shap,12,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,1,2,lasso,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,1,2,lasso,2,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,1,2,lasso,3,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,1,2,lasso,4,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,1,2,lasso,5,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,1,2,lasso,6,composition::Other,hnc_wu2022,False
+motif_cd8_high,1,2,lasso,7,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,1,2,lasso,8,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,1,2,lasso,9,composition::B cell,hnc_wu2022,False
+motif_cd8_high,1,2,lasso,10,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,1,2,lasso,11,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,1,2,lasso,12,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,1,2,shap,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,1,2,shap,2,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,1,2,shap,3,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,1,2,shap,4,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,1,2,shap,5,composition::Other,hnc_wu2022,False
+motif_cd8_high,1,2,shap,6,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,1,2,shap,7,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,1,2,shap,8,composition::B cell,hnc_wu2022,False
+motif_cd8_high,1,2,shap,9,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,1,2,shap,10,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,1,2,shap,11,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,1,2,shap,12,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,1,3,lasso,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,1,3,lasso,2,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,1,3,lasso,3,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,1,3,lasso,4,composition::Other,hnc_wu2022,False
+motif_cd8_high,1,3,lasso,5,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,1,3,lasso,6,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,1,3,lasso,7,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,1,3,lasso,8,composition::B cell,hnc_wu2022,False
+motif_cd8_high,1,3,lasso,9,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,1,3,lasso,10,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,1,3,lasso,11,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,1,3,lasso,12,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,1,3,shap,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,1,3,shap,2,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,1,3,shap,3,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,1,3,shap,4,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,1,3,shap,5,composition::Other,hnc_wu2022,False
+motif_cd8_high,1,3,shap,6,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,1,3,shap,7,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,1,3,shap,8,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,1,3,shap,9,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,1,3,shap,10,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,1,3,shap,11,composition::B cell,hnc_wu2022,False
+motif_cd8_high,1,3,shap,12,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,1,4,lasso,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,1,4,lasso,2,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,1,4,lasso,3,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,1,4,lasso,4,composition::Other,hnc_wu2022,False
+motif_cd8_high,1,4,lasso,5,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,1,4,lasso,6,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,1,4,lasso,7,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,1,4,lasso,8,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,1,4,lasso,9,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,1,4,lasso,10,composition::B cell,hnc_wu2022,False
+motif_cd8_high,1,4,lasso,11,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,1,4,lasso,12,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,1,4,shap,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,1,4,shap,2,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,1,4,shap,3,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,1,4,shap,4,composition::Other,hnc_wu2022,False
+motif_cd8_high,1,4,shap,5,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,1,4,shap,6,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,1,4,shap,7,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,1,4,shap,8,composition::B cell,hnc_wu2022,False
+motif_cd8_high,1,4,shap,9,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,1,4,shap,10,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,1,4,shap,11,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,1,4,shap,12,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,2,0,lasso,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,2,0,lasso,2,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,2,0,lasso,3,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,2,0,lasso,4,composition::Other,hnc_wu2022,False
+motif_cd8_high,2,0,lasso,5,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,2,0,lasso,6,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,2,0,lasso,7,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,2,0,lasso,8,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,2,0,lasso,9,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,2,0,lasso,10,composition::B cell,hnc_wu2022,False
+motif_cd8_high,2,0,lasso,11,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,2,0,lasso,12,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,2,0,shap,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,2,0,shap,2,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,2,0,shap,3,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,2,0,shap,4,composition::Other,hnc_wu2022,False
+motif_cd8_high,2,0,shap,5,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,2,0,shap,6,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,2,0,shap,7,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,2,0,shap,8,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,2,0,shap,9,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,2,0,shap,10,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,2,0,shap,11,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,2,0,shap,12,composition::B cell,hnc_wu2022,False
+motif_cd8_high,2,1,lasso,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,2,1,lasso,2,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,2,1,lasso,3,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,2,1,lasso,4,composition::Other,hnc_wu2022,False
+motif_cd8_high,2,1,lasso,5,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,2,1,lasso,6,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,2,1,lasso,7,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,2,1,lasso,8,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,2,1,lasso,9,composition::B cell,hnc_wu2022,False
+motif_cd8_high,2,1,lasso,10,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,2,1,lasso,11,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,2,1,lasso,12,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,2,1,shap,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,2,1,shap,2,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,2,1,shap,3,composition::Other,hnc_wu2022,False
+motif_cd8_high,2,1,shap,4,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,2,1,shap,5,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,2,1,shap,6,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,2,1,shap,7,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,2,1,shap,8,composition::B cell,hnc_wu2022,False
+motif_cd8_high,2,1,shap,9,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,2,1,shap,10,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,2,1,shap,11,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,2,1,shap,12,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,2,2,lasso,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,2,2,lasso,2,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,2,2,lasso,3,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,2,2,lasso,4,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,2,2,lasso,5,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,2,2,lasso,6,composition::Other,hnc_wu2022,False
+motif_cd8_high,2,2,lasso,7,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,2,2,lasso,8,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,2,2,lasso,9,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,2,2,lasso,10,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,2,2,lasso,11,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,2,2,lasso,12,composition::B cell,hnc_wu2022,False
+motif_cd8_high,2,2,shap,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,2,2,shap,2,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,2,2,shap,3,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,2,2,shap,4,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,2,2,shap,5,composition::Other,hnc_wu2022,False
+motif_cd8_high,2,2,shap,6,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,2,2,shap,7,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,2,2,shap,8,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,2,2,shap,9,composition::B cell,hnc_wu2022,False
+motif_cd8_high,2,2,shap,10,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,2,2,shap,11,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,2,2,shap,12,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,2,3,lasso,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,2,3,lasso,2,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,2,3,lasso,3,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,2,3,lasso,4,composition::Other,hnc_wu2022,False
+motif_cd8_high,2,3,lasso,5,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,2,3,lasso,6,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,2,3,lasso,7,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,2,3,lasso,8,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,2,3,lasso,9,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,2,3,lasso,10,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,2,3,lasso,11,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,2,3,lasso,12,composition::B cell,hnc_wu2022,False
+motif_cd8_high,2,3,shap,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,2,3,shap,2,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,2,3,shap,3,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,2,3,shap,4,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,2,3,shap,5,composition::Other,hnc_wu2022,False
+motif_cd8_high,2,3,shap,6,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,2,3,shap,7,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,2,3,shap,8,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,2,3,shap,9,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,2,3,shap,10,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,2,3,shap,11,composition::B cell,hnc_wu2022,False
+motif_cd8_high,2,3,shap,12,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,2,4,lasso,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,2,4,lasso,2,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,2,4,lasso,3,composition::Other,hnc_wu2022,False
+motif_cd8_high,2,4,lasso,4,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,2,4,lasso,5,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,2,4,lasso,6,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,2,4,lasso,7,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,2,4,lasso,8,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,2,4,lasso,9,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,2,4,lasso,10,composition::B cell,hnc_wu2022,False
+motif_cd8_high,2,4,lasso,11,composition::Macrophage,hnc_wu2022,False
+motif_cd8_high,2,4,lasso,12,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,2,4,shap,1,composition::CD8 T cell,hnc_wu2022,False
+motif_cd8_high,2,4,shap,2,composition::Tumor,hnc_wu2022,False
+motif_cd8_high,2,4,shap,3,composition::Granulocyte,hnc_wu2022,False
+motif_cd8_high,2,4,shap,4,composition::Tumor (Proliferating),hnc_wu2022,False
+motif_cd8_high,2,4,shap,5,composition::Other,hnc_wu2022,False
+motif_cd8_high,2,4,shap,6,composition::Stroma,hnc_wu2022,False
+motif_cd8_high,2,4,shap,7,composition::Vessel,hnc_wu2022,False
+motif_cd8_high,2,4,shap,8,composition::B cell,hnc_wu2022,False
+motif_cd8_high,2,4,shap,9,composition::APC/Dendritic cell,hnc_wu2022,False
+motif_cd8_high,2,4,shap,10,composition::CD4 T cell,hnc_wu2022,False
+motif_cd8_high,2,4,shap,11,composition::Naive immune cell,hnc_wu2022,False
+motif_cd8_high,2,4,shap,12,composition::Macrophage,hnc_wu2022,False

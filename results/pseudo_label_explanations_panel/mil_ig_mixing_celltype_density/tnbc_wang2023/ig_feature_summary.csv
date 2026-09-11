@@ -1,0 +1,7 @@
+task,kind,explainer,aggregation,n_folds,mean_auc,frac_auc_passed,frac_recovered,frac_passed,frac_miss_as_top1,mean_best_hit_rank,modal_top1,control_frac_passed,verdict,dataset,selected
+motif_cd8_high,control,ig,abs,15,0.8677761006898052,0.13333333333333333,0.0,0.0,0.0,169.5,mixing__neighbor_fraction__CD56^+NK__to__CA9^+,0.0,fail_control,tnbc_wang2023,True
+motif_tumor_high,control,ig,abs,15,0.865819453062805,0.13333333333333333,0.0,0.0,0.0,,mixing__neighbor_fraction__CA9^+__to__Vimentin^{+}EMT,0.0,fail_control,tnbc_wang2023,False
+motif_cd8_high,control,ig,signed,15,0.8677761006898052,0.13333333333333333,0.0,0.0,0.0,163.0,mixing__neighbor_fraction__CD56^{+}NE__to__PDPN^+Stromal,0.0,fail_control,tnbc_wang2023,True
+motif_tumor_high,control,ig,signed,15,0.865819453062805,0.13333333333333333,0.0,0.0,0.0,,mixing__neighbor_fraction__CA9^+__to__CK^{hi}GATA3^{+},0.0,fail_control,tnbc_wang2023,False
+motif_cd8_high,control,ig,top,15,0.8677761006898052,0.13333333333333333,0.0,0.0,0.0,106.5,mixing__neighbor_fraction__CD56^{+}NE__to__PDPN^+Stromal,0.0,fail_control,tnbc_wang2023,True
+motif_tumor_high,control,ig,top,15,0.865819453062805,0.13333333333333333,0.0,0.0,0.0,,mixing__neighbor_fraction__CA9^+__to__Vimentin^{+}EMT,0.0,fail_control,tnbc_wang2023,False

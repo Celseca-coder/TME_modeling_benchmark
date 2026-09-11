@@ -1,0 +1,7 @@
+task,kind,explainer,aggregation,n_folds,mean_auc,frac_auc_passed,frac_recovered,frac_passed,frac_miss_as_top1,mean_best_hit_rank,modal_top1,control_frac_passed,verdict,dataset,selected
+motif_cd8_high,control,ig,abs,15,0.8672033639128475,0.13333333333333333,0.0,0.0,0.0,,mixing__neighbor_fraction__CD56^+NK__to__CA9^+,0.0,fail_control,tnbc_wang2023,True
+motif_tumor_high,control,ig,abs,15,0.8687296590769598,0.2,0.0,0.0,0.0,,mixing__neighbor_fraction__AR^{+}LAR__to__M2 Mac,0.0,fail_control,tnbc_wang2023,False
+motif_cd8_high,control,ig,signed,15,0.8672033639128475,0.13333333333333333,0.0,0.0,0.0,,mixing__neighbor_fraction__CD56^{+}NE__to__PDPN^+Stromal,0.0,fail_control,tnbc_wang2023,True
+motif_tumor_high,control,ig,signed,15,0.8687296590769598,0.2,0.0,0.0,0.0,,mixing__neighbor_fraction__AR^{+}LAR__to__M2 Mac,0.0,fail_control,tnbc_wang2023,False
+motif_cd8_high,control,ig,top,15,0.8672033639128475,0.13333333333333333,0.0,0.0,0.0,,mixing__neighbor_fraction__CD56^{+}NE__to__PDPN^+Stromal,0.0,fail_control,tnbc_wang2023,True
+motif_tumor_high,control,ig,top,15,0.8687296590769598,0.2,0.0,0.0,0.0,,mixing__neighbor_fraction__AR^{+}LAR__to__panCK^{med},0.0,fail_control,tnbc_wang2023,False
