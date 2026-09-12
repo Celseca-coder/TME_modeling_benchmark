@@ -1,0 +1,8 @@
+{
+  "sources": [
+    "composition",
+    "spatial-distance"
+  ],
+  "by_type": true,
+  "cell_type_col": "cell_type"
+}

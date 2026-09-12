@@ -1,0 +1,5 @@
+task,kind,n_folds,mean_auc_ridge,mean_auc_lasso,frac_lasso_passed,frac_shap_passed,frac_faithfulness_passed,frac_fold_passed,mean_drop_top,mean_drop_random,lasso_control_frac,shap_control_frac,control_frac_passed,lasso_verdict,shap_verdict,verdict,dataset,selected
+motif_tumor_high,control,15,0.8901021337775513,0.8924964524173213,0.0,0.0,0.8666666666666667,0.0,0.019581235783336363,0.00232905504073333,0.0,0.0,0.0,fail_control,fail_control,fail_control,bc_metabric_ali2020,False
+motif_cd8_high,control,15,0.7746698597813471,0.7790412235289889,0.0,0.0,0.9333333333333333,0.0,0.03504336548730269,0.0018223557192829753,0.0,0.0,0.0,fail_control,fail_control,fail_control,bc_metabric_ali2020,False
+motif_tumor_stroma_mixing,spatial,15,0.7541508050251587,0.758155026016666,1.0,1.0,0.8666666666666667,0.8666666666666667,0.06374598888258971,-0.00021877507738091346,0.0,0.0,0.0,fail_control_block,fail_control_block,fail_control_block,bc_metabric_ali2020,True
+motif_interface_immune,spatial,15,0.5478818970525805,0.5482975232532612,0.0,0.0,0.4,0.0,-0.014426807648674496,0.0037345414093498267,0.0,0.0,0.0,fail_control_block,fail_control_block,fail_control_block,bc_metabric_ali2020,True
