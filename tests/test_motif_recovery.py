@@ -77,6 +77,90 @@ class MotifRecoveryTest(unittest.TestCase):
         self.assertTrue(rec_fail["miss_as_top1"])
         self.assertFalse(rec_fail["passed"])
 
+    def test_exclusion_tissue_density_is_abundance_leak(self):
+        rec = rank_recovery(
+            [
+                "density::tissue_density::CD8 T cell",
+                "density::tumor_density::CD8 T cell",
+            ],
+            RULES["motif_immune_exclusion"],
+            k=5,
+        )
+        self.assertTrue(rec["recovered"])
+        self.assertTrue(rec["miss_as_top1"])
+        self.assertFalse(rec["passed"])
+
+    def test_exclusion_hits_cd8_tumor_neighbor_fraction(self):
+        rec = rank_recovery(
+            [
+                "mixing::neighbor_fraction__CD8 T cell__to__Tumor",
+                "composition::Stroma",
+            ],
+            RULES["motif_immune_exclusion"],
+            k=5,
+        )
+        self.assertTrue(rec["passed"])
+
+    def test_aliases_cover_tnbc_and_stroma_names(self):
+        self.assertTrue(
+            rank_recovery(
+                ["composition::panCK^{med}", "composition::DCs"],
+                RULES["motif_tumor_high"],
+                k=5,
+            )["passed"]
+        )
+        self.assertTrue(
+            rank_recovery(
+                ["mixing::neighbor_fraction__M2 Mac__to__panCK^{med}"],
+                RULES["motif_macrophage_tumor_niche"],
+                k=5,
+            )["passed"]
+        )
+        self.assertTrue(
+            rank_recovery(
+                ["mixing::neighbor_fraction__DCs__to__CD8^+T"],
+                RULES["motif_apc_t_contact"],
+                k=5,
+            )["passed"]
+        )
+        self.assertTrue(
+            rank_recovery(
+                ["mixing::neighbor_fraction__Fibroblasts__to__Basal"],
+                RULES["motif_tumor_stroma_mixing"],
+                k=5,
+            )["passed"]
+        )
+
+    def test_cd8_clustering_does_not_hit_cd4_ripley(self):
+        rec = rank_recovery(
+            ["point-pattern::CD4 T cell_K_r50", "composition::Tumor"],
+            RULES["motif_cd8_clustering"],
+            k=5,
+        )
+        self.assertFalse(rec["recovered"])
+
+    def test_t_tumor_mixing_does_not_hit_cd45_macrophage(self):
+        rec = rank_recovery(
+            ["density::tumor_density::Macrophages Vim+ CD45low"],
+            RULES["motif_t_tumor_mixing"],
+            k=5,
+        )
+        self.assertFalse(rec["recovered"])
+
+    def test_mixing_does_not_hit_shannon_entropy(self):
+        rec = rank_recovery(
+            ["mixing::shannon_entropy_global", "composition::Tumor"],
+            RULES["motif_t_tumor_mixing"],
+            k=5,
+        )
+        self.assertFalse(rec["recovered"])
+        rec_ok = rank_recovery(
+            ["spatial-distance::cross_neighbor_dist_mean", "composition::Tumor"],
+            RULES["motif_t_tumor_mixing"],
+            k=5,
+        )
+        self.assertTrue(rec_ok["passed"])
+
     def test_mixing_requires_spatial_not_stroma_fraction(self):
         rec = rank_recovery(
             ["composition::Stroma", "composition::Tumor"],

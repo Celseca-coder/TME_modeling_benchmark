@@ -30,6 +30,7 @@ htmlcov/
 # IDE / editor
 .vscode/
 .idea/
+.cursor/
 
 # macOS
 .DS_Store
@@ -51,6 +52,8 @@ nohup.out
 
 # Weights, caches, archives (do not push)
 *.pt
+*.pth
+*.ckpt
 *.pkl
 *.npz
 *.tar
