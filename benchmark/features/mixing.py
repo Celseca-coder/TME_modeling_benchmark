@@ -88,14 +88,24 @@ class MixingFeaturizer(BaseFeatureExtractor):
     ) -> dict[str, float]:
         """Compute local mixing scores and aggregate."""
         n = len(coords)
+        empty = {
+            "local_mixing_mean": np.nan, "local_mixing_std": np.nan,
+            "local_mixing_min": np.nan, "local_mixing_max": np.nan,
+            "same_type_neighbor_fraction": np.nan,
+        }
+        empty.update(
+            {
+                f"neighbor_fraction__{source}__to__{neighbor}": np.nan
+                for source in self.cell_types_
+                for neighbor in self.cell_types_
+            }
+        )
         if n < 2 or k < 1:
-            return {"local_mixing_mean": np.nan, "local_mixing_std": np.nan,
-                    "local_mixing_min": np.nan, "local_mixing_max": np.nan}
+            return empty
 
         k = min(k, n - 1)
         if k == 0:
-            return {"local_mixing_mean": np.nan, "local_mixing_std": np.nan,
-                    "local_mixing_min": np.nan, "local_mixing_max": np.nan}
+            return empty
 
         tree = KDTree(coords)
         # Query k+1 neighbors (first is self)

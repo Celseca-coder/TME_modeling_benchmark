@@ -17,6 +17,30 @@ CANDIDATE_DATASETS = (
     "tnbc_wang2023",
 )
 
+# Frozen 10 motif × source-dataset pairs (PseudoNoisyDataset/selected_catalog.csv).
+SELECTED_MOTIF_SOURCES: tuple[tuple[str, str], ...] = (
+    ("bc_jackson2020", "tumor_high"),
+    ("bc_jackson2020", "t_tumor_mixing"),
+    ("bc_jackson2020", "cd8_tumor_contact"),
+    ("bc_jackson2020", "macrophage_tumor_niche"),
+    ("bc_jackson2020", "apc_t_contact"),
+    ("hnc_wu2022", "cd8_clustering"),
+    ("hnc_wu2022", "immune_exclusion"),
+    ("bc_metabric_ali2020", "tumor_stroma_mixing"),
+    ("bc_metabric_ali2020", "interface_immune"),
+    ("tnbc_wang2023", "cd8_high"),
+)
+SELECTED_PAIR_SET = frozenset(SELECTED_MOTIF_SOURCES)
+
+
+def selected_motifs_for(dataset: str) -> tuple[str, ...]:
+    """Motifs kept for ``dataset`` in the 10-pair panel; empty if none."""
+    return tuple(motif for ds, motif in SELECTED_MOTIF_SOURCES if ds == dataset)
+
+
+def is_selected_pair(dataset: str, motif_id: str) -> bool:
+    return (str(dataset), str(motif_id)) in SELECTED_PAIR_SET
+
 TRUE_CD8_DATASETS = {"hnc_wu2022", "tnbc_wang2023"}
 CD8_MOTIFS = {
     "cd8_high",

@@ -1,0 +1,12 @@
+dataset,motif,feature_group,method,auroc_window_mean,n_regions_scored,n_folds,pass_window
+tnbc_wang2023,cd8_high,composition,shap_mil,0.6895511960385592,766,5,True
+tnbc_wang2023,cd8_high,density,shap_mil,0.6745392275777155,766,5,True
+tnbc_wang2023,cd8_high,mixing,shap_mil,0.6757797776253761,766,5,True
+tnbc_wang2023,cd8_high,point_pattern,shap_mil,0.5932083564337114,766,5,False
+tnbc_wang2023,cd8_high,composition+density,shap_mil,0.6926795277415253,766,5,True
+tnbc_wang2023,cd8_high,composition+mixing,shap_mil,0.6797721576537782,766,5,True
+tnbc_wang2023,cd8_high,composition+point_pattern,shap_mil,0.6147612116042374,766,5,True
+tnbc_wang2023,cd8_high,density+mixing,shap_mil,0.6773590700912835,766,5,True
+tnbc_wang2023,cd8_high,density+point_pattern,shap_mil,0.6068809752936339,766,5,True
+tnbc_wang2023,cd8_high,mixing+point_pattern,shap_mil,0.6588460404124039,766,5,True
+tnbc_wang2023,cd8_high,composition+density+mixing+point_pattern,shap_mil,0.6601282749135394,766,5,True

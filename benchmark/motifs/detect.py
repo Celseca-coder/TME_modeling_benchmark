@@ -163,27 +163,31 @@ def tls_l1_mask(
     return l1
 
 
-def score_tls_like(
+def tls_large_cluster_mask(
     region: RegionData,
     labels: pd.Series,
     catalog: MotifCatalog,
     spec: MotifSpec,
-) -> float:
-    """L2/L3: fraction of cells that sit in a large cluster of L1-positive neighborhoods."""
+) -> np.ndarray:
+    """Per-cell mask: in a connected L1 cluster of size >= min_cluster_size."""
     xy = coordinates_um(region)
     n = len(xy)
+    mask = np.zeros(n, dtype=bool)
     if n == 0:
-        return np.nan
+        return mask
     l1 = tls_l1_mask(xy, labels, catalog, spec)
     idx = np.flatnonzero(l1)
     if len(idx) == 0:
-        return 0.0
-    sub = xy[idx]
-    if len(sub) == 1:
-        return 0.0 if spec.min_cluster_size > 1 else 1.0 / n
-    pairs = KDTree(sub).query_pairs(r=float(spec.radius_um))
+        return mask
+    if len(idx) == 1:
+        if spec.min_cluster_size <= 1:
+            mask[idx] = True
+        return mask
+    pairs = KDTree(xy[idx]).query_pairs(r=float(spec.radius_um))
     if not pairs:
-        return 0.0 if spec.min_cluster_size > 1 else float(len(idx) / n)
+        if spec.min_cluster_size <= 1:
+            mask[idx] = True
+        return mask
     rows: list[int] = []
     cols: list[int] = []
     for i, j in pairs:
@@ -193,8 +197,22 @@ def score_tls_like(
     _n_comp, comp = connected_components(adj, directed=False)
     sizes = pd.Series(comp).value_counts()
     large = set(sizes[sizes >= spec.min_cluster_size].index)
-    n_in_large = int(np.isin(comp, list(large)).sum()) if large else 0
-    return float(n_in_large / n)
+    if large:
+        mask[idx[np.isin(comp, list(large))]] = True
+    return mask
+
+
+def score_tls_like(
+    region: RegionData,
+    labels: pd.Series,
+    catalog: MotifCatalog,
+    spec: MotifSpec,
+) -> float:
+    """L2/L3: fraction of cells that sit in a large cluster of L1-positive neighborhoods."""
+    n = len(region.coordinates)
+    if n == 0:
+        return np.nan
+    return float(tls_large_cluster_mask(region, labels, catalog, spec).mean())
 
 
 def _distance_to_tumor_boundary_um(region: RegionData) -> np.ndarray | None:

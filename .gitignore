@@ -37,8 +37,8 @@ htmlcov/
 
 # Data & large artifacts (uncomment/adjust as needed)
 # data/
-# *.h5ad
-# *.parquet
+*.h5ad
+*.parquet
 
 # Logs and local run dumps
 *.log
@@ -76,6 +76,18 @@ results/pseudo_label_explanations_panel/mil/
 results/pseudo_label_explanations_panel/mil_noisy*/
 results/pseudo_label_explanations_panel/*.tar
 results/pseudo_label_explanations_panel/*.tar.gz
+
+# Per-window label tables and feature panels (hundreds of MB each).
+# Localisation summaries in the same folder stay visible.
+results/pseudo_labels/mil_windows/features/
+results/pseudo_labels/mil_windows/selected/
+results/pseudo_labels/mil_windows/maps/
+results/pseudo_labels/mil_windows/bc_*.csv
+results/pseudo_labels/mil_windows/hnc_*.csv
+results/pseudo_labels/mil_windows/tnbc_*.csv
+
+# Local run logs
+/running_logs/
 
 # Third-party model trees may contain large binaries; already-tracked files stay tracked
 /models/

@@ -1,0 +1,2 @@
+dataset,motif,feature_group,method,auroc_window_mean,n_regions_scored,n_folds,pass_window
+tnbc_wang2023,cd8_high,composition,shap_mil,0.6106952615249952,766,5,True
