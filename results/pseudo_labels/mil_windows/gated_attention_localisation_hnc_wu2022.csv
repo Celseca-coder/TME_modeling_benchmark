@@ -1,0 +1,7 @@
+dataset,motif,feature_group,method,auroc_window_mean,precision_at_20,labeled_prev,n_regions_scored,n_folds,pass_window,pass_precision_at_20,completeness_error_mean,ig_steps_mean
+hnc_wu2022,cd8_clustering,composition+density+mixing+point_pattern,attention,0.5122645278900253,0.5110083269475489,0.5038602367007723,212,5,False,False,,
+hnc_wu2022,cd8_clustering,composition+density+mixing+point_pattern,shap_mil,0.5268738489669254,0.5291277892248589,0.5038602367007723,212,5,False,False,,
+hnc_wu2022,cd8_clustering,composition+density+mixing+point_pattern,ig,0.5274857705265734,0.5368453105183105,0.5038602367007723,212,5,False,False,0.029404618751668027,34.51283393902734
+hnc_wu2022,immune_exclusion,composition+density+mixing+point_pattern,attention,0.46890323744440626,0.5484025949286526,0.5489054146502521,198,5,False,False,,
+hnc_wu2022,immune_exclusion,composition+density+mixing+point_pattern,shap_mil,0.5005975228890845,0.5375582483365977,0.5489054146502521,198,5,False,False,,
+hnc_wu2022,immune_exclusion,composition+density+mixing+point_pattern,ig,0.49720607464893474,0.5404344743090516,0.5489054146502521,198,5,False,False,0.09437783631609852,34.81669562901562

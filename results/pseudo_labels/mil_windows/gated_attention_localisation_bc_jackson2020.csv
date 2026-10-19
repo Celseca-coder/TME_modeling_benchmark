@@ -1,0 +1,16 @@
+dataset,motif,feature_group,method,auroc_window_mean,precision_at_20,labeled_prev,n_regions_scored,n_folds,pass_window,pass_precision_at_20,completeness_error_mean,ig_steps_mean
+bc_jackson2020,tumor_high,composition+density+mixing+point_pattern,attention,0.5474053775524768,0.5285928732605307,0.4672394397873382,665,5,False,False,,
+bc_jackson2020,tumor_high,composition+density+mixing+point_pattern,shap_mil,0.7180825435322282,0.68517518015883,0.4672394397873382,665,5,True,False,,
+bc_jackson2020,tumor_high,composition+density+mixing+point_pattern,ig,0.7466569632662156,0.7142405208345302,0.4672394397873382,665,5,True,True,0.01462496821351542,34.47099051410876
+bc_jackson2020,t_tumor_mixing,composition+density+mixing+point_pattern,attention,0.5128485322608551,0.5379326841220042,0.5278363620318856,277,5,False,False,,
+bc_jackson2020,t_tumor_mixing,composition+density+mixing+point_pattern,shap_mil,0.55426472851108,0.5807521224956701,0.5278363620318856,277,5,False,False,,
+bc_jackson2020,t_tumor_mixing,composition+density+mixing+point_pattern,ig,0.5694387316862741,0.60457378674153,0.5278363620318856,277,5,False,False,0.012755441930851194,33.26870890136327
+bc_jackson2020,cd8_tumor_contact,composition+density+mixing+point_pattern,attention,0.5062313390708721,0.5456526140525962,0.5341268093159146,291,5,False,False,,
+bc_jackson2020,cd8_tumor_contact,composition+density+mixing+point_pattern,shap_mil,0.5498827949626776,0.5928258665067404,0.5341268093159146,291,5,False,False,,
+bc_jackson2020,cd8_tumor_contact,composition+density+mixing+point_pattern,ig,0.5574202481424197,0.5973835409545325,0.5341268093159146,291,5,False,False,0.02162253433548621,34.504823578655014
+bc_jackson2020,macrophage_tumor_niche,composition+density+mixing+point_pattern,attention,0.4875739156938028,0.4445291529003835,0.47629866652892094,116,5,False,False,,
+bc_jackson2020,macrophage_tumor_niche,composition+density+mixing+point_pattern,shap_mil,0.5459993697331135,0.5442587824172099,0.47629866652892094,116,5,False,False,,
+bc_jackson2020,macrophage_tumor_niche,composition+density+mixing+point_pattern,ig,0.5552188793461438,0.5280980467202774,0.47629866652892094,116,5,False,False,0.014428892592789835,34.00862155388471
+bc_jackson2020,apc_t_contact,composition+density+mixing+point_pattern,attention,0.49704063980053637,0.5237008956742206,0.5190701218267919,102,5,False,False,,
+bc_jackson2020,apc_t_contact,composition+density+mixing+point_pattern,shap_mil,0.5233371318894169,0.5459410449405384,0.5190701218267919,102,5,False,False,,
+bc_jackson2020,apc_t_contact,composition+density+mixing+point_pattern,ig,0.518033550298753,0.5474704776599313,0.5190701218267919,102,5,False,False,0.040221247844822186,34.51727500569606

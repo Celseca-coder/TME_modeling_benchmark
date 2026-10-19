@@ -1,0 +1,4 @@
+dataset,motif,feature_group,method,auroc_window_mean,precision_at_20,labeled_prev,n_regions_scored,n_folds,pass_window,pass_precision_at_20,completeness_error_mean,ig_steps_mean
+tnbc_wang2023,cd8_high,composition+density+mixing+point_pattern,attention,0.5244844335656765,0.5245841772405991,0.49527450610572654,766,5,False,False,,
+tnbc_wang2023,cd8_high,composition+density+mixing+point_pattern,shap_mil,0.6601272294947599,0.6643801505653624,0.49527450610572654,766,5,True,False,,
+tnbc_wang2023,cd8_high,composition+density+mixing+point_pattern,ig,0.6916441535505025,0.6748083029075594,0.49527450610572654,766,5,True,False,0.017182353952800884,33.74963323875829

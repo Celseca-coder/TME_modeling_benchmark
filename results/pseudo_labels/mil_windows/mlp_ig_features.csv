@@ -1,0 +1,151 @@
+dataset,motif,feature,mean_rank,n_folds
+hnc_wu2022,cd8_clustering,mixing__neighbor_fraction__CD8 T cell__to__CD8 T cell,1.0,5
+hnc_wu2022,cd8_clustering,point_pattern__CD8 T cell_L_r50,2.2,5
+hnc_wu2022,cd8_clustering,mixing__neighbor_fraction__CD8 T cell__to__Tumor,2.8,5
+hnc_wu2022,cd8_clustering,point_pattern__CD8 T cell_K_r50,4.6,5
+hnc_wu2022,cd8_clustering,mixing__shannon_entropy_global,6.2,5
+hnc_wu2022,cd8_clustering,mixing__neighbor_fraction__CD8 T cell__to__Tumor (Proliferating),6.4,5
+hnc_wu2022,cd8_clustering,mixing__neighbor_fraction__CD8 T cell__to__B cell,8.4,5
+hnc_wu2022,cd8_clustering,composition__CD8 T cell,8.6,5
+hnc_wu2022,cd8_clustering,mixing__local_mixing_mean,9.4,5
+hnc_wu2022,cd8_clustering,point_pattern__CD8 T cell_K_r10,10.0,5
+hnc_wu2022,cd8_clustering,mixing__neighbor_fraction__CD8 T cell__to__Naive immune cell,11.4,5
+hnc_wu2022,cd8_clustering,mixing__neighbor_fraction__CD8 T cell__to__Stroma,13.2,5
+hnc_wu2022,cd8_clustering,point_pattern__CD8 T cell_L_r10,14.4,5
+hnc_wu2022,cd8_clustering,mixing__neighbor_fraction__CD8 T cell__to__Granulocyte,14.8,5
+hnc_wu2022,cd8_clustering,composition__CD4 T cell,15.0,5
+hnc_wu2022,immune_exclusion,mixing__shannon_entropy_global,1.8,5
+hnc_wu2022,immune_exclusion,mixing__shannon_entropy_normalized,3.6,5
+hnc_wu2022,immune_exclusion,mixing__neighbor_fraction__Tumor__to__CD4 T cell,5.2,5
+hnc_wu2022,immune_exclusion,mixing__neighbor_fraction__Tumor__to__CD8 T cell,6.0,5
+hnc_wu2022,immune_exclusion,mixing__neighbor_fraction__Tumor (Proliferating)__to__B cell,7.8,5
+hnc_wu2022,immune_exclusion,celltype_density__Stroma,8.0,5
+hnc_wu2022,immune_exclusion,mixing__neighbor_fraction__Tumor__to__Stroma,8.8,5
+hnc_wu2022,immune_exclusion,local_cell_density_per_mm2,9.6,5
+hnc_wu2022,immune_exclusion,mixing__neighbor_fraction__Tumor (Proliferating)__to__CD4 T cell,9.6,5
+hnc_wu2022,immune_exclusion,mixing__neighbor_fraction__Stroma__to__Tumor,14.4,5
+hnc_wu2022,immune_exclusion,mixing__neighbor_fraction__Tumor__to__Macrophage,23.2,5
+hnc_wu2022,immune_exclusion,mixing__neighbor_fraction__Macrophage__to__Tumor,23.6,5
+hnc_wu2022,immune_exclusion,mixing__neighbor_fraction__Tumor__to__Tumor,23.6,5
+hnc_wu2022,immune_exclusion,mixing__neighbor_fraction__CD8 T cell__to__Tumor,24.0,5
+hnc_wu2022,immune_exclusion,mixing__local_mixing_max,24.6,5
+bc_jackson2020,tumor_high,composition__Stromal cells,1.0,5
+bc_jackson2020,tumor_high,composition__Tumor (CK lo HR lo),2.0,5
+bc_jackson2020,tumor_high,composition__Tumor (CK+ HR lo),3.4,5
+bc_jackson2020,tumor_high,mixing__shannon_entropy_normalized,4.8,5
+bc_jackson2020,tumor_high,composition__Tumor (CK+ HR hi),5.0,5
+bc_jackson2020,tumor_high,composition__Tumor (CK7+),6.6,5
+bc_jackson2020,tumor_high,mixing__shannon_entropy_global,6.6,5
+bc_jackson2020,tumor_high,composition__Tumor (CK7+ CK hi Ecadh hi),7.0,5
+bc_jackson2020,tumor_high,composition__T cell,10.0,5
+bc_jackson2020,tumor_high,composition__Tumor (CK+ HR+),12.2,5
+bc_jackson2020,tumor_high,mixing__neighbor_fraction__Tumor (CK lo HR lo)__to__Tumor (CK lo HR lo),12.8,5
+bc_jackson2020,tumor_high,mixing__local_mixing_mean,13.6,5
+bc_jackson2020,tumor_high,mixing__neighbor_fraction__Stromal cells__to__Stromal cells,13.8,5
+bc_jackson2020,tumor_high,celltype_density__Stromal cells,14.2,5
+bc_jackson2020,tumor_high,composition__Tumor (Myoepithelial),15.2,5
+bc_jackson2020,t_tumor_mixing,mixing__neighbor_fraction__T cell__to__Stromal cells,1.0,5
+bc_jackson2020,t_tumor_mixing,mixing__local_mixing_mean,3.2,5
+bc_jackson2020,t_tumor_mixing,mixing__shannon_entropy_global,3.8,5
+bc_jackson2020,t_tumor_mixing,mixing__neighbor_fraction__T cell__to__Tumor (CK lo HR lo),4.0,5
+bc_jackson2020,t_tumor_mixing,mixing__neighbor_fraction__T cell__to__T cell,7.2,5
+bc_jackson2020,t_tumor_mixing,mixing__neighbor_fraction__T cell__to__Endothelial,8.0,5
+bc_jackson2020,t_tumor_mixing,mixing__neighbor_fraction__T cell__to__Tumor (CK7+ CK hi Ecadh hi),11.0,5
+bc_jackson2020,t_tumor_mixing,mixing__same_type_neighbor_fraction,11.0,5
+bc_jackson2020,t_tumor_mixing,mixing__neighbor_fraction__T cell__to__Tumor (Epithelial low),11.8,5
+bc_jackson2020,t_tumor_mixing,composition__Stromal cells,12.0,5
+bc_jackson2020,t_tumor_mixing,mixing__neighbor_fraction__T cell__to__Macrophage,12.6,5
+bc_jackson2020,t_tumor_mixing,mixing__neighbor_fraction__T cell__to__B cell,13.8,5
+bc_jackson2020,t_tumor_mixing,mixing__neighbor_fraction__T cell__to__Tumor (CK+ HR hi),15.0,5
+bc_jackson2020,t_tumor_mixing,mixing__neighbor_fraction__T cell__to__Tumor (Proliferative),16.0,5
+bc_jackson2020,t_tumor_mixing,mixing__neighbor_fraction__T cell__to__Tumor (CK+ HR lo),16.4,5
+bc_jackson2020,cd8_tumor_contact,mixing__neighbor_fraction__T cell__to__Stromal cells,1.0,5
+bc_jackson2020,cd8_tumor_contact,mixing__shannon_entropy_global,3.4,5
+bc_jackson2020,cd8_tumor_contact,mixing__neighbor_fraction__T cell__to__Tumor (CK lo HR lo),3.6,5
+bc_jackson2020,cd8_tumor_contact,mixing__local_mixing_mean,4.2,5
+bc_jackson2020,cd8_tumor_contact,mixing__neighbor_fraction__T cell__to__T cell,5.2,5
+bc_jackson2020,cd8_tumor_contact,mixing__neighbor_fraction__T cell__to__Endothelial,8.2,5
+bc_jackson2020,cd8_tumor_contact,mixing__neighbor_fraction__T cell__to__Tumor (Epithelial low),10.8,5
+bc_jackson2020,cd8_tumor_contact,composition__Stromal cells,11.2,5
+bc_jackson2020,cd8_tumor_contact,mixing__neighbor_fraction__T cell__to__Tumor (CK7+ CK hi Ecadh hi),11.6,5
+bc_jackson2020,cd8_tumor_contact,mixing__shannon_entropy_normalized,13.0,5
+bc_jackson2020,cd8_tumor_contact,mixing__neighbor_fraction__T cell__to__Tumor (CK+ HR hi),13.4,5
+bc_jackson2020,cd8_tumor_contact,mixing__neighbor_fraction__T cell__to__B cell,13.6,5
+bc_jackson2020,cd8_tumor_contact,mixing__same_type_neighbor_fraction,14.6,5
+bc_jackson2020,cd8_tumor_contact,point_pattern__T cell_L_r50,15.4,5
+bc_jackson2020,cd8_tumor_contact,celltype_density__Stromal cells,16.6,5
+bc_jackson2020,macrophage_tumor_niche,point_pattern__Macrophage_L_r50,2.2,5
+bc_jackson2020,macrophage_tumor_niche,mixing__neighbor_fraction__Macrophage__to__Stromal cells,2.8,5
+bc_jackson2020,macrophage_tumor_niche,mixing__neighbor_fraction__Macrophage__to__T cell,4.6,5
+bc_jackson2020,macrophage_tumor_niche,point_pattern__Macrophage_K_r50,5.8,5
+bc_jackson2020,macrophage_tumor_niche,mixing__neighbor_fraction__Macrophage__to__Tumor (Epithelial low),8.4,5
+bc_jackson2020,macrophage_tumor_niche,mixing__neighbor_fraction__Macrophage__to__Macrophage,9.2,5
+bc_jackson2020,macrophage_tumor_niche,mixing__neighbor_fraction__Macrophage__to__Tumor (CK lo HR lo),9.6,5
+bc_jackson2020,macrophage_tumor_niche,mixing__neighbor_fraction__Macrophage__to__Endothelial,11.8,5
+bc_jackson2020,macrophage_tumor_niche,mixing__neighbor_fraction__Macrophage__to__Tumor (CK+ HR hi),12.0,5
+bc_jackson2020,macrophage_tumor_niche,mixing__shannon_entropy_global,13.6,5
+bc_jackson2020,macrophage_tumor_niche,mixing__shannon_entropy_normalized,14.2,5
+bc_jackson2020,macrophage_tumor_niche,mixing__neighbor_fraction__Macrophage__to__Tumor (CK+ HR lo),15.0,5
+bc_jackson2020,macrophage_tumor_niche,mixing__neighbor_fraction__T cell__to__Macrophage,15.2,5
+bc_jackson2020,macrophage_tumor_niche,point_pattern__T cell_L_r50,15.2,5
+bc_jackson2020,macrophage_tumor_niche,mixing__local_mixing_mean,15.8,5
+bc_jackson2020,apc_t_contact,mixing__neighbor_fraction__Macrophage__to__T cell,1.6,5
+bc_jackson2020,apc_t_contact,point_pattern__T cell_L_r50,2.6,5
+bc_jackson2020,apc_t_contact,point_pattern__T cell_K_r50,2.8,5
+bc_jackson2020,apc_t_contact,mixing__neighbor_fraction__T cell__to__Macrophage,3.8,5
+bc_jackson2020,apc_t_contact,mixing__neighbor_fraction__Macrophage__to__Stromal cells,6.0,5
+bc_jackson2020,apc_t_contact,mixing__shannon_entropy_global,6.8,5
+bc_jackson2020,apc_t_contact,mixing__neighbor_fraction__Macrophage__to__Tumor (CK lo HR lo),9.6,5
+bc_jackson2020,apc_t_contact,mixing__neighbor_fraction__Macrophage__to__Tumor (CK+ HR lo),12.4,5
+bc_jackson2020,apc_t_contact,mixing__neighbor_fraction__Macrophage__to__Tumor (Proliferative),12.8,5
+bc_jackson2020,apc_t_contact,mixing__neighbor_fraction__Macrophage__to__Tumor (CK+ HR hi),15.2,5
+bc_jackson2020,apc_t_contact,mixing__neighbor_fraction__Tumor (Proliferative)__to__Macrophage,21.2,5
+bc_jackson2020,apc_t_contact,mixing__neighbor_fraction__T cell__to__T cell,21.8,5
+bc_jackson2020,apc_t_contact,mixing__shannon_entropy_normalized,23.2,5
+bc_jackson2020,apc_t_contact,mixing__neighbor_fraction__Stromal cells__to__T cell,26.0,5
+bc_jackson2020,apc_t_contact,mixing__neighbor_fraction__T cell__to__Stromal cells,26.2,5
+bc_metabric_ali2020,tumor_stroma_mixing,mixing__neighbor_fraction__Myofibroblasts__to__Myofibroblasts,1.4,5
+bc_metabric_ali2020,tumor_stroma_mixing,mixing__local_mixing_mean,1.6,5
+bc_metabric_ali2020,tumor_stroma_mixing,mixing__neighbor_fraction__Fibroblasts__to__Fibroblasts,3.0,5
+bc_metabric_ali2020,tumor_stroma_mixing,mixing__shannon_entropy_global,4.2,5
+bc_metabric_ali2020,tumor_stroma_mixing,mixing__same_type_neighbor_fraction,5.6,5
+bc_metabric_ali2020,tumor_stroma_mixing,composition__Myofibroblasts,6.0,5
+bc_metabric_ali2020,tumor_stroma_mixing,mixing__shannon_entropy_normalized,6.2,5
+bc_metabric_ali2020,tumor_stroma_mixing,mixing__neighbor_fraction__HR+ CK7-__to__Myofibroblasts,9.2,5
+bc_metabric_ali2020,tumor_stroma_mixing,point_pattern__HR+ CK7-_L_r50,9.2,5
+bc_metabric_ali2020,tumor_stroma_mixing,composition__Fibroblasts,10.0,5
+bc_metabric_ali2020,tumor_stroma_mixing,mixing__neighbor_fraction__HR- CK7-__to__Myofibroblasts,12.6,5
+bc_metabric_ali2020,tumor_stroma_mixing,point_pattern__HR+ CK7-_K_r50,12.6,5
+bc_metabric_ali2020,tumor_stroma_mixing,mixing__neighbor_fraction__HR+ CK7-__to__HR+ CK7-,13.6,5
+bc_metabric_ali2020,tumor_stroma_mixing,composition__HR- CK7-,13.8,5
+bc_metabric_ali2020,tumor_stroma_mixing,point_pattern__Myofibroblasts_L_r50,13.8,5
+bc_metabric_ali2020,interface_immune,point_pattern__HR+ CK7-_L_r50,1.4,5
+bc_metabric_ali2020,interface_immune,point_pattern__HR+ CK7-_K_r50,3.2,5
+bc_metabric_ali2020,interface_immune,mixing__neighbor_fraction__HR- Ki67+__to__Fibroblasts CD68+,5.0,5
+bc_metabric_ali2020,interface_immune,point_pattern__HR+ CK7-_L_r20,15.0,5
+bc_metabric_ali2020,interface_immune,mixing__neighbor_fraction__Endothelial__to__HR+ CK7-,22.6,5
+bc_metabric_ali2020,interface_immune,mixing__shannon_entropy_global,25.6,5
+bc_metabric_ali2020,interface_immune,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__Fibroblasts,26.2,5
+bc_metabric_ali2020,interface_immune,mixing__local_mixing_max,27.2,5
+bc_metabric_ali2020,interface_immune,mixing__neighbor_fraction__HR+ CK7-__to__Macrophages Vim+ Slug-,29.8,5
+bc_metabric_ali2020,interface_immune,mixing__neighbor_fraction__HER2+__to__HR+ CK7-,34.0,5
+bc_metabric_ali2020,interface_immune,local_cell_density_per_mm2,36.6,5
+bc_metabric_ali2020,interface_immune,mixing__neighbor_fraction__Macrophages Vim+ Slug-__to__HR- CK7-,42.8,5
+bc_metabric_ali2020,interface_immune,mixing__neighbor_fraction__HR+ CK7-__to__Macrophages Vim+ Slug+,45.8,5
+bc_metabric_ali2020,interface_immune,composition__Fibroblasts CD68+,49.0,5
+bc_metabric_ali2020,interface_immune,mixing__neighbor_fraction__Macrophages Vim+ CD45low__to__Fibroblasts,49.8,5
+tnbc_wang2023,cd8_high,composition__CD8^+GZMB^+T,1.8,5
+tnbc_wang2023,cd8_high,composition__CD8^+T,2.0,5
+tnbc_wang2023,cd8_high,mixing__shannon_entropy_global,2.2,5
+tnbc_wang2023,cd8_high,celltype_density__CD8^+T,4.8,5
+tnbc_wang2023,cd8_high,local_cell_density_per_mm2,5.0,5
+tnbc_wang2023,cd8_high,composition__CD8^+TCF1^+T,6.6,5
+tnbc_wang2023,cd8_high,composition__CD8^+PD1^+T_{Ex},8.4,5
+tnbc_wang2023,cd8_high,celltype_density__PDPN^+Stromal,8.6,5
+tnbc_wang2023,cd8_high,mixing__neighbor_fraction__CD8^+T__to__CD79a^+Plasma,9.4,5
+tnbc_wang2023,cd8_high,mixing__neighbor_fraction__CD8^+GZMB^+T__to__CD8^+GZMB^+T,13.4,5
+tnbc_wang2023,cd8_high,mixing__neighbor_fraction__CD8^+T__to__PDPN^+Stromal,13.8,5
+tnbc_wang2023,cd8_high,mixing__neighbor_fraction__CD8^+T__to__Fibroblasts,16.0,5
+tnbc_wang2023,cd8_high,celltype_density__Basal,18.4,5
+tnbc_wang2023,cd8_high,mixing__neighbor_fraction__CD8^+T__to__DCs,23.6,5
+tnbc_wang2023,cd8_high,celltype_density__DCs,24.0,5
