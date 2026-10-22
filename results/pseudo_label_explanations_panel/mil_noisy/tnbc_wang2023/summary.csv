@@ -1,0 +1,9 @@
+task,kind,explainer,n_folds,mean_auc,frac_auc_passed,mean_loc_auprc,mean_loc_auprc2,mean_loc_enrichment,frac_loc_passed,mean_aupc_morf,mean_aupc_lerf,mean_delta_lerf_morf,frac_faith_passed,control_auc_frac,control_loc_frac,control_frac_passed,loc_verdict,faith_verdict,verdict,p_morf_lt_random,dataset,selected
+motif_cd8_high,control,attention,5,0.8621161750007771,0.0,,,,0.0,,,,0.0,0.2,0.0,0.0,fail_control,fail_control,fail_control,,tnbc_wang2023,True
+motif_tumor_high,control,attention,5,0.8672953907110508,0.4,0.4394269786444226,0.43932328363712647,1.1820050845950187,0.0,0.47730866244466463,0.5506040010350501,0.07329533859038544,0.4,0.2,0.0,0.0,fail_control,fail_control,fail_control,0.05892571039515435,tnbc_wang2023,True
+motif_cd8_high,control,one_removed,5,0.8621161750007771,0.0,,,,0.0,,,,0.0,0.2,0.2,0.2,fail_control,fail_control,fail_control,,tnbc_wang2023,True
+motif_tumor_high,control,one_removed,5,0.8672953907110508,0.4,0.5860070238623987,0.5846873047020924,1.8124433420237251,0.4,0.36417037927268137,0.7192805718304041,0.3551101925577227,0.4,0.2,0.2,0.2,fail_control,fail_control,fail_control,0.016957944381992295,tnbc_wang2023,True
+motif_cd8_high,control,random,5,0.8621161750007771,0.0,,,,0.0,,,,0.0,0.2,0.0,0.0,fail_control,fail_control,fail_control,,tnbc_wang2023,True
+motif_tumor_high,control,random,5,0.8672953907110508,0.4,0.38454910016514476,0.3902513572523716,0.9950172615468195,0.0,0.5361548864922727,0.5479717030582645,0.011816816565991867,0.0,0.2,0.0,0.0,fail_control,fail_control,fail_control,0.02825411790989945,tnbc_wang2023,True
+motif_cd8_high,control,single,5,0.8621161750007771,0.0,,,,0.0,,,,0.0,0.2,0.2,0.2,fail_control,fail_control,fail_control,,tnbc_wang2023,True
+motif_tumor_high,control,single,5,0.8672953907110508,0.4,0.720010298591877,0.7327349702254857,2.188478545804463,0.4,0.24590822863114903,0.7687954843484002,0.522887255717251,0.4,0.2,0.2,0.2,fail_control,fail_control,fail_control,0.02875199650394366,tnbc_wang2023,True

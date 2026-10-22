@@ -104,7 +104,11 @@ class MotifRecoveryTest(unittest.TestCase):
             index=y.index,
         )
         model = LinearClassifier(seed=0, C=0.2, l1_ratio=1.0).fit(X, y)
-        self.assertEqual(model._clf.penalty, "l1")
+        self.assertEqual(model._clf.solver, "saga")
+        self.assertEqual(model._clf.penalty, "elasticnet")
+        self.assertEqual(model._clf.l1_ratio, 1.0)
+        coef = np.asarray(model._clf.coef_).ravel()
+        self.assertEqual(int(np.count_nonzero(coef)), 1)
 
 
 class UTAGRecoveryTest(unittest.TestCase):

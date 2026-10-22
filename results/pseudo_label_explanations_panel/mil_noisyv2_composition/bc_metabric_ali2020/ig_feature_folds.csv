@@ -1,0 +1,181 @@
+task,kind,seed,fold,explainer,aggregation,n_bags,auc,auc_passed,top1,hit_in_top,n_hit_in_top,best_hit_rank,miss_as_top1,recovered,passed,fold_passed,dataset,selected
+motif_interface_immune,spatial,0,0,ig,abs,62,0.709508881922675,True,composition__HR- CKlow CK5+,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,signed,62,0.709508881922675,True,composition__HR- CKlow CK5+,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,0,ig,top,62,0.709508881922675,True,composition__HR- CKlow CK5+,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,1,ig,abs,0,0.5194660734149055,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,1,ig,signed,0,0.5194660734149055,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,1,ig,top,0,0.5194660734149055,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,abs,59,0.6095661846496107,True,composition__Myoepithelial,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,signed,59,0.6095661846496107,True,composition__Myoepithelial,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,2,ig,top,59,0.6095661846496107,True,composition__Myoepithelial,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,3,ig,abs,0,0.4924731182795699,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,3,ig,signed,0,0.4924731182795699,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,3,ig,top,0,0.4924731182795699,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,4,ig,abs,0,0.4347290640394089,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,4,ig,signed,0,0.4347290640394089,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,0,4,ig,top,0,0.4347290640394089,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,1,0,ig,abs,0,0.4375,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,1,0,ig,signed,0,0.4375,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,1,0,ig,top,0,0.4375,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,1,1,ig,abs,0,0.5461624026696329,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,1,1,ig,signed,0,0.5461624026696329,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,1,1,ig,top,0,0.5461624026696329,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,1,2,ig,abs,0,0.48271604938271606,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,1,2,ig,signed,0,0.48271604938271606,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,1,2,ig,top,0,0.48271604938271606,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,1,3,ig,abs,0,0.5413793103448276,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,1,3,ig,signed,0,0.5413793103448276,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,1,3,ig,top,0,0.5413793103448276,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,1,4,ig,abs,0,0.4994775339602926,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,1,4,ig,signed,0,0.4994775339602926,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,1,4,ig,top,0,0.4994775339602926,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,0,ig,abs,0,0.5383759733036708,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,0,ig,signed,0,0.5383759733036708,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,0,ig,top,0,0.5383759733036708,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,1,ig,abs,0,0.5287356321839081,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,1,ig,signed,0,0.5287356321839081,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,1,ig,top,0,0.5287356321839081,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,abs,0,0.41935483870967744,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,signed,0,0.41935483870967744,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,2,ig,top,0,0.41935483870967744,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,3,ig,abs,0,0.4178571428571428,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,3,ig,signed,0,0.4178571428571428,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,3,ig,top,0,0.4178571428571428,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,4,ig,abs,0,0.541871921182266,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,4,ig,signed,0,0.541871921182266,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_interface_immune,spatial,2,4,ig,top,0,0.541871921182266,False,,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,0,ig,abs,68,0.6128472222222221,True,composition__Myofibroblasts,,0,,True,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,0,ig,signed,68,0.6128472222222221,True,composition__HR- CK7-,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,0,ig,top,68,0.6128472222222221,True,composition__HR- CK7-,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,abs,67,0.6648745519713262,True,composition__Basal CKlow,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,signed,67,0.6648745519713262,True,composition__HR- CK7-,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,1,ig,top,67,0.6648745519713262,True,composition__HR- CK7-,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,abs,70,0.7607313195548491,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,signed,70,0.7607313195548491,True,composition__Myofibroblasts,,0,,True,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,2,ig,top,70,0.7607313195548491,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,abs,67,0.7163865546218487,True,composition__HRlow CKlow,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,signed,67,0.7163865546218487,True,composition__Fibroblasts,,0,,True,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,3,ig,top,67,0.7163865546218487,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,4,ig,abs,74,0.6880934989043097,True,composition__Myofibroblasts,,0,,True,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,4,ig,signed,74,0.6880934989043097,True,composition__Myofibroblasts,,0,,True,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,0,4,ig,top,74,0.6880934989043097,True,composition__HR- CKlow CK5+,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,abs,68,0.7212121212121212,True,composition__HRlow CKlow,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,signed,68,0.7212121212121212,True,composition__HR- CK7-,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,0,ig,top,68,0.7212121212121212,True,composition__HRlow CKlow,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,1,ig,abs,70,0.7376644736842105,True,composition__Basal CKlow,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,1,ig,signed,70,0.7376644736842105,True,composition__Myofibroblasts,,0,,True,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,1,ig,top,70,0.7376644736842105,True,composition__HR- CK7-,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,abs,64,0.6773148148148148,True,composition__Fibroblasts,,0,,True,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,signed,64,0.6773148148148148,True,composition__Fibroblasts,,0,,True,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,2,ig,top,64,0.6773148148148148,True,composition__HR- CKlow CK5+,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,abs,73,0.7436186186186186,True,composition__Myofibroblasts,,0,,True,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,signed,73,0.7436186186186186,True,composition__HR- CK7-,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,3,ig,top,73,0.7436186186186186,True,composition__HR- CKlow CK5+,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,abs,71,0.7073359073359073,True,composition__HR- CK7-,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,signed,71,0.7073359073359073,True,composition__HR- CK7-,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,1,4,ig,top,71,0.7073359073359073,True,composition__HR- CK7-,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,abs,70,0.8095238095238095,True,composition__Myoepithelial,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,signed,70,0.8095238095238095,True,composition__Myofibroblasts,,0,,True,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,0,ig,top,70,0.8095238095238095,True,composition__HR- CK7-,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,abs,73,0.6798245614035089,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,signed,73,0.6798245614035089,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,1,ig,top,73,0.6798245614035089,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,2,ig,abs,67,0.6102877070619006,True,composition__Fibroblasts,,0,,True,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,2,ig,signed,67,0.6102877070619006,True,composition__Macrophages Vim+ CD45low,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,2,ig,top,67,0.6102877070619006,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,abs,69,0.6414141414141414,True,composition__Fibroblasts,,0,,True,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,signed,69,0.6414141414141414,True,composition__Fibroblasts,,0,,True,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,3,ig,top,69,0.6414141414141414,True,composition__Vascular SMA+,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,abs,67,0.7168458781362006,True,composition__HRlow CKlow,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,signed,67,0.7168458781362006,True,composition__Myofibroblasts,,0,,True,False,False,False,bc_metabric_ali2020,True
+motif_tumor_stroma_mixing,spatial,2,4,ig,top,67,0.7168458781362006,True,composition__HRlow CKlow,,0,,False,False,False,False,bc_metabric_ali2020,True
+motif_tumor_high,control,0,0,ig,abs,107,0.9156089193825043,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,0,0,ig,signed,107,0.9156089193825043,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,0,0,ig,top,107,0.9156089193825043,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,0,1,ig,abs,0,0.896969696969697,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,0,1,ig,signed,0,0.896969696969697,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,0,1,ig,top,0,0.896969696969697,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,0,2,ig,abs,111,0.9031020147105853,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,0,2,ig,signed,111,0.9031020147105853,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,0,2,ig,top,111,0.9031020147105853,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,abs,113,0.9421182266009852,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,signed,113,0.9421182266009852,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,0,3,ig,top,113,0.9421182266009852,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,0,4,ig,abs,104,0.9030501089324618,True,composition__Fibroblasts,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,0,4,ig,signed,104,0.9030501089324618,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,0,4,ig,top,104,0.9030501089324618,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,abs,103,0.927615780445969,True,composition__Fibroblasts,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,signed,103,0.927615780445969,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,1,0,ig,top,103,0.927615780445969,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,abs,109,0.9066711590296496,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,signed,109,0.9066711590296496,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,1,1,ig,top,109,0.9066711590296496,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,1,2,ig,abs,109,0.9060846560846562,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,1,2,ig,signed,109,0.9060846560846562,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,1,2,ig,top,109,0.9060846560846562,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,1,3,ig,abs,111,0.9464285714285714,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,1,3,ig,signed,111,0.9464285714285714,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,1,3,ig,top,111,0.9464285714285714,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,abs,108,0.9501683501683501,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,signed,108,0.9501683501683501,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,1,4,ig,top,108,0.9501683501683501,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,2,0,ig,abs,107,0.937221269296741,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,2,0,ig,signed,107,0.937221269296741,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,2,0,ig,top,107,0.937221269296741,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,2,1,ig,abs,112,0.9064039408866995,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,2,1,ig,signed,112,0.9064039408866995,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,2,1,ig,top,112,0.9064039408866995,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,abs,106,0.9290705800139762,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,signed,106,0.9290705800139762,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,2,2,ig,top,106,0.9290705800139762,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,2,3,ig,abs,110,0.9080687830687831,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,2,3,ig,signed,110,0.9080687830687831,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,2,3,ig,top,110,0.9080687830687831,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,2,4,ig,abs,105,0.9090909090909091,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,2,4,ig,signed,105,0.9090909090909091,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_tumor_high,control,2,4,ig,top,105,0.9090909090909091,True,composition__HR+ CK7-,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,0,0,ig,abs,0,0.8513339762134363,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,0,0,ig,signed,0,0.8513339762134363,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,0,0,ig,top,0,0.8513339762134363,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,0,1,ig,abs,0,0.8545038705137228,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,0,1,ig,signed,0,0.8545038705137228,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,0,1,ig,top,0,0.8545038705137228,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,0,2,ig,abs,0,0.8402732595966169,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,0,2,ig,signed,0,0.8402732595966169,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,0,2,ig,top,0,0.8402732595966169,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,0,3,ig,abs,0,0.8692493946731235,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,0,3,ig,signed,0,0.8692493946731235,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,0,3,ig,top,0,0.8692493946731235,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,0,4,ig,abs,0,0.8233333333333333,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,0,4,ig,signed,0,0.8233333333333333,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,0,4,ig,top,0,0.8233333333333333,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,1,0,ig,abs,0,0.8066666666666668,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,1,0,ig,signed,0,0.8066666666666668,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,1,0,ig,top,0,0.8066666666666668,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,1,1,ig,abs,0,0.878817100610736,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,1,1,ig,signed,0,0.878817100610736,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,1,1,ig,top,0,0.878817100610736,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,1,2,ig,abs,0,0.8336601307189542,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,1,2,ig,signed,0,0.8336601307189542,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,1,2,ig,top,0,0.8336601307189542,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,1,3,ig,abs,0,0.8918644067796611,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,1,3,ig,signed,0,0.8918644067796611,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,1,3,ig,top,0,0.8918644067796611,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,1,4,ig,abs,0,0.8244067796610169,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,1,4,ig,signed,0,0.8244067796610169,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,1,4,ig,top,0,0.8244067796610169,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,2,0,ig,abs,0,0.8374710360807679,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,2,0,ig,signed,0,0.8374710360807679,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,2,0,ig,top,0,0.8374710360807679,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,2,1,ig,abs,0,0.8397031539888683,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,2,1,ig,signed,0,0.8397031539888683,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,2,1,ig,top,0,0.8397031539888683,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,2,2,ig,abs,109,0.9142372881355932,True,composition__T cells,composition__T cells,1,1.0,False,True,True,True,bc_metabric_ali2020,False
+motif_cd8_high,control,2,2,ig,signed,109,0.9142372881355932,True,composition__T cells,composition__T cells,1,1.0,False,True,True,True,bc_metabric_ali2020,False
+motif_cd8_high,control,2,2,ig,top,109,0.9142372881355932,True,composition__T cells,composition__T cells,1,1.0,False,True,True,True,bc_metabric_ali2020,False
+motif_cd8_high,control,2,3,ig,abs,0,0.8254437869822485,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,2,3,ig,signed,0,0.8254437869822485,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,2,3,ig,top,0,0.8254437869822485,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,2,4,ig,abs,0,0.8288194444444444,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,2,4,ig,signed,0,0.8288194444444444,False,,,0,,False,False,False,False,bc_metabric_ali2020,False
+motif_cd8_high,control,2,4,ig,top,0,0.8288194444444444,False,,,0,,False,False,False,False,bc_metabric_ali2020,False

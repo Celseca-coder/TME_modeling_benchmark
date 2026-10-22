@@ -1,0 +1,13 @@
+task,kind,explainer,aggregation,n_folds,mean_auc,frac_auc_passed,frac_recovered,frac_passed,frac_miss_as_top1,mean_best_hit_rank,modal_top1,control_frac_passed,verdict,dataset,selected
+motif_cd8_clustering,spatial,ig,abs,15,0.8362932695858607,1.0,0.0,0.0,1.0,,composition__CD8 T cell,0.5666666666666667,abundance_only_or_fail,hnc_wu2022,True
+motif_cd8_high,control,ig,abs,15,0.9147129972240033,0.6,0.6,0.6,0.0,1.0,composition__CD8 T cell,0.5666666666666667,pass_control,hnc_wu2022,False
+motif_immune_exclusion,spatial,ig,abs,15,0.769908445307184,1.0,0.0,0.0,0.26666666666666666,,composition__Tumor,0.5666666666666667,abundance_only_or_fail,hnc_wu2022,True
+motif_tumor_high,control,ig,abs,15,0.8929222445906486,0.5333333333333333,0.5333333333333333,0.5333333333333333,0.0,1.25,composition__Tumor,0.5666666666666667,pass_control,hnc_wu2022,False
+motif_cd8_clustering,spatial,ig,signed,15,0.8362932695858607,1.0,0.0,0.0,1.0,,composition__CD8 T cell,0.5666666666666667,abundance_only_or_fail,hnc_wu2022,True
+motif_cd8_high,control,ig,signed,15,0.9147129972240033,0.6,0.6,0.6,0.0,1.0,composition__CD8 T cell,0.5666666666666667,pass_control,hnc_wu2022,False
+motif_immune_exclusion,spatial,ig,signed,15,0.769908445307184,1.0,0.0,0.0,0.0,,composition__Tumor,0.5666666666666667,abundance_only_or_fail,hnc_wu2022,True
+motif_tumor_high,control,ig,signed,15,0.8929222445906486,0.5333333333333333,0.5333333333333333,0.5333333333333333,0.0,1.875,composition__Tumor,0.5666666666666667,pass_control,hnc_wu2022,False
+motif_cd8_clustering,spatial,ig,top,15,0.8362932695858607,1.0,0.0,0.0,1.0,,composition__CD8 T cell,0.5666666666666667,abundance_only_or_fail,hnc_wu2022,True
+motif_cd8_high,control,ig,top,15,0.9147129972240033,0.6,0.6,0.6,0.0,1.0,composition__CD8 T cell,0.5666666666666667,pass_control,hnc_wu2022,False
+motif_immune_exclusion,spatial,ig,top,15,0.769908445307184,1.0,0.0,0.0,0.06666666666666667,,composition__Tumor,0.5666666666666667,abundance_only_or_fail,hnc_wu2022,True
+motif_tumor_high,control,ig,top,15,0.8929222445906486,0.5333333333333333,0.5333333333333333,0.5333333333333333,0.0,1.625,composition__Tumor,0.5666666666666667,pass_control,hnc_wu2022,False

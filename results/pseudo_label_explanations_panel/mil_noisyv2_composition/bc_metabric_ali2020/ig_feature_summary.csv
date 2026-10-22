@@ -1,0 +1,13 @@
+task,kind,explainer,aggregation,n_folds,mean_auc,frac_auc_passed,frac_recovered,frac_passed,frac_miss_as_top1,mean_best_hit_rank,modal_top1,control_frac_passed,verdict,dataset,selected
+motif_cd8_high,control,ig,abs,15,0.8479855752266127,0.06666666666666667,0.06666666666666667,0.06666666666666667,0.0,1.0,composition__T cells,0.03333333333333333,fail_control,bc_metabric_ali2020,False
+motif_interface_immune,spatial,ig,abs,15,0.5146116084600203,0.13333333333333333,0.0,0.0,0.0,,composition__HR- CKlow CK5+,0.03333333333333333,fail_control_block,bc_metabric_ali2020,True
+motif_tumor_high,control,ig,abs,15,0.9191781977407025,0.9333333333333333,0.0,0.0,0.0,,composition__HR+ CK7-,0.03333333333333333,fail_control,bc_metabric_ali2020,False
+motif_tumor_stroma_mixing,spatial,ig,abs,15,0.6991983453653193,1.0,0.0,0.0,0.4,,composition__Fibroblasts,0.03333333333333333,fail_control_block,bc_metabric_ali2020,True
+motif_cd8_high,control,ig,signed,15,0.8479855752266127,0.06666666666666667,0.06666666666666667,0.06666666666666667,0.0,1.0,composition__T cells,0.03333333333333333,fail_control,bc_metabric_ali2020,False
+motif_interface_immune,spatial,ig,signed,15,0.5146116084600203,0.13333333333333333,0.0,0.0,0.0,,composition__HR- CKlow CK5+,0.03333333333333333,fail_control_block,bc_metabric_ali2020,True
+motif_tumor_high,control,ig,signed,15,0.9191781977407025,0.9333333333333333,0.0,0.0,0.0,,composition__HR+ CK7-,0.03333333333333333,fail_control,bc_metabric_ali2020,False
+motif_tumor_stroma_mixing,spatial,ig,signed,15,0.6991983453653193,1.0,0.0,0.0,0.5333333333333333,,composition__HR- CK7-,0.03333333333333333,fail_control_block,bc_metabric_ali2020,True
+motif_cd8_high,control,ig,top,15,0.8479855752266127,0.06666666666666667,0.06666666666666667,0.06666666666666667,0.0,1.0,composition__T cells,0.03333333333333333,fail_control,bc_metabric_ali2020,False
+motif_interface_immune,spatial,ig,top,15,0.5146116084600203,0.13333333333333333,0.0,0.0,0.0,,composition__HR- CKlow CK5+,0.03333333333333333,fail_control_block,bc_metabric_ali2020,True
+motif_tumor_high,control,ig,top,15,0.9191781977407025,0.9333333333333333,0.0,0.0,0.0,,composition__HR+ CK7-,0.03333333333333333,fail_control,bc_metabric_ali2020,False
+motif_tumor_stroma_mixing,spatial,ig,top,15,0.6991983453653193,1.0,0.0,0.0,0.0,,composition__HR- CK7-,0.03333333333333333,fail_control_block,bc_metabric_ali2020,True

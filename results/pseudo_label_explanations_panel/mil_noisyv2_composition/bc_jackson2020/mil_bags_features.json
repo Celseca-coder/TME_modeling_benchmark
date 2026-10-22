@@ -1,0 +1,22 @@
+[
+  "composition__B cell",
+  "composition__Endothelial",
+  "composition__Macrophage",
+  "composition__Stromal cells",
+  "composition__T & B cells",
+  "composition__T cell",
+  "composition__Tumor (Apoptotic)",
+  "composition__Tumor (Basal CK)",
+  "composition__Tumor (CK lo HR hi p53+)",
+  "composition__Tumor (CK lo HR lo)",
+  "composition__Tumor (CK+ HR hi)",
+  "composition__Tumor (CK+ HR lo)",
+  "composition__Tumor (CK+ HR+)",
+  "composition__Tumor (CK7+ CK hi Ecadh hi)",
+  "composition__Tumor (CK7+)",
+  "composition__Tumor (Epithelial low)",
+  "composition__Tumor (Hypoxic)",
+  "composition__Tumor (Myoepithelial)",
+  "composition__Tumor (Proliferative)",
+  "composition__Tumor (p53+ EGFR+)"
+]

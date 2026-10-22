@@ -39,6 +39,12 @@ htmlcov/
 # *.h5ad
 # *.parquet
 
+# Over GitHub's 100MB file limit
+results/**/*.pkl
+results/pseudo_labels/mil_windows/
+results/pseudo_label_explanations_panel/*.tar*
+results/pseudo_label_explanations_panel/features/*_gnn_explainer.csv
+
 # Logs
 *.log
 

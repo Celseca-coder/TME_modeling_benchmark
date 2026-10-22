@@ -1,0 +1,49 @@
+task,kind,explainer,aggregation,n_folds,mean_auc,frac_auc_passed,frac_recovered,frac_passed,frac_miss_as_top1,mean_best_hit_rank,modal_top1,control_frac_passed,verdict,dataset,selected
+motif_apc_t_contact,spatial,ig,abs,15,0.6412292819145929,0.8,0.0,0.0,0.06666666666666667,,composition__Tumor (Myoepithelial),0.43333333333333335,fail_control_block,bc_jackson2020,True
+motif_cd8_high,control,ig,abs,15,0.882949647443491,0.26666666666666666,0.26666666666666666,0.26666666666666666,0.0,1.0,composition__T cell,0.43333333333333335,fail_control,bc_jackson2020,False
+motif_cd8_tumor_contact,spatial,ig,abs,15,0.7913586775589501,1.0,0.0,0.0,1.0,,composition__T cell,0.43333333333333335,fail_control_block,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,ig,abs,15,0.6029246608540901,0.4666666666666667,0.0,0.0,0.4,,composition__Macrophage,0.43333333333333335,fail_control_block,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,ig,abs,15,0.7994056676887384,1.0,0.0,0.0,0.7333333333333333,,composition__T cell,0.43333333333333335,fail_control_block,bc_jackson2020,True
+motif_tumor_high,control,ig,abs,15,0.9063328203530644,0.6,0.6,0.6,0.0,2.4444444444444446,composition__Stromal cells,0.43333333333333335,pass_control,bc_jackson2020,True
+motif_apc_t_contact,spatial,ig,signed,15,0.6412292819145929,0.8,0.0,0.0,0.06666666666666667,,composition__Tumor (Myoepithelial),0.43333333333333335,fail_control_block,bc_jackson2020,True
+motif_cd8_high,control,ig,signed,15,0.882949647443491,0.26666666666666666,0.26666666666666666,0.26666666666666666,0.0,1.0,composition__T cell,0.43333333333333335,fail_control,bc_jackson2020,False
+motif_cd8_tumor_contact,spatial,ig,signed,15,0.7913586775589501,1.0,0.0,0.0,0.8666666666666667,,composition__T cell,0.43333333333333335,fail_control_block,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,ig,signed,15,0.6029246608540901,0.4666666666666667,0.0,0.0,0.3333333333333333,,composition__Macrophage,0.43333333333333335,fail_control_block,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,ig,signed,15,0.7994056676887384,1.0,0.0,0.0,0.9333333333333333,,composition__T cell,0.43333333333333335,fail_control_block,bc_jackson2020,True
+motif_tumor_high,control,ig,signed,15,0.9063328203530644,0.6,0.6,0.6,0.0,1.2222222222222223,composition__Tumor (CK+ HR hi),0.43333333333333335,pass_control,bc_jackson2020,True
+motif_apc_t_contact,spatial,ig,top,15,0.6412292819145929,0.8,0.0,0.0,0.13333333333333333,,composition__Stromal cells,0.43333333333333335,fail_control_block,bc_jackson2020,True
+motif_cd8_high,control,ig,top,15,0.882949647443491,0.26666666666666666,0.26666666666666666,0.26666666666666666,0.0,1.0,composition__T cell,0.43333333333333335,fail_control,bc_jackson2020,False
+motif_cd8_tumor_contact,spatial,ig,top,15,0.7913586775589501,1.0,0.0,0.0,1.0,,composition__Tumor (Myoepithelial),0.43333333333333335,fail_control_block,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,ig,top,15,0.6029246608540901,0.4666666666666667,0.0,0.0,0.3333333333333333,,composition__Macrophage,0.43333333333333335,fail_control_block,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,ig,top,15,0.7994056676887384,1.0,0.0,0.0,1.0,,composition__T cell,0.43333333333333335,fail_control_block,bc_jackson2020,True
+motif_tumor_high,control,ig,top,15,0.9063328203530644,0.6,0.6,0.6,0.0,1.2222222222222223,composition__Tumor (CK lo HR lo),0.43333333333333335,pass_control,bc_jackson2020,True
+motif_cd8_clustering,spatial,ig,abs,15,0.8362932695858607,1.0,0.0,0.0,1.0,,composition__CD8 T cell,0.5666666666666667,abundance_only_or_fail,hnc_wu2022,True
+motif_cd8_high,control,ig,abs,15,0.9147129972240033,0.6,0.6,0.6,0.0,1.0,composition__CD8 T cell,0.5666666666666667,pass_control,hnc_wu2022,False
+motif_immune_exclusion,spatial,ig,abs,15,0.769908445307184,1.0,0.0,0.0,0.26666666666666666,,composition__Tumor,0.5666666666666667,abundance_only_or_fail,hnc_wu2022,True
+motif_tumor_high,control,ig,abs,15,0.8929222445906486,0.5333333333333333,0.5333333333333333,0.5333333333333333,0.0,1.25,composition__Tumor,0.5666666666666667,pass_control,hnc_wu2022,False
+motif_cd8_clustering,spatial,ig,signed,15,0.8362932695858607,1.0,0.0,0.0,1.0,,composition__CD8 T cell,0.5666666666666667,abundance_only_or_fail,hnc_wu2022,True
+motif_cd8_high,control,ig,signed,15,0.9147129972240033,0.6,0.6,0.6,0.0,1.0,composition__CD8 T cell,0.5666666666666667,pass_control,hnc_wu2022,False
+motif_immune_exclusion,spatial,ig,signed,15,0.769908445307184,1.0,0.0,0.0,0.0,,composition__Tumor,0.5666666666666667,abundance_only_or_fail,hnc_wu2022,True
+motif_tumor_high,control,ig,signed,15,0.8929222445906486,0.5333333333333333,0.5333333333333333,0.5333333333333333,0.0,1.875,composition__Tumor,0.5666666666666667,pass_control,hnc_wu2022,False
+motif_cd8_clustering,spatial,ig,top,15,0.8362932695858607,1.0,0.0,0.0,1.0,,composition__CD8 T cell,0.5666666666666667,abundance_only_or_fail,hnc_wu2022,True
+motif_cd8_high,control,ig,top,15,0.9147129972240033,0.6,0.6,0.6,0.0,1.0,composition__CD8 T cell,0.5666666666666667,pass_control,hnc_wu2022,False
+motif_immune_exclusion,spatial,ig,top,15,0.769908445307184,1.0,0.0,0.0,0.06666666666666667,,composition__Tumor,0.5666666666666667,abundance_only_or_fail,hnc_wu2022,True
+motif_tumor_high,control,ig,top,15,0.8929222445906486,0.5333333333333333,0.5333333333333333,0.5333333333333333,0.0,1.625,composition__Tumor,0.5666666666666667,pass_control,hnc_wu2022,False
+motif_cd8_high,control,ig,abs,15,0.892130190917952,0.4,0.4,0.4,0.0,1.1666666666666667,composition__CD8^+GZMB^+T,0.2,fail_control,tnbc_wang2023,True
+motif_tumor_high,control,ig,abs,15,0.9061098611706169,0.6666666666666666,0.0,0.0,0.0,,composition__Fibroblasts,0.2,fail_control,tnbc_wang2023,False
+motif_cd8_high,control,ig,signed,15,0.892130190917952,0.4,0.4,0.4,0.0,1.0,composition__CD8^+PD1^+T_{Ex},0.2,fail_control,tnbc_wang2023,True
+motif_tumor_high,control,ig,signed,15,0.9061098611706169,0.6666666666666666,0.0,0.0,0.0,,composition__Basal,0.2,fail_control,tnbc_wang2023,False
+motif_cd8_high,control,ig,top,15,0.892130190917952,0.4,0.4,0.4,0.0,1.0,composition__CD8^+PD1^+T_{Ex},0.2,fail_control,tnbc_wang2023,True
+motif_tumor_high,control,ig,top,15,0.9061098611706169,0.6666666666666666,0.0,0.0,0.0,,composition__Basal,0.2,fail_control,tnbc_wang2023,False
+motif_cd8_high,control,ig,abs,15,0.8479855752266127,0.06666666666666667,0.06666666666666667,0.06666666666666667,0.0,1.0,composition__T cells,0.03333333333333333,fail_control,bc_metabric_ali2020,False
+motif_interface_immune,spatial,ig,abs,15,0.5146116084600203,0.13333333333333333,0.0,0.0,0.0,,composition__HR- CKlow CK5+,0.03333333333333333,fail_control_block,bc_metabric_ali2020,True
+motif_tumor_high,control,ig,abs,15,0.9191781977407025,0.9333333333333333,0.0,0.0,0.0,,composition__HR+ CK7-,0.03333333333333333,fail_control,bc_metabric_ali2020,False
+motif_tumor_stroma_mixing,spatial,ig,abs,15,0.6991983453653193,1.0,0.0,0.0,0.4,,composition__Fibroblasts,0.03333333333333333,fail_control_block,bc_metabric_ali2020,True
+motif_cd8_high,control,ig,signed,15,0.8479855752266127,0.06666666666666667,0.06666666666666667,0.06666666666666667,0.0,1.0,composition__T cells,0.03333333333333333,fail_control,bc_metabric_ali2020,False
+motif_interface_immune,spatial,ig,signed,15,0.5146116084600203,0.13333333333333333,0.0,0.0,0.0,,composition__HR- CKlow CK5+,0.03333333333333333,fail_control_block,bc_metabric_ali2020,True
+motif_tumor_high,control,ig,signed,15,0.9191781977407025,0.9333333333333333,0.0,0.0,0.0,,composition__HR+ CK7-,0.03333333333333333,fail_control,bc_metabric_ali2020,False
+motif_tumor_stroma_mixing,spatial,ig,signed,15,0.6991983453653193,1.0,0.0,0.0,0.5333333333333333,,composition__HR- CK7-,0.03333333333333333,fail_control_block,bc_metabric_ali2020,True
+motif_cd8_high,control,ig,top,15,0.8479855752266127,0.06666666666666667,0.06666666666666667,0.06666666666666667,0.0,1.0,composition__T cells,0.03333333333333333,fail_control,bc_metabric_ali2020,False
+motif_interface_immune,spatial,ig,top,15,0.5146116084600203,0.13333333333333333,0.0,0.0,0.0,,composition__HR- CKlow CK5+,0.03333333333333333,fail_control_block,bc_metabric_ali2020,True
+motif_tumor_high,control,ig,top,15,0.9191781977407025,0.9333333333333333,0.0,0.0,0.0,,composition__HR+ CK7-,0.03333333333333333,fail_control,bc_metabric_ali2020,False
+motif_tumor_stroma_mixing,spatial,ig,top,15,0.6991983453653193,1.0,0.0,0.0,0.0,,composition__HR- CK7-,0.03333333333333333,fail_control_block,bc_metabric_ali2020,True

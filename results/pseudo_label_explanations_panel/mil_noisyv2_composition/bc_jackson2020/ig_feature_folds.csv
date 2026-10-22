@@ -1,0 +1,271 @@
+task,kind,seed,fold,explainer,aggregation,n_bags,auc,auc_passed,top1,hit_in_top,n_hit_in_top,best_hit_rank,miss_as_top1,recovered,passed,fold_passed,dataset,selected
+motif_apc_t_contact,spatial,0,0,ig,abs,52,0.674074074074074,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,0,0,ig,signed,52,0.674074074074074,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,0,0,ig,top,52,0.674074074074074,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,0,1,ig,abs,60,0.6025641025641025,True,composition__Stromal cells,,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,0,1,ig,signed,60,0.6025641025641025,True,composition__Tumor (Myoepithelial),,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,0,1,ig,top,60,0.6025641025641025,True,composition__Stromal cells,,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,0,2,ig,abs,64,0.6793743890518085,True,composition__Tumor (Myoepithelial),,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,0,2,ig,signed,64,0.6793743890518085,True,composition__Tumor (Myoepithelial),,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,0,2,ig,top,64,0.6793743890518085,True,composition__Stromal cells,,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,0,3,ig,abs,0,0.5631578947368421,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,0,3,ig,signed,0,0.5631578947368421,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,0,3,ig,top,0,0.5631578947368421,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,0,4,ig,abs,0,0.5626373626373626,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,0,4,ig,signed,0,0.5626373626373626,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,0,4,ig,top,0,0.5626373626373626,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,1,0,ig,abs,75,0.702439024390244,True,composition__Endothelial,,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,1,0,ig,signed,75,0.702439024390244,True,composition__Tumor (Myoepithelial),,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,1,0,ig,top,75,0.702439024390244,True,composition__Endothelial,,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,1,1,ig,abs,65,0.6258064516129033,True,composition__Tumor (Myoepithelial),,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,1,1,ig,signed,65,0.6258064516129033,True,composition__Tumor (Myoepithelial),,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,1,1,ig,top,65,0.6258064516129033,True,composition__Tumor (Proliferative),,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,1,2,ig,abs,55,0.7817460317460317,True,composition__Tumor (Myoepithelial),,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,1,2,ig,signed,55,0.7817460317460317,True,composition__Tumor (Myoepithelial),,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,1,2,ig,top,55,0.7817460317460317,True,composition__Stromal cells,,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,1,3,ig,abs,70,0.6052631578947367,True,composition__Tumor (CK+ HR hi),,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,1,3,ig,signed,70,0.6052631578947367,True,composition__Tumor (CK lo HR hi p53+),,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,1,3,ig,top,70,0.6052631578947367,True,composition__Tumor (CK+ HR hi),,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,1,4,ig,abs,57,0.6268472906403941,True,composition__T & B cells,,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,1,4,ig,signed,57,0.6268472906403941,True,composition__T & B cells,,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,1,4,ig,top,57,0.6268472906403941,True,composition__Stromal cells,,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,2,0,ig,abs,58,0.6226190476190475,True,composition__Stromal cells,,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,2,0,ig,signed,58,0.6226190476190475,True,composition__Stromal cells,,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,2,0,ig,top,58,0.6226190476190475,True,composition__Macrophage,,0,,True,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,2,1,ig,abs,72,0.6177606177606177,True,composition__Stromal cells,,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,2,1,ig,signed,72,0.6177606177606177,True,composition__Stromal cells,,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,2,1,ig,top,72,0.6177606177606177,True,composition__Stromal cells,,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,2,2,ig,abs,71,0.6706539074960127,True,composition__Tumor (Myoepithelial),,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,2,2,ig,signed,71,0.6706539074960127,True,composition__Tumor (Myoepithelial),,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,2,2,ig,top,71,0.6706539074960127,True,composition__Tumor (CK lo HR lo),,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,2,3,ig,abs,62,0.72509765625,True,composition__Tumor (Apoptotic),,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,2,3,ig,signed,62,0.72509765625,True,composition__Stromal cells,,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,2,3,ig,top,62,0.72509765625,True,composition__Stromal cells,,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,2,4,ig,abs,0,0.5583982202447163,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,2,4,ig,signed,0,0.5583982202447163,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_apc_t_contact,spatial,2,4,ig,top,0,0.5583982202447163,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,0,0,ig,abs,84,0.8246118458884416,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,0,0,ig,signed,84,0.8246118458884416,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,0,0,ig,top,84,0.8246118458884416,True,composition__Tumor (Myoepithelial),,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,0,1,ig,abs,84,0.7577992058990356,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,0,1,ig,signed,84,0.7577992058990356,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,0,1,ig,top,84,0.7577992058990356,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,0,2,ig,abs,97,0.7337606837606837,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,0,2,ig,signed,97,0.7337606837606837,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,0,2,ig,top,97,0.7337606837606837,True,composition__Tumor (Myoepithelial),,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,0,3,ig,abs,83,0.8145071982281284,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,0,3,ig,signed,83,0.8145071982281284,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,0,3,ig,top,83,0.8145071982281284,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,0,4,ig,abs,87,0.8123011664899258,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,0,4,ig,signed,87,0.8123011664899258,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,0,4,ig,top,87,0.8123011664899258,True,composition__Tumor (Myoepithelial),,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,1,0,ig,abs,89,0.7634834240475011,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,1,0,ig,signed,89,0.7634834240475011,True,composition__Macrophage,,0,,False,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,1,0,ig,top,89,0.7634834240475011,True,composition__Tumor (Myoepithelial),,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,1,1,ig,abs,76,0.7825783972125436,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,1,1,ig,signed,76,0.7825783972125436,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,1,1,ig,top,76,0.7825783972125436,True,composition__Tumor (Myoepithelial),,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,1,2,ig,abs,84,0.796369824163358,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,1,2,ig,signed,84,0.796369824163358,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,1,2,ig,top,84,0.796369824163358,True,composition__Tumor (Myoepithelial),,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,1,3,ig,abs,96,0.8265795206971677,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,1,3,ig,signed,96,0.8265795206971677,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,1,3,ig,top,96,0.8265795206971677,True,composition__Tumor (Myoepithelial),,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,1,4,ig,abs,90,0.8104448742746616,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,1,4,ig,signed,90,0.8104448742746616,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,1,4,ig,top,90,0.8104448742746616,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,2,0,ig,abs,77,0.7452574525745257,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,2,0,ig,signed,77,0.7452574525745257,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,2,0,ig,top,77,0.7452574525745257,True,composition__Tumor (Myoepithelial),,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,2,1,ig,abs,104,0.8036580813736468,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,2,1,ig,signed,104,0.8036580813736468,True,composition__Stromal cells,,0,,False,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,2,1,ig,top,104,0.8036580813736468,True,composition__Tumor (Myoepithelial),,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,2,2,ig,abs,86,0.8661375661375661,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,2,2,ig,signed,86,0.8661375661375661,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,2,2,ig,top,86,0.8661375661375661,True,composition__Tumor (Myoepithelial),,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,2,3,ig,abs,90,0.6831875607385812,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,2,3,ig,signed,90,0.6831875607385812,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,2,3,ig,top,90,0.6831875607385812,True,composition__Tumor (Myoepithelial),,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,2,4,ig,abs,78,0.8497033618984839,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,2,4,ig,signed,78,0.8497033618984839,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_cd8_tumor_contact,spatial,2,4,ig,top,78,0.8497033618984839,True,composition__Tumor (Myoepithelial),,0,,True,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,0,0,ig,abs,0,0.5081135902636917,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,0,0,ig,signed,0,0.5081135902636917,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,0,0,ig,top,0,0.5081135902636917,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,0,1,ig,abs,0,0.5929276315789473,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,0,1,ig,signed,0,0.5929276315789473,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,0,1,ig,top,0,0.5929276315789473,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,0,2,ig,abs,0,0.5548469387755102,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,0,2,ig,signed,0,0.5548469387755102,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,0,2,ig,top,0,0.5548469387755102,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,0,3,ig,abs,72,0.67890625,True,composition__Tumor (Apoptotic),,0,,True,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,0,3,ig,signed,72,0.67890625,True,composition__Endothelial,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,0,3,ig,top,72,0.67890625,True,composition__Tumor (Apoptotic),,0,,True,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,0,4,ig,abs,0,0.5482625482625483,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,0,4,ig,signed,0,0.5482625482625483,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,0,4,ig,top,0,0.5482625482625483,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,1,0,ig,abs,71,0.7727272727272727,True,composition__Endothelial,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,1,0,ig,signed,71,0.7727272727272727,True,composition__Endothelial,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,1,0,ig,top,71,0.7727272727272727,True,composition__Endothelial,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,1,1,ig,abs,0,0.49000000000000005,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,1,1,ig,signed,0,0.49000000000000005,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,1,1,ig,top,0,0.49000000000000005,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,1,2,ig,abs,0,0.5524553571428572,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,1,2,ig,signed,0,0.5524553571428572,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,1,2,ig,top,0,0.5524553571428572,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,1,3,ig,abs,75,0.6556671449067432,True,composition__Macrophage,,0,,True,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,1,3,ig,signed,75,0.6556671449067432,True,composition__Macrophage,,0,,True,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,1,3,ig,top,75,0.6556671449067432,True,composition__Macrophage,,0,,True,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,1,4,ig,abs,60,0.6296296296296297,True,composition__Macrophage,,0,,True,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,1,4,ig,signed,60,0.6296296296296297,True,composition__Macrophage,,0,,True,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,1,4,ig,top,60,0.6296296296296297,True,composition__Endothelial,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,2,0,ig,abs,67,0.6675675675675676,True,composition__Macrophage,,0,,True,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,2,0,ig,signed,67,0.6675675675675676,True,composition__Macrophage,,0,,True,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,2,0,ig,top,67,0.6675675675675676,True,composition__Macrophage,,0,,True,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,2,1,ig,abs,0,0.5547667342799188,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,2,1,ig,signed,0,0.5547667342799188,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,2,1,ig,top,0,0.5547667342799188,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,2,2,ig,abs,0,0.5306306306306307,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,2,2,ig,signed,0,0.5306306306306307,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,2,2,ig,top,0,0.5306306306306307,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,2,3,ig,abs,66,0.6811059907834102,True,composition__Macrophage,,0,,True,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,2,3,ig,signed,66,0.6811059907834102,True,composition__Macrophage,,0,,True,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,2,3,ig,top,66,0.6811059907834102,True,composition__Macrophage,,0,,True,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,2,4,ig,abs,63,0.6262626262626263,True,composition__Macrophage,,0,,True,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,2,4,ig,signed,63,0.6262626262626263,True,composition__Macrophage,,0,,True,False,False,False,bc_jackson2020,True
+motif_macrophage_tumor_niche,spatial,2,4,ig,top,63,0.6262626262626263,True,composition__Macrophage,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,0,0,ig,abs,84,0.800110741971207,True,composition__Stromal cells,,0,,False,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,0,0,ig,signed,84,0.800110741971207,True,composition__Stromal cells,,0,,False,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,0,0,ig,top,84,0.800110741971207,True,composition__Tumor (Myoepithelial),,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,0,1,ig,abs,86,0.8255434782608696,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,0,1,ig,signed,86,0.8255434782608696,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,0,1,ig,top,86,0.8255434782608696,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,0,2,ig,abs,92,0.7694128787878787,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,0,2,ig,signed,92,0.7694128787878787,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,0,2,ig,top,92,0.7694128787878787,True,composition__Tumor (Myoepithelial),,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,0,3,ig,abs,95,0.8296064400715564,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,0,3,ig,signed,95,0.8296064400715564,True,composition__Tumor (CK lo HR lo),,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,0,3,ig,top,95,0.8296064400715564,True,composition__Tumor (Myoepithelial),,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,0,4,ig,abs,71,0.8023166023166023,True,composition__Stromal cells,,0,,False,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,0,4,ig,signed,71,0.8023166023166023,True,composition__Tumor (CK lo HR lo),,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,0,4,ig,top,71,0.8023166023166023,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,1,0,ig,abs,93,0.849437148217636,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,1,0,ig,signed,93,0.849437148217636,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,1,0,ig,top,93,0.849437148217636,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,1,1,ig,abs,71,0.7623211446740857,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,1,1,ig,signed,71,0.7623211446740857,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,1,1,ig,top,71,0.7623211446740857,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,1,2,ig,abs,95,0.8262032085561497,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,1,2,ig,signed,95,0.8262032085561497,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,1,2,ig,top,95,0.8262032085561497,True,composition__Tumor (Myoepithelial),,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,1,3,ig,abs,86,0.7943722943722944,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,1,3,ig,signed,86,0.7943722943722944,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,1,3,ig,top,86,0.7943722943722944,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,1,4,ig,abs,83,0.8034922394678492,True,composition__Stromal cells,,0,,False,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,1,4,ig,signed,83,0.8034922394678492,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,1,4,ig,top,83,0.8034922394678492,True,composition__Tumor (Myoepithelial),,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,2,0,ig,abs,71,0.7206923682140047,True,composition__Stromal cells,,0,,False,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,2,0,ig,signed,71,0.7206923682140047,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,2,0,ig,top,71,0.7206923682140047,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,2,1,ig,abs,99,0.7698933552091879,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,2,1,ig,signed,99,0.7698933552091879,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,2,1,ig,top,99,0.7698933552091879,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,2,2,ig,abs,88,0.8252279635258358,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,2,2,ig,signed,88,0.8252279635258358,True,composition__Tumor (CK lo HR lo),,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,2,2,ig,top,88,0.8252279635258358,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,2,3,ig,abs,78,0.858645627876397,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,2,3,ig,signed,78,0.858645627876397,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,2,3,ig,top,78,0.858645627876397,True,composition__Tumor (Myoepithelial),,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,2,4,ig,abs,92,0.7538095238095238,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,2,4,ig,signed,92,0.7538095238095238,True,composition__T cell,,0,,True,False,False,False,bc_jackson2020,True
+motif_t_tumor_mixing,spatial,2,4,ig,top,92,0.7538095238095238,True,composition__Tumor (Myoepithelial),,0,,True,False,False,False,bc_jackson2020,True
+motif_tumor_high,control,0,0,ig,abs,0,0.86875,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_tumor_high,control,0,0,ig,signed,0,0.86875,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_tumor_high,control,0,0,ig,top,0,0.86875,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_tumor_high,control,0,1,ig,abs,122,0.9281811085089773,True,composition__Stromal cells,composition__Tumor (CK7+);composition__Tumor (CK lo HR lo);composition__Tumor (CK+ HR hi),3,3.0,False,True,True,True,bc_jackson2020,True
+motif_tumor_high,control,0,1,ig,signed,122,0.9281811085089773,True,composition__Tumor (CK+ HR hi),composition__Tumor (CK+ HR hi);composition__Tumor (CK7+);composition__Tumor (CK+ HR lo);composition__Tumor (CK lo HR lo),4,1.0,False,True,True,True,bc_jackson2020,True
+motif_tumor_high,control,0,1,ig,top,122,0.9281811085089773,True,composition__Stromal cells,composition__Tumor (Myoepithelial);composition__Tumor (CK lo HR lo);composition__Tumor (CK+ HR hi);composition__Tumor (CK7+),4,2.0,False,True,True,True,bc_jackson2020,True
+motif_tumor_high,control,0,2,ig,abs,160,0.9123903019485349,True,composition__Endothelial,composition__Tumor (CK7+);composition__Tumor (CK+ HR hi);composition__Tumor (CK lo HR lo),3,3.0,False,True,True,True,bc_jackson2020,True
+motif_tumor_high,control,0,2,ig,signed,160,0.9123903019485349,True,composition__Tumor (CK+ HR hi),composition__Tumor (CK+ HR hi);composition__Tumor (CK lo HR lo);composition__Tumor (CK+ HR lo),3,1.0,False,True,True,True,bc_jackson2020,True
+motif_tumor_high,control,0,2,ig,top,160,0.9123903019485349,True,composition__Tumor (CK lo HR lo),composition__Tumor (CK lo HR lo);composition__Tumor (Myoepithelial);composition__Tumor (CK7+);composition__Tumor (CK+ HR hi),4,1.0,False,True,True,True,bc_jackson2020,True
+motif_tumor_high,control,0,3,ig,abs,153,0.9364400305576775,True,composition__Stromal cells,composition__Tumor (CK lo HR lo);composition__Tumor (CK+ HR hi);composition__Tumor (CK7+),3,3.0,False,True,True,True,bc_jackson2020,True
+motif_tumor_high,control,0,3,ig,signed,153,0.9364400305576775,True,composition__Tumor (CK+ HR hi),composition__Tumor (CK+ HR hi);composition__Tumor (CK lo HR lo);composition__Tumor (CK+ HR lo);composition__Tumor (CK7+),4,1.0,False,True,True,True,bc_jackson2020,True
+motif_tumor_high,control,0,3,ig,top,153,0.9364400305576775,True,composition__Tumor (Myoepithelial),composition__Tumor (Myoepithelial);composition__Tumor (CK lo HR lo);composition__Tumor (CK+ HR hi);composition__Tumor (CK+ HR lo),4,1.0,False,True,True,True,bc_jackson2020,True
+motif_tumor_high,control,0,4,ig,abs,0,0.8695652173913043,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_tumor_high,control,0,4,ig,signed,0,0.8695652173913043,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_tumor_high,control,0,4,ig,top,0,0.8695652173913043,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_tumor_high,control,1,0,ig,abs,0,0.8943661971830986,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_tumor_high,control,1,0,ig,signed,0,0.8943661971830986,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_tumor_high,control,1,0,ig,top,0,0.8943661971830986,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_tumor_high,control,1,1,ig,abs,125,0.907103825136612,True,composition__Stromal cells,composition__Tumor (CK lo HR lo);composition__Tumor (CK+ HR lo);composition__Tumor (CK7+),3,2.0,False,True,True,True,bc_jackson2020,True
+motif_tumor_high,control,1,1,ig,signed,125,0.907103825136612,True,composition__Stromal cells,composition__Tumor (CK lo HR lo);composition__Tumor (CK+ HR lo);composition__Tumor (CK+ HR hi);composition__Tumor (CK7+),4,2.0,False,True,True,True,bc_jackson2020,True
+motif_tumor_high,control,1,1,ig,top,125,0.907103825136612,True,composition__Tumor (CK lo HR lo),composition__Tumor (CK lo HR lo);composition__Tumor (CK7+);composition__Tumor (Myoepithelial);composition__Tumor (Basal CK),4,1.0,False,True,True,True,bc_jackson2020,True
+motif_tumor_high,control,1,2,ig,abs,137,0.9279448621553885,True,composition__Stromal cells,composition__Tumor (CK+ HR lo);composition__Tumor (CK lo HR lo);composition__Tumor (CK+ HR hi),3,3.0,False,True,True,True,bc_jackson2020,True
+motif_tumor_high,control,1,2,ig,signed,137,0.9279448621553885,True,composition__Tumor (CK+ HR lo),composition__Tumor (CK+ HR lo);composition__Tumor (CK lo HR lo);composition__Tumor (CK+ HR hi),3,1.0,False,True,True,True,bc_jackson2020,True
+motif_tumor_high,control,1,2,ig,top,137,0.9279448621553885,True,composition__Tumor (Myoepithelial),composition__Tumor (Myoepithelial);composition__Tumor (CK lo HR lo);composition__Tumor (CK+ HR lo);composition__Tumor (CK7+ CK hi Ecadh hi),4,1.0,False,True,True,True,bc_jackson2020,True
+motif_tumor_high,control,1,3,ig,abs,108,0.9250669045495095,True,composition__Tumor (CK lo HR lo),composition__Tumor (CK lo HR lo);composition__Tumor (CK+ HR lo);composition__Tumor (CK+ HR hi),3,1.0,False,True,True,True,bc_jackson2020,True
+motif_tumor_high,control,1,3,ig,signed,108,0.9250669045495095,True,composition__Tumor (CK lo HR lo),composition__Tumor (CK lo HR lo);composition__Tumor (CK+ HR hi);composition__Tumor (Basal CK);composition__Tumor (CK+ HR lo),4,1.0,False,True,True,True,bc_jackson2020,True
+motif_tumor_high,control,1,3,ig,top,108,0.9250669045495095,True,composition__Tumor (CK lo HR lo),composition__Tumor (CK lo HR lo);composition__Tumor (Myoepithelial);composition__Tumor (Basal CK);composition__Tumor (CK+ HR hi),4,1.0,False,True,True,True,bc_jackson2020,True
+motif_tumor_high,control,1,4,ig,abs,0,0.8895348837209303,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_tumor_high,control,1,4,ig,signed,0,0.8895348837209303,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_tumor_high,control,1,4,ig,top,0,0.8895348837209303,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_tumor_high,control,2,0,ig,abs,113,0.9278294149808639,True,composition__Stromal cells,composition__Tumor (CK+ HR lo);composition__Tumor (CK lo HR lo);composition__Tumor (CK7+),3,3.0,False,True,True,True,bc_jackson2020,True
+motif_tumor_high,control,2,0,ig,signed,113,0.9278294149808639,True,composition__Tumor (CK+ HR lo),composition__Tumor (CK+ HR lo);composition__Tumor (CK7+);composition__Tumor (CK lo HR lo),3,1.0,False,True,True,True,bc_jackson2020,True
+motif_tumor_high,control,2,0,ig,top,113,0.9278294149808639,True,composition__Tumor (CK7+ CK hi Ecadh hi),composition__Tumor (CK7+ CK hi Ecadh hi);composition__Tumor (CK lo HR lo);composition__Tumor (Myoepithelial);composition__Tumor (CK+ HR lo),4,1.0,False,True,True,True,bc_jackson2020,True
+motif_tumor_high,control,2,1,ig,abs,0,0.8623076923076923,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_tumor_high,control,2,1,ig,signed,0,0.8623076923076923,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_tumor_high,control,2,1,ig,top,0,0.8623076923076923,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_tumor_high,control,2,2,ig,abs,0,0.8931650246305418,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_tumor_high,control,2,2,ig,signed,0,0.8931650246305418,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_tumor_high,control,2,2,ig,top,0,0.8931650246305418,False,,,0,,False,False,False,False,bc_jackson2020,True
+motif_tumor_high,control,2,3,ig,abs,143,0.9439269406392694,True,composition__Stromal cells,composition__Tumor (CK lo HR lo);composition__Tumor (CK+ HR lo);composition__Tumor (CK+ HR hi);composition__Tumor (CK7+),4,2.0,False,True,True,True,bc_jackson2020,True
+motif_tumor_high,control,2,3,ig,signed,143,0.9439269406392694,True,composition__Tumor (CK lo HR lo),composition__Tumor (CK lo HR lo);composition__Tumor (CK+ HR lo);composition__Tumor (CK+ HR hi);composition__Tumor (CK7+),4,1.0,False,True,True,True,bc_jackson2020,True
+motif_tumor_high,control,2,3,ig,top,143,0.9439269406392694,True,composition__Tumor (CK lo HR lo),composition__Tumor (CK lo HR lo);composition__Tumor (Myoepithelial);composition__Tumor (CK+ HR lo);composition__Tumor (CK+ HR hi),4,1.0,False,True,True,True,bc_jackson2020,True
+motif_tumor_high,control,2,4,ig,abs,116,0.9084199015855658,True,composition__Stromal cells,composition__Tumor (CK7+);composition__Tumor (CK lo HR lo);composition__Tumor (CK+ HR lo),3,2.0,False,True,True,True,bc_jackson2020,True
+motif_tumor_high,control,2,4,ig,signed,116,0.9084199015855658,True,composition__Stromal cells,composition__Tumor (CK+ HR lo);composition__Tumor (CK lo HR lo);composition__Tumor (CK7+),3,2.0,False,True,True,True,bc_jackson2020,True
+motif_tumor_high,control,2,4,ig,top,116,0.9084199015855658,True,composition__Stromal cells,composition__Tumor (CK lo HR lo);composition__Tumor (Myoepithelial);composition__Tumor (Apoptotic);composition__Tumor (CK7+),4,2.0,False,True,True,True,bc_jackson2020,True
+motif_cd8_high,control,0,0,ig,abs,137,0.9267399267399267,True,composition__T cell,composition__T cell,1,1.0,False,True,True,True,bc_jackson2020,False
+motif_cd8_high,control,0,0,ig,signed,137,0.9267399267399267,True,composition__T cell,composition__T cell,1,1.0,False,True,True,True,bc_jackson2020,False
+motif_cd8_high,control,0,0,ig,top,137,0.9267399267399267,True,composition__T cell,composition__T cell,1,1.0,False,True,True,True,bc_jackson2020,False
+motif_cd8_high,control,0,1,ig,abs,0,0.888148667601683,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,0,1,ig,signed,0,0.888148667601683,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,0,1,ig,top,0,0.888148667601683,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,0,2,ig,abs,0,0.8588359788359787,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,0,2,ig,signed,0,0.8588359788359787,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,0,2,ig,top,0,0.8588359788359787,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,0,3,ig,abs,0,0.8631088280060882,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,0,3,ig,signed,0,0.8631088280060882,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,0,3,ig,top,0,0.8631088280060882,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,0,4,ig,abs,0,0.8930180180180181,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,0,4,ig,signed,0,0.8930180180180181,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,0,4,ig,top,0,0.8930180180180181,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,1,0,ig,abs,150,0.9004024144869215,True,composition__T cell,composition__T cell,1,1.0,False,True,True,True,bc_jackson2020,False
+motif_cd8_high,control,1,0,ig,signed,150,0.9004024144869215,True,composition__T cell,composition__T cell,1,1.0,False,True,True,True,bc_jackson2020,False
+motif_cd8_high,control,1,0,ig,top,150,0.9004024144869215,True,composition__T cell,composition__T cell,1,1.0,False,True,True,True,bc_jackson2020,False
+motif_cd8_high,control,1,1,ig,abs,111,0.9084639498432602,True,composition__T cell,composition__T cell,1,1.0,False,True,True,True,bc_jackson2020,False
+motif_cd8_high,control,1,1,ig,signed,111,0.9084639498432602,True,composition__T cell,composition__T cell,1,1.0,False,True,True,True,bc_jackson2020,False
+motif_cd8_high,control,1,1,ig,top,111,0.9084639498432602,True,composition__T cell,composition__T cell,1,1.0,False,True,True,True,bc_jackson2020,False
+motif_cd8_high,control,1,2,ig,abs,0,0.8632268632268633,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,1,2,ig,signed,0,0.8632268632268633,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,1,2,ig,top,0,0.8632268632268633,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,1,3,ig,abs,0,0.856969696969697,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,1,3,ig,signed,0,0.856969696969697,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,1,3,ig,top,0,0.856969696969697,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,1,4,ig,abs,0,0.8745647356758467,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,1,4,ig,signed,0,0.8745647356758467,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,1,4,ig,top,0,0.8745647356758467,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,2,0,ig,abs,0,0.8929121725731896,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,2,0,ig,signed,0,0.8929121725731896,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,2,0,ig,top,0,0.8929121725731896,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,2,1,ig,abs,0,0.8947209653092006,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,2,1,ig,signed,0,0.8947209653092006,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,2,1,ig,top,0,0.8947209653092006,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,2,2,ig,abs,0,0.871869918699187,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,2,2,ig,signed,0,0.871869918699187,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,2,2,ig,top,0,0.871869918699187,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,2,3,ig,abs,143,0.9055147750799926,True,composition__T cell,composition__T cell,1,1.0,False,True,True,True,bc_jackson2020,False
+motif_cd8_high,control,2,3,ig,signed,143,0.9055147750799926,True,composition__T cell,composition__T cell,1,1.0,False,True,True,True,bc_jackson2020,False
+motif_cd8_high,control,2,3,ig,top,143,0.9055147750799926,True,composition__T cell,composition__T cell,1,1.0,False,True,True,True,bc_jackson2020,False
+motif_cd8_high,control,2,4,ig,abs,0,0.8457478005865102,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,2,4,ig,signed,0,0.8457478005865102,False,,,0,,False,False,False,False,bc_jackson2020,False
+motif_cd8_high,control,2,4,ig,top,0,0.8457478005865102,False,,,0,,False,False,False,False,bc_jackson2020,False
