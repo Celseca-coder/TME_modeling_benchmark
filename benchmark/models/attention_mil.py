@@ -112,6 +112,11 @@ class AttentionMILModel(RegionModel):
         bag = (bag - self._mean[None, :]) / self._std[None, :]
         return torch.as_tensor(bag, dtype=torch.float32, device=self.device_)
 
+    def _make_net(self, output_dim: int) -> nn.Module:
+        return _GatedAttentionNet(
+            self._input_dim, self.hidden_dim, self.attention_dim, output_dim, self.dropout
+        )
+
     def _positive_index(self) -> int:
         classes = list(self.classes_)
         if 1 in classes:
@@ -170,9 +175,7 @@ class AttentionMILModel(RegionModel):
                                 device=self.device_)
             output_dim = len(self.classes_)
 
-        self._net = _GatedAttentionNet(
-            self._input_dim, self.hidden_dim, self.attention_dim, output_dim, self.dropout
-        ).to(self.device_)
+        self._net = self._make_net(output_dim).to(self.device_)
         optimizer = torch.optim.AdamW(self._net.parameters(), lr=self.lr,
                                       weight_decay=self.weight_decay)
         best_loss, best_state, stale = float("inf"), None, 0

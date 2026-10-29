@@ -115,7 +115,7 @@ def within_region_topk(
     precision is the labeled-window prevalence (≈0.5 under median / tertile
     extremes). Chance recall equals ``frac``.
     """
-    precs, recs, prevs, ks = [], [], [], []
+    precs, recs, prevs, ks, score_means = [], [], [], [], []
     for _, idx in region.groupby(region).groups.items():
         yy = y.loc[idx].to_numpy(float)
         ss = score.loc[idx].to_numpy(float)
@@ -131,6 +131,7 @@ def within_region_topk(
         recs.append(hit / n_pos if n_pos else np.nan)
         prevs.append(n_pos / len(yy_l))
         ks.append(k)
+        score_means.append(float(np.mean(ss[top])))
     prec = np.asarray(precs, float)
     rec = np.asarray(recs, float)
     prev = np.asarray(prevs, float)
@@ -140,6 +141,7 @@ def within_region_topk(
         "recall_at_20": float(np.nanmean(rec)) if rec.size else np.nan,
         "labeled_prev": float(prev.mean()) if prev.size else np.nan,
         "topk_k_mean": float(np.mean(ks)) if ks else np.nan,
+        "score_top20_mean": float(np.mean(score_means)) if score_means else np.nan,
     }
 
 

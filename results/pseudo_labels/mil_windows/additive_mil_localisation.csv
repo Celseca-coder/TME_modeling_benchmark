@@ -1,0 +1,11 @@
+dataset,motif,feature_group,method,auroc_window_mean,precision_at_20,score_top20_mean,labeled_prev,n_regions_scored,n_folds,pass_window,pass_precision_at_20,completeness_error_mean
+bc_jackson2020,tumor_high,composition+density+mixing+point_pattern,additive_mil,0.7752622779813365,0.7309717476399282,0.06637979214407694,0.4672394397873382,665,5,True,True,2.087629411865216e-07
+bc_jackson2020,t_tumor_mixing,composition+density+mixing+point_pattern,additive_mil,0.5624241242305863,0.5930010189825069,0.1942694925778815,0.5278363620318856,277,5,False,False,2.797018438413936e-07
+bc_jackson2020,cd8_tumor_contact,composition+density+mixing+point_pattern,additive_mil,0.5600580843480247,0.5931835174001467,0.15482252440713756,0.5341268093159146,291,5,False,False,2.661736803994236e-07
+bc_jackson2020,macrophage_tumor_niche,composition+density+mixing+point_pattern,additive_mil,0.5229698632630178,0.4768903626655526,0.09168899686667645,0.47629866652892094,116,5,False,False,3.059770619554208e-07
+bc_jackson2020,apc_t_contact,composition+density+mixing+point_pattern,additive_mil,0.4962751961001558,0.507100948775596,0.10273338495732617,0.5190701218267919,102,5,False,False,2.7013128514298276e-07
+hnc_wu2022,cd8_clustering,composition+density+mixing+point_pattern,additive_mil,0.5390843949737159,0.5259976700414027,0.047446569433291653,0.5038602367007723,212,5,False,False,1.9130259121081493e-07
+hnc_wu2022,immune_exclusion,composition+density+mixing+point_pattern,additive_mil,0.4891011296684688,0.5458991837444243,0.04167486221737649,0.5489054146502521,198,5,False,False,2.379435006338001e-07
+bc_metabric_ali2020,tumor_stroma_mixing,composition+density+mixing+point_pattern,additive_mil,0.5693431983344931,0.5881185884270692,0.15497389447723348,0.5012071812111004,311,5,False,False,2.3929125635371394e-07
+bc_metabric_ali2020,interface_immune,composition+density+mixing+point_pattern,additive_mil,0.5463834955789182,0.591640393442509,0.28984819378320525,0.5276430071847976,125,5,False,False,1.9863141165458575e-07
+tnbc_wang2023,cd8_high,composition+density+mixing+point_pattern,additive_mil,0.6926604978662938,0.6834931191136666,0.1846466875605211,0.49527450610572654,766,5,True,False,3.225320560815803e-07
