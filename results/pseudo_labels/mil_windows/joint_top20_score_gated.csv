@@ -1,0 +1,31 @@
+dataset,motif,method,method_name,score_kind,score_top20_mean,precision_at_20,feature_group
+bc_jackson2020,tumor_high,attention,attention,mean softmax attention weight,0.0265962780798222,0.5285928732605307,composition+density+mixing+point_pattern
+bc_jackson2020,tumor_high,shap_mil,SHAP+Gated Attention,mean Shapley window score,0.03701607595432237,0.68517518015883,composition+density+mixing+point_pattern
+bc_jackson2020,tumor_high,ig,IG,mean integrated-gradient window score,0.10940319727530845,0.7142405208345302,composition+density+mixing+point_pattern
+bc_jackson2020,t_tumor_mixing,attention,attention,mean softmax attention weight,0.037612597693323944,0.5379326841220042,composition+density+mixing+point_pattern
+bc_jackson2020,t_tumor_mixing,shap_mil,SHAP+Gated Attention,mean Shapley window score,0.04358087666856124,0.5807521224956701,composition+density+mixing+point_pattern
+bc_jackson2020,t_tumor_mixing,ig,IG,mean integrated-gradient window score,0.252022760461383,0.60457378674153,composition+density+mixing+point_pattern
+bc_jackson2020,cd8_tumor_contact,attention,attention,mean softmax attention weight,0.03819233969247647,0.5456526140525962,composition+density+mixing+point_pattern
+bc_jackson2020,cd8_tumor_contact,shap_mil,SHAP+Gated Attention,mean Shapley window score,0.044567030603818045,0.5928258665067404,composition+density+mixing+point_pattern
+bc_jackson2020,cd8_tumor_contact,ig,IG,mean integrated-gradient window score,0.23014528107299367,0.5973835409545325,composition+density+mixing+point_pattern
+bc_jackson2020,macrophage_tumor_niche,attention,attention,mean softmax attention weight,0.028600378080804057,0.4445291529003835,composition+density+mixing+point_pattern
+bc_jackson2020,macrophage_tumor_niche,shap_mil,SHAP+Gated Attention,mean Shapley window score,0.04136279782134226,0.5442587824172099,composition+density+mixing+point_pattern
+bc_jackson2020,macrophage_tumor_niche,ig,IG,mean integrated-gradient window score,0.14274176119059767,0.5280980467202774,composition+density+mixing+point_pattern
+bc_jackson2020,apc_t_contact,attention,attention,mean softmax attention weight,0.02445052332524451,0.5237008956742206,composition+density+mixing+point_pattern
+bc_jackson2020,apc_t_contact,shap_mil,SHAP+Gated Attention,mean Shapley window score,0.03143513922259374,0.5459410449405384,composition+density+mixing+point_pattern
+bc_jackson2020,apc_t_contact,ig,IG,mean integrated-gradient window score,0.16123976117560762,0.5474704776599313,composition+density+mixing+point_pattern
+hnc_wu2022,cd8_clustering,attention,attention,mean softmax attention weight,0.03347065979889756,0.5110083269475489,composition+density+mixing+point_pattern
+hnc_wu2022,cd8_clustering,shap_mil,SHAP+Gated Attention,mean Shapley window score,0.045406152292006806,0.5291277892248589,composition+density+mixing+point_pattern
+hnc_wu2022,cd8_clustering,ig,IG,mean integrated-gradient window score,0.14800013486784022,0.5368453105183105,composition+density+mixing+point_pattern
+hnc_wu2022,immune_exclusion,attention,attention,mean softmax attention weight,0.019430969859102577,0.5484025949286526,composition+density+mixing+point_pattern
+hnc_wu2022,immune_exclusion,shap_mil,SHAP+Gated Attention,mean Shapley window score,0.03571298404745403,0.5375582483365977,composition+density+mixing+point_pattern
+hnc_wu2022,immune_exclusion,ig,IG,mean integrated-gradient window score,0.1293348647800453,0.5404344743090516,composition+density+mixing+point_pattern
+bc_metabric_ali2020,tumor_stroma_mixing,attention,attention,mean softmax attention weight,0.054721071470875536,0.5154363225419154,composition+density+mixing+point_pattern
+bc_metabric_ali2020,tumor_stroma_mixing,shap_mil,SHAP+Gated Attention,mean Shapley window score,0.05955231779321,0.553772749863702,composition+density+mixing+point_pattern
+bc_metabric_ali2020,tumor_stroma_mixing,ig,IG,mean integrated-gradient window score,0.21904993390824895,0.578673384821384,composition+density+mixing+point_pattern
+bc_metabric_ali2020,interface_immune,attention,attention,mean softmax attention weight,0.04967368141275251,0.5734538333433857,composition+density+mixing+point_pattern
+bc_metabric_ali2020,interface_immune,shap_mil,SHAP+Gated Attention,mean Shapley window score,0.06389570238676182,0.5728499793229632,composition+density+mixing+point_pattern
+bc_metabric_ali2020,interface_immune,ig,IG,mean integrated-gradient window score,0.40702907641256136,0.6068584788114004,composition+density+mixing+point_pattern
+tnbc_wang2023,cd8_high,attention,attention,mean softmax attention weight,0.03712175553553858,0.5245841772405991,composition+density+mixing+point_pattern
+tnbc_wang2023,cd8_high,shap_mil,SHAP+Gated Attention,mean Shapley window score,0.028533671185061355,0.6643801505653624,composition+density+mixing+point_pattern
+tnbc_wang2023,cd8_high,ig,IG,mean integrated-gradient window score,0.16406533991353484,0.6748083029075594,composition+density+mixing+point_pattern

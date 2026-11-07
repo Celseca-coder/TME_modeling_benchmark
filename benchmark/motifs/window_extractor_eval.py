@@ -1,4 +1,4 @@
-"""Train on window GT y_w; score whether extractor features recover important windows."""
+"""Train bag models on the region label; score windows against y_w."""
 from __future__ import annotations
 
 import numpy as np
@@ -6,7 +6,7 @@ import pandas as pd
 from sklearn.metrics import roc_auc_score
 
 from benchmark.features.local_window import columns_for_families
-from benchmark.models.linear import LinearClassifier
+from benchmark.models.l1_mil import L1MILModel
 from benchmark.validation.splits import safe_patient_kfold
 
 PASS_WINDOW = 0.60
@@ -28,7 +28,7 @@ def join_features_and_labels(
     motif: str,
     bags: pd.DataFrame | None = None,
 ) -> pd.DataFrame:
-    """Inner-join x_w to window GT. Train/eval target is label (y_w), not Y_r."""
+    """Inner-join x_w to window GT. Metrics use y_w; bag training uses Y_r."""
     feat = features.copy()
     feat["region_id"] = feat["region_id"].astype(str)
     feat["window_id"] = feat["window_id"].astype(int)
@@ -161,32 +161,79 @@ def within_region_precision_at_frac(
     }
 
 
-def _positive_proba(model: LinearClassifier, X: pd.DataFrame) -> np.ndarray:
-    proba = model.predict(X)
-    classes = list(model.classes_)
-    if 1 in classes:
-        return proba[:, classes.index(1)]
-    if 1.0 in classes:
-        return proba[:, classes.index(1.0)]
-    return proba[:, -1]
+def region_label(bags: pd.DataFrame, motif: str) -> pd.Series:
+    """Region label ``{motif}_label_v2``, indexed by ``region_id``."""
+    col = f"{motif}_label_v2"
+    meta = bags.drop_duplicates("region_id").copy()
+    meta["region_id"] = meta["region_id"].astype(str)
+    if col not in meta.columns:
+        raise KeyError(f"{col} is not in the region table")
+    return pd.to_numeric(meta.set_index("region_id")[col], errors="coerce")
+
+
+def bags_for_regions(table: pd.DataFrame, feat_cols: list[str], region_ids) -> pd.DataFrame:
+    """One row per region. ``bag`` is the window matrix in ``window_id`` order."""
+    rows = []
+    wanted = set(map(str, region_ids))
+    part = table[table["region_id"].astype(str).isin(wanted)]
+    for rid, group in part.groupby("region_id", sort=False):
+        group = group.sort_values("window_id")
+        rows.append({
+            "region_id": str(rid),
+            "bag": group[feat_cols].to_numpy(np.float32),
+            "index": group.index.to_numpy(),
+        })
+    out = pd.DataFrame(rows)
+    return out.set_index("region_id") if len(out) else out
+
+# 分训练折和验证折
+def patient_region_folds(table: pd.DataFrame, y_r: pd.Series, n_folds: int = 5, seed: int = 0):
+    """Patient folds stratified by the region label."""
+    if "patient_id" not in table.columns:
+        raise ValueError("need patient_id for clustered CV")
+    meta = (
+        table[["region_id", "patient_id"]]
+        .dropna(subset=["patient_id"])
+        .drop_duplicates("region_id")
+        .copy()
+    )
+    meta["region_id"] = meta["region_id"].astype(str)
+    labels = y_r.reindex(meta["region_id"])
+    meta = meta.loc[labels.isin([0.0, 1.0]).to_numpy()].copy()
+    meta["Y_r"] = y_r.reindex(meta["region_id"]).to_numpy(float)
+    folds = safe_patient_kfold(meta, n_folds, "patient_id", stratify_col="Y_r", seed=seed)
+    if not folds:
+        raise ValueError("not enough patients for CV")
+    return folds
 
 
 def evaluate_fold(
     train: pd.DataFrame,
     val: pd.DataFrame,
     feat_cols: list[str],
+    y_r: pd.Series,
     seed: int = 0,
-    l1_ratio: float = 1.0,
+    l1_lambda: float = 1e-5,
+    lr: float = 1e-4,
+    epochs: int = 80,
+    patience: int = 15,
 ) -> dict:
-    tr = train.loc[train["y_w"].isin([0.0, 1.0])].copy()
+    """Fit mean-pooled L1 MIL on Y_r. Score validation windows with p_w."""
+    tr = bags_for_regions(train, feat_cols, train["region_id"].unique())
+    ytr = y_r.reindex(tr.index)
+    keep = ytr.isin([0.0, 1.0])
+    tr, ytr = tr.loc[keep], ytr.loc[keep]
     va = val.copy()
-    if tr.empty or tr["y_w"].nunique() < 2:
+    if tr.empty or ytr.nunique() < 2:
         return {"n_train": int(len(tr)), "auroc_window_mean": np.nan, "pass_window": False}
-    Xtr = tr[feat_cols].set_index(tr["row_id"])
-    ytr = tr.set_index("row_id")["y_w"].astype(float)
-    model = LinearClassifier(seed=seed, C=1.0, l1_ratio=l1_ratio).fit(Xtr, ytr)
-    Xva = va[feat_cols].set_index(va["row_id"])
-    p = pd.Series(_positive_proba(model, Xva), index=va.index)
+    model = L1MILModel(
+        seed=seed, lr=lr, l1_lambda=l1_lambda, epochs=epochs, patience=patience, max_instances=None,
+    ).fit(tr[["bag"]], ytr.astype(int))
+    p = pd.Series(np.nan, index=va.index, dtype=float)
+    for rid, group in va.groupby("region_id", sort=False):
+        group = group.sort_values("window_id")
+        bag = group[feat_cols].to_numpy(np.float32)
+        p.loc[group.index] = model.window_probabilities(bag)
     loc = within_region_auroc(va["y_w"], p, va["region_id"])
     loc.update(within_region_topk(va["y_w"], p, va["region_id"]))
     loc["n_train"] = int(len(tr))
@@ -197,33 +244,26 @@ def evaluate_fold(
 
 def evaluate_table(
     table: pd.DataFrame,
+    y_r: pd.Series,
     n_folds: int = 5,
     seed: int = 0,
     families: tuple[str, ...] | None = None,
-    l1_ratio: float = 1.0,
+    l1_lambda: float = 1e-5,
+    lr: float = 1e-4,
+    epochs: int = 80,
+    patience: int = 15,
 ) -> pd.DataFrame:
-    """Patient-level CV. Target = window label y_w."""
+    """Patient-level CV. Train on the region label. Score windows with p_w."""
     feat_cols = feature_columns(table, families=families)
-    if "patient_id" not in table.columns:
-        raise ValueError("need patient_id for clustered CV")
-    meta = (
-        table[["region_id", "patient_id", "y_w"]]
-        .dropna(subset=["patient_id"])
-        .drop_duplicates("region_id")
-    )
-    # stratify patients by whether the region has any positive window
-    has_pos = table.groupby("region_id")["y_w"].apply(lambda s: float((s == 1).any()))
-    meta = meta.set_index("region_id")
-    meta["has_pos"] = has_pos.reindex(meta.index)
-    meta = meta.reset_index()
-    folds = safe_patient_kfold(meta, n_folds, "patient_id", stratify_col="has_pos", seed=seed)
-    if not folds:
-        raise ValueError("not enough patients for CV")
+    folds = patient_region_folds(table, y_r, n_folds=n_folds, seed=seed)
     rows = []
     for k, (tr_regs, va_regs) in enumerate(folds):
-        tr = table[table["region_id"].isin(set(map(str, tr_regs)))]
-        va = table[table["region_id"].isin(set(map(str, va_regs)))]
-        rec = evaluate_fold(tr, va, feat_cols, seed=seed + k, l1_ratio=l1_ratio)
+        tr = table[table["region_id"].astype(str).isin(set(map(str, tr_regs)))]
+        va = table[table["region_id"].astype(str).isin(set(map(str, va_regs)))]
+        rec = evaluate_fold(
+            tr, va, feat_cols, y_r,
+            seed=seed + k, l1_lambda=l1_lambda, lr=lr, epochs=epochs, patience=patience,
+        )
         rec["fold"] = k
         rows.append(rec)
     return pd.DataFrame(rows)

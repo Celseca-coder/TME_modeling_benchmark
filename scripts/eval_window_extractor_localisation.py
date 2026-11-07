@@ -1,5 +1,8 @@
 #!/usr/bin/env python
-"""Did this extractor recover GT-important windows? Train/eval on y_w.
+"""Did this extractor recover GT-important windows?
+
+Train mean-pooled L1 MIL on the region label. Score windows with p_w and
+compare with y_w.
 
     python scripts/eval_window_extractor_localisation.py \
         --dataset tnbc_wang2023 --motif cd8_high \
@@ -21,6 +24,7 @@ from benchmark.motifs.window_extractor_eval import (
     PASS_WINDOW,
     evaluate_table,
     join_features_and_labels,
+    region_label,
 )
 
 WINDOW_DIR = Path("/autofs/nas8/tywang/tjzou/PseudoNoisyDataset/mil_windows/per_dataset")
@@ -43,8 +47,7 @@ def main() -> None:
 
     feats = pd.read_csv(args.features)
     wins = pd.read_csv(WINDOW_DIR / f"{args.dataset}_windows_noisy.csv")
-    bags = pd.read_csv(BAG_DIR / f"{args.dataset}_v2_noisy.csv",
-                       usecols=lambda c: c in {"region_id", "patient_id"})
+    bags = pd.read_csv(BAG_DIR / f"{args.dataset}_v2_noisy.csv")
     motifs = [args.motif] if args.motif else list(selected_motifs_for(args.dataset))
     families = tuple(args.families) if args.families else None
     group = (
@@ -56,7 +59,7 @@ def main() -> None:
     rows = []
     for motif in motifs:
         tab = join_features_and_labels(feats, wins, motif, bags)
-        fold = evaluate_table(tab, families=families)
+        fold = evaluate_table(tab, region_label(bags, motif), families=families)
         summary = {
             "dataset": args.dataset,
             "motif": motif,

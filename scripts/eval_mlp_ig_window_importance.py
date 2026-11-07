@@ -1,9 +1,9 @@
 #!/usr/bin/env python
-"""Train a window MLP on y_w and attribute features with Integrated Gradients.
+"""Train a mean-pooled window MLP on Y_r and attribute windows with IG.
 
-Window score s_w is the sum of signed IG across features. Global importance
-x_f is the mean absolute IG inside each validation fold. Hit@5 and Precision@5
-use the mean rank of x_f across folds.
+Window score s_w is the sum of absolute IG of the bag probability. Global
+importance x_f is the mean absolute IG inside each validation fold. Hit@5
+and Precision@5 use the mean rank of x_f across folds.
 
     python scripts/eval_mlp_ig_window_importance.py \
         --families composition density mixing point_pattern
@@ -32,12 +32,14 @@ from benchmark.motifs.source_select import CANDIDATE_DATASETS, selected_motifs_f
 from benchmark.motifs.window_extractor_eval import (
     PASS_PRECISION_AT,
     PASS_WINDOW,
+    bags_for_regions,
     feature_columns,
     join_features_and_labels,
+    patient_region_folds,
+    region_label,
     within_region_auroc,
     within_region_topk,
 )
-from benchmark.validation.splits import safe_patient_kfold
 
 WINDOW_DIR = Path("/autofs/nas8/tywang/tjzou/PseudoNoisyDataset/mil_windows/per_dataset")
 BAG_DIR = Path("/autofs/nas8/tywang/tjzou/PseudoNoisyDataset/per_dataset")
@@ -47,50 +49,46 @@ K = 5
 
 def evaluate_mlp_ig(
     table: pd.DataFrame,
+    y_r: pd.Series,
     families,
-    steps: int = 32,
+    steps: int = 50,
     seed: int = 0,
-    epochs: int = 20,
+    epochs: int = 80,
+    patience: int = 15,
 ) -> tuple[pd.DataFrame, pd.DataFrame]:
-    """Patient-level CV. Returns fold metrics and the mean feature ranking."""
+    """Patient-level CV on Y_r. Returns fold metrics and the mean feature ranking."""
     feat_cols = feature_columns(table, families=families)
-    if "patient_id" not in table.columns:
-        raise ValueError("need patient_id for clustered CV")
-    meta = (
-        table[["region_id", "patient_id", "y_w"]]
-        .dropna(subset=["patient_id"])
-        .drop_duplicates("region_id")
-    )
-    has_pos = table.groupby("region_id")["y_w"].apply(lambda s: float((s == 1).any()))
-    meta = meta.set_index("region_id")
-    meta["has_pos"] = has_pos.reindex(meta.index)
-    meta = meta.reset_index()
-    folds = safe_patient_kfold(meta, 5, "patient_id", stratify_col="has_pos", seed=seed)
-    if not folds:
-        raise ValueError("not enough patients for CV")
+    folds = patient_region_folds(table, y_r, seed=seed)
     rows = []
     orders: list[list[str]] = []
     for k, (tr_regs, va_regs) in enumerate(folds):
-        tr = table[table["region_id"].isin(set(map(str, tr_regs)))]
-        va = table[table["region_id"].isin(set(map(str, va_regs)))].copy()
-        labeled_tr = tr.loc[tr["y_w"].isin([0.0, 1.0])].copy()
-        if labeled_tr.empty or labeled_tr["y_w"].nunique() < 2:
+        tr = bags_for_regions(table, feat_cols, tr_regs)
+        ytr = y_r.reindex(tr.index)
+        keep = ytr.isin([0.0, 1.0])
+        tr, ytr = tr.loc[keep], ytr.loc[keep]
+        if ytr.nunique() < 2:
             continue
-        model = WindowMLP(seed=seed + k, epochs=epochs).fit(
-            labeled_tr[feat_cols].set_index(labeled_tr["row_id"]),
-            labeled_tr.set_index("row_id")["y_w"].astype(float),
+        model = WindowMLP(seed=seed + k, epochs=epochs, patience=patience).fit(
+            tr[["bag"]], ytr.astype(float), columns=feat_cols,
         )
-        labeled_va = va.loc[va["y_w"].isin([0.0, 1.0])].copy()
-        ig, scores_l = integrated_gradients(model, labeled_va[feat_cols], steps=steps)
+        va = table[table["region_id"].astype(str).isin(set(map(str, va_regs)))].copy()
         scores = pd.Series(np.nan, index=va.index, dtype=float)
-        scores.loc[labeled_va.index] = scores_l
+        ig_parts: list[np.ndarray] = []
+        for _, group in va.groupby("region_id", sort=False):
+            group = group.sort_values("window_id")
+            bag = group[feat_cols].to_numpy(np.float32)
+            ig, window_scores = integrated_gradients(model, bag, steps=steps)
+            scores.loc[group.index] = window_scores
+            if len(ig):
+                ig_parts.append(ig)
         loc = within_region_auroc(va["y_w"], scores, va["region_id"])
         loc.update(within_region_topk(va["y_w"], scores, va["region_id"]))
         loc["fold"] = k
         rows.append(loc)
-        importance = global_feature_importance(ig)
-        order = np.argsort(-importance)
-        orders.append([model._columns[int(i)] for i in order])
+        if ig_parts:
+            importance = global_feature_importance(np.concatenate(ig_parts, axis=0))
+            order = np.argsort(-importance)
+            orders.append([model._columns[int(i)] for i in order])
     return pd.DataFrame(rows), mean_feature_rank(orders)
 
 
@@ -100,8 +98,8 @@ def main() -> None:
     p.add_argument("--motif", default="")
     p.add_argument("--feature-dir", default="results/pseudo_labels/mil_windows/features")
     p.add_argument("--families", nargs="+", default=list(DEFAULT_FAMILIES))
-    p.add_argument("--steps", type=int, default=32)
-    p.add_argument("--epochs", type=int, default=20)
+    p.add_argument("--steps", type=int, default=50)
+    p.add_argument("--epochs", type=int, default=80)
     p.add_argument("--window-dir", default=str(WINDOW_DIR))
     p.add_argument("--bag-dir", default=str(BAG_DIR))
     p.add_argument("--out", default="results/pseudo_labels/mil_windows/mlp_ig_localisation.csv")
@@ -119,7 +117,10 @@ def main() -> None:
         motifs = [args.motif] if args.motif else list(selected_motifs_for(dataset))
         for motif in motifs:
             tab = join_features_and_labels(feats, wins, motif, bags)
-            fold, ranking = evaluate_mlp_ig(tab, families, steps=args.steps, epochs=args.epochs)
+            y_r = region_label(bags, motif)
+            fold, ranking = evaluate_mlp_ig(
+                tab, y_r, families, steps=args.steps, epochs=args.epochs,
+            )
             if fold.empty:
                 auroc = pwr = prev = float("nan")
                 n_regions = n_folds = 0

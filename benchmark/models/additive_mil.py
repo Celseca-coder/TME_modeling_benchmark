@@ -1,62 +1,48 @@
-"""Additive gated-attention MIL.
+"""Additive attention MIL.
 
-The bag logit is the sum of per-window contributions plus one bag-level bias.
-The bias stays outside the sum so it is not repeated once per window.
+Attention is the plain (non-gated) Ilse form. The embedding is the window
+vector itself, so the trained parameters are V, w, W, and b.
 """
 from __future__ import annotations
 
-import numpy as np
 import torch
 from torch import nn
 
 from .attention_mil import AttentionMILModel
 
 
-class _AdditiveGatedNet(nn.Module):
-    def __init__(self, input_dim: int, hidden_dim: int, attention_dim: int,
-                 output_dim: int, dropout: float) -> None:
+class _AdditiveAttentionNet(nn.Module):
+    def __init__(self, input_dim: int, attention_dim: int) -> None:
         super().__init__()
-        self.encoder = nn.Sequential(
-            nn.Linear(input_dim, hidden_dim), nn.ReLU(), nn.Dropout(dropout)
-        )
-        self.attn_v = nn.Linear(hidden_dim, attention_dim)
-        self.attn_u = nn.Linear(hidden_dim, attention_dim)
+        self.attn_v = nn.Linear(input_dim, attention_dim, bias=False)
         self.attn_w = nn.Linear(attention_dim, 1, bias=False)
-        self.psi = nn.Sequential(
-            nn.Linear(hidden_dim, hidden_dim),
-            nn.ReLU(),
-            nn.Dropout(dropout),
-            nn.Linear(hidden_dim, output_dim, bias=False),
-        )
-        self.bias = nn.Parameter(torch.zeros(output_dim))
+        self.head = nn.Linear(input_dim, 1)
 
     def forward(self, bag: torch.Tensor):
-        h = self.encoder(bag)
-        attn_logits = self.attn_w(torch.tanh(self.attn_v(h)) * torch.sigmoid(self.attn_u(h))).squeeze(1)
-        weights = torch.softmax(attn_logits, dim=0)
-        contrib = self.psi(weights[:, None] * h)
-        return contrib.sum(dim=0) + self.bias, contrib
+        logits = self.attn_w(torch.tanh(self.attn_v(bag))).squeeze(-1)
+        weights = torch.softmax(logits, dim=0)
+        pooled = torch.sum(weights[:, None] * bag, dim=0)
+        return self.head(pooled), weights
 
 
 class AdditiveMILModel(AttentionMILModel):
-    """Gated attention, then a bias-free head on each weighted window.
+    """Bag probability is sigmoid(Wz + b). Window score is the attention weight."""
 
-    ``window_contributions`` is the positive-class column of those heads.
-    Summing it and adding the bag bias recovers the positive-class logit.
-    """
+    def __init__(self, l1_lambda: float = 1e-5, **kwargs) -> None:
+        kwargs.setdefault("lr", 1e-4)
+        kwargs.setdefault("weight_decay", 0.0)
+        super().__init__(**kwargs)
+        self.l1_lambda = float(l1_lambda)
 
+    # 建立注意力矩阵V,打分向量omega,袋分类层W和b
     def _make_net(self, output_dim: int) -> nn.Module:
-        return _AdditiveGatedNet(
-            self._input_dim, self.hidden_dim, self.attention_dim, output_dim, self.dropout
+        return _AdditiveAttentionNet(self._input_dim, self.attention_dim)
+
+    def _penalty(self) -> torch.Tensor:
+        net = self._net
+        penalty = (
+            net.attn_v.weight.abs().sum()
+            + net.attn_w.weight.abs().sum()
+            + net.head.weight.abs().sum()
         )
-
-    def window_contributions(self, bag: np.ndarray) -> np.ndarray:
-        """Signed positive-class contribution of each window. Shape ``(n_windows,)``."""
-        self._net.eval()
-        with torch.no_grad():
-            _, contrib = self._net(self._bag_tensor(bag))
-            return contrib[:, self._positive_index()].detach().cpu().numpy().astype(np.float64, copy=False)
-
-    def positive_bias(self) -> float:
-        self._net.eval()
-        return float(self._net.bias.detach()[self._positive_index()].cpu())
+        return self.l1_lambda * penalty

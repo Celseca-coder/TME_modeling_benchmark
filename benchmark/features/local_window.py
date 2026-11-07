@@ -30,6 +30,9 @@ PANEL_FAMILY_TO_GROUPS = {
     "mixing": ("mixing",),
     "point_pattern": ("point_pattern",),
 }
+# Window mixing keeps six summaries plus the C×C neighbor-fraction block.
+MIXING_WINDOW_DROPPED = ("mixing__same_type_neighbor_fraction",)
+
 FAMILY_COLUMN_PREFIXES = {
     "composition": ("composition__",),
     "density": ("local_cell_density_per_mm2", "celltype_density__"),
@@ -83,7 +86,10 @@ def columns_for_families(columns: list[str], families: tuple[str, ...]) -> list[
             raise ValueError(f"Unknown panel family: {family}")
         prefixes.extend(FAMILY_COLUMN_PREFIXES[family])
     keep = []
+    dropped = set(MIXING_WINDOW_DROPPED)
     for col in columns:
+        if col in dropped:
+            continue
         if any(col == prefix or col.startswith(prefix) for prefix in prefixes):
             keep.append(col)
     return keep
@@ -211,7 +217,11 @@ class LocalWindowInstanceFeaturizer:
             elif group == "mixing":
                 if self.mixing_ is None:
                     continue
-                names.extend(f"mixing__{name}" for name in self.mixing_.feature_names())
+                names.extend(
+                    f"mixing__{name}"
+                    for name in self.mixing_.feature_names()
+                    if f"mixing__{name}" not in MIXING_WINDOW_DROPPED
+                )
             elif group == "point_pattern":
                 if self.point_pattern_ is None:
                     continue

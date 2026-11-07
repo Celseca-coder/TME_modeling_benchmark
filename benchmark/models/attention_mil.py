@@ -13,23 +13,31 @@ from .base import RegionModel
 
 
 class _GatedAttentionNet(nn.Module):
+    """Two-layer encoder, gated attention, dropout on the pooled vector."""
+
     def __init__(self, input_dim: int, hidden_dim: int, attention_dim: int,
                  output_dim: int, dropout: float) -> None:
         super().__init__()
+        # Encoder加了两层ReLU
         self.encoder = nn.Sequential(
-            nn.Linear(input_dim, hidden_dim), nn.ReLU(), nn.Dropout(dropout)
+            nn.Linear(input_dim, hidden_dim),
+            nn.ReLU(),
+            nn.Linear(hidden_dim, hidden_dim),
+            nn.ReLU(),
         )
-        self.attn_v = nn.Linear(hidden_dim, attention_dim)
-        self.attn_u = nn.Linear(hidden_dim, attention_dim)
+        # 加入可偏置开关和dropout
+        self.attn_v = nn.Linear(hidden_dim, attention_dim, bias=False)
+        self.attn_u = nn.Linear(hidden_dim, attention_dim, bias=False)
         self.attn_w = nn.Linear(attention_dim, 1, bias=False)
+        self.drop = nn.Dropout(dropout)
         self.head = nn.Linear(hidden_dim, output_dim)
 
     def forward(self, bag: torch.Tensor):
         h = self.encoder(bag)
-        logits = self.attn_w(torch.tanh(self.attn_v(h)) * torch.sigmoid(self.attn_u(h))).squeeze(1)
+        logits = self.attn_w(torch.tanh(self.attn_v(h)) * torch.sigmoid(self.attn_u(h))).squeeze(-1)
         weights = torch.softmax(logits, dim=0)
         pooled = torch.sum(weights[:, None] * h, dim=0)
-        return self.head(pooled), weights
+        return self.head(self.drop(pooled)), weights
 
 
 class AttentionMILModel(RegionModel):
@@ -117,25 +125,55 @@ class AttentionMILModel(RegionModel):
             self._input_dim, self.hidden_dim, self.attention_dim, output_dim, self.dropout
         )
 
+    def _penalty(self) -> torch.Tensor:
+        return torch.zeros((), device=self.device_)
+
+    # 交叉熵函数计算分类损失
+    def _classification_loss(self, outputs: torch.Tensor, y: torch.Tensor, n_classes: int) -> torch.Tensor:
+        """Binary bags use one logit and BCE. Multiclass stays cross-entropy."""
+        if n_classes == 2:
+            return nn.functional.binary_cross_entropy_with_logits(
+                outputs.reshape(-1), y.reshape(-1).float(),
+            )
+        counts = torch.bincount(y, minlength=n_classes).float()
+        weights = len(y) / (n_classes * counts.clamp_min(1.0))
+        return nn.functional.cross_entropy(outputs, y, weight=weights)
+
     def _positive_index(self) -> int:
         classes = list(self.classes_)
         if 1 in classes:
             return classes.index(1)
+        # 有时候标签可能是1.0
+        if 1.0 in classes:
+            return classes.index(1.0)
         return len(classes) - 1
 
+    # 返回分数正/负的一维
+    def _positive_scalar(self, raw: torch.Tensor) -> torch.Tensor:
+        flat = raw.reshape(-1)
+        if flat.numel() == 1:
+            return flat[0]
+        return raw.reshape(-1)[self._positive_index()]
+
+    # sigma
     def positive_logit(self, bag: np.ndarray) -> float:
-        """Positive-class logit for one bag."""
+        """Positive-class logit for one bag. Probability models return the bag score."""
         self._net.eval()
         with torch.no_grad():
-            logits, _ = self._net(self._bag_tensor(bag))
-            return float(logits[self._positive_index()].cpu())
-
+            raw, _ = self._net(self._bag_tensor(bag))
+            return float(self._positive_scalar(raw).cpu())
+    # sigmoid
     def positive_proba(self, bag: np.ndarray) -> float:
         """Positive-class probability for one bag."""
         self._net.eval()
         with torch.no_grad():
-            logits, _ = self._net(self._bag_tensor(bag))
-            return float(torch.softmax(logits, dim=0)[self._positive_index()].cpu())
+            raw, _ = self._net(self._bag_tensor(bag))
+            scalar = self._positive_scalar(raw)
+            if getattr(self, "_bag_probability", False):
+                return float(scalar.cpu())
+            if len(self.classes_) == 2:
+                return float(torch.sigmoid(scalar).cpu())
+            return float(torch.softmax(raw.reshape(-1), dim=0)[self._positive_index()].cpu())
 
     def forward_scaled(self, tensor: torch.Tensor):
         """Gated-attention forward on an already-scaled bag tensor."""
@@ -160,6 +198,7 @@ class AttentionMILModel(RegionModel):
         self.device_ = self._device()
 
         survival = self.task_type == "survival"
+        n_classes = 2
         if survival:
             output_dim = 1
             times = torch.as_tensor(target["time"].to_numpy(float), dtype=torch.float32,
@@ -173,7 +212,8 @@ class AttentionMILModel(RegionModel):
             class_to_i = {c: i for i, c in enumerate(self.classes_)}
             y = torch.as_tensor([class_to_i[v] for v in target.to_numpy()], dtype=torch.long,
                                 device=self.device_)
-            output_dim = len(self.classes_)
+            n_classes = len(self.classes_)
+            output_dim = 1 if n_classes == 2 else n_classes
 
         self._net = self._make_net(output_dim).to(self.device_)
         optimizer = torch.optim.AdamW(self._net.parameters(), lr=self.lr,
@@ -183,14 +223,13 @@ class AttentionMILModel(RegionModel):
             self._net.train()
             optimizer.zero_grad()
             outputs = torch.stack([
-                self._net(self._bag_tensor(bag, training=True))[0] for bag in bags
+                self._net(self._bag_tensor(bag, training=True))[0].reshape(-1) for bag in bags
             ])
             if survival:
                 loss = self._cox_loss(outputs[:, 0], times, events)
             else:
-                counts = torch.bincount(y, minlength=output_dim).float()
-                weights = len(y) / (output_dim * counts.clamp_min(1.0))
-                loss = nn.functional.cross_entropy(outputs, y, weight=weights)
+                loss = self._classification_loss(outputs, y, n_classes)
+            loss = loss + self._penalty()
             loss.backward()
             optimizer.step()
             value = float(loss.detach().cpu())
@@ -210,11 +249,19 @@ class AttentionMILModel(RegionModel):
         outputs = []
         with torch.no_grad():
             for bag in self._raw_bags(features):
-                logits, _ = self._net(self._bag_tensor(bag))
+                raw, _ = self._net(self._bag_tensor(bag))
                 if self.task_type == "survival":
-                    outputs.append(float(logits[0].cpu()))
+                    # 越大预后越差
+                    outputs.append(float(raw.reshape(-1)[0].cpu()))
+                elif getattr(self, "_bag_probability", False):
+                    p1 = float(raw.reshape(-1)[0].cpu())
+                    # P_{bag}
+                    outputs.append(np.array([1.0 - p1, p1], dtype=np.float64))
+                elif len(self.classes_) == 2:
+                    p1 = float(torch.sigmoid(raw.reshape(-1)[0]).cpu())
+                    outputs.append(np.array([1.0 - p1, p1], dtype=np.float64))
                 else:
-                    outputs.append(torch.softmax(logits, dim=0).cpu().numpy())
+                    outputs.append(torch.softmax(raw.reshape(-1), dim=0).cpu().numpy())
         return np.asarray(outputs)
 
     def attention_weights(self, features: pd.DataFrame) -> list[np.ndarray]:

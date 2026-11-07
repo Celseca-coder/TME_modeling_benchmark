@@ -21,6 +21,7 @@ from benchmark.motifs.source_select import SELECTED_MOTIF_SOURCES, selected_moti
 from benchmark.motifs.window_extractor_eval import (  # noqa: E402
     evaluate_table,
     join_features_and_labels,
+    region_label,
 )
 from scripts.eval_ig_mil_window_importance import evaluate_gated_localisation  # noqa: E402
 from scripts.eval_mlp_ig_window_importance import evaluate_mlp_ig  # noqa: E402
@@ -38,19 +39,15 @@ OUT_DIR = Path(
 
 METHOD_NAME = {
     "lasso": "Lasso",
-    "shap_mil": "SHAP+Gated Attention",
-    "ig": "IG",
     "attention": "attention",
     "mlp_ig": "MLP IG",
-    "rf_mdi": "RF MDI",
+    "rf_mdi": "RF",
 }
 SCORE_KIND = {
-    "lasso": "mean positive-class probability",
-    "shap_mil": "mean Shapley window score",
-    "ig": "mean integrated-gradient window score",
+    "lasso": "mean window sigmoid score",
     "attention": "mean softmax attention weight",
-    "mlp_ig": "mean summed signed IG",
-    "rf_mdi": "mean MDI window score",
+    "mlp_ig": "mean absolute IG",
+    "rf_mdi": "mean RF positive probability",
 }
 
 
@@ -90,7 +87,7 @@ def run_lasso() -> list[dict]:
         feats, wins, bags = _load(dataset)
         for motif in motifs:
             tab = join_features_and_labels(feats, wins, motif, bags)
-            fold = evaluate_table(tab, families=FAMILIES, l1_ratio=1.0)
+            fold = evaluate_table(tab, region_label(bags, motif), families=FAMILIES)
             rec = _row(dataset, motif, "lasso", fold)
             rows.append(rec)
             print(rec, flush=True)
@@ -119,7 +116,7 @@ def run_mlp() -> list[dict]:
         feats, wins, bags = _load(dataset)
         for motif in selected_motifs_for(dataset):
             tab = join_features_and_labels(feats, wins, motif, bags)
-            fold, _ranking = evaluate_mlp_ig(tab, FAMILIES)
+            fold, _ranking = evaluate_mlp_ig(tab, region_label(bags, motif), FAMILIES)
             rec = _row(dataset, motif, "mlp_ig", fold)
             rows.append(rec)
             print(rec, flush=True)

@@ -1,14 +1,12 @@
 #!/usr/bin/env python
 """Window-importance extraction on PseudoLabelDatasetExtreme20.
 
-Same method–metric pairs and the same within-region evaluation as
-``four_family_localisation_wide.csv``: patient 5-fold, joint
-composition+density+mixing+point_pattern features, AUROC and precision
-among the top 20% scored windows.
+Patient 5-fold, joint composition+density+mixing+point_pattern features,
+AUROC and precision among the top 20% scored windows.
 
-Lasso, MLP IG, and RF MDI train on the window label y_w. Gated attention
-(attention, SHAP, IG) and Additive MIL train on the region label Y_r.
-Window features are the existing panel; only the labels change.
+L1 MIL, gated attention, window MLP, and Additive MIL train on the region
+label Y_r. RF trains on the previously calculated window label y_w and
+scores each window with P(y=1|x). Window metrics always use y_w.
 
     python scripts/eval_extreme20_window_importance.py --method all
     python scripts/eval_extreme20_window_importance.py --method lasso
@@ -42,17 +40,15 @@ FEATURE_DIR = Path(
 DEFAULT_FAMILIES = ("composition", "density", "mixing", "point_pattern")
 METHODS = ("lasso", "gated", "mlp", "rf", "additive")
 
-# Wide-table column order. Gated attention writes three of these.
+# Wide-table column order. Gated attention contributes its attention weight.
 METHOD_SPECS = (
     ("lasso", "window L1 MIL", "Lasso"),
-    ("shap_mil", "Gated Attention MIL", "SHAP+Gated Attention"),
-    ("ig", "Gated Attention MIL", "IG"),
     ("attention", "Gated Attention MIL", "attention"),
     ("mlp_ig", "window MLP MIL", "MLP IG"),
-    ("rf_mdi", "window RF MIL", "RF MDI"),
+    ("rf_mdi", "window RF MIL", "RF"),
     ("additive_mil", "Additive MIL", "Additive MIL"),
 )
-GATED_METHODS = ("attention", "shap_mil", "ig")
+GATED_METHODS = ("attention",)
 
 
 def _out_dir(label: str) -> Path:
@@ -153,8 +149,8 @@ def run_lasso(jobs, group, label, feature_dir, dest: Path) -> None:
         if (dataset, motif, "lasso") in done:
             print(f"skip lasso {dataset} {motif}", flush=True)
             continue
-        tab, _y_r = _prepare(dataset, motif, label, feature_dir)
-        fold = evaluate_table(tab, families=DEFAULT_FAMILIES, l1_ratio=1.0)
+        tab, y_r = _prepare(dataset, motif, label, feature_dir)
+        fold = evaluate_table(tab, y_r, families=DEFAULT_FAMILIES)
         rec = _row(dataset, motif, group, "lasso", tab, fold)
         rows.append(rec)
         done.add((dataset, motif, "lasso"))
@@ -196,8 +192,8 @@ def run_mlp(jobs, group, label, feature_dir, dest: Path) -> None:
         if (dataset, motif, "mlp_ig") in done:
             print(f"skip mlp {dataset} {motif}", flush=True)
             continue
-        tab, _y_r = _prepare(dataset, motif, label, feature_dir)
-        fold, _ranking = evaluate_mlp_ig(tab, DEFAULT_FAMILIES)
+        tab, y_r = _prepare(dataset, motif, label, feature_dir)
+        fold, _ranking = evaluate_mlp_ig(tab, y_r, DEFAULT_FAMILIES)
         rec = _row(dataset, motif, group, "mlp_ig", tab, fold)
         rows.append(rec)
         done.add((dataset, motif, "mlp_ig"))

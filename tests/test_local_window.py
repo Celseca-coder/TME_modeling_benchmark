@@ -71,6 +71,15 @@ class LocalWindowPanelTest(unittest.TestCase):
         inside[0] = True
         vec = feat.extract_vector(region, inside, 100.0)
         names = feat.feature_names()
-        self.assertIn("mixing__same_type_neighbor_fraction", names)
+        for stat in (
+            "shannon_entropy_global",
+            "shannon_entropy_normalized",
+            "local_mixing_mean",
+            "local_mixing_std",
+            "local_mixing_min",
+            "local_mixing_max",
+        ):
+            self.assertIn(f"mixing__{stat}", names)
+        self.assertNotIn("mixing__same_type_neighbor_fraction", names)
+        self.assertTrue(any("neighbor_fraction" in name for name in names))
         self.assertEqual(len(vec), len(names))
-        self.assertTrue(np.isnan(vec[names.index("mixing__same_type_neighbor_fraction")]))

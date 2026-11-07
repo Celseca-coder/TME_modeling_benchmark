@@ -1,8 +1,9 @@
 #!/usr/bin/env python
-"""Train gated-attention MIL on Y_r; score windows; AUROC and PWR@20 vs y_w.
+"""Train gated-attention MIL on Y_r; score windows by attention; AUROC vs y_w.
 
-Three scores share each validation fold: softmax attention, Shapley phi_w,
-and Integrated Gradients s_w. Metrics stay inside each region.
+The window score is the gated-attention weight. Shapley and Integrated
+Gradients remain available through ``--methods`` but are not the benchmark
+score. Metrics stay inside each region.
 
     python scripts/eval_ig_mil_window_importance.py \
         --dataset tnbc_wang2023 --motif cd8_high \
@@ -45,6 +46,7 @@ IG_STEPS = 32
 IG_STEPS_RETRY = 64
 COMPLETENESS_RETRY = 0.05
 METHODS = ("attention", "shap_mil", "ig")
+DEFAULT_METHODS = ("attention",)
 
 
 def _bags_for_split(table: pd.DataFrame, feat_cols: list[str], region_ids) -> pd.DataFrame:
@@ -82,9 +84,9 @@ def evaluate_gated_localisation(
     steps: int = IG_STEPS,
     n_samples: int = 32,
     seed: int = 0,
-    methods: tuple[str, ...] = METHODS,
+    methods: tuple[str, ...] = DEFAULT_METHODS,
 ) -> dict[str, pd.DataFrame]:
-    """Patient-stratified CV. One gated-attention model per fold, three window scores."""
+    """Patient-stratified CV. One gated-attention model per fold."""
     feat_cols = feature_columns(table, families=families)
     meta = (
         table[["region_id", "patient_id"]]
@@ -105,6 +107,7 @@ def evaluate_gated_localisation(
             continue
         model = AttentionMILModel(
             seed=seed + k, epochs=80, patience=15, max_instances=None,
+            lr=1e-4, weight_decay=0.0,
         ).fit(tr, ytr.astype(int))
         va = table[table["region_id"].isin(set(map(str, va_regs)))].copy()
         held = {method: np.full(len(va), np.nan) for method in methods}
@@ -177,7 +180,7 @@ def main():
     p.add_argument("--motif", default="")
     p.add_argument("--features", default="")
     p.add_argument("--families", nargs="+", default=None)
-    p.add_argument("--methods", nargs="+", choices=METHODS, default=list(METHODS))
+    p.add_argument("--methods", nargs="+", choices=METHODS, default=list(DEFAULT_METHODS))
     p.add_argument("--steps", type=int, default=IG_STEPS)
     p.add_argument("--n-samples", type=int, default=32)
     p.add_argument("--window-dir", default=str(WINDOW_DIR))

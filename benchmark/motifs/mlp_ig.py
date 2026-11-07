@@ -1,8 +1,9 @@
-"""Window MLP with Integrated Gradients.
+"""Bag-level window MLP with Integrated Gradients.
 
-Each labeled window is one sample. Signed IG summed over features is the
-window score. Mean absolute IG across windows in a fold is the global
-feature importance.
+Each region is one bag. The MLP maps a window to a logit, the bag logit is
+the mean, and the bag probability is trained against the region label.
+Window score is the sum of absolute IG of that probability. The baseline is
+the zero tensor in scaled space, which is the training-set mean.
 """
 from __future__ import annotations
 
@@ -21,36 +22,34 @@ class _MLP(nn.Module):
             nn.Linear(input_dim, hidden_dim),
             nn.ReLU(),
             nn.Dropout(dropout),
-            nn.Linear(hidden_dim, 2),
+            nn.Linear(hidden_dim, 1),
         )
 
     def forward(self, x: torch.Tensor) -> torch.Tensor:
-        return self.net(x)
+        return self.net(x).squeeze(-1)
 
 
 class WindowMLP:
-    """Binary MLP on a window feature table. Target is y_w."""
+    """Mean-pooled window MLP. Training target is the region label."""
 
     def __init__(
         self,
         seed: int = 0,
         hidden_dim: int = 64,
         dropout: float = 0.1,
-        lr: float = 1e-3,
-        weight_decay: float = 1e-4,
-        epochs: int = 20,
-        patience: int = 5,
-        batch_size: int = 2048,
+        lr: float = 1e-4,
+        l1_lambda: float = 1e-5,
+        epochs: int = 80,
+        patience: int = 15,
         device: str = "auto",
     ) -> None:
         self.seed = seed
         self.hidden_dim = hidden_dim
         self.dropout = dropout
         self.lr = lr
-        self.weight_decay = weight_decay
+        self.l1_lambda = l1_lambda
         self.epochs = epochs
         self.patience = patience
-        self.batch_size = batch_size
         self.device_name = device
 
     def _device(self) -> torch.device:
@@ -58,58 +57,59 @@ class WindowMLP:
             return torch.device("cuda" if torch.cuda.is_available() else "cpu")
         return torch.device(self.device_name)
 
-    def fit(self, features: pd.DataFrame, target: pd.Series) -> "WindowMLP":
+    def fit(self, features: pd.DataFrame, target: pd.Series, columns: list[str] | None = None) -> "WindowMLP":
+        """``features`` has a ``bag`` column of ``(n_windows, n_features)`` arrays."""
         torch.manual_seed(self.seed)
         np.random.seed(self.seed)
-        y_raw = target.loc[features.index].to_numpy(float)
+        if "bag" not in features.columns:
+            raise ValueError("WindowMLP requires a 'bag' column")
+        target = target.loc[features.index]
+        y_raw = target.to_numpy(float)
         classes = np.asarray(sorted(pd.unique(y_raw).tolist()))
         if len(classes) < 2:
-            raise ValueError("Window MLP requires two classes")
+            raise ValueError("Window MLP requires two region classes")
         self.classes_ = classes
-        self._class_to_i = {c: i for i, c in enumerate(classes)}
         self.device_ = self._device()
-
-        raw = features.to_numpy(np.float64)
-        self._columns = list(features.columns)
-        self._median = np.nanmedian(raw, axis=0)
-        self._median = np.nan_to_num(self._median, nan=0.0)
-        filled = np.where(np.isnan(raw), self._median, raw)
-        self._mean = filled.mean(axis=0)
-        self._std = filled.std(axis=0)
-        keep = self._std >= 1e-8
+        bags = [np.asarray(bag, dtype=np.float64) for bag in features["bag"]]
+        if columns is None:
+            width = next(bag.shape[1] for bag in bags if bag.ndim == 2 and len(bag))
+            columns = [f"f{i}" for i in range(width)]
+        nonempty = [bag for bag in bags if bag.ndim == 2 and len(bag)]
+        if not nonempty:
+            raise ValueError("all training bags are empty")
+        raw = np.concatenate(nonempty, axis=0)
+        if raw.shape[1] != len(columns):
+            raise ValueError(f"bag width {raw.shape[1]} does not match {len(columns)} columns")
+        median = np.nanmedian(raw, axis=0)
+        median = np.nan_to_num(median, nan=0.0)
+        filled = np.where(np.isnan(raw), median, raw)
+        mean = filled.mean(axis=0)
+        std = filled.std(axis=0)
+        keep = std >= 1e-8
         if not np.any(keep):
             raise ValueError("no non-constant features")
+        self._columns = [col for col, flag in zip(columns, keep) if flag]
+        # 去除不能标准化的列
         self._keep = keep
-        self._columns = [c for c, flag in zip(features.columns, keep) if flag]
-        self._median = self._median[keep]
-        self._mean = self._mean[keep]
-        self._std = self._std[keep]
-        x = torch.as_tensor(self._scale_matrix(features), dtype=torch.float32, device=self.device_)
-        y = torch.as_tensor(
-            [self._class_to_i[v] for v in y_raw], dtype=torch.long, device=self.device_,
-        )
-        counts = torch.bincount(y, minlength=len(classes)).float()
-        weights = len(y) / (len(classes) * counts.clamp_min(1.0))
-
-        self._net = _MLP(x.shape[1], self.hidden_dim, self.dropout).to(self.device_)
-        opt = torch.optim.AdamW(self._net.parameters(), lr=self.lr, weight_decay=self.weight_decay)
+        self._median = median[keep]
+        self._mean = mean[keep]
+        self._std = std[keep]
+        y = torch.as_tensor(y_raw, dtype=torch.float32, device=self.device_)
+        self._net = _MLP(int(keep.sum()), self.hidden_dim, self.dropout).to(self.device_)
+        opt = torch.optim.Adam(self._net.parameters(), lr=self.lr)
         best_loss, best_state, stale = float("inf"), None, 0
-        order = np.arange(len(y))
-        rng = np.random.default_rng(self.seed)
         for _ in range(self.epochs):
             self._net.train()
-            rng.shuffle(order)
-            total, seen = 0.0, 0
-            for start in range(0, len(order), self.batch_size):
-                batch = order[start:start + self.batch_size]
-                idx = torch.as_tensor(batch, device=self.device_)
-                opt.zero_grad()
-                loss = nn.functional.cross_entropy(self._net(x[idx]), y[idx], weight=weights)
-                loss.backward()
-                opt.step()
-                total += float(loss.detach().cpu()) * len(batch)
-                seen += len(batch)
-            value = total / max(seen, 1)
+            opt.zero_grad()
+            losses = []
+            for bag, label in zip(bags, y):
+                logit = self._net(self._tensor(bag)).mean()
+                losses.append(nn.functional.binary_cross_entropy_with_logits(logit, label))
+            penalty = self.l1_lambda * sum(param.abs().sum() for param in self._net.parameters() if param.ndim > 1)
+            loss = torch.stack(losses).mean() + penalty
+            loss.backward()
+            opt.step()
+            value = float(loss.detach().cpu())
             if value < best_loss - 1e-5:
                 best_loss, stale = value, 0
                 best_state = {k: v.detach().cpu().clone() for k, v in self._net.state_dict().items()}
@@ -122,51 +122,52 @@ class WindowMLP:
         self._net.to(self.device_)
         return self
 
-    def _scale_matrix(self, features: pd.DataFrame) -> np.ndarray:
-        raw = features[self._columns].to_numpy(np.float64) if set(self._columns) <= set(features.columns) else None
-        if raw is None:
-            raw = features.to_numpy(np.float64)[:, self._keep]
+    def _tensor(self, bag: np.ndarray) -> torch.Tensor:
+        raw = np.asarray(bag, dtype=np.float64)
+        if raw.ndim != 2 or raw.shape[1] != len(self._keep):
+            raise ValueError(f"Invalid bag shape {raw.shape}; expected (*, {len(self._keep)})")
+        if len(raw) == 0:
+            raw = np.zeros((1, raw.shape[1]), dtype=np.float64)
+        raw = raw[:, self._keep]
         raw = np.where(np.isnan(raw), self._median, raw)
-        return ((raw - self._mean) / self._std).astype(np.float32)
+        scaled = ((raw - self._mean) / self._std).astype(np.float32)
+        return torch.as_tensor(scaled, dtype=torch.float32, device=self.device_)
 
-    def _positive_index(self) -> int:
-        classes = list(self.classes_)
-        if 1 in classes:
-            return classes.index(1)
-        if 1.0 in classes:
-            return classes.index(1.0)
-        return len(classes) - 1
+    def bag_probability(self, bag: np.ndarray) -> float:
+        self._net.eval()
+        with torch.no_grad():
+            logit = self._net(self._tensor(bag)).mean()
+            return float(torch.sigmoid(logit).cpu())
 
 
 def integrated_gradients(
     model: WindowMLP,
-    features: pd.DataFrame,
-    steps: int = 32,
-    chunk: int = 512,
+    bag: np.ndarray,
+    steps: int = 100,
 ) -> tuple[np.ndarray, np.ndarray]:
-    """Signed IG of the positive logit.
+    """IG of the bag probability. Baseline is the zero tensor.
 
-    Returns ``(ig, s_w)``. ``ig`` has shape ``(n_windows, n_features)`` in the
-    kept-column order. ``s_w`` is the sum over features.
+    Returns ``(ig, s_w)``. ``ig`` has shape ``(n_windows, n_features)``.
+    ``s_w`` is the sum of absolute feature attributions.
     """
     if steps < 1:
         raise ValueError(f"steps must be positive, got {steps}")
+    n = int(len(bag))
+    width = len(model._columns)
+    if n == 0:
+        return np.zeros((0, width), dtype=np.float64), np.zeros(0, dtype=np.float64)
     model._net.eval()
-    x_np = model._scale_matrix(features)
-    pos = model._positive_index()
-    ig = np.empty_like(x_np)
-    for start in range(0, len(x_np), chunk):
-        x = torch.as_tensor(x_np[start:start + chunk], dtype=torch.float32, device=model.device_)
-        acc = torch.zeros_like(x)
-        for k in range(1, steps + 1):
-            inp = ((k / steps) * x).detach().requires_grad_(True)
-            logit = model._net(inp)[:, pos]
-            model._net.zero_grad(set_to_none=True)
-            logit.sum().backward()
-            if inp.grad is not None:
-                acc = acc + inp.grad.detach()
-        ig[start:start + len(x)] = (x * acc / steps).detach().cpu().numpy()
-    scores = ig.sum(axis=1)
+    x = model._tensor(bag).detach()
+    acc = torch.zeros_like(x)
+    for k in range(1, steps + 1):
+        inp = ((k / steps) * x).detach().requires_grad_(True)
+        prob = torch.sigmoid(model._net(inp).mean())
+        model._net.zero_grad(set_to_none=True)
+        prob.backward()
+        if inp.grad is not None:
+            acc = acc + inp.grad.detach()
+    ig = (x * acc / steps).detach().cpu().numpy().astype(np.float64, copy=False)
+    scores = np.abs(ig).sum(axis=1)
     return ig, scores
 
 

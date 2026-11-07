@@ -31,11 +31,10 @@ def ig_window_importance(
         )
     model._net.eval()
     x = model._bag_tensor(bag).detach()
-    pos = model._positive_index()
     acc = torch.zeros_like(x)
     for k in range(1, steps + 1):
         inp = ((k / steps) * x).detach().requires_grad_(True)
-        logit = model._net(inp)[0][pos]
+        logit = model._positive_scalar(model._net(inp)[0])
         model._net.zero_grad(set_to_none=True)
         logit.backward()
         grad = inp.grad
@@ -55,9 +54,8 @@ def ig_completeness_error(
         return 0.0
     model._net.eval()
     x = model._bag_tensor(bag).detach()
-    pos = model._positive_index()
     with torch.inference_mode():
-        fx = float(model._net(x)[0][pos].detach().cpu())
-        f0 = float(model._net(torch.zeros_like(x))[0][pos].detach().cpu())
+        fx = float(model._positive_scalar(model._net(x)[0]).detach().cpu())
+        f0 = float(model._positive_scalar(model._net(torch.zeros_like(x))[0]).detach().cpu())
     gap = fx - f0
     return abs(float(np.sum(scores)) - gap) / (abs(gap) + 1e-6)

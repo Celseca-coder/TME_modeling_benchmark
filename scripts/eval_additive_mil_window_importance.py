@@ -1,9 +1,8 @@
 #!/usr/bin/env python
-"""Train Additive MIL on Y_r and score windows by their signed contribution.
+"""Train Additive MIL on Y_r and score windows by attention weight.
 
-The region logit is one bias plus the sum of per-window contributions. Window
-importance is that contribution. AUROC and precision@20% are computed against
-y_w inside each region, on the same patient folds as gated-attention MIL.
+Attention is non-gated. The bag probability is sigmoid(Wz + b), with an L1
+penalty on V, w, and W. AUROC and precision@20% use y_w inside each region.
 
     python scripts/eval_additive_mil_window_importance.py \
         --families composition density mixing point_pattern
@@ -82,10 +81,10 @@ def evaluate_additive_localisation(
             continue
         model = AdditiveMILModel(
             seed=seed + k, epochs=epochs, patience=patience, max_instances=None,
+            lr=1e-4, weight_decay=0.0, l1_lambda=1e-5,
         ).fit(tr, ytr.astype(int))
         va = table[table["region_id"].isin(set(map(str, va_regs)))].copy()
         held = np.full(len(va), np.nan)
-        gaps = []
         for _, g in va.groupby("region_id"):
             idx = g.sort_values("window_id").index
             yw = g.loc[idx, "y_w"].to_numpy(float)
@@ -93,28 +92,24 @@ def evaluate_additive_localisation(
             if labeled.sum() < MIN_LABELED or np.unique(yw[labeled]).size < 2:
                 continue
             bag = table.loc[idx, feat_cols].to_numpy(np.float32)
-            scores = model.window_contributions(bag)
+            scores = model.attention_weights(pd.DataFrame({"bag": [bag]}))[0]
             held[va.index.get_indexer(idx)] = scores
-            logit = model.positive_logit(bag)
-            gaps.append(abs(float(scores.sum()) + model.positive_bias() - logit))
         loc = within_region_auroc(va["y_w"], pd.Series(held, index=va.index), va["region_id"])
         loc.update(within_region_topk(va["y_w"], pd.Series(held, index=va.index), va["region_id"]))
         loc["fold"] = k
-        loc["completeness_error_mean"] = float(np.mean(gaps)) if gaps else np.nan
         rows.append(loc)
     return pd.DataFrame(rows)
 
 
 def _summary_row(dataset: str, motif: str, group: str, fold: pd.DataFrame) -> dict:
     if fold.empty:
-        auroc = pwr = prev = score = err = np.nan
+        auroc = pwr = prev = score = np.nan
         n_regions = n_folds = 0
     else:
         auroc = float(fold["auroc_window_mean"].mean())
         pwr = float(fold["precision_at_20"].mean())
         prev = float(fold["labeled_prev"].mean())
         score = float(fold["score_top20_mean"].mean()) if "score_top20_mean" in fold.columns else np.nan
-        err = float(fold["completeness_error_mean"].mean())
         n_regions = int(fold["n_regions_scored"].sum()) if "n_regions_scored" in fold.columns else int(fold["n_regions_topk"].sum())
         n_folds = int(len(fold))
     return {
@@ -130,7 +125,6 @@ def _summary_row(dataset: str, motif: str, group: str, fold: pd.DataFrame) -> di
         "n_folds": n_folds,
         "pass_window": bool(np.isfinite(auroc) and auroc >= PASS_WINDOW),
         "pass_precision_at_20": bool(np.isfinite(pwr) and pwr >= PASS_PRECISION_AT),
-        "completeness_error_mean": err,
     }
 
 

@@ -49,7 +49,17 @@ def _batched_proba(
             logits = logits.masked_fill(~mask_t, torch.finfo(logits.dtype).min)
             weights = torch.softmax(logits, dim=1) * mask_t
             pooled = torch.sum(weights.unsqueeze(-1) * gathered, dim=1)
-            prob = torch.softmax(net.head(pooled), dim=-1)[:, pos]
+            head = net.head(pooled)
+            # 二分类时只输出一个logit
+            if head.shape[-1] == 1:
+                prob = torch.sigmoid(head[:, 0])
+            else:
+                '''
+                head = [2.0]
+                p1 = sigmoid(2.0) = 0.881
+                返回 [1 - 0.881, 0.881] = [0.119, 0.881]
+                '''
+                prob = torch.softmax(head, dim=-1)[:, pos]
             out[start:start + len(block)] = prob.detach().cpu().numpy()
     return out
 

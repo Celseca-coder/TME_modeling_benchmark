@@ -1,0 +1,11 @@
+dataset,motif,method,method_name,score_kind,score_top20_mean,precision_at_20,feature_group
+bc_jackson2020,tumor_high,lasso,Lasso,mean positive-class probability,0.7726487862586622,0.7562415395712005,composition+density+mixing+point_pattern
+bc_jackson2020,t_tumor_mixing,lasso,Lasso,mean positive-class probability,0.8695639886241319,0.8524308921397623,composition+density+mixing+point_pattern
+bc_jackson2020,cd8_tumor_contact,lasso,Lasso,mean positive-class probability,0.876382923615392,0.8554299386997961,composition+density+mixing+point_pattern
+bc_jackson2020,macrophage_tumor_niche,lasso,Lasso,mean positive-class probability,0.8910431701946792,0.77658559237613,composition+density+mixing+point_pattern
+bc_jackson2020,apc_t_contact,lasso,Lasso,mean positive-class probability,0.890096503664946,0.7927289974896996,composition+density+mixing+point_pattern
+hnc_wu2022,cd8_clustering,lasso,Lasso,mean positive-class probability,0.8340407295029749,0.8156417309320435,composition+density+mixing+point_pattern
+hnc_wu2022,immune_exclusion,lasso,Lasso,mean positive-class probability,0.833741850628047,0.7267123195344978,composition+density+mixing+point_pattern
+bc_metabric_ali2020,tumor_stroma_mixing,lasso,Lasso,mean positive-class probability,0.8534668937798378,0.8021569262133414,composition+density+mixing+point_pattern
+bc_metabric_ali2020,interface_immune,lasso,Lasso,mean positive-class probability,0.8620559059732751,0.6275682746171559,composition+density+mixing+point_pattern
+tnbc_wang2023,cd8_high,lasso,Lasso,mean positive-class probability,0.81427108528183,0.790043727503314,composition+density+mixing+point_pattern

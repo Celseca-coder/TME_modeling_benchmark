@@ -1,0 +1,11 @@
+dataset,motif,method,method_name,score_kind,score_top20_mean,precision_at_20,feature_group
+bc_jackson2020,tumor_high,mlp_ig,MLP IG,mean summed signed IG,1.5764881722501551,0.7532477289768854,composition+density+mixing+point_pattern
+bc_jackson2020,t_tumor_mixing,mlp_ig,MLP IG,mean summed signed IG,1.413272070791118,0.8182241997959239,composition+density+mixing+point_pattern
+bc_jackson2020,cd8_tumor_contact,mlp_ig,MLP IG,mean summed signed IG,1.466439031364959,0.8309496776973593,composition+density+mixing+point_pattern
+bc_jackson2020,macrophage_tumor_niche,mlp_ig,MLP IG,mean summed signed IG,1.2543436081436048,0.6910411770652803,composition+density+mixing+point_pattern
+bc_jackson2020,apc_t_contact,mlp_ig,MLP IG,mean summed signed IG,0.8546828356681047,0.6879468664206625,composition+density+mixing+point_pattern
+hnc_wu2022,cd8_clustering,mlp_ig,MLP IG,mean summed signed IG,0.9781803760002268,0.7916996771862747,composition+density+mixing+point_pattern
+hnc_wu2022,immune_exclusion,mlp_ig,MLP IG,mean summed signed IG,1.274383657888331,0.723099935517974,composition+density+mixing+point_pattern
+bc_metabric_ali2020,tumor_stroma_mixing,mlp_ig,MLP IG,mean summed signed IG,1.502215689382019,0.8008604591902181,composition+density+mixing+point_pattern
+bc_metabric_ali2020,interface_immune,mlp_ig,MLP IG,mean summed signed IG,0.8428832788665066,0.6551112352967426,composition+density+mixing+point_pattern
+tnbc_wang2023,cd8_high,mlp_ig,MLP IG,mean summed signed IG,2.8137345650666212,0.7742009975703732,composition+density+mixing+point_pattern

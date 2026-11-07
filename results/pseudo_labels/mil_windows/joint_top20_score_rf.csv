@@ -1,0 +1,11 @@
+dataset,motif,method,method_name,score_kind,score_top20_mean,precision_at_20,feature_group
+bc_jackson2020,tumor_high,rf_mdi,RF MDI,mean MDI window score,160.31200332053487,0.5432302708764113,composition+density+mixing+point_pattern
+bc_jackson2020,t_tumor_mixing,rf_mdi,RF MDI,mean MDI window score,102.27280805040539,0.5068982633242282,composition+density+mixing+point_pattern
+bc_jackson2020,cd8_tumor_contact,rf_mdi,RF MDI,mean MDI window score,101.7478542492125,0.5138058998215966,composition+density+mixing+point_pattern
+bc_jackson2020,macrophage_tumor_niche,rf_mdi,RF MDI,mean MDI window score,90.40710687669223,0.4716228343422933,composition+density+mixing+point_pattern
+bc_jackson2020,apc_t_contact,rf_mdi,RF MDI,mean MDI window score,112.73146225659596,0.5083032528720215,composition+density+mixing+point_pattern
+hnc_wu2022,cd8_clustering,rf_mdi,RF MDI,mean MDI window score,183.1203717364195,0.5367017600314897,composition+density+mixing+point_pattern
+hnc_wu2022,immune_exclusion,rf_mdi,RF MDI,mean MDI window score,334.1553698033477,0.6165442612391863,composition+density+mixing+point_pattern
+bc_metabric_ali2020,tumor_stroma_mixing,rf_mdi,RF MDI,mean MDI window score,74.00290086472738,0.4657167627286082,composition+density+mixing+point_pattern
+bc_metabric_ali2020,interface_immune,rf_mdi,RF MDI,mean MDI window score,85.18199783499736,0.5034248460894897,composition+density+mixing+point_pattern
+tnbc_wang2023,cd8_high,rf_mdi,RF MDI,mean MDI window score,60.43175410547774,0.6318562683568987,composition+density+mixing+point_pattern

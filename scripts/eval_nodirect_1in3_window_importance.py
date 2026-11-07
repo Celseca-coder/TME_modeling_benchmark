@@ -8,8 +8,9 @@ AUROC compares extremes against the intermediate band. Precision@20 uses that
 same label.
 
 Features stay the joint composition+density+mixing+point_pattern panel.
-Attention trains on the region label Y_r. RF MDI trains on the window label
-y_w. Patient 5-fold and the pass thresholds match the other localisation runs.
+Attention trains on the region label Y_r. RF trains on the window label y_w
+and scores P(y=1|x). Patient 5-fold and the pass thresholds match the other
+localisation runs.
 
     python scripts/eval_nodirect_1in3_window_importance.py --pack 1in3 --method attention rf --label noisy
     python scripts/eval_nodirect_1in3_window_importance.py --pack 1in5 --method attention rf --label noisy

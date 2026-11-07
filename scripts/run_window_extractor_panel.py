@@ -1,8 +1,8 @@
 #!/usr/bin/env python
 """Extract the four global tabular families on MIL windows and eval every combo.
 
-Lasso / SHAP in the region-level table share the same feature matrix; window
-localisation uses Lasso on y_w, so each combo is scored once. KRONOS / Eva /
+Window localisation trains mean-pooled L1 MIL on the region label and scores
+each window with p_w. KRONOS / Eva /
 UTAG / SPACE-GM are not window tabular extractors and are not run here.
 
     python scripts/run_window_extractor_panel.py --dataset tnbc_wang2023
@@ -32,6 +32,7 @@ from benchmark.motifs.window_extractor_eval import (
     PASS_WINDOW,
     evaluate_table,
     join_features_and_labels,
+    region_label,
 )
 from benchmark.utils.registry import load_dataset
 
@@ -94,17 +95,14 @@ def _upsert(path: Path, new: pd.DataFrame) -> None:
 def _eval(dataset: str, features: Path, out: Path) -> None:
     feats = pd.read_csv(features)
     wins = pd.read_csv(WINDOW_DIR / f"{dataset}_windows_noisy.csv")
-    bags = pd.read_csv(
-        BAG_DIR / f"{dataset}_v2_noisy.csv",
-        usecols=lambda c: c in {"region_id", "patient_id"},
-    )
+    bags = pd.read_csv(BAG_DIR / f"{dataset}_v2_noisy.csv")
     motifs = list(selected_motifs_for(dataset))
     rows = []
     for families in WINDOW_PANEL_COMBOS:
         group = combo_name(families)
         for motif in motifs:
             tab = join_features_and_labels(feats, wins, motif, bags)
-            fold = evaluate_table(tab, families=families)
+            fold = evaluate_table(tab, region_label(bags, motif), families=families)
             summary = {
                 "dataset": dataset,
                 "motif": motif,

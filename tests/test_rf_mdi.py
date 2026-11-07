@@ -1,4 +1,4 @@
-"""Random-forest impurity importance as a window score."""
+"""Random-forest window score is the positive-class probability."""
 from __future__ import annotations
 
 import unittest
@@ -11,7 +11,7 @@ from benchmark.motifs.rf_mdi import mdi_window_scores
 
 
 class RfMdiTest(unittest.TestCase):
-    def test_score_is_importance_weighted_feature_sum(self):
+    def test_score_is_positive_probability(self):
         rng = np.random.default_rng(0)
         x = rng.normal(size=(40, 2))
         y = pd.Series((x[:, 0] > 0).astype(float))
@@ -19,15 +19,12 @@ class RfMdiTest(unittest.TestCase):
         model = RandomForestModel(
             seed=0, n_estimators=20, class_weight=None,
         ).fit(features, y)
-        scores = mdi_window_scores(model, features)
-        raw = features[model._keep].fillna(model._median[model._keep]).to_numpy(float)
-        expected = raw @ model._clf.feature_importances_
-        np.testing.assert_allclose(scores, expected)
-        self.assertAlmostEqual(float(model._clf.feature_importances_.sum()), 1.0)
-        self.assertGreater(
-            model._clf.feature_importances_[model._keep.index("a")],
-            model._clf.feature_importances_[model._keep.index("b")],
-        )
+        scores = rf_window_scores(model, features)
+        proba = model.predict(features)
+        column = list(model.classes_).index(1.0)
+        np.testing.assert_allclose(scores, proba[:, column])
+        self.assertTrue(np.all((scores >= 0.0) & (scores <= 1.0)))
+        self.assertGreater(float(scores[x[:, 0] > 0].mean()), float(scores[x[:, 0] <= 0].mean()))
 
 
 if __name__ == "__main__":

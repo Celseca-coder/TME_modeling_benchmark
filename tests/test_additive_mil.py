@@ -1,4 +1,4 @@
-"""Additive MIL window contributions sum to the bag logit."""
+"""Additive MIL attention weights form a distribution over windows."""
 from __future__ import annotations
 
 import unittest
@@ -22,14 +22,13 @@ def _fitted() -> tuple[AdditiveMILModel, np.ndarray]:
 
 
 class AdditiveMilTest(unittest.TestCase):
-    def test_contributions_sum_to_positive_logit(self):
+    def test_attention_weights_sum_to_one(self):
         model, bag = _fitted()
-        scores = model.window_contributions(bag)
-        self.assertEqual(scores.shape, (len(bag),))
-        self.assertTrue(np.isfinite(scores).all())
-        logit = model.positive_logit(bag)
-        gap = abs(float(scores.sum()) + model.positive_bias() - logit)
-        self.assertLess(gap, 1e-4)
+        weights = model.attention_weights(pd.DataFrame({"bag": [bag]}))[0]
+        self.assertEqual(weights.shape, (len(bag),))
+        self.assertTrue(np.isfinite(weights).all())
+        self.assertTrue(np.all(weights >= -1e-6))
+        self.assertAlmostEqual(float(weights.sum()), 1.0, places=5)
 
 
 if __name__ == "__main__":

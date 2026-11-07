@@ -1,8 +1,8 @@
 #!/usr/bin/env python
-"""Train a random forest on y_w; rank windows by impurity-importance scores.
+"""Train a random forest on window pseudo-labels; score windows by P(y=1|x).
 
-``s_w = sum_j I_j x_{w,j}``, where ``I`` is mean decrease in impurity.
-Metrics stay inside each region: AUROC and precision among the top 20% scores.
+There is no bag-level gradient. Metrics stay inside each region: AUROC and
+precision among the top 20% scores, both against y_w.
 
     python scripts/eval_rf_mdi_window_importance.py \
         --families composition density mixing point_pattern
@@ -20,7 +20,7 @@ sys.path.insert(0, str(_CODE))
 
 from benchmark.features.local_window import combo_name
 from benchmark.models.forest import RandomForestModel
-from benchmark.motifs.rf_mdi import mdi_window_scores
+from benchmark.motifs.rf_mdi import rf_window_scores
 from benchmark.motifs.source_select import CANDIDATE_DATASETS, selected_motifs_for
 from benchmark.motifs.window_extractor_eval import (
     PASS_PRECISION_AT,
@@ -69,7 +69,7 @@ def evaluate_rf_mdi(
         Xtr = labeled[feat_cols].set_index(labeled["row_id"])
         ytr = labeled.set_index("row_id")["y_w"].astype(float)
         model = RandomForestModel(seed=seed + k, n_estimators=n_estimators).fit(Xtr, ytr)
-        scores = pd.Series(mdi_window_scores(model, va[feat_cols]), index=va.index)
+        scores = pd.Series(rf_window_scores(model, va[feat_cols]), index=va.index)
         loc = within_region_auroc(va["y_w"], scores, va["region_id"])
         loc.update(within_region_topk(va["y_w"], scores, va["region_id"]))
         loc["fold"] = k
