@@ -25,6 +25,7 @@ sys.path.insert(0, str(_CODE))
 
 from benchmark.features.local_window import combo_name  # noqa: E402
 from benchmark.motifs.source_select import SELECTED_MOTIF_SOURCES  # noqa: E402
+from benchmark.motifs.checkpoints import score_tag_matches  # noqa: E402
 from benchmark.motifs.window_extractor_eval import (  # noqa: E402
     PASS_PRECISION_AT,
     PASS_WINDOW,
@@ -40,15 +41,24 @@ FEATURE_DIR = Path(
 DEFAULT_FAMILIES = ("composition", "density", "mixing", "point_pattern")
 METHODS = ("lasso", "gated", "mlp", "rf", "additive")
 
-# Wide-table column order. Gated attention contributes its attention weight.
+# Wide-table column order. Each gradient method reports the full-window score and LOO.
 METHOD_SPECS = (
     ("lasso", "window L1 MIL", "Lasso"),
+    ("lasso_loo", "window L1 MIL", "Lasso LOO"),
     ("attention", "Gated Attention MIL", "attention"),
-    ("mlp_ig", "window MLP MIL", "MLP IG"),
+    ("attention_loo", "Gated Attention MIL", "attention LOO"),
+    ("mlp", "window MLP MIL", "MLP"),
+    ("mlp_loo", "window MLP MIL", "MLP LOO"),
     ("rf_mdi", "window RF MIL", "RF"),
     ("additive_mil", "Additive MIL", "Additive MIL"),
+    ("additive_loo", "Additive MIL", "Additive MIL LOO"),
 )
-GATED_METHODS = ("attention",)
+LOO_METHOD = {
+    "lasso": "lasso_loo",
+    "attention": "attention_loo",
+    "mlp": "mlp_loo",
+    "additive_mil": "additive_loo",
+}
 
 
 def _out_dir(label: str) -> Path:
@@ -134,6 +144,72 @@ def _save(path: Path, rows: list[dict]) -> None:
     pd.DataFrame(rows).to_csv(path, index=False)
 
 
+def checkpoint_dir(dest: Path, dataset: str, motif: str, method: str) -> Path:
+    """``<pack>/checkpoints/<dataset>/<motif>/<method>/fold{k}.pt``."""
+    return dest.parent / "checkpoints" / str(dataset) / str(motif) / method
+
+
+def _drop_task(rows: list[dict], dataset: str, motif: str, method: str) -> list[dict]:
+    return [
+        row for row in rows
+        if not (str(row["dataset"]) == str(dataset) and str(row["motif"]) == str(motif) and str(row["method"]) == method)
+    ]
+
+
+def _row_recorded(rows: list[dict], dataset: str, motif: str, method: str) -> bool:
+    return any(
+        str(row["dataset"]) == str(dataset) and str(row["motif"]) == str(motif) and str(row["method"]) == method
+        for row in rows
+    )
+
+
+def _scores_ready(rows: list[dict], dest: Path, dataset: str, motif: str, method: str) -> bool:
+    """A model is finished only when its current weights and the LOO row both exist."""
+    if not _checkpoints_ready(rows, dest, dataset, motif, method):
+        return False
+    if not score_tag_matches(checkpoint_dir(dest, dataset, motif, method)):
+        return False
+    loo_method = LOO_METHOD.get(method)
+    if loo_method is None:
+        return True
+    return _row_recorded(rows, dataset, motif, loo_method)
+
+
+def _store_pair(
+    rows: list[dict],
+    dataset: str,
+    motif: str,
+    group: str,
+    tab: pd.DataFrame,
+    method: str,
+    fold: pd.DataFrame,
+    loo_fold: pd.DataFrame,
+    legacy: tuple[str, ...] = (),
+) -> tuple[list[dict], dict, dict]:
+    loo_method = LOO_METHOD[method]
+    for name in (method, loo_method, *legacy):
+        rows = _drop_task(rows, dataset, motif, name)
+    full = _row(dataset, motif, group, method, tab, fold)
+    loo = _row(dataset, motif, group, loo_method, tab, loo_fold)
+    rows.extend([full, loo])
+    return rows, full, loo
+
+
+def _checkpoints_ready(rows: list[dict], dest: Path, dataset: str, motif: str, method: str) -> bool:
+    """A finished CSV row still needs a retrain when its fold files are missing."""
+    matches = [
+        row for row in rows
+        if str(row["dataset"]) == str(dataset) and str(row["motif"]) == str(motif) and str(row["method"]) == method
+    ]
+    if not matches:
+        return False
+    n_folds = int(matches[-1].get("n_folds") or 0)
+    folder = checkpoint_dir(dest, dataset, motif, method)
+    if n_folds <= 0 or not folder.is_dir():
+        return False
+    return len(list(folder.glob("fold*.pt"))) >= n_folds
+
+
 def _prepare(dataset: str, motif: str, label: str, feature_dir: Path):
     feats, wins, bags = _load(dataset, label, feature_dir)
     tab = join_features_and_labels(feats, wins, motif, bags)
@@ -146,16 +222,21 @@ def run_lasso(jobs, group, label, feature_dir, dest: Path) -> None:
 
     rows, done = _resume(dest)
     for dataset, motif in jobs:
-        if (dataset, motif, "lasso") in done:
+        if _scores_ready(rows, dest, dataset, motif, "lasso"):
             print(f"skip lasso {dataset} {motif}", flush=True)
             continue
         tab, y_r = _prepare(dataset, motif, label, feature_dir)
-        fold = evaluate_table(tab, y_r, families=DEFAULT_FAMILIES)
-        rec = _row(dataset, motif, group, "lasso", tab, fold)
-        rows.append(rec)
+        fold, loo = evaluate_table(
+            tab, y_r, families=DEFAULT_FAMILIES,
+            checkpoint_dir=checkpoint_dir(dest, dataset, motif, "lasso"),
+            with_loo=True,
+        )
+        rows, rec, loo_rec = _store_pair(rows, dataset, motif, group, tab, "lasso", fold, loo)
         done.add((dataset, motif, "lasso"))
+        done.add((dataset, motif, "lasso_loo"))
         _save(dest, rows)
         print(rec, flush=True)
+        print(loo_rec, flush=True)
 
 
 def run_gated(jobs, group, label, feature_dir, dest: Path) -> None:
@@ -169,18 +250,22 @@ def run_gated(jobs, group, label, feature_dir, dest: Path) -> None:
         feats, wins, bags = _load(dataset, label, feature_dir)
         y_index = bags.set_index("region_id")
         for motif in motifs:
-            if all((dataset, motif, method) in done for method in GATED_METHODS):
+            if _scores_ready(rows, dest, dataset, motif, "attention"):
                 print(f"skip gated {dataset} {motif}", flush=True)
                 continue
             tab = join_features_and_labels(feats, wins, motif, bags)
             y_r = pd.to_numeric(y_index[f"{motif}_label_v2"], errors="coerce")
-            folds = evaluate_gated_localisation(tab, y_r, DEFAULT_FAMILIES)
-            for method in GATED_METHODS:
-                rec = _row(dataset, motif, group, method, tab, folds[method])
-                rows = [r for r in rows if not (r["dataset"] == dataset and r["motif"] == motif and r["method"] == method)]
-                rows.append(rec)
-                done.add((dataset, motif, method))
-                print(rec, flush=True)
+            folds = evaluate_gated_localisation(
+                tab, y_r, DEFAULT_FAMILIES,
+                checkpoint_dir=checkpoint_dir(dest, dataset, motif, "attention"),
+            )
+            rows, rec, loo_rec = _store_pair(
+                rows, dataset, motif, group, tab, "attention", folds["attention"], folds["attention_loo"],
+            )
+            done.add((dataset, motif, "attention"))
+            done.add((dataset, motif, "attention_loo"))
+            print(rec, flush=True)
+            print(loo_rec, flush=True)
             _save(dest, rows)
 
 
@@ -189,16 +274,22 @@ def run_mlp(jobs, group, label, feature_dir, dest: Path) -> None:
 
     rows, done = _resume(dest)
     for dataset, motif in jobs:
-        if (dataset, motif, "mlp_ig") in done:
+        if _scores_ready(rows, dest, dataset, motif, "mlp"):
             print(f"skip mlp {dataset} {motif}", flush=True)
             continue
         tab, y_r = _prepare(dataset, motif, label, feature_dir)
-        fold, _ranking = evaluate_mlp_ig(tab, y_r, DEFAULT_FAMILIES)
-        rec = _row(dataset, motif, group, "mlp_ig", tab, fold)
-        rows.append(rec)
-        done.add((dataset, motif, "mlp_ig"))
+        fold, loo, _ranking = evaluate_mlp_ig(
+            tab, y_r, DEFAULT_FAMILIES,
+            checkpoint_dir=checkpoint_dir(dest, dataset, motif, "mlp"),
+        )
+        rows, rec, loo_rec = _store_pair(
+            rows, dataset, motif, group, tab, "mlp", fold, loo, legacy=("mlp_ig",),
+        )
+        done.add((dataset, motif, "mlp"))
+        done.add((dataset, motif, "mlp_loo"))
         _save(dest, rows)
         print(rec, flush=True)
+        print(loo_rec, flush=True)
 
 
 def run_rf(jobs, group, label, feature_dir, dest: Path) -> None:
@@ -206,12 +297,16 @@ def run_rf(jobs, group, label, feature_dir, dest: Path) -> None:
 
     rows, done = _resume(dest)
     for dataset, motif in jobs:
-        if (dataset, motif, "rf_mdi") in done:
+        if _checkpoints_ready(rows, dest, dataset, motif, "rf_mdi"):
             print(f"skip rf {dataset} {motif}", flush=True)
             continue
         tab, _y_r = _prepare(dataset, motif, label, feature_dir)
-        fold = evaluate_rf_mdi(tab, DEFAULT_FAMILIES)
+        fold = evaluate_rf_mdi(
+            tab, DEFAULT_FAMILIES,
+            checkpoint_dir=checkpoint_dir(dest, dataset, motif, "rf_mdi"),
+        )
         rec = _row(dataset, motif, group, "rf_mdi", tab, fold)
+        rows = _drop_task(rows, dataset, motif, "rf_mdi")
         rows.append(rec)
         done.add((dataset, motif, "rf_mdi"))
         _save(dest, rows)
@@ -223,16 +318,22 @@ def run_additive(jobs, group, label, feature_dir, dest: Path) -> None:
 
     rows, done = _resume(dest)
     for dataset, motif in jobs:
-        if (dataset, motif, "additive_mil") in done:
+        if _scores_ready(rows, dest, dataset, motif, "additive_mil"):
             print(f"skip additive {dataset} {motif}", flush=True)
             continue
         tab, y_r = _prepare(dataset, motif, label, feature_dir)
-        fold = evaluate_additive_localisation(tab, y_r, DEFAULT_FAMILIES)
-        rec = _row(dataset, motif, group, "additive_mil", tab, fold)
-        rows.append(rec)
+        fold, loo = evaluate_additive_localisation(
+            tab, y_r, DEFAULT_FAMILIES,
+            checkpoint_dir=checkpoint_dir(dest, dataset, motif, "additive_mil"),
+        )
+        rows, rec, loo_rec = _store_pair(
+            rows, dataset, motif, group, tab, "additive_mil", fold, loo,
+        )
         done.add((dataset, motif, "additive_mil"))
+        done.add((dataset, motif, "additive_loo"))
         _save(dest, rows)
         print(rec, flush=True)
+        print(loo_rec, flush=True)
 
 
 def _fmt(value) -> str:
@@ -307,13 +408,22 @@ def main() -> None:
     parser.add_argument("--motif", default="")
     parser.add_argument("--families", nargs="+", default=list(DEFAULT_FAMILIES))
     parser.add_argument("--feature-dir", default=str(FEATURE_DIR))
+    parser.add_argument("--window-dir", default="", help="override the window-label directory")
+    parser.add_argument("--bag-dir", default="", help="override the region-label directory")
+    parser.add_argument("--out-dir", default="", help="override the result directory")
     args = parser.parse_args()
+
+    global WINDOW_DIR, BAG_DIR
+    if args.window_dir:
+        WINDOW_DIR = Path(args.window_dir)
+    if args.bag_dir:
+        BAG_DIR = Path(args.bag_dir)
 
     families = tuple(args.families)
     if families != DEFAULT_FAMILIES:
         raise SystemExit("this driver keeps the joint four-family panel used in the wide table")
     group = combo_name(families)
-    out_dir = _out_dir(args.label)
+    out_dir = Path(args.out_dir) if args.out_dir else _out_dir(args.label)
     if args.method == "assemble":
         assemble(out_dir)
         return

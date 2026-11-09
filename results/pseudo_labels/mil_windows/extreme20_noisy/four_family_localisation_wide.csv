@@ -1,12 +1,12 @@
-,,,window L1 MIL,window L1 MIL,Gated Attention MIL,Gated Attention MIL,Gated Attention MIL,Gated Attention MIL,Gated Attention MIL,Gated Attention MIL,window MLP MIL,window MLP MIL,window RF MIL,window RF MIL,Additive MIL,Additive MIL,,
-task,n_windows,n_labeled,Lasso (AUROC),Lasso (precision_at_20),SHAP+Gated Attention (AUROC),SHAP+Gated Attention (precision_at_20),IG (AUROC),IG (precision_at_20),attention (AUROC),attention (precision_at_20),MLP IG (AUROC),MLP IG (precision_at_20),RF MDI (AUROC),RF MDI (precision_at_20),Additive MIL (AUROC),Additive MIL (precision_at_20),Highest Method (AUROC),Highest Method (precision_at_20)
-tumor_high (bc_jackson2020),117026,101219,0.820,0.756,0.718,0.685,0.747,0.714,0.547,0.529,0.819,0.753,0.589,0.543,0.775,0.731,Lasso,Lasso
-t_tumor_mixing (bc_jackson2020),117026,11321,0.872,0.863,0.567,0.582,0.581,0.596,0.521,0.557,0.835,0.829,0.488,0.515,0.588,0.598,Lasso,Lasso
-cd8_tumor_contact (bc_jackson2020),117026,11352,0.864,0.848,0.591,0.606,0.615,0.607,0.497,0.520,0.825,0.822,0.479,0.506,0.612,0.606,Lasso,Lasso
-macrophage_tumor_niche (bc_jackson2020),117026,3007,0.824,0.759,0.586,0.430,0.572,0.413,0.519,0.415,0.798,0.759,0.476,0.444,0.537,0.432,Lasso,Lasso
-apc_t_contact (bc_jackson2020),117026,3258,0.803,0.815,0.479,0.531,0.510,0.564,0.517,0.536,0.666,0.679,0.480,0.456,0.517,0.571,Lasso,Lasso
-cd8_clustering (hnc_wu2022),74614,11246,0.829,0.846,0.509,0.519,0.529,0.550,0.501,0.512,0.790,0.802,0.579,0.567,0.538,0.564,Lasso,Lasso
-immune_exclusion (hnc_wu2022),74314,10124,0.666,0.686,0.496,0.573,0.492,0.585,0.443,0.570,0.662,0.684,0.468,0.539,0.518,0.592,Lasso,Lasso
-tumor_stroma_mixing (bc_metabric_ali2020),48619,14387,0.849,0.840,0.564,0.574,0.580,0.570,0.478,0.508,0.835,0.830,0.411,0.421,0.572,0.583,Lasso,Lasso
-interface_immune (bc_metabric_ali2020),48619,3280,0.668,0.672,0.527,0.621,0.513,0.621,0.491,0.604,0.671,0.712,0.517,0.555,0.528,0.648,MLP IG,MLP IG
-cd8_high (tnbc_wang2023),75495,74271,0.815,0.789,0.654,0.664,0.682,0.674,0.519,0.524,0.805,0.779,0.627,0.635,0.685,0.683,Lasso,Lasso
+,,,window L1 MIL,window L1 MIL,Gated Attention MIL,Gated Attention MIL,window MLP MIL,window MLP MIL,window RF MIL,window RF MIL,Additive MIL,Additive MIL,,
+task,n_windows,n_labeled,Lasso (AUROC),Lasso (precision_at_20),attention (AUROC),attention (precision_at_20),MLP IG (AUROC),MLP IG (precision_at_20),RF (AUROC),RF (precision_at_20),Additive MIL (AUROC),Additive MIL (precision_at_20),Highest Method (AUROC),Highest Method (precision_at_20)
+tumor_high (bc_jackson2020),117026,101219,0.674,0.651,0.720,0.685,0.626,0.582,0.824,0.756,0.549,0.530,RF,RF
+t_tumor_mixing (bc_jackson2020),117026,11321,0.529,0.558,0.523,0.559,0.495,0.529,0.830,0.831,0.511,0.551,RF,RF
+cd8_tumor_contact (bc_jackson2020),117026,11352,0.555,0.566,0.543,0.559,0.485,0.514,0.829,0.831,0.506,0.521,RF,RF
+macrophage_tumor_niche (bc_jackson2020),117026,3007,0.571,0.433,0.520,0.453,0.476,0.424,0.817,0.773,0.485,0.408,RF,RF
+apc_t_contact (bc_jackson2020),117026,3258,0.498,0.542,0.531,0.588,0.519,0.531,0.794,0.815,0.506,0.547,RF,RF
+cd8_clustering (hnc_wu2022),74614,11246,0.505,0.500,0.500,0.504,0.511,0.510,0.809,0.819,0.484,0.485,RF,RF
+immune_exclusion (hnc_wu2022),74314,10124,0.531,0.604,0.493,0.580,0.426,0.550,0.694,0.719,0.413,0.538,RF,RF
+tumor_stroma_mixing (bc_metabric_ali2020),48619,14387,0.518,0.531,0.513,0.536,0.515,0.539,0.833,0.821,0.514,0.542,RF,RF
+interface_immune (bc_metabric_ali2020),48619,3280,0.563,0.649,0.528,0.650,0.521,0.657,0.739,0.764,0.543,0.631,RF,RF
+cd8_high (tnbc_wang2023),75495,74271,0.694,0.683,0.646,0.650,0.667,0.654,0.826,0.797,0.568,0.571,RF,RF

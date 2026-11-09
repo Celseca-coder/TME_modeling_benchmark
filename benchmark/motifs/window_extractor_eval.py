@@ -1,6 +1,8 @@
 """Train bag models on the region label; score windows against y_w."""
 from __future__ import annotations
 
+from pathlib import Path
+
 import numpy as np
 import pandas as pd
 from sklearn.metrics import roc_auc_score
@@ -217,6 +219,8 @@ def evaluate_fold(
     lr: float = 1e-4,
     epochs: int = 80,
     patience: int = 15,
+    checkpoint_dir: str | Path | None = None,
+    fold: int = 0,
 ) -> dict:
     """Fit mean-pooled L1 MIL on Y_r. Score validation windows with p_w."""
     tr = bags_for_regions(train, feat_cols, train["region_id"].unique())
@@ -224,22 +228,22 @@ def evaluate_fold(
     keep = ytr.isin([0.0, 1.0])
     tr, ytr = tr.loc[keep], ytr.loc[keep]
     va = val.copy()
+    empty = {"n_train": int(len(tr)), "auroc_window_mean": np.nan, "pass_window": False}
     if tr.empty or ytr.nunique() < 2:
-        return {"n_train": int(len(tr)), "auroc_window_mean": np.nan, "pass_window": False}
+        return empty, dict(empty)
     model = L1MILModel(
         seed=seed, lr=lr, l1_lambda=l1_lambda, epochs=epochs, patience=patience, max_instances=None,
     ).fit(tr[["bag"]], ytr.astype(int))
-    p = pd.Series(np.nan, index=va.index, dtype=float)
+    from benchmark.motifs.checkpoints import mil_payload, save_fold
+    save_fold(checkpoint_dir, fold, mil_payload("l1_mil", model))
+    full = pd.Series(np.nan, index=va.index, dtype=float)
+    loo = pd.Series(np.nan, index=va.index, dtype=float)
     for rid, group in va.groupby("region_id", sort=False):
         group = group.sort_values("window_id")
         bag = group[feat_cols].to_numpy(np.float32)
-        p.loc[group.index] = model.window_probabilities(bag)
-    loc = within_region_auroc(va["y_w"], p, va["region_id"])
-    loc.update(within_region_topk(va["y_w"], p, va["region_id"]))
-    loc["n_train"] = int(len(tr))
-    loc["n_val"] = int(len(va))
-    loc["n_val_labeled"] = int(va["y_w"].isin([0.0, 1.0]).sum())
-    return loc
+        full.loc[group.index] = model.window_probabilities(bag)
+        loo.loc[group.index] = model.leave_one_out_scores(bag)
+    return _score_record(va, full, tr), _score_record(va, loo, tr)
 
 
 def evaluate_table(
@@ -252,18 +256,35 @@ def evaluate_table(
     lr: float = 1e-4,
     epochs: int = 80,
     patience: int = 15,
-) -> pd.DataFrame:
+    checkpoint_dir: str | Path | None = None,
+    with_loo: bool = False,
+):
     """Patient-level CV. Train on the region label. Score windows with p_w."""
     feat_cols = feature_columns(table, families=families)
     folds = patient_region_folds(table, y_r, n_folds=n_folds, seed=seed)
-    rows = []
+    rows, loo_rows = [], []
     for k, (tr_regs, va_regs) in enumerate(folds):
         tr = table[table["region_id"].astype(str).isin(set(map(str, tr_regs)))]
         va = table[table["region_id"].astype(str).isin(set(map(str, va_regs)))]
-        rec = evaluate_fold(
+        rec, loo = evaluate_fold(
             tr, va, feat_cols, y_r,
             seed=seed + k, l1_lambda=l1_lambda, lr=lr, epochs=epochs, patience=patience,
+            checkpoint_dir=checkpoint_dir, fold=k,
         )
         rec["fold"] = k
+        loo["fold"] = k
         rows.append(rec)
-    return pd.DataFrame(rows)
+        loo_rows.append(loo)
+    full = pd.DataFrame(rows)
+    if with_loo:
+        return full, pd.DataFrame(loo_rows)
+    return full
+
+
+def _score_record(va: pd.DataFrame, score: pd.Series, train: pd.DataFrame) -> dict:
+    loc = within_region_auroc(va["y_w"], score, va["region_id"])
+    loc.update(within_region_topk(va["y_w"], score, va["region_id"]))
+    loc["n_train"] = int(len(train))
+    loc["n_val"] = int(len(va))
+    loc["n_val_labeled"] = int(va["y_w"].isin([0.0, 1.0]).sum())
+    return loc

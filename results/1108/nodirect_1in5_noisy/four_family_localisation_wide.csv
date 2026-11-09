@@ -1,0 +1,12 @@
+,,,Gated Attention MIL,Gated Attention MIL,window RF MIL,window RF MIL,,
+task,n_windows,n_labeled,attention (AUROC),attention (precision_at_20),RF (AUROC),RF (precision_at_20),Highest Method (AUROC),Highest Method (precision_at_20)
+tumor_high (bc_jackson2020),117026,101219,0.394,0.320,0.868,0.833,RF,RF
+t_tumor_mixing (bc_jackson2020),117026,26102,0.479,0.449,0.713,0.670,RF,RF
+cd8_tumor_contact (bc_jackson2020),117026,26102,0.471,0.435,0.713,0.674,RF,RF
+macrophage_tumor_niche (bc_jackson2020),117026,7704,0.490,0.436,0.697,0.630,RF,RF
+apc_t_contact (bc_jackson2020),117026,7704,0.446,0.387,0.674,0.601,RF,RF
+cd8_clustering (hnc_wu2022),74614,27841,0.494,0.450,0.605,0.599,RF,RF
+immune_exclusion (hnc_wu2022),74314,24850,0.555,0.493,0.792,0.737,RF,RF
+tumor_stroma_mixing (bc_metabric_ali2020),48619,35541,0.413,0.351,0.728,0.662,RF,RF
+interface_immune (bc_metabric_ali2020),48619,8098,0.469,0.404,0.607,0.561,RF,RF
+cd8_high (tnbc_wang2023),75495,74271,0.494,0.412,0.770,0.684,RF,RF

@@ -1,0 +1,11 @@
+dataset,motif,feature_group,method,n_windows,n_labeled,auroc_window_mean,precision_at_20,n_regions_scored,n_folds,pass_window,pass_precision_at_20
+bc_jackson2020,tumor_high,composition+density+mixing+point_pattern,attention,117026,101219,0.719530748510197,0.6846837292930577,665,5,True,False
+bc_jackson2020,t_tumor_mixing,composition+density+mixing+point_pattern,attention,117026,18174,0.528079947067915,0.5649829447147038,277,5,False,False
+bc_jackson2020,cd8_tumor_contact,composition+density+mixing+point_pattern,attention,117026,18256,0.5288364063625673,0.5672516412321083,291,5,False,False
+bc_jackson2020,macrophage_tumor_niche,composition+density+mixing+point_pattern,attention,117026,5087,0.5284052685231597,0.48824541464738386,116,5,False,False
+bc_jackson2020,apc_t_contact,composition+density+mixing+point_pattern,attention,117026,5351,0.4997791911988726,0.5261957056382268,102,5,False,False
+hnc_wu2022,cd8_clustering,composition+density+mixing+point_pattern,attention,74614,18673,0.4849319058173231,0.48347586221737276,212,5,False,False
+hnc_wu2022,immune_exclusion,composition+density+mixing+point_pattern,attention,74314,16698,0.451603138390429,0.5092444169354007,198,5,False,False
+bc_metabric_ali2020,tumor_stroma_mixing,composition+density+mixing+point_pattern,attention,48619,24268,0.4891559651093931,0.49506205534839437,311,5,False,False
+bc_metabric_ali2020,interface_immune,composition+density+mixing+point_pattern,attention,48619,5293,0.5265411483346915,0.5472248723710098,125,5,False,False
+tnbc_wang2023,cd8_high,composition+density+mixing+point_pattern,attention,75495,74271,0.6530730445805449,0.6525052394803807,766,5,True,False

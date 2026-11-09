@@ -29,7 +29,17 @@ sys.path.insert(0, str(_CODE))
 from benchmark.features.local_window import combo_name  # noqa: E402
 from benchmark.motifs.source_select import SELECTED_MOTIF_SOURCES  # noqa: E402
 from benchmark.motifs.window_extractor_eval import join_features_and_labels  # noqa: E402
-from scripts.eval_extreme20_window_importance import _resume, _row, _save, write_wide  # noqa: E402
+from scripts.eval_extreme20_window_importance import (  # noqa: E402
+    _checkpoints_ready,
+    _drop_task,
+    _resume,
+    _row,
+    _save,
+    _scores_ready,
+    _store_pair,
+    checkpoint_dir,
+    write_wide,
+)
 
 PACKS = {
     "1in3": Path("/autofs/nas8/tywang/tjzou/PseudoLabelDataset1in3NoDirect"),
@@ -95,19 +105,23 @@ def run_attention(jobs, group, pack, label, feature_dir, dest: Path) -> None:
         feats, wins, bags = _load(pack, dataset, label, feature_dir)
         y_index = bags.set_index("region_id")
         for motif in motifs:
-            if (dataset, motif, "attention") in done:
+            if _scores_ready(rows, dest, dataset, motif, "attention"):
                 print(f"skip attention {dataset} {motif}", flush=True)
                 continue
             tab = join_features_and_labels(feats, wins, motif, bags)
             y_r = pd.to_numeric(y_index[f"{motif}_label_v2"], errors="coerce")
             folds = evaluate_gated_localisation(
                 tab, y_r, DEFAULT_FAMILIES, methods=("attention",),
+                checkpoint_dir=checkpoint_dir(dest, dataset, motif, "attention"),
             )
-            rec = _row(dataset, motif, group, "attention", tab, folds["attention"])
-            rows.append(rec)
+            rows, rec, loo_rec = _store_pair(
+                rows, dataset, motif, group, tab, "attention", folds["attention"], folds["attention_loo"],
+            )
             done.add((dataset, motif, "attention"))
+            done.add((dataset, motif, "attention_loo"))
             _save(dest, rows)
             print(rec, flush=True)
+            print(loo_rec, flush=True)
 
 
 def run_rf(jobs, group, pack, label, feature_dir, dest: Path) -> None:
@@ -115,12 +129,16 @@ def run_rf(jobs, group, pack, label, feature_dir, dest: Path) -> None:
 
     rows, done = _resume(dest)
     for dataset, motif in jobs:
-        if (dataset, motif, "rf_mdi") in done:
+        if _checkpoints_ready(rows, dest, dataset, motif, "rf_mdi"):
             print(f"skip rf {dataset} {motif}", flush=True)
             continue
         tab, _y_r = _prepare(pack, dataset, motif, label, feature_dir)
-        fold = evaluate_rf_mdi(tab, DEFAULT_FAMILIES)
+        fold = evaluate_rf_mdi(
+            tab, DEFAULT_FAMILIES,
+            checkpoint_dir=checkpoint_dir(dest, dataset, motif, "rf_mdi"),
+        )
         rec = _row(dataset, motif, group, "rf_mdi", tab, fold)
+        rows = _drop_task(rows, dataset, motif, "rf_mdi")
         rows.append(rec)
         done.add((dataset, motif, "rf_mdi"))
         _save(dest, rows)

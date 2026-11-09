@@ -42,6 +42,7 @@ def evaluate_rf_mdi(
     families,
     n_estimators: int = 300,
     seed: int = 0,
+    checkpoint_dir: str | Path | None = None,
 ) -> pd.DataFrame:
     """Patient-level CV. Target is the window label y_w."""
     feat_cols = feature_columns(table, families=families)
@@ -69,6 +70,8 @@ def evaluate_rf_mdi(
         Xtr = labeled[feat_cols].set_index(labeled["row_id"])
         ytr = labeled.set_index("row_id")["y_w"].astype(float)
         model = RandomForestModel(seed=seed + k, n_estimators=n_estimators).fit(Xtr, ytr)
+        from benchmark.motifs.checkpoints import rf_payload, save_fold
+        save_fold(checkpoint_dir, k, rf_payload(model))
         scores = pd.Series(rf_window_scores(model, va[feat_cols]), index=va.index)
         loc = within_region_auroc(va["y_w"], scores, va["region_id"])
         loc.update(within_region_topk(va["y_w"], scores, va["region_id"]))

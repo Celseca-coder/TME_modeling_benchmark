@@ -1,12 +1,12 @@
 ,,,Gated Attention MIL,Gated Attention MIL,window RF MIL,window RF MIL,,
-task,n_windows,n_labeled,attention (AUROC),attention (precision_at_20),RF MDI (AUROC),RF MDI (precision_at_20),Highest Method (AUROC),Highest Method (precision_at_20)
-tumor_high (bc_jackson2020),117026,101219,0.525,0.681,0.486,0.661,attention,attention
-t_tumor_mixing (bc_jackson2020),117026,26102,0.584,0.766,0.539,0.722,attention,attention
-cd8_tumor_contact (bc_jackson2020),117026,26102,0.574,0.758,0.545,0.718,attention,attention
-macrophage_tumor_niche (bc_jackson2020),117026,7704,0.549,0.735,0.536,0.704,attention,attention
-apc_t_contact (bc_jackson2020),117026,7704,0.505,0.653,0.511,0.659,RF MDI,RF MDI
-cd8_clustering (hnc_wu2022),74614,27841,0.503,0.694,0.446,0.631,attention,attention
-immune_exclusion (hnc_wu2022),74314,24850,0.497,0.669,0.426,0.598,attention,attention
-tumor_stroma_mixing (bc_metabric_ali2020),48619,35541,0.520,0.709,0.489,0.663,attention,attention
-interface_immune (bc_metabric_ali2020),48619,8098,0.497,0.632,0.448,0.601,attention,attention
-cd8_high (tnbc_wang2023),75495,74271,0.539,0.582,0.491,0.545,attention,attention
+task,n_windows,n_labeled,attention (AUROC),attention (precision_at_20),RF (AUROC),RF (precision_at_20),Highest Method (AUROC),Highest Method (precision_at_20)
+tumor_high (bc_jackson2020),117026,101219,0.592,0.750,0.862,0.944,RF,RF
+t_tumor_mixing (bc_jackson2020),117026,26102,0.589,0.776,0.674,0.831,RF,RF
+cd8_tumor_contact (bc_jackson2020),117026,26102,0.594,0.768,0.683,0.837,RF,RF
+macrophage_tumor_niche (bc_jackson2020),117026,7704,0.584,0.763,0.663,0.837,RF,RF
+apc_t_contact (bc_jackson2020),117026,7704,0.497,0.670,0.611,0.765,RF,RF
+cd8_clustering (hnc_wu2022),74614,27841,0.487,0.673,0.562,0.753,RF,RF
+immune_exclusion (hnc_wu2022),74314,24850,0.617,0.767,0.780,0.886,RF,RF
+tumor_stroma_mixing (bc_metabric_ali2020),48619,35541,0.548,0.731,0.684,0.831,RF,RF
+interface_immune (bc_metabric_ali2020),48619,8098,0.516,0.673,0.571,0.729,RF,RF
+cd8_high (tnbc_wang2023),75495,74271,0.608,0.663,0.759,0.782,RF,RF

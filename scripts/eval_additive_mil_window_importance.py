@@ -1,8 +1,9 @@
 #!/usr/bin/env python
-"""Train Additive MIL on Y_r and score windows by attention weight.
+"""Train Additive MIL on Y_r.
 
-Attention is non-gated. The bag probability is sigmoid(Wz + b), with an L1
-penalty on V, w, and W. AUROC and precision@20% use y_w inside each region.
+Attention is non-gated. The bag probability is sigmoid(Wz + b) and the loss
+is BCE. Dropout applies to the pooled vector during training. The full-window
+score is the attention weight. Leave-one-out is the drop in bag probability.
 
     python scripts/eval_additive_mil_window_importance.py \
         --families composition density mixing point_pattern
@@ -59,7 +60,8 @@ def evaluate_additive_localisation(
     seed: int = 0,
     epochs: int = 80,
     patience: int = 15,
-) -> pd.DataFrame:
+    checkpoint_dir: str | Path | None = None,
+) -> tuple[pd.DataFrame, pd.DataFrame]:
     """Patient-stratified CV. One Additive MIL model per fold."""
     feat_cols = feature_columns(table, families=families)
     meta = (
@@ -72,6 +74,7 @@ def evaluate_additive_localisation(
     meta["Y_r"] = y_r.reindex(meta["region_id"].astype(str)).to_numpy(float)
     folds = safe_patient_kfold(meta, 5, "patient_id", stratify_col="Y_r", seed=seed)
     rows = []
+    loo_rows = []
     for k, (tr_regs, va_regs) in enumerate(folds):
         tr = _bags_for_split(table, feat_cols, tr_regs)
         ytr = y_r.reindex(tr.index)
@@ -81,10 +84,13 @@ def evaluate_additive_localisation(
             continue
         model = AdditiveMILModel(
             seed=seed + k, epochs=epochs, patience=patience, max_instances=None,
-            lr=1e-4, weight_decay=0.0, l1_lambda=1e-5,
+            lr=1e-4, weight_decay=0.0,
         ).fit(tr, ytr.astype(int))
+        from benchmark.motifs.checkpoints import mil_payload, save_fold
+        save_fold(checkpoint_dir, k, mil_payload("additive_mil", model))
         va = table[table["region_id"].isin(set(map(str, va_regs)))].copy()
         held = np.full(len(va), np.nan)
+        held_loo = np.full(len(va), np.nan)
         for _, g in va.groupby("region_id"):
             idx = g.sort_values("window_id").index
             yw = g.loc[idx, "y_w"].to_numpy(float)
@@ -92,16 +98,23 @@ def evaluate_additive_localisation(
             if labeled.sum() < MIN_LABELED or np.unique(yw[labeled]).size < 2:
                 continue
             bag = table.loc[idx, feat_cols].to_numpy(np.float32)
-            scores = model.attention_weights(pd.DataFrame({"bag": [bag]}))[0]
-            held[va.index.get_indexer(idx)] = scores
-        loc = within_region_auroc(va["y_w"], pd.Series(held, index=va.index), va["region_id"])
-        loc.update(within_region_topk(va["y_w"], pd.Series(held, index=va.index), va["region_id"]))
+            slot = va.index.get_indexer(idx)
+            held[slot] = model.attention_weights(pd.DataFrame({"bag": [bag]}))[0]
+            held_loo[slot] = model.leave_one_out_scores(bag)
+        score = pd.Series(held, index=va.index)
+        loc = within_region_auroc(va["y_w"], score, va["region_id"])
+        loc.update(within_region_topk(va["y_w"], score, va["region_id"]))
         loc["fold"] = k
         rows.append(loc)
-    return pd.DataFrame(rows)
+        loo_score = pd.Series(held_loo, index=va.index)
+        loo = within_region_auroc(va["y_w"], loo_score, va["region_id"])
+        loo.update(within_region_topk(va["y_w"], loo_score, va["region_id"]))
+        loo["fold"] = k
+        loo_rows.append(loo)
+    return pd.DataFrame(rows), pd.DataFrame(loo_rows)
 
 
-def _summary_row(dataset: str, motif: str, group: str, fold: pd.DataFrame) -> dict:
+def _summary_row(dataset: str, motif: str, group: str, fold: pd.DataFrame, method: str = "additive_mil") -> dict:
     if fold.empty:
         auroc = pwr = prev = score = np.nan
         n_regions = n_folds = 0
@@ -116,7 +129,7 @@ def _summary_row(dataset: str, motif: str, group: str, fold: pd.DataFrame) -> di
         "dataset": dataset,
         "motif": motif,
         "feature_group": group,
-        "method": "additive_mil",
+        "method": method,
         "auroc_window_mean": auroc,
         "precision_at_20": pwr,
         "score_top20_mean": score,
@@ -159,12 +172,14 @@ def main() -> None:
         for motif in motifs:
             tab = join_features_and_labels(feats, wins, motif, bags)
             y_r = pd.to_numeric(y_index[f"{motif}_label_v2"], errors="coerce")
-            fold = evaluate_additive_localisation(
+            fold, loo = evaluate_additive_localisation(
                 tab, y_r, families, epochs=args.epochs, patience=args.patience,
             )
             summary = _summary_row(dataset, motif, group, fold)
-            rows.append(summary)
+            loo_summary = _summary_row(dataset, motif, group, loo, method="additive_loo")
+            rows.extend([summary, loo_summary])
             print(summary, flush=True)
+            print(loo_summary, flush=True)
             dest = Path(args.out)
             dest.parent.mkdir(parents=True, exist_ok=True)
             pd.DataFrame(rows).to_csv(dest, index=False)

@@ -40,12 +40,18 @@ OUT_DIR = Path(
 METHOD_NAME = {
     "lasso": "Lasso",
     "attention": "attention",
+    "attention_loo": "attention LOO",
+    "mlp": "MLP",
+    "mlp_loo": "MLP LOO",
     "mlp_ig": "MLP IG",
     "rf_mdi": "RF",
 }
 SCORE_KIND = {
     "lasso": "mean window sigmoid score",
     "attention": "mean softmax attention weight",
+    "attention_loo": "mean leave-one-out bag-probability drop",
+    "mlp": "mean MLP logit",
+    "mlp_loo": "mean leave-one-out bag-probability drop",
     "mlp_ig": "mean absolute IG",
     "rf_mdi": "mean RF positive probability",
 }
@@ -104,6 +110,8 @@ def run_gated() -> list[dict]:
             y_r = pd.to_numeric(y_index[f"{motif}_label_v2"], errors="coerce")
             folds = evaluate_gated_localisation(tab, y_r, FAMILIES)
             for method, fold in folds.items():
+                if method not in METHOD_NAME:
+                    continue
                 rec = _row(dataset, motif, method, fold)
                 rows.append(rec)
                 print(rec, flush=True)
@@ -116,8 +124,8 @@ def run_mlp() -> list[dict]:
         feats, wins, bags = _load(dataset)
         for motif in selected_motifs_for(dataset):
             tab = join_features_and_labels(feats, wins, motif, bags)
-            fold, _ranking = evaluate_mlp_ig(tab, region_label(bags, motif), FAMILIES)
-            rec = _row(dataset, motif, "mlp_ig", fold)
+            fold, _loo, _ranking = evaluate_mlp_ig(tab, region_label(bags, motif), FAMILIES)
+            rec = _row(dataset, motif, "mlp", fold)
             rows.append(rec)
             print(rec, flush=True)
     return rows

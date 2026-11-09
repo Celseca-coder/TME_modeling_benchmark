@@ -1,0 +1,11 @@
+dataset,motif,feature_group,method,n_windows,n_labeled,auroc_window_mean,precision_at_20,n_regions_scored,n_folds,pass_window,pass_precision_at_20
+bc_jackson2020,tumor_high,composition+density+mixing+point_pattern,lasso,117026,101219,0.8199834169707689,0.7562415395712005,689,5,True,True
+bc_jackson2020,t_tumor_mixing,composition+density+mixing+point_pattern,lasso,117026,11321,0.8720201659890133,0.8625783651828727,379,5,True,True
+bc_jackson2020,cd8_tumor_contact,composition+density+mixing+point_pattern,lasso,117026,11352,0.8638524555184117,0.8484829910707651,378,5,True,True
+bc_jackson2020,macrophage_tumor_niche,composition+density+mixing+point_pattern,lasso,117026,3007,0.8241079754475431,0.7590110805655594,124,5,True,True
+bc_jackson2020,apc_t_contact,composition+density+mixing+point_pattern,lasso,117026,3258,0.8030048122609337,0.8148812431771961,127,5,True,True
+hnc_wu2022,cd8_clustering,composition+density+mixing+point_pattern,lasso,74614,11246,0.8293843462351378,0.8459590027201485,221,5,True,True
+hnc_wu2022,immune_exclusion,composition+density+mixing+point_pattern,lasso,74314,10124,0.6660733004346764,0.6856116232238624,176,5,True,False
+bc_metabric_ali2020,tumor_stroma_mixing,composition+density+mixing+point_pattern,lasso,48619,14387,0.8494450332811739,0.8396436216034298,445,5,True,True
+bc_metabric_ali2020,interface_immune,composition+density+mixing+point_pattern,lasso,48619,3280,0.6675855267877843,0.6720631357046074,143,5,True,False
+tnbc_wang2023,cd8_high,composition+density+mixing+point_pattern,lasso,75495,74271,0.8152111364741007,0.7891822427238766,765,5,True,True

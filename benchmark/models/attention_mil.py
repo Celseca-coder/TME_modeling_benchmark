@@ -39,6 +39,33 @@ class _GatedAttentionNet(nn.Module):
         pooled = torch.sum(weights[:, None] * h, dim=0)
         return self.head(self.drop(pooled)), weights
 
+    def leave_one_out(self, bag: torch.Tensor) -> torch.Tensor:
+        """``p_bag - p_bag,-j`` with attention renormalized. Dropout is not applied."""
+        h = self.encoder(bag)
+        energy = self.attn_w(
+            torch.tanh(self.attn_v(h)) * torch.sigmoid(self.attn_u(h))
+        ).squeeze(-1)
+        return _attention_leave_one_out(h, energy, self.head)
+
+
+def _attention_leave_one_out(
+    values: torch.Tensor, energy: torch.Tensor, head: nn.Linear,
+) -> torch.Tensor:
+    """Drop each row, renormalize the remaining softmax, and subtract bag probabilities."""
+    k = int(energy.shape[0])
+    if k < 2:
+        return torch.full((k,), float("nan"), device=energy.device)
+    shifted = energy - energy.max()
+    weight = torch.exp(shifted)
+    total = weight.sum()
+    pooled = (weight[:, None] * values).sum(dim=0) / total
+    full = torch.sigmoid(head(pooled).reshape(-1)[0])
+    denom = (total - weight).clamp_min(1e-12)
+    mass = weight[:, None] * values
+    held = (mass.sum(dim=0, keepdim=True) - mass) / denom[:, None]
+    partial = torch.sigmoid(head(held).reshape(-1))
+    return full - partial
+
 
 class AttentionMILModel(RegionModel):
     """Trainable gated-attention pooling over local handcrafted feature bags.
@@ -277,3 +304,12 @@ class AttentionMILModel(RegionModel):
                 _, weights = self._net(self._bag_tensor(bag))
                 result.append(weights.cpu().numpy())
         return result
+
+    def leave_one_out_scores(self, bag: np.ndarray) -> np.ndarray:
+        """Window score ``p_bag - p_bag without this window``. Dropout is off."""
+        self._net.eval()
+        with torch.no_grad():
+            if len(bag) == 0:
+                return np.zeros(0, dtype=np.float64)
+            scores = self._net.leave_one_out(self._bag_tensor(bag))
+            return scores.detach().cpu().numpy().astype(np.float64, copy=False)

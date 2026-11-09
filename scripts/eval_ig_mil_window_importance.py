@@ -85,6 +85,7 @@ def evaluate_gated_localisation(
     n_samples: int = 32,
     seed: int = 0,
     methods: tuple[str, ...] = DEFAULT_METHODS,
+    checkpoint_dir: str | Path | None = None,
 ) -> dict[str, pd.DataFrame]:
     """Patient-stratified CV. One gated-attention model per fold."""
     feat_cols = feature_columns(table, families=families)
@@ -97,7 +98,10 @@ def evaluate_gated_localisation(
     meta = meta.loc[ycol.isin([0.0, 1.0]).to_numpy()].copy()
     meta["Y_r"] = y_r.reindex(meta["region_id"].astype(str)).to_numpy(float)
     folds = safe_patient_kfold(meta, 5, "patient_id", stratify_col="Y_r", seed=seed)
-    fold_rows = {method: [] for method in methods}
+    score_methods = list(methods)
+    if "attention" in score_methods and "attention_loo" not in score_methods:
+        score_methods.append("attention_loo")
+    fold_rows = {method: [] for method in score_methods}
     for k, (tr_regs, va_regs) in enumerate(folds):
         tr = _bags_for_split(table, feat_cols, tr_regs)
         ytr = y_r.reindex(tr.index)
@@ -109,8 +113,10 @@ def evaluate_gated_localisation(
             seed=seed + k, epochs=80, patience=15, max_instances=None,
             lr=1e-4, weight_decay=0.0,
         ).fit(tr, ytr.astype(int))
+        from benchmark.motifs.checkpoints import mil_payload, save_fold
+        save_fold(checkpoint_dir, k, mil_payload("attention", model))
         va = table[table["region_id"].isin(set(map(str, va_regs)))].copy()
-        held = {method: np.full(len(va), np.nan) for method in methods}
+        held = {method: np.full(len(va), np.nan) for method in score_methods}
         errors: list[float] = []
         steps_used: list[int] = []
         for _, g in va.groupby("region_id"):
@@ -124,6 +130,7 @@ def evaluate_gated_localisation(
             if "attention" in methods:
                 attn = model.attention_weights(pd.DataFrame({"bag": [bag]}))[0]
                 held["attention"][slot] = attn
+                held["attention_loo"][slot] = model.leave_one_out_scores(bag)
             if "shap_mil" in methods:
                 held["shap_mil"][slot] = shap_window_importance(
                     model, bag, n_samples=n_samples, seed=seed + k,
@@ -133,7 +140,7 @@ def evaluate_gated_localisation(
                 held["ig"][slot] = scores
                 errors.append(err)
                 steps_used.append(used)
-        for method in methods:
+        for method in score_methods:
             loc = _region_metrics(va["y_w"], held[method], va["region_id"])
             loc["fold"] = k
             if method == "ig":
@@ -211,7 +218,10 @@ def main():
                 tab, y_r, families,
                 steps=args.steps, n_samples=args.n_samples, methods=methods,
             )
-            for method in methods:
+            record = list(methods)
+            if "attention" in record:
+                record.append("attention_loo")
+            for method in record:
                 summary = _summary_row(args.dataset, motif, group, method, folds[method])
                 rows.append(summary)
                 print(summary, flush=True)

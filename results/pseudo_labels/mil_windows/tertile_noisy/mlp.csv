@@ -1,0 +1,4 @@
+dataset,motif,feature_group,method,n_windows,n_labeled,auroc_window_mean,precision_at_20,n_regions_scored,n_folds,pass_window,pass_precision_at_20
+bc_jackson2020,tumor_high,composition+density+mixing+point_pattern,mlp_ig,117026,101219,0.6256919445095058,0.5821579751411737,665,5,True,False
+bc_jackson2020,t_tumor_mixing,composition+density+mixing+point_pattern,mlp_ig,117026,18174,0.500468017190603,0.5283084085930115,277,5,False,False
+bc_jackson2020,cd8_tumor_contact,composition+density+mixing+point_pattern,mlp_ig,117026,18256,0.5085033853800905,0.5457369611641641,291,5,False,False

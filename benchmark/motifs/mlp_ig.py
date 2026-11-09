@@ -1,9 +1,10 @@
-"""Bag-level window MLP with Integrated Gradients.
+"""Bag-level window MLP.
 
 Each region is one bag. The MLP maps a window to a logit, the bag logit is
-the mean, and the bag probability is trained against the region label.
-Window score is the sum of absolute IG of that probability. The baseline is
-the zero tensor in scaled space, which is the training-set mean.
+the mean, and the bag probability is trained with BCE against the region
+label. The full-window score is that logit. Leave-one-out is the drop in bag
+probability after removing the window. Integrated Gradients remains available
+for feature ranking; its baseline is the zero tensor in scaled space.
 """
 from __future__ import annotations
 
@@ -38,7 +39,7 @@ class WindowMLP:
         hidden_dim: int = 64,
         dropout: float = 0.1,
         lr: float = 1e-4,
-        l1_lambda: float = 1e-5,
+        l1_lambda: float = 0.0,
         epochs: int = 80,
         patience: int = 15,
         device: str = "auto",
@@ -105,8 +106,7 @@ class WindowMLP:
             for bag, label in zip(bags, y):
                 logit = self._net(self._tensor(bag)).mean()
                 losses.append(nn.functional.binary_cross_entropy_with_logits(logit, label))
-            penalty = self.l1_lambda * sum(param.abs().sum() for param in self._net.parameters() if param.ndim > 1)
-            loss = torch.stack(losses).mean() + penalty
+            loss = torch.stack(losses).mean()
             loss.backward()
             opt.step()
             value = float(loss.detach().cpu())
@@ -132,6 +132,30 @@ class WindowMLP:
         raw = np.where(np.isnan(raw), self._median, raw)
         scaled = ((raw - self._mean) / self._std).astype(np.float32)
         return torch.as_tensor(scaled, dtype=torch.float32, device=self.device_)
+
+    def window_logits(self, bag: np.ndarray) -> np.ndarray:
+        """Per-window MLP output ``s_j``, before the bag mean. Shape ``(n_windows,)``."""
+        self._net.eval()
+        with torch.no_grad():
+            if len(bag) == 0:
+                return np.zeros(0, dtype=np.float64)
+            logits = self._net(self._tensor(bag))
+            return logits.detach().cpu().numpy().astype(np.float64, copy=False)
+
+    def leave_one_out_scores(self, bag: np.ndarray) -> np.ndarray:
+        """``s_j = sigmoid(mean logit) - sigmoid(mean logit without j)``."""
+        self._net.eval()
+        with torch.no_grad():
+            if len(bag) == 0:
+                return np.zeros(0, dtype=np.float64)
+            logits = self._net(self._tensor(bag))
+            k = int(logits.numel())
+            if k < 2:
+                return np.full(k, np.nan, dtype=np.float64)
+            full = torch.sigmoid(logits.mean())
+            held = (logits.sum() - logits) / (k - 1)
+            scores = full - torch.sigmoid(held)
+            return scores.detach().cpu().numpy().astype(np.float64, copy=False)
 
     def bag_probability(self, bag: np.ndarray) -> float:
         self._net.eval()

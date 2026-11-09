@@ -50,3 +50,13 @@ class L1MILModel(AttentionMILModel):
                 return np.zeros(0, dtype=np.float64)
             _, window = self._net(self._bag_tensor(bag))
             return window.detach().cpu().numpy().astype(np.float64, copy=False)
+
+    def leave_one_out_scores(self, bag: np.ndarray) -> np.ndarray:
+        """``s_j = p_bag - mean(p without j)``. One window has no defined score."""
+        p = self.window_probabilities(bag)
+        k = int(p.size)
+        if k < 2:
+            return np.full(k, np.nan, dtype=np.float64)
+        p_bag = float(p.mean())
+        held_out = (float(p.sum()) - p) / (k - 1)
+        return p_bag - held_out
